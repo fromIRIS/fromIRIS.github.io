@@ -1,0 +1,890 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Lyu Dada</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Lyu Dada">
+<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:site_name" content="Lyu Dada">
+<meta property="og:description">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Lyu Dada">
+<meta name="twitter:description">
+  
+    <link rel="alternative" href="/atom.xml" title="Lyu Dada" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+  
+</head>
+<body>
+<div id="container">
+  <div id="wrap">
+    <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Lyu Dada</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">to love and get love</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="https://github.com/fromIRIS">MYGithub</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="http://www.baidu.com/baidu" method="get" accept-charset="utf-8" class="search-form">
+          <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="Search">
+          <input type="submit" value="" class="search-form-submit">
+          <input name=tn type=hidden value="bds">
+          <input name=cl type=hidden value="3">
+          <input name=ct type=hidden value="2097152">
+          <input type="hidden" name="si" value="yoursite.com">
+        </form>
+      </div>
+    </div>
+  </div>
+</header>
+    <div class="outer">
+      <section id="main">
+  
+    <article id="post-attribute与property" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/10/12/attribute与property/" class="article-date">
+  <time datetime="2015-10-12T14:42:58.000Z" itemprop="datePublished">2015-10-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/10/12/attribute与property/">attribute与property</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Dom节点Attribute与Property">Dom节点Attribute与Property</h2><blockquote>
+<p>前段时间在尚妆请假OA系统中接触到了大量<code>checkbox/select/input</code>等表单元素，在使用jq的attr遇到了一些问题，所以了解了一下这几者的关系，顺便理了理dom的一些基础。</p>
+</blockquote>
+<p>1、在IE&lt;9中,浏览器会把所有的property和attribute强制映射，即property = attribute<br>tip：通过getAttribute获取到的值都是字符串，<br>但通过property获取的值可以是任何类型。</p>
+<p>2、每个dom节点都是一个对象，既然是js对象，就跟对象一样式是有属性和方法的。而且原则上这些属性方法都是在js中出现供js调用的。但是不同的节点总会有几个默认的常见的属性出现在html上（不是页面上,是指在查看控制台中的element），比如a标签的<code>href</code>，img标签的<code>src</code>，以及多数标签的<code>id</code>。<br>当然方法也是可以出现在html上的，比如<code>onclick onblur等</code><br><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> <span class="keyword">list</span> = [];</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> key <span class="keyword">in</span> document.body) &#123;</span><br><span class="line">	<span class="keyword">list</span>.push(key)</span><br><span class="line">&#125;</span><br><span class="line">console.<span class="literal">log</span>(<span class="keyword">list</span>.join('\<span class="keyword">n</span>'))</span><br><span class="line"><span class="comment">//这个方法可以在控制台查看某个dom对象的所有属性跟方法。</span></span><br></pre></td></tr></table></figure></p>
+<p>3、而出现在html中的属性在dom中（不是对象）就不叫<code>property</code>了，而叫<code>attribute</code>。<br><code>property</code>和<code>attribute</code>存在<strong>某种程度上</strong>的映射关系，即改变其中之一，相对应的也会改变。</p>
+<p>4、property跟attribute的读写方式不同，<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="built_in">document</span>.getElementById(<span class="string">'test'</span>);</span><br><span class="line"><span class="comment">//property</span></span><br><span class="line">》<span class="literal">get</span> a.id;</span><br><span class="line">》<span class="literal">set</span> a.id = <span class="string">'es'</span>;</span><br><span class="line"><span class="comment">//attribute</span></span><br><span class="line">》<span class="literal">get</span> a.getAttribute(<span class="string">'id'</span>)</span><br><span class="line">》<span class="literal">set</span> a.setAttribute(<span class="string">'id'</span>, <span class="string">'es'</span>);</span><br></pre></td></tr></table></figure></p>
+<p>5、既然第四点内容里对于两种属性都有读写，那改变了其中一个（例如property），另一个属性会不会也改呢？接下来就来解释一下，这里面有一些特殊的点，记住就好。</p>
+<p>property属性非常多，而attribute并不多，常用的有<code>name, id, scr, href, value, checked等</code></p>
+<ul>
+<li>对于这些attribute属性，通过setAttribute改变值时，都能同步到property上（即改变了attribute，htmldom直接显示改了， 然后去dom节点对象里查看property也变了）</li>
+<li>而通过第4点中的property<code>a.id</code>写方法，对于<code>value、checked</code>属性来说，并不改变相对应的attribute的值。这也意味着改了property，但html中的value值却不变。</li>
+<li><strong>但是</strong>： 对于input中的value和checked这两个属性来讲，property获取的是页面的显示，而attribute获取的是html中的属性值。</li>
+<li>所以用户在输入框中输入，我们在js中要获取到就要使用property。</li>
+<li>特别说明checkbox的property属性是checked = true，checkbox = false。而在html中写attribute时若要初始勾选就</li>
+</ul>
+<figure class="highlight fsharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input <span class="class"><span class="keyword">type</span></span>=<span class="string">"checkbox"</span> id=<span class="string">"checkbox"</span> checked&gt;</span><br></pre></td></tr></table></figure>
+<p>6、还有个select表单元素的value属性，对于select元素而言，一般没有value的attribute属性，而property获取到的就是选中的下拉框option的value属性。<br>而对于option元素，其value的attribute和property属性都只指向html中的value值，不会涉及到<strong>s或a</strong>这些显示在页面上的值，这点不要跟input的输入框混淆了。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">select</span> <span class="attribute">id</span>=<span class="value">"select"</span>&gt;</span></span><br><span class="line"> 	<span class="tag">&lt;<span class="title">option</span> <span class="attribute">value</span>=<span class="value">"22"</span>&gt;</span>s<span class="tag">&lt;/<span class="title">option</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">option</span> <span class="attribute">value</span>=<span class="value">"1"</span>&gt;</span>a<span class="tag">&lt;/<span class="title">option</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">select</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>综上所述</strong>：除了input中的type=text的value和type=checkbox的checked属性外，其他属性用property和attribute差别不大。但是对于value和checked还是使用property比较方便，因为我们大多数都是想获取到用户输入了什么。对应到jq中就是使用其prop()方法。</p>
+<p>还有二个特殊的属性，在映射中名字不一样。</p>
+<blockquote>
+<p>attribute   &lt;==&gt; property</p>
+</blockquote>
+<ol>
+<li>class  &lt;==&gt;  className</li>
+<li>data-x  &lt;==&gt;  dataset.x</li>
+</ol>
+<p>这两个属性都是互通的。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://yoursite.com/2015/10/12/attribute与property/" data-id="cifo2153n0000gnjh71uhjl5c" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-hammer-js" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/10/05/hammer-js/" class="article-date">
+  <time datetime="2015-10-05T15:24:45.000Z" itemprop="datePublished">2015-10-05</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/javascript/">javascript</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/10/05/hammer-js/">hammerjs的初次学习</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="hammerjs的初次学习">hammerjs的初次学习</h2><h3 id="Hammer-js_手势库的学习与应用。">Hammer.js 手势库的学习与应用。</h3><blockquote>
+<p>上个礼拜公司交代的任务中有一个需求，商品详细页面的图片点击后可以缩放拖拽。本来想用原生的api取写，但是出来的效果兼容性很差，在双击，拖拽，放大绑定在同一元素的情况下，很容易误触发不相关的动作，比如在双指缩放时一不小心就触发了双击事件，能力还未够，所以在hammer.js官网学习了一下手势库，完成了那个需求。</p>
+</blockquote>
+<p><strong>1、hammerjs概括</strong><br>hammerjs一共有6种手势，<code>pan</code>(拖拽)，<code>pinch</code>(缩放)，<code>press</code>(长按) <code>rotate</code>(旋转)  <code>swipe</code>(滑动) <code>tap</code>(点)。这6个手势几乎涵盖了所有日常所需！<br><strong>2、用法</strong><br>需要实例化一个对象。<br>我这里提供一个我在项目中使用的通用写法。<br>我们写移动端一般都包含zepto的底层工具库。<br><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> wrap = $(<span class="string">'.wrap'</span>)[<span class="number">0</span>];</span><br><span class="line"><span class="comment">//定义一个元素节点，注意这里不能是jq或者zepto对象</span></span><br><span class="line"><span class="keyword">var</span> wrapHammer = <span class="keyword">new</span> Hammer(wrap);</span><br><span class="line"><span class="comment">//把需要绑定事件的节点传入，实例化。</span></span><br><span class="line"><span class="keyword">var</span> singletap = <span class="keyword">new</span> Hammer.Tap();</span><br><span class="line"><span class="comment">//实例化手势对象</span></span><br><span class="line"><span class="keyword">var</span> doubletap = <span class="keyword">new</span> Hammer.Tap(&#123;<span class="keyword">event</span>: <span class="string">'doubletap'</span>, taps: <span class="number">2</span>&#125;);</span><br><span class="line"><span class="keyword">var</span> pinch = <span class="keyword">new</span> Hammer.Pinch();</span><br><span class="line"><span class="keyword">var</span> pan = <span class="keyword">new</span> Hammer.Pan();</span><br><span class="line"><span class="keyword">var</span> swipe = <span class="keyword">new</span> Hammer.Swipe();</span><br></pre></td></tr></table></figure></p>
+<p>在实例化手势对象的时候可以传参数，不同的手势对象有不同的参数可以选择。具体可以参考官网。<br>例如想看<code>pan</code>在实例化的时候可以填什么参数，可以查看<a href="http://hammerjs.github.io/recognizer-pan/" target="_blank" rel="external">http://hammerjs.github.io/recognizer-pan/</a> 。有一个框表示了传入的对象里可以填什么参数。<br><strong>这里比较特殊的是Tap</strong>，不同数量的点击，需要实例化不同的对象。<br><strong>接下来</strong><br><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">wrapHammer.<span class="built_ins">add</span>(singletap);</span><br><span class="line">wrapHammer.<span class="built_ins">add</span>(doubletap);</span><br><span class="line">			  singletap.requireFailure(doubletap);			doubletap.requireFailure(singletap);</span><br><span class="line">			  </span><br><span class="line">wrapHammer.<span class="built_ins">add</span>(pinch);</span><br><span class="line">wrapHammer.<span class="built_ins">add</span>(pan);</span><br><span class="line">wrapHammer.<span class="built_ins">add</span>(swipe)</span><br><span class="line">//在实例出来的节点对象上<span class="built_ins">add</span>上一步实例化的手势对象，此时一个节点上将绑定了很多手势。</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight delphi"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">wrapHammer.<span class="keyword">on</span>(<span class="string">'tap'</span>, hideWrap);</span><br><span class="line">wrapHammer.<span class="keyword">on</span>(<span class="string">'doubletap'</span>, doubleScale);</span><br><span class="line">wrapHammer.<span class="keyword">on</span>(<span class="string">'pinchmove'</span>, scaleImg);</span><br><span class="line">wrapHammer.<span class="keyword">on</span>(<span class="string">'pinchend'</span>, scaleEndImg);</span><br><span class="line">wrapHammer.<span class="keyword">on</span>(<span class="string">'panstart'</span>, moveStartImg);</span><br><span class="line">wrapHammer.<span class="keyword">on</span>(<span class="string">'panmove'</span>, moveImg);</span><br><span class="line">wrapHammer.<span class="keyword">on</span>(<span class="string">'panend'</span>, moveEndImg);</span><br><span class="line"><span class="comment">//第三步就是绑定事件了</span></span><br></pre></td></tr></table></figure>
+<p><strong>注意</strong>第三步中的这些事件名，可以在官网上对应手势页面的events中找到。例如若要查看<code>pinch</code>则<br><a href="http://hammerjs.github.io/recognizer-pinch/" target="_blank" rel="external">http://hammerjs.github.io/recognizer-pinch/</a></p>
+<p><strong>3、注意点</strong><br>紧跟以上三步，基本就能做出基本的手势页面了。<br>接下来再介绍几个需要特殊设置的地方。<br><code>1</code>如果想要缩放与旋转同时触发，即边旋转边缩放。可以<br><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> pinch = new Hammer.Pinch();</span><br><span class="line"><span class="keyword">var</span> <span class="keyword">rotate</span> = new Hammer.<span class="keyword">Rotate</span>();</span><br><span class="line">pinch.recognizeWith(<span class="keyword">rotate</span>);</span><br></pre></td></tr></table></figure></p>
+<p>官网页面：<a href="http://hammerjs.github.io/recognize-with/" target="_blank" rel="external">http://hammerjs.github.io/recognize-with/</a><br><code>2</code>在doubletap时会在之前触发tap，此时可以设置<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">singleTap.requireFailure(doubleTap);</span><br></pre></td></tr></table></figure></p>
+<p>如此设置后在触发tap后稍微有些许停顿，以触发double。<br><code>3</code>在官网或者网上经常看到<code>pan</code> <code>swipe</code> 在默认情况下只能水平移动，如果要开启还需要设置。但采用我上面的写法，就不需要设置了，默认情况下上下左右都是打开的。<br><a href="http://hammerjs.github.io/recognizer-pan/" target="_blank" rel="external">http://hammerjs.github.io/recognizer-pan/</a><br>direction的默认值是DIRECTION_ALL，而且在最下面的note也说明了当采用<code>new Hanmmer()</code>实例化就默认水平，而我们是<code>new Hammer.pan()</code> 实例化。<br><code>pinch</code>道理也同，不需要再配置就可以用了。<br><code>4</code>在<code>on</code>的事件绑定中回调的event返回，最常用的也就是<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ev<span class="class">.type</span></span><br><span class="line">ev<span class="class">.deltaX</span></span><br><span class="line">ev<span class="class">.deltaY</span></span><br><span class="line">ev.scale</span><br></pre></td></tr></table></figure></p>
+<p>链接推荐：<br><a href="https://cdn.rawgit.com/hammerjs/hammer.js/master/tests/manual/visual.html" target="_blank" rel="external">https://cdn.rawgit.com/hammerjs/hammer.js/master/tests/manual/visual.html</a><br><a href="http://www.cnblogs.com/iamlilinfeng/p/4239957.html" target="_blank" rel="external">http://www.cnblogs.com/iamlilinfeng/p/4239957.html</a></p>
+<p>原创文章，转载请注明出处！</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://yoursite.com/2015/10/05/hammer-js/" data-id="cifo2154w0011gnjhxful1nk5" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-tween" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/10/05/tween/" class="article-date">
+  <time datetime="2015-10-05T15:24:45.000Z" itemprop="datePublished">2015-10-05</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/动画库/">动画库</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/10/05/tween/">tweenMax基础api的逐条随意翻译</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="tweenMax基础api的逐条随意翻译">tweenMax基础api的逐条随意翻译</h3><p><code>1</code>tween没有内置的选择器引擎，在没有载入jquery等类库的情况下只能通过<code>getElementById</code>进行选择。<br><code>2.ticker</code><br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">TweenMax.ticker.addEventListener(<span class="string">"tick"</span>, myFunction);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">myFunction</span><span class="params">(event)</span> </span>&#123;</span><br><span class="line"><span class="comment">//executes on every tick after the core engine updates</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><code>3.delay()</code><br><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable"><span class="keyword">var</span> currentDelay</span> = myAnimation.delay(); <span class="comment">//gets current delay</span></span><br><span class="line">myAnimation.delay(<span class="number">2</span>); <span class="comment">//sets delay</span></span><br></pre></td></tr></table></figure></p>
+<p>dalay方法可以设置或者获取某一个实例的延迟。<br>数值是以秒为单位的。<br>在设置了延迟的tween中，一切开始的动画都在delay之后开始，除了from()方法，from方法是不管延迟的，直接开始，除非设置了immediateRender:false参数在vars对象里。<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">TweenMax ( <span class="string">target:</span>Object, <span class="string">duration:</span>Number, <span class="string">vars:</span>Object ) ;</span><br><span class="line"><span class="comment">//就是设置运动参数的vars对象。</span></span><br></pre></td></tr></table></figure></p>
+<p><code>4.TweenMax.delayedCall()</code><br>定义一个实例，这个实例表示延迟了多少秒后调用一个函数，而且回调函数可以传参数，<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//calls myFunction after 1 second and passes 2 parameters:</span></span><br><span class="line">TweenMax.delayedCall(<span class="number">1</span>, myFunction, [<span class="string">"param1"</span>, <span class="string">"param2"</span>]);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">myFunction</span><span class="params">(param1, param2)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//do stuff</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//即如果这个方法写在文档加载后，即代表文档加载后过1秒执行myFunction函数，并且可以传一个数组的参数进去</span></span><br></pre></td></tr></table></figure></p>
+<p><code>5.duration(time)</code><br>获取tween实例的动画时长或者设置其动画时长<br><figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">var</span> currentDuration <span class="subst">=</span> myAnimation<span class="built_in">.</span><span class="built_in">duration</span>(); <span class="comment">//gets current duration</span></span><br><span class="line">myAnimation<span class="built_in">.</span><span class="built_in">duration</span>(<span class="number">2</span>); <span class="comment">//sets duration</span></span><br></pre></td></tr></table></figure></p>
+<p><code>6.endTime()</code><br>只返回tween实例结束动画的时间<br><code>7.eventCallback( type:String, callback:Function, params:Array, scope:* )</code><br>作用跟在tween的vars对象里直接写上事件是一样的，区别是这样做可以解除这个事件的绑定。<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//the following two lines produce IDENTICAL results:</span></span><br><span class="line">var myAnimation = <span class="keyword">new</span> TweenLite(mc, <span class="number">1</span>, &#123;<span class="string">x:</span><span class="number">100</span>, <span class="string">onComplete:</span>myFunction, <span class="string">onCompleteParams:</span>[<span class="string">"param1"</span>,<span class="string">"param2"</span>]&#125;);</span><br><span class="line">myAnimation.eventCallback(<span class="string">"onComplete"</span>, myFunction, [<span class="string">"param1"</span>,<span class="string">"param2"</span>]);</span><br></pre></td></tr></table></figure></p>
+<p>如果要给一个tween实例绑定不同的多个事件，则可以<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">myAnimation.<span class="function"><span class="title">eventCallback</span><span class="params">(<span class="string">"onComplete"</span>, completeHandler)</span></span>.<span class="function"><span class="title">eventCallback</span><span class="params">(<span class="string">"onUpdate"</span>, updateHandler, [<span class="string">"param1"</span>,<span class="string">"&#123;self&#125;"</span>])</span></span></span><br><span class="line"><span class="comment">//链式调用</span></span><br></pre></td></tr></table></figure></p>
+<p>如何解除绑定<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//deletes the onUpdate</span></span><br><span class="line">myAnimation.eventCallback(<span class="string">"onUpdate"</span>, <span class="literal">null</span>);</span><br></pre></td></tr></table></figure></p>
+<p><strong>需要注意的是一个事件只能有一个callback，如果写多个callback那将会覆盖</strong><br><code>8、TweenMax.fromTo( target:Object, duration:Number, fromVars:Object, toVars:Object )</code><br>需要注意的是一般的vars的属性写在fromVars里，而特殊的类似onComplete等方法需要写在toVars对象里。<br><code>9、TweenMax.getAllTweens( includeTimelines:Boolean ) : Array</code><br>返回一个数组，包含所以的tween实例，参数可以选择是否返回timeline实例，如果想要实现对所有的实例同意操作，比如暂停，开始等，可以考虑使用<code>TimelineLite.exportRoot()</code><br><code>10、TweenMax.getTweensOf( target:Object, onlyActive:Boolean );</code><br>在当前寻找到操作元素对象是Object的tween，并返回。也可能返回多个tween的数组.若onlyActive为true则只返回正在运行的tween。<br><figure class="highlight delphi"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">TweenMax.<span class="keyword">to</span>(myObject1, <span class="number">1</span>, <span class="comment">&#123;x:100&#125;</span>);</span><br><span class="line">TweenMax.<span class="keyword">to</span>(myObject2, <span class="number">1</span>, <span class="comment">&#123;x:100&#125;</span>);</span><br><span class="line">TweenMax.<span class="keyword">to</span>([myObject1, myObject2], <span class="number">1</span>, <span class="comment">&#123;opacity:0&#125;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> a1 = TweenMax.getTweensOf(myObject1); <span class="comment">//finds 2 tweens</span></span><br><span class="line"><span class="keyword">var</span> a2 = TweenMax.getTweensOf([myObject1, myObject2]); <span class="comment">//finds 3 tweens</span></span><br></pre></td></tr></table></figure></p>
+<p><code>11、TweenMax.globalTimeScale( value:Number );</code><br>设置全部tween的速度，大于1则表示速度越大。<br><code>12、.invalidate()</code>不懂<br><code>13、.isActive( ) : Boolean</code><br>可以查看这个tween是否是在运动中，没开始，结束，暂停都不算在运动中。<br><code>14、TweenMax.isTweening(target: object)</code><br>Reports whether or not a particular object is actively tweening. If a tween is paused, is completed, or hasn’t started yet, it isn’t considered active.<br><code>15、.kill()</code><br>看下方官方给出的示例代码就能清楚的知道.kill()方法的用途<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// <span class="operator"><span class="keyword">kill</span> the entire animation:</span><br><span class="line">myAnimation.<span class="keyword">kill</span>();</span></span><br><span class="line"> </span><br><span class="line">//<span class="operator"><span class="keyword">kill</span> <span class="keyword">only</span> the <span class="string">"x"</span> <span class="keyword">and</span> <span class="string">"y"</span> properties <span class="keyword">of</span> the animation (<span class="keyword">all</span> targets):</span><br><span class="line">myAnimation.<span class="keyword">kill</span>(&#123;x:<span class="literal">true</span>, y:<span class="literal">true</span>&#125;);</span></span><br><span class="line"> </span><br><span class="line">//<span class="operator"><span class="keyword">kill</span> <span class="keyword">all</span> parts <span class="keyword">of</span> the animation related <span class="keyword">to</span> the target <span class="string">"myObject"</span> (<span class="keyword">if</span> the tween has multiple targets, the others will <span class="keyword">not</span> be affected):</span><br><span class="line">myAnimation.<span class="keyword">kill</span>(<span class="literal">null</span>, myObject);</span></span><br><span class="line"> </span><br><span class="line">//<span class="operator"><span class="keyword">kill</span> <span class="keyword">only</span> the <span class="string">"x"</span> <span class="keyword">and</span> <span class="string">"y"</span> properties <span class="keyword">of</span> animations <span class="keyword">of</span> the target <span class="string">"myObject"</span>:</span><br><span class="line">myAnimation.<span class="keyword">kill</span>(&#123;x:<span class="literal">true</span>, y:<span class="literal">true</span>&#125;, myObject);</span></span><br><span class="line">  </span><br><span class="line">//<span class="operator"><span class="keyword">kill</span> <span class="keyword">only</span> the <span class="string">"opacity"</span> properties <span class="keyword">of</span> animations <span class="keyword">of</span> the targets <span class="string">"myObject1"</span> <span class="keyword">and</span> <span class="string">"myObject2"</span>:</span><br><span class="line">myAnimation.<span class="keyword">kill</span>(&#123;opacity:<span class="literal">true</span>&#125;, [myObject1, myObject2]);</span></span><br></pre></td></tr></table></figure></p>
+<p><code>16、TweenMax.killAll( complete:Boolean, tweens:Boolean, delayedCalls:Boolean, timelines:Boolean );</code><br><code>17、TweenMax.killChildTweensOf( parent:Object, complete:Boolean );</code><br>去除父元素下的所有tween，可选的complete若为true则先完成动画 再kill。<br><code>18、TweenMax.lagSmoothing()</code>不懂<br><code>19、.pause( atTime:*, suppressEvents:Boolean ) : *</code><br>如果括号内有秒计数的数字，则表示运动到atTime秒后在暂停<br><code>20、TweenMax.pauseAll( tweens:Boolean, delayedCalls:Boolean, timelines:Boolean );</code><br>括号内可选的属性的默认值都是true 表示默认暂停这些所有<br><code>21、paused(boolean)</code><br>getter or setter 判断当前tween实例是否处于停止状态。<br>下方代码的toggles比较有用<br><figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var paused = myAnimation.paused(); //gets current paused <span class="keyword">state</span></span><br><span class="line">myAnimation.paused( true ); //sets paused <span class="keyword">state</span> <span class="keyword">to</span> true (just like pause())</span><br><span class="line">myAnimation.paused( !myAnimation.paused() ); //toggles the paused <span class="keyword">state</span></span><br></pre></td></tr></table></figure></p>
+<p><code>22、play(from:num, suppressEvents:Boolean)</code><br>from值默认情况下是在元素当前的位置开始动。设置的数值代表直接从第几分钟开始运动<br><figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//begins playing from wherever the playhead currently is:</span></span><br><span class="line">myAnimation.<span class="keyword">play</span>();</span><br><span class="line"><span class="comment">//begins playing from exactly 2-seconds into the animation:</span></span><br><span class="line">myAnimation.<span class="keyword">play</span>(<span class="number">2</span>);</span><br><span class="line"><span class="comment">//begins playing from exactly 2-seconds into the animation but doesn't suppress events during the initial move:</span></span><br><span class="line">myAnimation.<span class="keyword">play</span>(<span class="number">2</span>, false);</span><br></pre></td></tr></table></figure></p>
+<p><code>23、.progress( value:Number, suppressEvents:Boolean )</code><br>指示tween跳转到进程的某一个阶段（0-1），比如0.5就代表跳到进程的一半。<br><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable"><span class="keyword">var</span> progress</span> = myTween.progress(); <span class="comment">//gets current progress</span></span><br><span class="line">myTween.progress( <span class="number">0.25</span> ); <span class="comment">//sets progress to one quarter finished</span></span><br></pre></td></tr></table></figure></p>
+<p><code>24、.repeat( value:Number )</code><br>可以写在vars对象里<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var <span class="built_in">repeat</span> = myTween.<span class="built_in">repeat</span>(); //gets current <span class="built_in">repeat</span> value&lt;<span class="keyword">br</span> /&gt;</span><br><span class="line">myTween.<span class="built_in">repeat</span>(<span class="number">2</span>); //sets <span class="built_in">repeat</span> <span class="keyword">to</span> <span class="number">2</span></span><br></pre></td></tr></table></figure></p>
+<p><code>25、.repeatDelay( value:Number )</code><br>延迟几秒再重复<br>可以写在vars对象里<br><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">TweenMax</span><span class="class">.to</span>(mc, <span class="number">1</span>, &#123;<span class="attribute">x</span>:<span class="number">100</span>, <span class="attribute">repeat</span>:<span class="number">2</span>, <span class="attribute">repeatDelay</span>:<span class="number">1</span>&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>也可以当方法写<br><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable"><span class="keyword">var</span> repeatDelay</span> = myTween.repeatDelay(); <span class="comment">//gets current repeatDelay value</span></span><br><span class="line">myTween.repeatDelay(<span class="number">2</span>); <span class="comment">//sets repeatDelay to 2</span></span><br></pre></td></tr></table></figure></p>
+<p><code>26、.restart( includeDelay:Boolean, suppressEvents:Boolean )</code><br>第一个参数表示是否包含上一次的延迟效果，如果为true，则表示重复的时候还有继承上一次的延迟，即触发的时候会延迟几秒再开始动作。<br><code>27、.reverse( from:*, suppressEvents:Boolean )</code><br>往相反的方向运动，如果将值设置为0，则从先前运动的最后时刻开始往反方向运动。如果是-1，则跳到距离终点还有1秒的时刻开始掉头运动。<br><figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//reverses playback from wherever the playhead currently is:</span></span><br><span class="line"> myAnimation.<span class="keyword">reverse</span>();</span><br><span class="line"> </span><br><span class="line"> <span class="comment">//reverses playback from exactly 2 seconds into the animation:</span></span><br><span class="line"> myAnimation.<span class="keyword">reverse</span>(<span class="number">2</span>);</span><br><span class="line"> </span><br><span class="line"> <span class="comment">//reverses playback from exactly 2 seconds into the animation but doesn't suppress events during the initial move:</span></span><br><span class="line">myAnimation.<span class="keyword">reverse</span>(<span class="number">2</span>, <span class="keyword">false</span>);</span><br><span class="line"> </span><br><span class="line"><span class="comment">//reverses playback from the very END of the animation:</span></span><br><span class="line">myAnimation.<span class="keyword">reverse</span>(<span class="number">0</span>);</span><br><span class="line">  </span><br><span class="line"><span class="comment">//reverses playback starting from exactly 1 second before the end of the animation:</span></span><br><span class="line">myAnimation.<span class="keyword">reverse</span>(-<span class="number">1</span>);</span><br><span class="line"> </span><br><span class="line"><span class="comment">//flips the orientation (if it's forward, it will go backward, if it is backward, it will go forward):</span></span><br><span class="line"><span class="keyword">if</span> (myAnimation.reversed()) &#123;</span><br><span class="line">    myAnimation.play();</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    myAnimation.<span class="keyword">reverse</span>();</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">//flips the orientation using the reversed() method instead (shorter version of the code above):</span></span><br><span class="line">myAnimation.reversed( !myAnimation.reversed() );</span><br></pre></td></tr></table></figure></p>
+<p><code>28、.reversed( value:Boolean )</code><br>判断是否在相反的方向，用法跟pasued()一样<br><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable"><span class="keyword">var</span> rev</span> = myAnimation.reversed(); <span class="comment">//gets current orientation</span></span><br><span class="line">myAnimation.reversed( <span class="literal">true</span> ); <span class="comment">//sets the orientation to reversed</span></span><br><span class="line">myAnimation.reversed( !myAnimation.reversed() ); <span class="comment">//toggles the orientation</span></span><br></pre></td></tr></table></figure></p>
+<p><code>29、TweenMax.set( target:Object, vars:Object )</code><br><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">TweenMax</span><span class="class">.set</span>(myObject, &#123;<span class="attribute">x</span>:<span class="number">100</span>, <span class="attribute">y</span>:<span class="number">50</span>, <span class="attribute">opacity</span>:<span class="number">0</span>&#125;);</span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="tag">TweenMax</span><span class="class">.to</span>(myObject, <span class="number">0</span>, &#123;<span class="attribute">x</span>:<span class="number">100</span>, <span class="attribute">y</span>:<span class="number">50</span>, <span class="attribute">opacity</span>:<span class="number">0</span>&#125;);</span><br></pre></td></tr></table></figure></p>
+<p><code>30、.time()</code><br>获取或设置tween的当前运动的时间点<br><code>30、.timeScale()</code><br>获取或设置当前tween的速度缩放数值</p>
+<p>原整理文章，转载请注明出处！</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://yoursite.com/2015/10/05/tween/" data-id="cifo2154p000rgnjhc9554pmp" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jsLib/">jsLib</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-lazyload-js源码学习" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/09/28/lazyload-js源码学习/" class="article-date">
+  <time datetime="2015-09-27T16:59:55.000Z" itemprop="datePublished">2015-09-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/09/28/lazyload-js源码学习/">lazyload.js源码学习</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="lazyload-js源码学习">lazyload.js源码学习</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span><br><span class="line"> * Lazy Load - jQuery plugin for lazy loading images</span><br><span class="line"> *</span><br><span class="line"> * Copyright (c) 2007-2013 Mika Tuupola</span><br><span class="line"> *</span><br><span class="line"> * Licensed under the MIT license:</span><br><span class="line"> *   http://www.opensource.org/licenses/mit-license.php</span><br><span class="line"> *</span><br><span class="line"> * Project home:</span><br><span class="line"> *   http://www.appelsiini.net/projects/lazyload</span><br><span class="line"> *</span><br><span class="line"> * Version:  1.8.5</span><br><span class="line"> *</span><br><span class="line"> */</span></span><br><span class="line">(<span class="function"><span class="keyword">function</span><span class="params">($, window, document, undefined)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> $<span class="built_in">window</span> = $(<span class="built_in">window</span>);</span><br><span class="line">    <span class="comment">//基于jquery/zepto定义插件方法 lazyload</span></span><br><span class="line">    $.fn.lazyload = <span class="function"><span class="keyword">function</span><span class="params">(options)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//this 指向了调用了lazyload得dom对象</span></span><br><span class="line">        <span class="comment">//一般是一个包含多个元素的对象</span></span><br><span class="line">        <span class="keyword">var</span> elements = <span class="keyword">this</span>;</span><br><span class="line">        <span class="keyword">var</span> $container;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">/**</span><br><span class="line">        * 定义了默认的配置对象</span><br><span class="line">        * 在定义配置对象的时候最好将冒号对其 这样有益于阅读</span><br><span class="line">        *</span><br><span class="line">        **/</span></span><br><span class="line">        <span class="keyword">var</span> settings = &#123;</span><br><span class="line">            <span class="comment">//起征点 图片在离屏幕什么地方开始load</span></span><br><span class="line">            threshold       : <span class="number">0</span>,</span><br><span class="line">            <span class="comment">//可见区域外 搜索x个图片后停止搜索</span></span><br><span class="line">            failure_limit   : <span class="number">0</span>,</span><br><span class="line">            event           : <span class="string">"scroll"</span>,</span><br><span class="line">            effect          : <span class="string">"show"</span>,</span><br><span class="line">            container       : <span class="built_in">window</span>,</span><br><span class="line">            data_attribute  : <span class="string">"original"</span>,</span><br><span class="line">            <span class="comment">//是否跳过看不见的图片load</span></span><br><span class="line">            skip_invisible  : <span class="literal">true</span>,</span><br><span class="line">            appear          : <span class="literal">null</span>,</span><br><span class="line">            load            : <span class="literal">null</span></span><br><span class="line">        &#125;;</span><br><span class="line">        <span class="comment">/**</span><br><span class="line">        * function update</span><br><span class="line">        * update函数的作用是在滚动后者resize屏幕时判断图片在屏幕中得位置，并作一些判断</span><br><span class="line">        **/</span></span><br><span class="line">        <span class="function"><span class="keyword">function</span> <span class="title">update</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">var</span> counter = <span class="number">0</span>;</span><br><span class="line">            <span class="comment">//遍历需要懒加载的图片，根据当前屏幕相对文档的距离跟图片相对文档的距离的比较，去处理图片。</span></span><br><span class="line">            elements.each(<span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                <span class="keyword">var</span> $<span class="keyword">this</span> = $(<span class="keyword">this</span>);</span><br><span class="line">                <span class="comment">//如果配置的是跳过看不见的图片 并且 这些图片设置隐藏 则跳出update方法</span></span><br><span class="line">                <span class="keyword">if</span> (settings.skip_invisible &amp;&amp; $<span class="keyword">this</span>.css(<span class="string">"display"</span>) === <span class="string">"none"</span>) &#123;</span><br><span class="line">                    <span class="keyword">return</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span> ($.abovethetop(<span class="keyword">this</span>, settings) ||</span><br><span class="line">                    $.leftofbegin(<span class="keyword">this</span>, settings)) &#123;</span><br><span class="line">                        <span class="comment">/* Nothing. */</span></span><br><span class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (!$.belowthefold(<span class="keyword">this</span>, settings) &amp;&amp;</span><br><span class="line">                    !$.rightoffold(<span class="keyword">this</span>, settings)) &#123;</span><br><span class="line">                        $<span class="keyword">this</span>.trigger(<span class="string">"appear"</span>);</span><br><span class="line">                        <span class="comment">/* if we found an image we'll load, reset the counter */</span></span><br><span class="line">                        counter = <span class="number">0</span>;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="comment">//</span></span><br><span class="line">                    <span class="keyword">if</span> (++counter &gt; settings.failure_limit) &#123;</span><br><span class="line">                        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">/**</span><br><span class="line">        * 如果有配置项写入 则将配置项extend到setting对象上。</span><br><span class="line">        * 此处兼容了这个项目的之前的版本配置项的键名</span><br><span class="line">        *</span><br><span class="line">        **/</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span>(options) &#123;</span><br><span class="line">            <span class="comment">/* Maintain BC for a couple of versions. */</span></span><br><span class="line">            <span class="keyword">if</span> (<span class="literal">undefined</span> !== options.failurelimit) &#123;</span><br><span class="line">                options.failure_limit = options.failurelimit; </span><br><span class="line">                <span class="keyword">delete</span> options.failurelimit;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (<span class="literal">undefined</span> !== options.effectspeed) &#123;</span><br><span class="line">                options.effect_speed = options.effectspeed; </span><br><span class="line">                <span class="keyword">delete</span> options.effectspeed;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            $.extend(settings, options);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/* Cache container as jQuery as object. */</span></span><br><span class="line">        $container = (settings.container === <span class="literal">undefined</span> ||</span><br><span class="line">                      settings.container === <span class="built_in">window</span>) ? $<span class="built_in">window</span> : $(settings.container);</span><br><span class="line"></span><br><span class="line">        <span class="comment">/* Fire one scroll event per scroll. Not one scroll event per image. */</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="number">0</span> === settings.event.indexOf(<span class="string">"scroll"</span>)) &#123;</span><br><span class="line">            $container.on(settings.event, <span class="function"><span class="keyword">function</span><span class="params">(event)</span> </span>&#123;</span><br><span class="line">                <span class="keyword">return</span> update();</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//这里的this就是要实现懒加载的所有图片集合 &#123;object&#125;</span></span><br><span class="line">        <span class="comment">/**</span><br><span class="line">        * 给所有懒加载的图片遍历绑定事件 分2种情况</span><br><span class="line">        * 1、setting配置scroll的时候</span><br><span class="line">        * 绑定自定义的appear事件</span><br><span class="line">        * 2、setting配置其他事件的时候 eq:click</span><br><span class="line">        * 给图片绑定click事件，并且句柄设置为appear</span><br><span class="line">        **/</span></span><br><span class="line">        <span class="keyword">this</span>.each(<span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">var</span> self = <span class="keyword">this</span>;</span><br><span class="line">            <span class="keyword">var</span> $self = $(self);</span><br><span class="line"></span><br><span class="line">            self.loaded = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">            <span class="comment">/* When appear is triggered load original image. */</span></span><br><span class="line">            $self.one(<span class="string">"appear"</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                <span class="keyword">if</span> (!<span class="keyword">this</span>.loaded) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (settings.appear) &#123;</span><br><span class="line">                        <span class="keyword">var</span> elements_left = elements.length;</span><br><span class="line">                        settings.appear.call(self, elements_left, settings);</span><br><span class="line">                    &#125;</span><br><span class="line">                    $(<span class="string">"&lt;img /&gt;"</span>)</span><br><span class="line">                        .on(<span class="string">"load"</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                            $self</span><br><span class="line">                                .hide()</span><br><span class="line">                                .attr(<span class="string">"src"</span>, $self.data(settings.data_attribute))</span><br><span class="line">                                [settings.effect](settings.effect_speed);</span><br><span class="line">                            self.loaded = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">                            <span class="comment">/* Remove image from array so it is not looped next time. */</span></span><br><span class="line">                            <span class="keyword">var</span> temp = $.grep(elements, <span class="function"><span class="keyword">function</span><span class="params">(element)</span> </span>&#123;</span><br><span class="line">                                <span class="keyword">return</span> !element.loaded;</span><br><span class="line">                            &#125;);</span><br><span class="line">                            elements = $(temp);</span><br><span class="line"></span><br><span class="line">                            <span class="keyword">if</span> (settings.load) &#123;</span><br><span class="line">                                <span class="keyword">var</span> elements_left = elements.length;</span><br><span class="line">                                settings.load.call(self, elements_left, settings);</span><br><span class="line">                            &#125;</span><br><span class="line">                        &#125;)</span><br><span class="line">                        .attr(<span class="string">"src"</span>, $self.data(settings.data_attribute));</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line"></span><br><span class="line">            <span class="comment">/* When wanted event is triggered load original image */</span></span><br><span class="line">            <span class="comment">/* by triggering appear.                              */</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">/**</span><br><span class="line">            * 如果配置项中得event不是scroll</span><br><span class="line">            * 就需要给每个图片绑定一个事件</span><br><span class="line">            * 比如click</span><br><span class="line">            **/</span></span><br><span class="line">            <span class="keyword">if</span> (<span class="number">0</span> !== settings.event.indexOf(<span class="string">"scroll"</span>)) &#123;</span><br><span class="line">                $self.on(settings.event, <span class="function"><span class="keyword">function</span><span class="params">(event)</span> </span>&#123;</span><br><span class="line">                    <span class="keyword">if</span> (!self.loaded) &#123;</span><br><span class="line">                        $self.trigger(<span class="string">"appear"</span>);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        <span class="comment">/* Check if something appears when window is resized. */</span></span><br><span class="line">        $<span class="built_in">window</span>.on(<span class="string">"resize"</span>, <span class="function"><span class="keyword">function</span><span class="params">(event)</span> </span>&#123;</span><br><span class="line">            update();</span><br><span class="line">        &#125;);</span><br><span class="line">              </span><br><span class="line">        <span class="comment">/* With IOS5 force loading images when navigating with back button. */</span></span><br><span class="line">        <span class="comment">/* Non optimal workaround. */</span></span><br><span class="line">        <span class="keyword">if</span> ((<span class="regexp">/iphone|ipod|ipad.*os 5/gi</span>).test(navigator.appVersion)) &#123;</span><br><span class="line">            $<span class="built_in">window</span>.on(<span class="string">"pageshow"</span>, <span class="function"><span class="keyword">function</span><span class="params">(event)</span> </span>&#123;</span><br><span class="line">                <span class="comment">// if (event.originalEvent.persisted) &#123;</span></span><br><span class="line">                event = event.originalEvent || event;</span><br><span class="line">                <span class="keyword">if</span> (event.persisted) &#123;</span><br><span class="line">                    elements.each(<span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                        $(<span class="keyword">this</span>).trigger(<span class="string">"appear"</span>);</span><br><span class="line">                    &#125;);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/* Force initial check if images should appear. */</span></span><br><span class="line">        $(<span class="built_in">window</span>).on(<span class="string">"load"</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            update();</span><br><span class="line">        &#125;);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Convenience methods in jQuery namespace.           */</span></span><br><span class="line">    <span class="comment">/* Use as  $.belowthefold(element, &#123;threshold : 100, container : window&#125;) */</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span><br><span class="line">    * $.belowthefold &amp; $.rightoffold </span><br><span class="line">    * 是判断当前屏幕的最下方或最右方是否满足了加载图片的需求</span><br><span class="line">    * false 触发trigge('appear')</span><br><span class="line">    *</span><br><span class="line">    *</span><br><span class="line">    *</span><br><span class="line">    **/</span></span><br><span class="line">    $.belowthefold = <span class="function"><span class="keyword">function</span><span class="params">(element, settings)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> fold;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> (settings.container === <span class="literal">undefined</span> || settings.container === <span class="built_in">window</span>) &#123;</span><br><span class="line">            fold = $<span class="built_in">window</span>.height() + $<span class="built_in">window</span>[<span class="number">0</span>].scrollY;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            fold = $(settings.container).offset().top + $(settings.container).height();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> fold &lt;= $(element).offset().top - settings.threshold;</span><br><span class="line">    &#125;;</span><br><span class="line">    </span><br><span class="line">    $.rightoffold = <span class="function"><span class="keyword">function</span><span class="params">(element, settings)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> fold;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (settings.container === <span class="literal">undefined</span> || settings.container === <span class="built_in">window</span>) &#123;</span><br><span class="line">            fold = $<span class="built_in">window</span>.width() + $<span class="built_in">window</span>[<span class="number">0</span>].scrollX;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            fold = $(settings.container).offset().left + $(settings.container).width();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> fold &lt;= $(element).offset().left - settings.threshold;</span><br><span class="line">    &#125;;</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span><br><span class="line">    * $.abovethetop &amp; $.leftofbegin </span><br><span class="line">    * 判断当前屏幕的最上方或最左方是否已经超过了需要加载的图片的位置</span><br><span class="line">    * true  nothing </span><br><span class="line">    *</span><br><span class="line">    *</span><br><span class="line">    *</span><br><span class="line">    **/</span> </span><br><span class="line">    $.abovethetop = <span class="function"><span class="keyword">function</span><span class="params">(element, settings)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> fold;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> (settings.container === <span class="literal">undefined</span> || settings.container === <span class="built_in">window</span>) &#123;</span><br><span class="line">            fold = $<span class="built_in">window</span>[<span class="number">0</span>].scrollY;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            fold = $(settings.container).offset().top;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> fold &gt;= $(element).offset().top + settings.threshold  + $(element).height();</span><br><span class="line">    &#125;;</span><br><span class="line">    </span><br><span class="line">    $.leftofbegin = <span class="function"><span class="keyword">function</span><span class="params">(element, settings)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> fold;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> (settings.container === <span class="literal">undefined</span> || settings.container === <span class="built_in">window</span>) &#123;</span><br><span class="line">            fold = $<span class="built_in">window</span>[<span class="number">0</span>].scrollX;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            fold = $(settings.container).offset().left;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> fold &gt;= $(element).offset().left + settings.threshold + $(element).width();</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    $.inviewport = <span class="function"><span class="keyword">function</span><span class="params">(element, settings)</span> </span>&#123;</span><br><span class="line">         <span class="keyword">return</span> !$.rightoffold(element, settings) &amp;&amp; !$.leftofbegin(element, settings) &amp;&amp;</span><br><span class="line">                !$.belowthefold(element, settings) &amp;&amp; !$.abovethetop(element, settings);</span><br><span class="line">     &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Custom selectors for your convenience.   */</span></span><br><span class="line">    <span class="comment">/* Use as $("img:below-the-fold").something() or */</span></span><br><span class="line">    <span class="comment">/* $("img").filter(":below-the-fold").something() which is faster */</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span><br><span class="line">    * 添加选择器</span><br><span class="line">    * 通过筛选选择器可以方便的选出处于不同屏幕位置的图片</span><br><span class="line">    * 在jquery的空间里配置了一些实用的选择器，可以借鉴</span><br><span class="line">    *</span><br><span class="line">    **/</span></span><br><span class="line">    $.extend($.fn, &#123;</span><br><span class="line">        <span class="string">"below-the-fold"</span> : <span class="function"><span class="keyword">function</span><span class="params">(a)</span> </span>&#123; <span class="keyword">return</span> $.belowthefold(a, &#123;threshold : <span class="number">0</span>&#125;); &#125;,</span><br><span class="line">        <span class="string">"above-the-top"</span>  : <span class="function"><span class="keyword">function</span><span class="params">(a)</span> </span>&#123; <span class="keyword">return</span> !$.belowthefold(a, &#123;threshold : <span class="number">0</span>&#125;); &#125;,</span><br><span class="line">        <span class="string">"right-of-screen"</span>: <span class="function"><span class="keyword">function</span><span class="params">(a)</span> </span>&#123; <span class="keyword">return</span> $.rightoffold(a, &#123;threshold : <span class="number">0</span>&#125;); &#125;,</span><br><span class="line">        <span class="string">"left-of-screen"</span> : <span class="function"><span class="keyword">function</span><span class="params">(a)</span> </span>&#123; <span class="keyword">return</span> !$.rightoffold(a, &#123;threshold : <span class="number">0</span>&#125;); &#125;,</span><br><span class="line">        <span class="string">"in-viewport"</span>    : <span class="function"><span class="keyword">function</span><span class="params">(a)</span> </span>&#123; <span class="keyword">return</span> $.inviewport(a, &#123;threshold : <span class="number">0</span>&#125;); &#125;,</span><br><span class="line">        <span class="comment">/* Maintain BC for couple of versions. */</span></span><br><span class="line">        <span class="string">"above-the-fold"</span> : <span class="function"><span class="keyword">function</span><span class="params">(a)</span> </span>&#123; <span class="keyword">return</span> !$.belowthefold(a, &#123;threshold : <span class="number">0</span>&#125;); &#125;,</span><br><span class="line">        <span class="string">"right-of-fold"</span>  : <span class="function"><span class="keyword">function</span><span class="params">(a)</span> </span>&#123; <span class="keyword">return</span> $.rightoffold(a, &#123;threshold : <span class="number">0</span>&#125;); &#125;,</span><br><span class="line">        <span class="string">"left-of-fold"</span>   : <span class="function"><span class="keyword">function</span><span class="params">(a)</span> </span>&#123; <span class="keyword">return</span> !$.rightoffold(a, &#123;threshold : <span class="number">0</span>&#125;); &#125;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">&#125;)($, <span class="built_in">window</span>, <span class="built_in">document</span>);</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://yoursite.com/2015/09/28/lazyload-js源码学习/" data-id="cifo2154v0010gnjhvtszbatt" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-github学习" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/09/28/github学习/" class="article-date">
+  <time datetime="2015-09-27T16:56:09.000Z" itemprop="datePublished">2015-09-28</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/前端/">前端</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/09/28/github学习/">github学习</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="git_及github使用学习">git 及github使用学习</h2><p><strong>总结点：</strong><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;分支合并后在git中操作<code>git branch</code>查看所有分支时分支还是会显示。并没有删除分支。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;merge操作时务必到主干上操作。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>git reflog</code>跟<code>git reset --hard xxx</code>组合是很好的规避失误操作的方法。reflog查看所有仓库HEAD状态，reset回到那个状态。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在主干master上执行reset操作时，不会影响到已经打好的分支。</p>
+<blockquote>
+<p>1、git init 初始化一个git项目</p>
+</blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在初始化的项目中有一个<code>.git</code>文件，可以被称为“附属于该仓库的工作树”。文件的操作都在工作树中进行，然后记录到仓库中去。</p>
+<blockquote>
+<p>2、git status 查看状态</p>
+</blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;只要对git的工作树或者仓库操作，git status的现实结果就会发生变化。</p>
+<blockquote>
+<p>3、git add 向暂存区中添加文件<br>暂存区属于仓库的范畴</p>
+</blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;假如只是在工作区操作文件，并不会在被计入git仓库的版本管理对象中。用status查看状态时只会出现在Untracked files里，而git add操作后，文件就进入了暂存区即仓库。</p>
+<blockquote>
+<p>4、git commit 保存仓库的历史记录<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git <span class="operator"><span class="keyword">commit</span> <span class="comment">--amend</span></span><br><span class="line">//修改上一次提交的信息</span><br><span class="line">git <span class="keyword">commit</span> -am <span class="string">"message"</span></span><br><span class="line">//<span class="keyword">add</span> <span class="keyword">commit</span> &amp; 提交信息</span></span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;将当前暂存区的的文件实际保存到仓库的历史记录。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;通过这些记录我们就可以在工作区内复原文件。</p>
+<blockquote>
+<p>5、git log 查看提交的记录，也是保存过的仓库的记录。<br><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">log</span> <span class="comment">--pretty=short</span><span class="comment"></span><br><span class="line">//不显示日期</span></span><br><span class="line">git <span class="built_in">log</span> -p README.md<span class="comment"></span><br><span class="line">//读取READMD.md文件提交记录，-p代表了前后差异</span></span><br><span class="line">git <span class="built_in">log</span> README.md <span class="comment"></span><br><span class="line">//读取特定文件的提交记录</span></span><br><span class="line">git <span class="built_in">log</span> graph<span class="comment"></span><br><span class="line">//以图表形式查看分支</span></span><br></pre></td></tr></table></figure></p>
+<p>6、git diff 查看更改前后的差别</p>
+</blockquote>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git diff HEAD</span><br><span class="line"><span class="comment">//比较工作树和最新提交之间的差别。</span></span><br></pre></td></tr></table></figure>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;git diff 可以查看工作树、暂存区、最新提交之间的差异。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;默认情况下<code>git diff</code>比较的是工作树和暂存区的区别，如果此分支在<code>git add</code>之后工作树跟暂存区区别是没有的，所以在add之后commit之前需要使用<code>git diff HEAD</code>比较工作树和最新提交之间的差别。</p>
+<blockquote>
+<p>7、git branch 显示分支一览表</p>
+</blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;显示当前的仓库的所有分支。并且当前分支带有<strong>星号</strong>标志。</p>
+<blockquote>
+<p>8、git checkout -b feature-A  创建并切换到分支。<br>git branch feature-A 创建分支<br>git checkout feature-A 切换到feature-A分支</p>
+</blockquote>
+<p>打分支</p>
+<blockquote>
+<p>9、git merge 合并分支</p>
+</blockquote>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">merge</span> <span class="comment">--no-ff 分支</span><span class="comment"></span><br><span class="line">//在记录中记录本此合并</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>10、git reset —hard xxx让仓库的HEAD、暂存区、和当前工作树回溯到指定版本</p>
+</blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;回溯之后查看log日志只能看到当前状态之前的日志，就看不到回溯之前的那些日志，如果回溯错了，想回到回溯之前的状态该怎么办？<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;只用<code>git reflog</code>操作就能看到包括回溯之前的所有状态，然后再配合<code>git reset --hard</code>命令回溯回去就好了。<br>git</p>
+<blockquote>
+<p>11、git rebase -i HEAD~2（num）</p>
+</blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果觉得两次提交的内容和信息台贴近无需分成两次，就可以使用这个命令两xx条最近的HEAD合并成一条提交。<br>执行后回出现编辑框<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">pick <span class="number">7</span>aadfd <span class="string">"add feature"</span></span><br><span class="line">pick <span class="number">4</span>tw436 <span class="string">"dsxxxx"</span></span><br><span class="line"><span class="prompt">&gt;&gt;</span>&gt;&gt;&gt;&gt;修改成</span><br><span class="line">pick <span class="number">7</span>aadfd <span class="string">"add feature"</span></span><br><span class="line">fixup <span class="number">4</span>tw436 <span class="string">"dsxxxx"</span></span><br><span class="line">/<span class="regexp">/意味着将第二条修改加到第一条去</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="第三方开发者协作"><strong>第三方开发者协作</strong></h2><blockquote>
+<p>12、git remote add origin git@github.com:fromiris/git-test.git<br>将远程仓库链接到本地仓库，并且讲远程仓库名字设置成origin</p>
+<p>13、git push -u origin master<br>-u origin master 参数 表示将origin的master分支设置成本地master分支的upstream，这样以后pull时可以直接获取</p>
+</blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果是在本地开了一个分支并且推送到远程仓库也是这个语句。<br><code>git push -u origin feature-D</code><br>并且将远端的feature-D分支当成本地feature-D分支的upstream<br>这样之后在push只用<code>git push</code>就好了。</p>
+<blockquote>
+<p>1、git clone git@github.com:fromiris/git-test.git<br>clone操作默认克隆远程仓库的master分支，并不包含其他分支。</p>
+</blockquote>
+<figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git branch -<span class="literal">a</span></span><br><span class="line">//这个命令查看当前分支的相关信息，添加<span class="escape">`-</span><span class="literal">a</span><span class="escape">`参</span>数可以同时显示本地仓库和远程仓库的分支情况。</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>2、checkout -b feature-D origin/feature-D</p>
+</blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clone下仓库后并没有clone下其他分支，所以需要自己手动去在本地开分支，并且设定好远程仓库分支的来源。</p>
+<blockquote>
+<p>3、git pull origin feature-D<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;从远端的featur-D分支拉取最新的数据，如果第一次push设置了<br><code>git push -u origin feature-D</code>之后在这个分支上直接pull就好了。</p>
+</blockquote>
+<h2 id="github上的一些操作"><strong>github上的一些操作</strong></h2><blockquote>
+<p>1、Gist </p>
+</blockquote>
+<p>存放一些没必要放入一个仓库的代码片段，比如一些简单的组件js等。</p>
+<blockquote>
+<p>2、行号</p>
+</blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在具体仓库里的脚本文件，点击左侧可以在url中出现当前行的锚点。<br><img src="./1443275342434.png" alt="Alt text"><br>这个功能适合人员之间进行讨论。</p>
+<blockquote>
+<p>3、在仓库中快速查找 <code>t</code></p>
+</blockquote>
+<p><img src="./1443275543433.png" alt="Alt text"></p>
+<blockquote>
+<p>4、issue </p>
+</blockquote>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;之前在issue里程序员一般都会探讨一些技术问题，追踪bug等，现在的issue可以做更多事情。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;比如开源项目规划排期，写博客</p>
+<ul>
+<li>[ ] 我的</li>
+<li>[x] 你得</li>
+</ul>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;提交信息可以跟issus的编号绑定。<br><img src="./1443278089709.png" alt="Alt text"><br>这个#1就是这个开着的issus的编号，在代码commit的时候提交信息里出现#1，那么这个issue就会跟提交绑定。<br><img src="./1443278184749.png" alt="Alt text"><br>同样，在提交信息里加上<code>close#1</code>就会把相关的issue关闭，省去了代码完成后还要一层层去找issue去关闭的现象。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>issus跟pull request</strong>的编号是通用的。</p>
+<blockquote>
+<p>5、pull request</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://yoursite.com/2015/09/28/github学习/" data-id="cifo2154z0014gnjh6vavc5x2" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/杂/">杂</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-zepto-fullpage源码注释理解" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/08/03/zepto-fullpage源码注释理解/" class="article-date">
+  <time datetime="2015-08-02T17:07:28.000Z" itemprop="datePublished">2015-08-03</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/javascript/">javascript</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/08/03/zepto-fullpage源码注释理解/">zepto.fullpage源码注释理解</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="zepto-fullpage的源码逐段注释理解">zepto.fullpage的源码逐段注释理解</h3><p>在工作中经常用到这个插件，去做h5端的全屏滚动，但不知道具体实现原理，所以就阅读了源码而且做了注释。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"> <span class="comment">//将传入的Zepto 和 windo 当做参数传入，这样可以提高文档内的节点搜索速度</span></span><br><span class="line">(<span class="function"><span class="keyword">function</span><span class="params">($, window, undefined)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//判断zepto是否引用</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> $ === <span class="string">'undefined'</span>) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'zepto.fullpage\'s script requires Zepto'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//在手指滑动的时候阻止了屏幕默认的滚动</span></span><br><span class="line">    $(<span class="built_in">document</span>).on(<span class="string">'touchmove'</span>, <span class="function"><span class="keyword">function</span><span class="params">(e)</span> </span>&#123;</span><br><span class="line">        e.preventDefault();</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="comment">//初始化参数</span></span><br><span class="line">    <span class="keyword">var</span> fullpage = <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">var</span> d = &#123;</span><br><span class="line">        page: <span class="string">'.page'</span>,</span><br><span class="line">        start: <span class="number">0</span>,</span><br><span class="line">        duration: <span class="number">500</span>,</span><br><span class="line">        loop: <span class="literal">false</span>,</span><br><span class="line">        drag: <span class="literal">false</span>,</span><br><span class="line">        dir: <span class="string">'v'</span>,</span><br><span class="line">        change: <span class="function"><span class="keyword">function</span><span class="params">(data)</span> </span>&#123;&#125;,</span><br><span class="line">        beforeChange: <span class="function"><span class="keyword">function</span><span class="params">(data)</span> </span>&#123;&#125;,</span><br><span class="line">        afterChange: <span class="function"><span class="keyword">function</span><span class="params">(data)</span> </span>&#123;&#125;,</span><br><span class="line">        orientationchange: <span class="function"><span class="keyword">function</span><span class="params">(orientation)</span> </span>&#123;&#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="comment">//判断是否有循环 返回页面序号</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">fix</span><span class="params">(cur, pagesLength, loop)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (cur &lt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> !!loop ? pagesLength - <span class="number">1</span> : <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (cur &gt;= pagesLength) &#123;</span><br><span class="line">            <span class="keyword">return</span> !!loop ? <span class="number">0</span> : pagesLength - <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> cur;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//移动wpinner</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">move</span><span class="params">($ele, dir, dist)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> xPx = <span class="string">"0px"</span> , yPx = <span class="string">"0px"</span>;</span><br><span class="line">        <span class="keyword">if</span>(dir === <span class="string">'v'</span>) yPx = dist+<span class="string">"px"</span>;</span><br><span class="line">        <span class="keyword">else</span> xPx = dist + <span class="string">"px"</span>;</span><br><span class="line">        $ele.css(&#123;</span><br><span class="line">            <span class="string">'-webkit-transform'</span> : <span class="string">'translate3d('</span> + xPx + <span class="string">', '</span> + yPx + <span class="string">', 0px);'</span>,</span><br><span class="line">            <span class="string">'transform'</span> : <span class="string">'translate3d('</span> + xPx + <span class="string">', '</span> + yPx + <span class="string">', 0px);'</span></span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//初始化函数</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">init</span><span class="params">(option)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//将传入的option对象跟d深度合并，传给o</span></span><br><span class="line">        <span class="keyword">var</span> o = $.extend(<span class="literal">true</span>, &#123;&#125;, d, option);</span><br><span class="line">        <span class="comment">//这里的this是new Fullpage实例出来的对象</span></span><br><span class="line">        <span class="keyword">var</span> that = <span class="keyword">this</span>;</span><br><span class="line">        that.curIndex = -<span class="number">1</span>;</span><br><span class="line">        that.o = o;</span><br><span class="line"></span><br><span class="line">        that.startY = <span class="number">0</span>;</span><br><span class="line">        <span class="comment">//这个用来判断页面是否在移动中</span></span><br><span class="line">        that.movingFlag = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">        that.$<span class="keyword">this</span>.addClass(<span class="string">'fullPage-wp'</span>);</span><br><span class="line">        <span class="comment">//传进来节点对象的父节点对象</span></span><br><span class="line">        that.$parent = that.$<span class="keyword">this</span>.parent();</span><br><span class="line">        <span class="comment">//子元素中page对象的集合</span></span><br><span class="line">        that.$pages = that.$<span class="keyword">this</span>.find(o.page).addClass(<span class="string">'fullPage-page fullPage-dir-'</span> + o.dir);</span><br><span class="line">        <span class="comment">//有多少个page</span></span><br><span class="line">        that.pagesLength = that.$pages.length;</span><br><span class="line">        <span class="comment">//在实例化时就调用原型上的初始化方法</span></span><br><span class="line">        <span class="comment">//调节页面高度或宽度</span></span><br><span class="line">        that.update();</span><br><span class="line">        <span class="comment">//初始化绑定事件</span></span><br><span class="line">        that.initEvent();</span><br><span class="line">        that.status = <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">Fullpage</span><span class="params">($this, option)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.$<span class="keyword">this</span> = $<span class="keyword">this</span>;</span><br><span class="line">        <span class="comment">//init中定义的属性转移到Fullpage</span></span><br><span class="line">        init.call(<span class="keyword">this</span>, option);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//给Fullpage添加原型方法</span></span><br><span class="line">    $.extend(Fullpage.prototype, &#123;</span><br><span class="line">        <span class="comment">//更新page的高或宽，初始化出现的页面是第几页</span></span><br><span class="line">        update: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="comment">//这里的this就是实例Fullpage后的对象，</span></span><br><span class="line">            <span class="comment">//$.extend 合并对象给Fullpage的原型</span></span><br><span class="line">            <span class="keyword">if</span> (<span class="keyword">this</span>.o.dir === <span class="string">'h'</span>) &#123;</span><br><span class="line">                <span class="keyword">this</span>.width = <span class="keyword">this</span>.$parent.width();</span><br><span class="line">                <span class="keyword">this</span>.$pages.width(<span class="keyword">this</span>.width);</span><br><span class="line">                <span class="keyword">this</span>.$<span class="keyword">this</span>.width(<span class="keyword">this</span>.width * <span class="keyword">this</span>.pagesLength);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//将page的高度设置成wp容器的高度</span></span><br><span class="line">            <span class="keyword">this</span>.height = <span class="keyword">this</span>.$parent.height();</span><br><span class="line">            <span class="keyword">this</span>.$pages.height(<span class="keyword">this</span>.height);</span><br><span class="line">            <span class="comment">//调用原型上的moveTo方法，将page初始化到第某页</span></span><br><span class="line">            <span class="keyword">this</span>.moveTo(<span class="keyword">this</span>.curIndex &lt; <span class="number">0</span> ? <span class="keyword">this</span>.o.start : <span class="keyword">this</span>.curIndex);</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="comment">//</span></span><br><span class="line">        initEvent: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="comment">//将this传给that，不然下面的事件绑定的this会指向错误</span></span><br><span class="line">            <span class="keyword">var</span> that = <span class="keyword">this</span>;</span><br><span class="line">            <span class="keyword">var</span> $<span class="keyword">this</span> = that.$<span class="keyword">this</span>;</span><br><span class="line">            <span class="comment">//通过给wpinner绑定touchstart和touchend来做手势滑动效果</span></span><br><span class="line">            $<span class="keyword">this</span>.on(<span class="string">'touchstart'</span>, <span class="function"><span class="keyword">function</span><span class="params">(e)</span> </span>&#123;</span><br><span class="line">                <span class="keyword">if</span> (!that.status) &#123;<span class="keyword">return</span> <span class="number">1</span>;&#125;</span><br><span class="line">                <span class="comment">//e.preventDefault();</span></span><br><span class="line">                <span class="keyword">if</span> (that.movingFlag) &#123;</span><br><span class="line">                    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                that.startX = e.targetTouches[<span class="number">0</span>].pageX;</span><br><span class="line">                that.startY = e.targetTouches[<span class="number">0</span>].pageY;</span><br><span class="line">            &#125;);</span><br><span class="line">            $<span class="keyword">this</span>.on(<span class="string">'touchend'</span>, <span class="function"><span class="keyword">function</span><span class="params">(e)</span> </span>&#123;</span><br><span class="line">                <span class="keyword">if</span> (!that.status) &#123;<span class="keyword">return</span> <span class="number">1</span>;&#125;</span><br><span class="line">                <span class="comment">//e.preventDefault();</span></span><br><span class="line">                <span class="keyword">if</span> (that.movingFlag) &#123;</span><br><span class="line">                    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">var</span> sub = that.o.dir === <span class="string">'v'</span> ? e.changedTouches[<span class="number">0</span>].pageY - that.startY : e.changedTouches[<span class="number">0</span>].pageX - that.startX;</span><br><span class="line">                <span class="keyword">var</span> der = (sub &gt; <span class="number">30</span> || sub &lt; -<span class="number">30</span>) ? sub &gt; <span class="number">0</span> ? -<span class="number">1</span> : <span class="number">1</span> : <span class="number">0</span>;</span><br><span class="line">                <span class="comment">//调用原型的moveTo方法</span></span><br><span class="line">                that.moveTo(that.curIndex + der, <span class="literal">true</span>);</span><br><span class="line">            &#125;);</span><br><span class="line">            <span class="comment">//拖拽的效果是手指滑动的时候页面跟着滑动，end时候触发moveTo方法</span></span><br><span class="line">            <span class="keyword">if</span> (that.o.drag) &#123;</span><br><span class="line">                $<span class="keyword">this</span>.on(<span class="string">'touchmove'</span>, <span class="function"><span class="keyword">function</span><span class="params">(e)</span> </span>&#123;</span><br><span class="line">                    <span class="keyword">if</span> (!that.status) &#123;<span class="keyword">return</span> <span class="number">1</span>;&#125;</span><br><span class="line">                    <span class="comment">//e.preventDefault();</span></span><br><span class="line">                    <span class="keyword">if</span> (that.movingFlag) &#123;</span><br><span class="line">                        that.startX = e.targetTouches[<span class="number">0</span>].pageX;</span><br><span class="line">                        that.startY = e.targetTouches[<span class="number">0</span>].pageY;</span><br><span class="line">                        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">                    <span class="keyword">var</span> y = e.changedTouches[<span class="number">0</span>].pageY - that.startY;</span><br><span class="line">                    <span class="comment">//这里的两个if判断当页面在第一页或者最后一页时，页面只会移动一点恢复原状</span></span><br><span class="line">                    <span class="keyword">if</span>( (that.curIndex==<span class="number">0</span> &amp;&amp; y&gt;<span class="number">0</span>) || (that.curIndex===that.pagesLength-<span class="number">1</span> &amp;&amp; y&lt;<span class="number">0</span>) ) y/=<span class="number">2</span>;</span><br><span class="line">                    <span class="keyword">var</span> x = e.changedTouches[<span class="number">0</span>].pageX - that.startX;</span><br><span class="line">                    <span class="keyword">if</span>( (that.curIndex==<span class="number">0</span> &amp;&amp; x&gt;<span class="number">0</span>) || (that.curIndex===that.pagesLength-<span class="number">1</span> &amp;&amp; x&lt;<span class="number">0</span>) ) x/=<span class="number">2</span>;</span><br><span class="line">                    <span class="keyword">var</span> dist = (that.o.dir === <span class="string">'v'</span> ? (-that.curIndex * that.height + y) : (-that.curIndex * that.width + x));</span><br><span class="line">                    $<span class="keyword">this</span>.removeClass(<span class="string">'anim'</span>);</span><br><span class="line">                    move($<span class="keyword">this</span>, that.o.dir, dist);</span><br><span class="line">                &#125;);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 翻转屏幕提示</span></span><br><span class="line">            <span class="comment">// ==============================             </span></span><br><span class="line">            <span class="built_in">window</span>.addEventListener(<span class="string">"orientationchange"</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                <span class="keyword">if</span> (<span class="built_in">window</span>.orientation === <span class="number">180</span> || <span class="built_in">window</span>.orientation === <span class="number">0</span>) &#123;</span><br><span class="line">                    that.o.orientationchange(<span class="string">'portrait'</span>);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span> (<span class="built_in">window</span>.orientation === <span class="number">90</span> || <span class="built_in">window</span>.orientation === -<span class="number">90</span>) &#123;</span><br><span class="line">                    that.o.orientationchange(<span class="string">'landscape'</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;, <span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line">            <span class="built_in">window</span>.addEventListener(<span class="string">"resize"</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                that.update();</span><br><span class="line">            &#125;, <span class="literal">false</span>);</span><br><span class="line">        &#125;,</span><br><span class="line"></span><br><span class="line">        start: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.status = <span class="number">1</span>;</span><br><span class="line">        &#125;,</span><br><span class="line">        stop: <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.status = <span class="number">0</span>;</span><br><span class="line">        &#125;,</span><br><span class="line">        moveTo: <span class="function"><span class="keyword">function</span><span class="params">(next, anim)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">var</span> that = <span class="keyword">this</span>;</span><br><span class="line">            <span class="keyword">var</span> $<span class="keyword">this</span> = that.$<span class="keyword">this</span>;</span><br><span class="line">            <span class="keyword">var</span> cur = that.curIndex;</span><br><span class="line">            next = fix(next, that.pagesLength, that.o.loop);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (anim) &#123;</span><br><span class="line">                $<span class="keyword">this</span>.addClass(<span class="string">'anim'</span>);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                $<span class="keyword">this</span>.removeClass(<span class="string">'anim'</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//判断下一页的序号不是当前页··是否是最后一页了</span></span><br><span class="line">            <span class="comment">//在move之前调用beforeChange方法</span></span><br><span class="line">            <span class="keyword">if</span> (next !== cur) &#123;</span><br><span class="line">                that.o.beforeChange(&#123;</span><br><span class="line">                    next: next,</span><br><span class="line">                    cur: cur</span><br><span class="line">                &#125;);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            that.movingFlag = <span class="literal">true</span>;</span><br><span class="line">            <span class="comment">//改变当前序列号</span></span><br><span class="line">            that.curIndex = next;</span><br><span class="line">            <span class="comment">//移动wpinner</span></span><br><span class="line">            move($<span class="keyword">this</span>, that.o.dir, -next * (that.o.dir === <span class="string">'v'</span> ? that.height : that.width));</span><br><span class="line">            <span class="comment">//在move之后马上调用change方法</span></span><br><span class="line">            <span class="keyword">if</span> (next !== cur) &#123;</span><br><span class="line">                that.o.change(&#123;</span><br><span class="line">                    prev: cur,</span><br><span class="line">                    cur: next</span><br><span class="line">                &#125;);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//在move之后duration时间之后调用afterChange方法</span></span><br><span class="line">            <span class="built_in">window</span>.setTimeout(<span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                <span class="comment">//在每次调用moveTo多少时间后令movingFlag = false</span></span><br><span class="line">                that.movingFlag = <span class="literal">false</span>;</span><br><span class="line">                <span class="keyword">if</span> (next !== cur) &#123;</span><br><span class="line">                    that.o.afterChange(&#123;</span><br><span class="line">                        prev: cur,</span><br><span class="line">                        cur: next</span><br><span class="line">                    &#125;);</span><br><span class="line">                    that.$pages.removeClass(<span class="string">'cur'</span>).eq(next).addClass(<span class="string">'cur'</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;, that.o.duration);</span><br><span class="line">        &#125;,</span><br><span class="line">        movePrev: <span class="function"><span class="keyword">function</span><span class="params">(anim)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.moveTo(<span class="keyword">this</span>.curIndex - <span class="number">1</span>, anim);</span><br><span class="line">        &#125;,</span><br><span class="line">        moveNext: <span class="function"><span class="keyword">function</span><span class="params">(anim)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.moveTo(<span class="keyword">this</span>.curIndex + <span class="number">1</span>, anim);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="comment">//这句话解释起来就是在$的原型上写一个fullpage方法，所以this就是实例化出来的对象，在zepto中$(this)就是节点对象</span></span><br><span class="line">    $.fn.fullpage = <span class="function"><span class="keyword">function</span><span class="params">(option)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!fullpage) &#123;</span><br><span class="line">            fullpage = <span class="keyword">new</span> Fullpage($(<span class="keyword">this</span>), option);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">    &#125;;</span><br><span class="line">    $.fn.fullpage.version = <span class="string">'0.3.1'</span>;</span><br><span class="line">    <span class="comment">//暴露方法</span></span><br><span class="line">    $.each([<span class="string">'update'</span>, <span class="string">'moveTo'</span>, <span class="string">'moveNext'</span>, <span class="string">'movePrev'</span>, <span class="string">'start'</span>, <span class="string">'stop'</span>], <span class="function"><span class="keyword">function</span><span class="params">(key, val)</span> </span>&#123;</span><br><span class="line">        $.fn.fullpage[val] = <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (!fullpage) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            fullpage[val].apply(fullpage, [].slice.call(<span class="built_in">arguments</span>, <span class="number">0</span>));</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;(Zepto, <span class="built_in">window</span>));</span><br></pre></td></tr></table></figure></p>
+<p>原创文章！转载请注明出处</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://yoursite.com/2015/08/03/zepto-fullpage源码注释理解/" data-id="cifo2154j000kgnjhpv2d1pnx" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-viewport" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/07/12/viewport/" class="article-date">
+  <time datetime="2015-07-12T15:02:56.000Z" itemprop="datePublished">2015-07-12</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/html-css/">html&css</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/07/12/viewport/">viewport中的width、inital-scale简介</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="web移动端开发">web移动端开发</h2><h3 id="viewport">viewport</h3><p>1、css的一个像素只是一个抽象的单位，在不同的设备中代表的设备物理像素是不同的。<br>2、<code>devicePixelRatio</code>一个css像素代表多少个设备像素<br>3、<br><strong>浏览器默认的viewport</strong> 称为<code>layout viewport</code> ,且为比屏幕要宽的viewport，一般都为980px，可以通过以下代码获取<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">document<span class="class">.documentElement</span><span class="class">.clientWidth</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>浏览器可视区域的宽度</strong>：<code>visual viewport</code>可以通过以下代码获取<br><figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.innerWidth</span><br></pre></td></tr></table></figure></p>
+<p><strong>浏览器理想宽度</strong>：<code>idea viewport</code></p>
+<ul>
+<li>不同的设备有不同的idea viewport，所有的iphone的idea都是320px（iphone6以前）。查看最新<code>各设备idea viewport</code>网址<a href="http://viewportsizes.com/" target="_blank" rel="external">http://viewportsizes.com/</a></li>
+<li><code>idea viewport</code> 的宽度就是移动设备的屏幕宽度，在css中设置某元素的宽度为<code>idea viewport</code>的宽度（单位px），那么这个元素在屏幕中就是现实100%</li>
+</ul>
+<p>4、<img src="./1436681520937.png" alt="Alt text"><br><strong>target-densititydpi</strong>已经被安卓废除，避免使用<br>5、<code>initial-scale</code>这个缩放初始值是相对于设备的<code>idea viewport</code>的值进行缩放的，也就是说<br><figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta <span class="variable">name=</span><span class="string">"viewport"</span> <span class="variable">content=</span><span class="string">"initial-scale=1"</span>&gt; </span><br><span class="line">//等效于</span><br><span class="line">&lt;meta <span class="variable">name=</span><span class="string">"viewport"</span> <span class="variable">content=</span><span class="string">"width=devive-width"</span></span><br><span class="line">//</span><br></pre></td></tr></table></figure></p>
+<p><strong>两者各有一个bug，所以生产时最好将两个一起写上</strong><br>但如果同时出现<code>width</code>和<code>initial-scale</code><br><figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta <span class="variable">name=</span><span class="string">"viewport"</span> <span class="variable">content=</span><span class="string">"width=500, initial-scale=1"</span>&gt;</span><br></pre></td></tr></table></figure></p>
+<p>并不是根据先后顺序比较，而是通过谁大取谁，比如设备是iphone5，<code>idea viewport</code>是320px，则此时<code>initial-scale=1</code>(320px)，所以此时viewport取<code>width=500</code><br>6、<strong>关于initial-scale缩放的默认值以及其理论</strong><br><code>visual viewport宽度 = idea viewport宽度 / 当前设置的缩放值</code><br><code>当前缩放值 = idea viewport宽度 / visual viewport宽度</code><br><strong>注</strong>这个理论不适合安卓原生浏览器<br><strong>关于默认值：（iphone及ipad下）</strong><br>在安卓浏览器下的<code>initial-scale</code>并不能默认设置自己的值，但ios下<code>initial-scale</code>会自动根据情况设置初始值（不写<code>initial-scale</code>）。<br>例：<br><figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta <span class="variable">name=</span><span class="string">"viewport"</span> <span class="variable">content=</span><span class="string">"width=375"</span>&gt;</span><br></pre></td></tr></table></figure></p>
+<p>此标签只写了<code>width=375</code>属性，表明了<code>visual viewport=375</code>而且<code>375</code>是iphone6的<code>idea viewport</code>，所以此时css设置样式<code>width: 375px</code>在6就是完全填充。但如何设备是苹果5，其<code>idea viewport</code>是<code>320</code>，根据理论，得出<code>initial-scale</code>的默认值为<code>320/375</code>。页面会自动缩放这样不会出现滚动条，这样就可以在<code>320</code>的视角下无障碍浏览375的内容。</p>
+<h3 id="viewport总结">viewport总结</h3><p>目前移动开发中关于页面布局有三种方式</p>
+<ul>
+<li>1.缩放 ，利用iPhone的initial-scale默认值会自动变化</li>
+<li>2.width=device-width，布局采用百分比 </li>
+<li>3.rem </li>
+</ul>
+<p>上文的<code>initical-scale</code>的默认值的应用就是第一种方式的详解。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://yoursite.com/2015/07/12/viewport/" data-id="cifo2154m000ngnjhit6qu30b" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web移动端/">web移动端</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-regexp" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/06/10/regexp/" class="article-date">
+  <time datetime="2015-06-10T14:13:15.000Z" itemprop="datePublished">2015-06-10</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/javascript/">javascript</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/06/10/regexp/">js中的正则表达式</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="正则表达式">正则表达式</h3><p><code>代码摘自javascript语言精粹</code><br><figure class="highlight nimrod"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> parse_url = /^(?:([A-<span class="type">Za</span>-z]+):)?(\/&#123;<span class="number">0</span>,<span class="number">3</span>&#125;)([<span class="number">0</span>-<span class="number">9</span>.\-A-<span class="type">Za</span>-z]+)(?::(\d+))?(?:\/([^?<span class="comment">#]*))?(?:\?([^#]*))?(?:#(.*))?$/;</span></span><br><span class="line">            <span class="keyword">var</span> url = 'http://www.ora.com:<span class="number">80</span>/goodparts?q<span class="comment">#fragment';</span></span><br><span class="line">            <span class="keyword">var</span> <span class="literal">result</span> = parse_url.exec(url);</span><br><span class="line">            <span class="keyword">var</span> names = ['url', 'scheme', 'slash', 'host', 'port', 'path', 'query', 'hash'];</span><br><span class="line">            <span class="keyword">var</span> blanks = '      ';</span><br><span class="line">            <span class="keyword">var</span> i ;</span><br><span class="line">            <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; names.length; i++) &#123;</span><br><span class="line">                document.writeln(names[i] + ':' +blanks.substring(names[i].length), <span class="literal">result</span>[i])</span><br><span class="line">            &#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="正则中的分组">正则中的分组</h4><ul>
+<li>捕获型<br>(   ….     )<br>被包围在圆括号中的正则表达式分支，任何匹配这个分组的字符都会被捕获并<strong>指定一个数字，序号从1开始。</strong></li>
+<li>非捕获型<br>(?:    …..   )有一个<code>?:</code>的前缀。仅作简单的匹配，并不会捕获所匹配的文本。</li>
+</ul>
+<p>在上例中的<code>parse_url</code>中，有如下分组</p>
+<ul>
+<li><code>(?:([A-Za-z]+):)?</code><br>?:代表非捕获，即不会存到<code>parse_url.exec</code>的数组中，但中间有个捕获组（A-Za-z），会进入数组，<code>+</code>代表多个字母，大括号外的<code>?</code>代表这个非捕获组存在0个或1个。</li>
+<li><code>(\/{0,3})</code><br>/是保留符，需要转义，{0, 3}代表量词，表示/只能不存在或者/或者//或者///</li>
+<li><code>([0-9.\-A-Za-z]+)</code><br>在[    …..   ]字符选择中，-需要转义，<code>.+?</code>可以可以不需要转义</li>
+<li><code>(?::(\d+))?</code></li>
+<li><code>(?:\/([^?#]*))?</code><br>在 [..]里的^表示反义词，除…..之外</li>
+<li><code>(?:\?([^#]*))?</code></li>
+<li><code>(?:#(.*))?</code><br>这里的<code>.</code>代表除了结束符之外的所有值。</li>
+</ul>
+<h4 id="正则的基础知识">正则的基础知识</h4><p>/\d/  &gt;&gt;选择第一个数字<br>/\d/g  &gt;&gt;选择范围内的所有（以单个数字存在）数字<br>/\d\d/g  &gt;&gt;选择范围内的所有（以两个数字存在）数字<br>/\d+/g   &gt;&gt;选择范围内的所有（以不同数量存在）数字<br>/我|你/g     &gt;&gt;选择范围内的所有我或你的文字。<br>[]    &gt;&gt;字符类<br>/1[abc]2/   &gt;&gt;中括号里的是或，1b2或1a2或1c2<br>/[^a]/    &gt;&gt;除了a之外<br>/[^a-z0-9]/  &gt;&gt;除了字母数字</p>
+<p>/.+/   &gt;&gt; 所有<br>/\w/  &gt;&gt;字母数字下划线<br>/\s/   &gt;&gt;空白</p>
+<p>｛n, m｝量词<br> +  &gt;&gt;{1, mult}<br>*  &gt;&gt;{0, mult}<br>?  &gt;&gt;{0, 1}</p>
+<p>/^\$/  &gt;&gt;行首行尾，代表字符串中仅能出现^$之间的表达式的内容，区别于字符类的^</p>
+<p>/[\u4e00-\u9fa5]/  &gt;&gt;中文</p>
+<p><strong>通常在正则表达式中，下列11字符是需要转义的。</strong><br>[ ] \ ^ $ . | ? * + ( )</p>
+<p>原创文章，欢迎批评！</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://yoursite.com/2015/06/10/regexp/" data-id="cifo2154s000wgnjhg13kklbw" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Regexp/">Regexp</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-函数调用的四种方式" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/06/10/函数调用的四种方式/" class="article-date">
+  <time datetime="2015-06-10T05:16:11.000Z" itemprop="datePublished">2015-06-10</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/javascript/">javascript</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/06/10/函数调用的四种方式/">函数调用的四种方式与this的关系</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><code>笔记思想来自javascript语言精粹一书</code></p>
+<h3 id="函数调用有4种方式，且不同方式对this的处理有差异。">函数调用有4种方式，且不同方式对this的处理有差异。</h3><ul>
+<li>方法调用模式</li>
+<li>函数调用模式</li>
+<li>构造器调用模式</li>
+<li>apply调用模式</li>
+</ul>
+<h4 id="方法调用模式">方法调用模式</h4><p>把函数保存为对象的一个属性，且被调用时，称为方法调用，此时的<code>this</code>指向自己所属的对象。<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">	name: <span class="string">"dada"</span>,</span><br><span class="line">	getName: <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">this</span>.name;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">obj.getName()<span class="comment">//dada</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="函数调用模式">函数调用模式</h4><p>这种模式即为最普遍的函数调用，但此时的<code>this</code>有混淆的地方。<br>以此模式调用函数的时候，<code>this</code>指向全局对象，<strong>并不会指向外层函数的this</strong>。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.name = <span class="string">"nanyang"</span>;</span><br><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">	name: <span class="string">"dada"</span>,</span><br><span class="line">	getName: <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="comment">//that = this; 解决办法</span></span><br><span class="line">		<span class="keyword">var</span> helper = <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">			<span class="keyword">this</span>.name = <span class="string">'xx!'</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		helper();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">obj.name()<span class="comment">//dada</span></span><br><span class="line"><span class="built_in">window</span>.name<span class="comment">//xx!</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="构造器调用模式">构造器调用模式</h4><p>这个模式跟方法调用类似，this指向所属的新对象。<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Abc = <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">this</span>.name = <span class="string">'xxx'</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> Abc();</span><br><span class="line">a.name<span class="comment">//<span class="label">xxx</span></span></span><br></pre></td></tr></table></figure></p>
+<h4 id="apply调用模式">apply调用模式</h4><p><code>apply</code>允许我们自己选择this，感觉精粹里的说法很直白<code>apply接受两个参数，第一个是要绑定给this的值，第二个是参数的数组</code>。<br>我的解释是，我们可以调用任意的方法，然后将方法中的this指向的对象换成我们在<code>apply</code>中加进去的第一个参数。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> some_obj = &#123;</span><br><span class="line">	name: ‘ldd’;</span><br><span class="line">	say: <span class="function"><span class="keyword">function</span> <span class="params">(who)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> ‘hi’ + who + ‘I am’ + <span class="keyword">this</span>.name;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">Some_obj.say(<span class="string">"xyn"</span>) <span class="comment">//hi xyn, I am ldd;</span></span><br><span class="line">Var my_obj = &#123; name: <span class="string">"xxx"</span>&#125;;</span><br><span class="line">Some_obj.say.apply(my_obj, [<span class="string">'xyn'</span>])</span><br><span class="line"><span class="comment">//hi xyn, I am <span class="label">xxx</span></span></span><br><span class="line">原本say方法中的<span class="string">`this`</span>指向<span class="string">`some_obj`</span>对象，利用apply就可以将<span class="keyword">this</span>指向my_obj</span><br></pre></td></tr></table></figure></p>
+<p><strong>当然call跟apply的用法几乎一样，就是在第二个参数上的形式有一些变化</strong></p>
+<p>原创文章！转载请注明出处</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://yoursite.com/2015/06/10/函数调用的四种方式/" data-id="cifo2154c0009gnjh0wul359c" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-关于BFC的一些事儿" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/06/08/关于BFC的一些事儿/" class="article-date">
+  <time datetime="2015-06-08T14:58:17.000Z" itemprop="datePublished">2015-06-08</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/html-css/">html&css</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/06/08/关于BFC的一些事儿/">关于BFC的一些事儿</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="关于BFC的一些事儿："><strong>关于BFC的一些事儿</strong>：</h2><p>阅读：穆乙 <a href="http://www.cnblogs.com/pigtail/" target="_blank" rel="external">http://www.cnblogs.com/pigtail/</a><br><a href="http://www.iyunlu.com/view/css-xhtml/55.html" target="_blank" rel="external">http://www.iyunlu.com/view/css-xhtml/55.html</a></p>
+<p><code>什么是BFC</code><br>BFC（Block Formatting Context），中文为块状格式化上下文。<br>按我的理解，就是触发BFC环境的元素在文档流中各自独立，谁也不碍着谁，这个元素的子元素还是按照普通的文档流进行排列。<br><strong>触发BFC常见的有几种方式</strong>：overflow不为visible，float不为none， display的值为table-cell, table-caption, inline-block中的任何一个， position为absolute<br>在IE中，个人理解BFC是hasLayout，而触发hasLayout的简便方法就是zoom: 1;</p>
+<p><strong>触发BFC的好处主要在两方面，第一点是清除浮动，第二点在于处理上下margin的塌陷。</strong></p>
+<p><code>BFC与清除浮动</code><br>在需要清除浮动的时候<br><code>1</code>overflow: hidden<br><img src="../img/1433772289741.png" alt="Alt text"><br><strong>解释如下：</strong><br>根据 CSS2.1 规范第 10.6.3 部分的高度计算规则，在进行普通流中的块级非替换元素的高度计算时，浮动子元素不参与计算。</p>
+<p>同时 CSS2.1 规范第10.6.7部分的高度计算规则，在计算生成了 block formatting context 的元素的高度时，其浮动子元素应该参与计算。</p>
+<p>所以，触发外部容器BFC，高度将重新计算。比如给outer加上属性overflow:hidden触发其BFC。</p>
+<p><code>2</code>触发BFC的元素与浮动元素不会重叠<br>若两个Div排列，第一个div浮动，此时两个div会重叠，但将第二个div触发BFC，则此两个div分开（横向）</p>
+<p><code>BFC与margin上下塌陷</code><br>在普通流中的两个元素，不管是在同级还是包含关系中，margin-top和margin-bottom接触就会塌陷只留下较大方。<br><strong>即使父元素触发BFC，里面的正常流中的子元素之间还是会发生塌陷。</strong><br>因为触发BFC的两个元素相对独立，所以解决了塌陷，这个比较好理解。<br>对于嵌套元素之间的塌陷，即下图：<br><img src="../img/1433775283824.png" alt="Alt text"></p>
+<p><strong>合理解释为：</strong><br>根据 CSS 2.1 8.3.1 Collapsing margins 第三条，生成 block formatting context 的元素不会和在流中的子元素发生空白边折叠。<br>所以在父元素上触发BFC即可。</p>
+<h4 id="清除浮动的两种方法："><strong>清除浮动的两种方法</strong>：</h4><p><code>1</code><br><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.container</span><span class="pseudo">:before</span>,</span><br><span class="line"><span class="class">.container</span><span class="pseudo">:after</span> &#123;</span><br><span class="line">  <span class="attribute">content</span>:<span class="string">""</span>;</span><br><span class="line">  <span class="attribute">display</span>:table;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class">.container</span><span class="pseudo">:after</span> &#123;</span><br><span class="line">  <span class="attribute">clear</span>:both;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class">.container</span> &#123;</span><br><span class="line">  <span class="attribute">zoom</span>:<span class="number">1</span>; <span class="comment">/* For IE 6/7 (trigger hasLayout) */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><code>2</code><br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.container</span> <span class="rules">&#123;</span><br><span class="line">    <span class="rule"><span class="attribute">overflow</span>:<span class="value"> hidden</span></span>; <span class="comment">/* Clearfix! */</span></span><br><span class="line">    <span class="rule"><span class="attribute">zoom</span>:<span class="value"> <span class="number">1</span></span></span>;  <span class="comment">/* Triggering "hasLayout" in IE */</span></span><br><span class="line">    <span class="rule"><span class="attribute">display</span>:<span class="value"> block</span></span>; <span class="comment">/* Element must be a block to wrap around contents. Unnecessary if only using block-level elements. */</span></span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure></p>
+<p>原创文章，转载请注明出处！</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://yoursite.com/2015/06/08/关于BFC的一些事儿/" data-id="cifo2154e000cgnjhdojycn1e" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/html-css/">html&css</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+  
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    </nav>
+  
+</section>
+      
+      <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分類</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/html-css/">html&css</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/javascript/">javascript</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/动画库/">动画库</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">標簽</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Regexp/">Regexp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html-css/">html&css</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jsLib/">jsLib</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web移动端/">web移动端</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/杂/">杂</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">標簽雲</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Regexp/" style="font-size: 10px;">Regexp</a><a href="/tags/html-css/" style="font-size: 10px;">html&css</a><a href="/tags/javascript/" style="font-size: 20px;">javascript</a><a href="/tags/js/" style="font-size: 10px;">js</a><a href="/tags/jsLib/" style="font-size: 10px;">jsLib</a><a href="/tags/web移动端/" style="font-size: 10px;">web移动端</a><a href="/tags/杂/" style="font-size: 10px;">杂</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">歸檔</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">近期文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2015/10/12/attribute与property/">attribute与property</a>
+          </li>
+        
+          <li>
+            <a href="/2015/10/05/hammer-js/">hammerjs的初次学习</a>
+          </li>
+        
+          <li>
+            <a href="/2015/10/05/tween/">tweenMax基础api的逐条随意翻译</a>
+          </li>
+        
+          <li>
+            <a href="/2015/09/28/lazyload-js源码学习/">lazyload.js源码学习</a>
+          </li>
+        
+          <li>
+            <a href="/2015/09/28/github学习/">github学习</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">友情鏈接</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://xiguabaobao.com" target="_blank">主题作者</a>
+          </li>
+        
+          <li>
+            <a href="http://reqianduan.com" target="_blank">热前端</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015 Lyu Dada<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      .
+      Theme by <a href="https://github.com/xiangming/landscape-plus" target="_blank">Landscape-plus</a>
+    </div>
+  </div>
+</footer>
+  </div>
+  <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="https://github.com/fromIRIS" class="mobile-nav-link">MYGithub</a>
+  
+</nav>
+  <!-- totop start -->
+<div id="totop">
+<a title="返回頂部"><img src="/img/scrollup.png"/></a>
+</div>
+
+<!-- totop end -->
+
+
+<!-- 百度分享 start -->
+
+<div id="article-share-box" class="article-share-box">
+  <div id="bdshare" class="bdsharebuttonbox article-share-links">
+    <a class="article-share-weibo" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a class="article-share-weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a class="article-share-qq" data-cmd="sqq" title="分享到QQ"></a>
+    <a class="article-share-renren" data-cmd="renren" title="分享到人人网"></a>
+    <a class="article-share-more" data-cmd="more" title="更多"></a>
+  </div>
+</div>
+<script>window._bd_share_config={"common":{},"share":{"bdCustomStyle":"/css/bdshare.css"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+<!-- 百度分享 end -->
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+</div>
+</body>
+</html>
