@@ -74,6 +74,64 @@
     <div class="outer">
       <section id="main">
   
+    <article id="post-关于BFC的一些事儿" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/06/08/关于BFC的一些事儿/" class="article-date">
+  <time datetime="2015-06-08T14:58:17.000Z" itemprop="datePublished">2015-06-08</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/html-css/">html&css</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/06/08/关于BFC的一些事儿/">关于BFC的一些事儿</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="关于BFC的一些事儿："><strong>关于BFC的一些事儿</strong>：</h2><p>阅读：穆乙 <a href="http://www.cnblogs.com/pigtail/" target="_blank" rel="external">http://www.cnblogs.com/pigtail/</a><br><a href="http://www.iyunlu.com/view/css-xhtml/55.html" target="_blank" rel="external">http://www.iyunlu.com/view/css-xhtml/55.html</a></p>
+<p><code>什么是BFC</code><br>BFC（Block Formatting Context），中文为块状格式化上下文。<br>按我的理解，就是触发BFC环境的元素在文档流中各自独立，谁也不碍着谁，这个元素的子元素还是按照普通的文档流进行排列。<br><strong>触发BFC常见的有几种方式</strong>：overflow不为visible，float不为none， display的值为table-cell, table-caption, inline-block中的任何一个， position为absolute<br>在IE中，个人理解BFC是hasLayout，而触发hasLayout的简便方法就是zoom: 1;</p>
+<p><strong>触发BFC的好处主要在两方面，第一点是清除浮动，第二点在于处理上下margin的塌陷。</strong></p>
+<p><code>BFC与清除浮动</code><br>在需要清除浮动的时候<br><code>1</code>overflow: hidden<br><img src="../img/1433772289741.png" alt="Alt text"><br><strong>解释如下：</strong><br>根据 CSS2.1 规范第 10.6.3 部分的高度计算规则，在进行普通流中的块级非替换元素的高度计算时，浮动子元素不参与计算。</p>
+<p>同时 CSS2.1 规范第10.6.7部分的高度计算规则，在计算生成了 block formatting context 的元素的高度时，其浮动子元素应该参与计算。</p>
+<p>所以，触发外部容器BFC，高度将重新计算。比如给outer加上属性overflow:hidden触发其BFC。</p>
+<p><code>2</code>触发BFC的元素与浮动元素不会重叠<br>若两个Div排列，第一个div浮动，此时两个div会重叠，但将第二个div触发BFC，则此两个div分开（横向）</p>
+<p><code>BFC与margin上下塌陷</code><br>在普通流中的两个元素，不管是在同级还是包含关系中，margin-top和margin-bottom接触就会塌陷只留下较大方。<br><strong>即使父元素触发BFC，里面的正常流中的子元素之间还是会发生塌陷。</strong><br>因为触发BFC的两个元素相对独立，所以解决了塌陷，这个比较好理解。<br>对于嵌套元素之间的塌陷，即下图：<br><img src="../img/1433775283824.png" alt="Alt text"></p>
+<p><strong>合理解释为：</strong><br>根据 CSS 2.1 8.3.1 Collapsing margins 第三条，生成 block formatting context 的元素不会和在流中的子元素发生空白边折叠。<br>所以在父元素上触发BFC即可。</p>
+<h4 id="清除浮动的两种方法："><strong>清除浮动的两种方法</strong>：</h4><p><code>1</code><br><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.container</span><span class="pseudo">:before</span>,</span><br><span class="line"><span class="class">.container</span><span class="pseudo">:after</span> &#123;</span><br><span class="line">  <span class="attribute">content</span>:<span class="string">""</span>;</span><br><span class="line">  <span class="attribute">display</span>:table;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class">.container</span><span class="pseudo">:after</span> &#123;</span><br><span class="line">  <span class="attribute">clear</span>:both;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class">.container</span> &#123;</span><br><span class="line">  <span class="attribute">zoom</span>:<span class="number">1</span>; <span class="comment">/* For IE 6/7 (trigger hasLayout) */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><code>2</code><br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.container</span> <span class="rules">&#123;</span><br><span class="line">    <span class="rule"><span class="attribute">overflow</span>:<span class="value"> hidden</span></span>; <span class="comment">/* Clearfix! */</span></span><br><span class="line">    <span class="rule"><span class="attribute">zoom</span>:<span class="value"> <span class="number">1</span></span></span>;  <span class="comment">/* Triggering "hasLayout" in IE */</span></span><br><span class="line">    <span class="rule"><span class="attribute">display</span>:<span class="value"> block</span></span>; <span class="comment">/* Element must be a block to wrap around contents. Unnecessary if only using block-level elements. */</span></span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure></p>
+<p>原创文章，转载请注明出处！</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://yoursite.com/2015/06/08/关于BFC的一些事儿/" data-id="cigv0sm0u000fcgjh8z07pouu" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/html-css/">html&css</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-原型及原型链" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2015/05/20/原型及原型链/" class="article-date">
@@ -115,7 +173,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2015/05/20/原型及原型链/" data-id="cifo215490004gnjhlse0bn87" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://yoursite.com/2015/05/20/原型及原型链/" data-id="cigv0sm0o0007cgjh16mn1je6" class="article-share-link" data-share="baidu">分享到</a>
       
 
       
@@ -174,7 +232,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2015/05/11/作用域的理解/" data-id="cifo2154g000hgnjheaa0huxe" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://yoursite.com/2015/05/11/作用域的理解/" data-id="cigv0sm0y000kcgjhcq9oc9wr" class="article-share-link" data-share="baidu">分享到</a>
       
 
       
@@ -211,7 +269,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">標簽</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Regexp/">Regexp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html-css/">html&css</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jsLib/">jsLib</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web移动端/">web移动端</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/杂/">杂</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Regexp/">Regexp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html-css/">html&css</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jsLib/">jsLib</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web移动端/">web移动端</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端性能监控/">前端性能监控</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/杂/">杂</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -220,7 +278,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">標簽雲</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Regexp/" style="font-size: 10px;">Regexp</a><a href="/tags/html-css/" style="font-size: 10px;">html&css</a><a href="/tags/javascript/" style="font-size: 20px;">javascript</a><a href="/tags/js/" style="font-size: 10px;">js</a><a href="/tags/jsLib/" style="font-size: 10px;">jsLib</a><a href="/tags/web移动端/" style="font-size: 10px;">web移动端</a><a href="/tags/杂/" style="font-size: 10px;">杂</a>
+      <a href="/tags/Regexp/" style="font-size: 10px;">Regexp</a><a href="/tags/html-css/" style="font-size: 10px;">html&css</a><a href="/tags/javascript/" style="font-size: 20px;">javascript</a><a href="/tags/js/" style="font-size: 10px;">js</a><a href="/tags/jsLib/" style="font-size: 10px;">jsLib</a><a href="/tags/web移动端/" style="font-size: 10px;">web移动端</a><a href="/tags/前端性能监控/" style="font-size: 10px;">前端性能监控</a><a href="/tags/杂/" style="font-size: 10px;">杂</a>
     </div>
   </div>
 
@@ -229,7 +287,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">歸檔</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">2</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">2</span></li></ul>
     </div>
   </div>
 
@@ -239,6 +297,10 @@
     <h3 class="widget-title">近期文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2015/11/12/破译关键渲染路径（翻译）/">破译关键渲染路径（翻译）</a>
+          </li>
         
           <li>
             <a href="/2015/10/12/attribute与property/">attribute与property</a>
@@ -254,10 +316,6 @@
         
           <li>
             <a href="/2015/09/28/lazyload-js源码学习/">lazyload.js源码学习</a>
-          </li>
-        
-          <li>
-            <a href="/2015/09/28/github学习/">github学习</a>
           </li>
         
       </ul>
