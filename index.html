@@ -74,6 +74,130 @@
     <div class="outer">
       <section id="main">
   
+    <article id="post-编写可维护的javascript阅读笔记" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/11/15/编写可维护的javascript阅读笔记/" class="article-date">
+  <time datetime="2015-11-15T14:17:11.000Z" itemprop="datePublished">2015-11-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/15/编写可维护的javascript阅读笔记/">编写可维护的javascript阅读笔记</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="编写可维护的javascript阅读总结">编写可维护的javascript阅读总结</h2><hr>
+<h5 id="by_南洋_2015_11_14">by 南洋 2015 11 14</h5><hr>
+<h3 id="第一部分_编程风格">第一部分 编程风格</h3><hr>
+<p><strong>（一）、基本的格式化</strong><br><strong>1.1缩进层级</strong><br>第一种方式是使用制表符进行缩进，就是tab键好处是可以统一配置编辑器的配置改变制表符的长度，缺点是tab的表现在不同系统的变现可能不同，这样也会出现代码风格的不统一。<br>第二种方式是使用空格键，几个空格键代表一个缩进。<br><strong>我个人而言喜欢使用空格缩进并且两个空格代表一个缩进。</strong></p>
+<p><strong>1.2语句结尾</strong><br>除了函数定义以外的代码结尾，都要加上分号，以免分析器错误的自动加上一些不必要的分号。</p>
+<p><strong>1.3行的长度</strong><br>关于行的长度，sublime里有78的选项，个人一般会选择这个选项。如果长度太长，在浏览器里会超出视线，而且在github上也会出现横向滚动条，这都是阅读代码时不想看到的。</p>
+<p><strong>1.4空行的使用</strong><br>这点自己做的不是很好，在书里出现的规则是：</p>
+<ul>
+<li>在流控制语句前加空行，比如if for</li>
+<li>在方法内的局部变量与逻辑代码之间</li>
+<li>每个方法之间</li>
+<li>注释上下行</li>
+</ul>
+<p><strong>1.5命名</strong></p>
+<blockquote>
+<p>都采用驼峰式进行命名</p>
+</blockquote>
+<p>变量：前缀用名词，且名词能体现出这个变量的数据类型。<br>eg： countBox lengthBox msgUser</p>
+<p>方法：前缀用动词<br>can has is set get</p>
+<p>常量：<br>MAX_LENGTH<br><figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="keyword">count</span> &gt; MAX_LENGTH) &#123;</span><br><span class="line">	<span class="comment">//TO DO</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>1.7基本量</strong><br>1.7.1字符串<br>字符串可以用双引号也可以用单引号，值得注意的是整个文件需要保持对这种字符串风格的统一。<br>个人比较喜欢用单引号。</p>
+<p>1.7.2数字<br>不要省略0.4之前的0</p>
+<p><strong>（二）、注释</strong><br><strong>2.1单行注释</strong><br>单独一行，用来注释下一行代码，注释的上一行要为空行。注释的缩进要和下一行的代码缩进相同。<br>或者注释在一行代码的尾部，要求注释的字数要少。注释与前的代码之间要有至少一个缩进。</p>
+<p><strong>2.2多行注释</strong><br>多行注释出现在需要注释的一段代码之前，注释与代码之间没有空行，注释的上一行为空行。多行注释一般用来注释不好理解的代码段落。</p>
+<p><strong>（三）、语句与表达式</strong><br><strong>3.1花括号的对其方式</strong><br>花括号跟随语句之后，不另起一段。<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//使用</span></span><br><span class="line"><span class="keyword">if</span> (<span class="literal">true</span>) &#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">//todo</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//不使用</span></span><br><span class="line"><span class="keyword">if</span> (<span class="literal">true</span>) </span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line"> <span class="comment">//todo</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>3.2块语句的空格问题</strong><br>个人喜欢并自我强制使用左圆括号左、右圆括号右加空格<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="literal">true</span>) &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>（四）、变量、函数及运算符</strong><br><strong>4.1变量声明</strong><br>因为会有变量提升的现象，浏览器在执行一个函数时首先定义了这个函数内的变量名，并且赋值undefied。所以我们在函数内定义的变量都可以提前写在函数内的开头，并且使用单var模式。</p>
+<p><strong>4.2函数声明</strong><br>函数声明也有提升的现象，所以执行写在定义之前也是行的，但规范来讲函数的定义最好是在变量定义完之后跟上。而且函数定义不要在条件语句中出现。</p>
+<p><strong>4.3相等</strong><br>当执行==操作时，js会将一方的值强制转换成与另一方数据类型相等，然后进行比较。<br>eg：”1” == 1<br>1 == true<br>0 == false<br>true会被转换成1<br>所以想进行比较的时候用<code>===</code>，不会进行数据类型的转换。</p>
+<h3 id="第二部分_编程实践">第二部分 编程实践</h3><hr>
+<p><strong>（五）、UI层的松耦合</strong><br>这章主要讲的是UI层三要素<code>html css jacascript</code>之间如何尽量消除耦合。</p>
+<ul>
+<li>html html文档中不要出现style内嵌css属性，也不要出现内嵌的js，比如onclick。</li>
+<li>css css中不允许出现表达式内嵌javascript</li>
+<li>javascript中尽量不要出现直接操作css的语句，改而用<code>className</code>代替，另外javascript尽量不要拼接html操作dom，改而使用客户端模板引擎或者后端直接吐一整段html出来。</li>
+</ul>
+<p>总结：个人平时使用中，其他几点基本都能做到，但在javascript中还是经常去拼接一些html，在以后的工作中，尽量用前端模板引擎代替。</p>
+<p><strong>（六）、避免使用全局变量</strong></p>
+<blockquote>
+<p>在整个工程下使用全局变量，很容易覆盖掉别人写的一些变量，或者是自己定义的变量被别人错误的覆盖。</p>
+</blockquote>
+<p>一些解决办法：</p>
+<p>1、命名空间<br>可以在全局window变量下自定义一个全局变量，而且这个全局变量具有很大的辨识度，不会覆盖掉浏览器的api。<br><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable"><span class="keyword">var</span> nanyangTask</span> = &#123;&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>然后所有的方法属性全部定义在这个全局变量之下。<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">nanyangTask.book = <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//todo</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>2、模块加载<br>模块是一种通用的代码片段，存放在一个表示执行一个任务或发布一个接口的单函数中，这些代码片段不会影响到全局变量。<br>公司中使用的seajs遵循cmd规范，在define()全局函数中写逻辑代码就可。</p>
+<p>3、自执行函数，在自执行函数中定义的方法只要都带上var就不会污染全局变量，在不要给抛出接口的一些代码片段比较适合使用这种方式，比如现在在公司的活动营销页面的制作。</p>
+<p><strong>（七）、事件处理</strong><br><strong>7.2隔离应用逻辑</strong><br>先来看一段平时写的很多的时间绑定逻辑<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">handleClick</span><span class="params">(ev)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> a = <span class="built_in">document</span>.getElementById(<span class="string">'X'</span>);</span><br><span class="line">	a.style.left = ev.clientX + <span class="string">'px'</span>;</span><br><span class="line">&#125;</span><br><span class="line">$(<span class="built_in">document</span>).on(<span class="string">'click'</span>, handleClick);</span><br></pre></td></tr></table></figure></p>
+<p>handleClick方法中的逻代码片段是一段应用逻辑，跟业务逻辑紧密相关，但是设想一下，现在的逻辑是在页面中点击一下，元素移动到鼠标的位置，但是还有一处业务逻辑是长按一下，元素移动到鼠标的位置。如此就要复制一段代码。所以我们要做的就是将应用的逻辑抽离出来。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">handleClick</span><span class="params">(ev)</span> </span>&#123;</span><br><span class="line">	moveBox(ev)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">moveBox</span><span class="params">(ev)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> a = <span class="built_in">document</span>.getElementById(<span class="string">'X'</span>);</span><br><span class="line">	a.style.left = ev.clientX + <span class="string">'px'</span>;</span><br><span class="line">&#125; </span><br><span class="line">$(<span class="built_in">document</span>).on(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span><span class="params">(ev)</span> </span>&#123;</span><br><span class="line">	handleClick(ev)</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>如此一来，moveBox方法就可以在多个地方调用。</p>
+<p><strong>7.3不要分发事件对象</strong><br>上面的7.2还是有一些不好的地方，event事件对象被分发了很多次，首先传到事件处理程序handleClick，再传到应用逻辑函数moveBox，实际上应用逻辑是有很明确的目的的，这代表了这个方法会用到事件对象的哪些属性。所以修改下代码。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">handleClick</span><span class="params">(ev)</span> </span>&#123;</span><br><span class="line">	moveBox(ev.clientX);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">moveBox</span><span class="params">(x)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> a = <span class="built_in">document</span>.getElementById(<span class="string">'X'</span>);</span><br><span class="line">	a.style.left = x + <span class="string">'px'</span>;</span><br><span class="line">&#125; </span><br><span class="line">$(<span class="built_in">document</span>).on(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span><span class="params">(ev)</span> </span>&#123;</span><br><span class="line">	handleClick(ev)</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>这样做的好处是应用逻辑可以明确知道是干什么的，并且这样方便了测试，测试时不需要模拟事件，直接调用<code>moveBox(10)</code>就好了。<br>另外对于事件处理程序的一些方法，比如阻止默认事件，阻止冒泡都写在事件处理程序<code>handleClick</code>中，进一步分离事件处理程序和应用逻辑。</p>
+<p><strong>（八）、避免空比较</strong><br><strong>8.1检测原始值</strong><br>javascript有5种原始值 </p>
+<ul>
+<li>number</li>
+<li>string</li>
+<li>boolean</li>
+<li>null</li>
+<li>undefined</li>
+</ul>
+<p>检测number、string、boolean、endefined四种数据类型使用<code>typeof</code>非常实用也安全，返回的就是这四种类型。<br>null一般不用于检测，除非某个返回值就是null，例如document.getElementById(‘#rff’);如果没有这个 节点，返回的就是null。</p>
+<p><strong>8.2检测引用值</strong><br>引用类型包括数组、对象、函数等除了原始值之外的数据类型。<br>typeof检测这些类型返回的都是object。<br>所以检测引用类型的方法可以用instanceof<br>[] isstanceof Array === true</p>
+<p>最新方法：<br>Object.prototype.toString().call(value) === “[object Array]”  </p>
+<p><strong>8.3判断对象的属性是否存在</strong><br><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> <span class="keyword">object</span> = &#123;</span><br><span class="line">	arrd: <span class="string">'d'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>in if ( ‘arrd’ in object ) {}</li>
+<li>hasOwnProperty  if (object hasOwnProperty ‘arrd’) {}<br>两者的区在在于，in检测arrd这个属性是否是这个object实例的，但如果是其原型上的属性，也返回true，但hasOwnProperty只检测是否是实例的属性。</li>
+</ul>
+<p><strong>（九）、将配置数据从代码中分离出来</strong><br><strong>9.1什么是配置数据</strong><br>简单来讲就是在js逻辑里定死的数据，只能通过人为的去改的数据<br><figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="built_in">size</span> &gt; <span class="number">90</span>) &#123;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>在上面一段代码中，MAX_SIZE就是一个配置数据，在代码中固定。</p>
+<p><strong>9.2抽离配置数据</strong><br>将js逻辑代码里的配置数据都抽离出来存放在config对象中去。<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> config = &#123;</span><br><span class="line">	MSG_INVALID_VALUE: <span class="string">'Invalid value'</span>,</span><br><span class="line">	URL_INVALID: <span class="string">'XXX'</span>,</span><br><span class="line">	CSS_APP: <span class="string">'select'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>规范下，配置数据即定数据采用全大写的方式，首单词标明了这个数据的类型。</p>
+<p><strong>（十一）、不是你的对象不要动</strong><br>简单来讲，就是处理自己的逻辑代码，绝不尝试修改，覆盖，删除window的属性方法，绝不Object原型上的方法属性，或者是自己同事的代码。</p>
+<p><strong>（十二）、浏览器嗅探</strong><br><strong>12.1user-agent</strong><br>处理兼容性上这是最后的办法，会由很大的不准确性，真的要检测useragent也要首先检测旧版本，并进行一些hack，else的情况执行正常的逻辑代码。</p>
+<p><strong>12.2特性检测</strong><br>特性检测并不是去检测是什么浏览器，因为对于某些特性，会有多个浏览器支持。<br>正确的特性检测的一些重要组成部分</p>
+<ul>
+<li>探测标准的方法</li>
+<li>探测不同浏览器的特定方法。</li>
+</ul>
+<p><strong>值得注意的是千万不要根据特性去判断是什么浏览器</strong><br>比如</p>
+<blockquote>
+<p>var isIE = !!documenr.all 现在docuemnt.all是ie的特型，但是不应该通过这个特型去决定是否是一个浏览器，因为，假如哪天ie删除了这个属性，而isIE这个变量又大量用于文件中，会引起很多问题。</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://yoursite.com/2015/11/15/编写可维护的javascript阅读笔记/" data-id="cih0m0shr00003ajhqrl2kkin" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/书籍阅读/">书籍阅读</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-破译关键渲染路径（翻译）" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2015/11/12/破译关键渲染路径（翻译）/" class="article-date">
@@ -136,7 +260,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2015/11/12/破译关键渲染路径（翻译）/" data-id="cih0ly1pd00042yjhvzos7tbj" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://yoursite.com/2015/11/12/破译关键渲染路径（翻译）/" data-id="cih0m01k5000439jhstaowfkz" class="article-share-link" data-share="baidu">分享到</a>
       
 
       
@@ -206,71 +330,13 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2015/10/12/attribute与property/" data-id="cih0ly1on00002yjhpc0asr2u" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://yoursite.com/2015/10/12/attribute与property/" data-id="cih0m01jc000039jh1ozlq3tk" class="article-share-link" data-share="baidu">分享到</a>
       
 
       
 
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-hammer-js" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/10/05/hammer-js/" class="article-date">
-  <time datetime="2015-10-05T15:24:45.000Z" itemprop="datePublished">2015-10-05</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/javascript/">javascript</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/10/05/hammer-js/">hammerjs的初次学习</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="hammerjs的初次学习">hammerjs的初次学习</h2><h3 id="Hammer-js_手势库的学习与应用。">Hammer.js 手势库的学习与应用。</h3><blockquote>
-<p>上个礼拜公司交代的任务中有一个需求，商品详细页面的图片点击后可以缩放拖拽。本来想用原生的api取写，但是出来的效果兼容性很差，在双击，拖拽，放大绑定在同一元素的情况下，很容易误触发不相关的动作，比如在双指缩放时一不小心就触发了双击事件，能力还未够，所以在hammer.js官网学习了一下手势库，完成了那个需求。</p>
-</blockquote>
-<p><strong>1、hammerjs概括</strong><br>hammerjs一共有6种手势，<code>pan</code>(拖拽)，<code>pinch</code>(缩放)，<code>press</code>(长按) <code>rotate</code>(旋转)  <code>swipe</code>(滑动) <code>tap</code>(点)。这6个手势几乎涵盖了所有日常所需！<br><strong>2、用法</strong><br>需要实例化一个对象。<br>我这里提供一个我在项目中使用的通用写法。<br>我们写移动端一般都包含zepto的底层工具库。<br><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> wrap = $(<span class="string">'.wrap'</span>)[<span class="number">0</span>];</span><br><span class="line"><span class="comment">//定义一个元素节点，注意这里不能是jq或者zepto对象</span></span><br><span class="line"><span class="keyword">var</span> wrapHammer = <span class="keyword">new</span> Hammer(wrap);</span><br><span class="line"><span class="comment">//把需要绑定事件的节点传入，实例化。</span></span><br><span class="line"><span class="keyword">var</span> singletap = <span class="keyword">new</span> Hammer.Tap();</span><br><span class="line"><span class="comment">//实例化手势对象</span></span><br><span class="line"><span class="keyword">var</span> doubletap = <span class="keyword">new</span> Hammer.Tap(&#123;<span class="keyword">event</span>: <span class="string">'doubletap'</span>, taps: <span class="number">2</span>&#125;);</span><br><span class="line"><span class="keyword">var</span> pinch = <span class="keyword">new</span> Hammer.Pinch();</span><br><span class="line"><span class="keyword">var</span> pan = <span class="keyword">new</span> Hammer.Pan();</span><br><span class="line"><span class="keyword">var</span> swipe = <span class="keyword">new</span> Hammer.Swipe();</span><br></pre></td></tr></table></figure></p>
-<p>在实例化手势对象的时候可以传参数，不同的手势对象有不同的参数可以选择。具体可以参考官网。<br>例如想看<code>pan</code>在实例化的时候可以填什么参数，可以查看<a href="http://hammerjs.github.io/recognizer-pan/" target="_blank" rel="external">http://hammerjs.github.io/recognizer-pan/</a> 。有一个框表示了传入的对象里可以填什么参数。<br><strong>这里比较特殊的是Tap</strong>，不同数量的点击，需要实例化不同的对象。<br><strong>接下来</strong><br><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">wrapHammer.<span class="built_ins">add</span>(singletap);</span><br><span class="line">wrapHammer.<span class="built_ins">add</span>(doubletap);</span><br><span class="line">			  singletap.requireFailure(doubletap);			doubletap.requireFailure(singletap);</span><br><span class="line">			  </span><br><span class="line">wrapHammer.<span class="built_ins">add</span>(pinch);</span><br><span class="line">wrapHammer.<span class="built_ins">add</span>(pan);</span><br><span class="line">wrapHammer.<span class="built_ins">add</span>(swipe)</span><br><span class="line">//在实例出来的节点对象上<span class="built_ins">add</span>上一步实例化的手势对象，此时一个节点上将绑定了很多手势。</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight delphi"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">wrapHammer.<span class="keyword">on</span>(<span class="string">'tap'</span>, hideWrap);</span><br><span class="line">wrapHammer.<span class="keyword">on</span>(<span class="string">'doubletap'</span>, doubleScale);</span><br><span class="line">wrapHammer.<span class="keyword">on</span>(<span class="string">'pinchmove'</span>, scaleImg);</span><br><span class="line">wrapHammer.<span class="keyword">on</span>(<span class="string">'pinchend'</span>, scaleEndImg);</span><br><span class="line">wrapHammer.<span class="keyword">on</span>(<span class="string">'panstart'</span>, moveStartImg);</span><br><span class="line">wrapHammer.<span class="keyword">on</span>(<span class="string">'panmove'</span>, moveImg);</span><br><span class="line">wrapHammer.<span class="keyword">on</span>(<span class="string">'panend'</span>, moveEndImg);</span><br><span class="line"><span class="comment">//第三步就是绑定事件了</span></span><br></pre></td></tr></table></figure>
-<p><strong>注意</strong>第三步中的这些事件名，可以在官网上对应手势页面的events中找到。例如若要查看<code>pinch</code>则<br><a href="http://hammerjs.github.io/recognizer-pinch/" target="_blank" rel="external">http://hammerjs.github.io/recognizer-pinch/</a></p>
-<p><strong>3、注意点</strong><br>紧跟以上三步，基本就能做出基本的手势页面了。<br>接下来再介绍几个需要特殊设置的地方。<br><code>1</code>如果想要缩放与旋转同时触发，即边旋转边缩放。可以<br><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> pinch = new Hammer.Pinch();</span><br><span class="line"><span class="keyword">var</span> <span class="keyword">rotate</span> = new Hammer.<span class="keyword">Rotate</span>();</span><br><span class="line">pinch.recognizeWith(<span class="keyword">rotate</span>);</span><br></pre></td></tr></table></figure></p>
-<p>官网页面：<a href="http://hammerjs.github.io/recognize-with/" target="_blank" rel="external">http://hammerjs.github.io/recognize-with/</a><br><code>2</code>在doubletap时会在之前触发tap，此时可以设置<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">singleTap.requireFailure(doubleTap);</span><br></pre></td></tr></table></figure></p>
-<p>如此设置后在触发tap后稍微有些许停顿，以触发double。<br><code>3</code>在官网或者网上经常看到<code>pan</code> <code>swipe</code> 在默认情况下只能水平移动，如果要开启还需要设置。但采用我上面的写法，就不需要设置了，默认情况下上下左右都是打开的。<br><a href="http://hammerjs.github.io/recognizer-pan/" target="_blank" rel="external">http://hammerjs.github.io/recognizer-pan/</a><br>direction的默认值是DIRECTION_ALL，而且在最下面的note也说明了当采用<code>new Hanmmer()</code>实例化就默认水平，而我们是<code>new Hammer.pan()</code> 实例化。<br><code>pinch</code>道理也同，不需要再配置就可以用了。<br><code>4</code>在<code>on</code>的事件绑定中回调的event返回，最常用的也就是<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ev<span class="class">.type</span></span><br><span class="line">ev<span class="class">.deltaX</span></span><br><span class="line">ev<span class="class">.deltaY</span></span><br><span class="line">ev.scale</span><br></pre></td></tr></table></figure></p>
-<p>链接推荐：<br><a href="https://cdn.rawgit.com/hammerjs/hammer.js/master/tests/manual/visual.html" target="_blank" rel="external">https://cdn.rawgit.com/hammerjs/hammer.js/master/tests/manual/visual.html</a><br><a href="http://www.cnblogs.com/iamlilinfeng/p/4239957.html" target="_blank" rel="external">http://www.cnblogs.com/iamlilinfeng/p/4239957.html</a></p>
-<p>原创文章，转载请注明出处！</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="http://yoursite.com/2015/10/05/hammer-js/" data-id="cih0ly1q600142yjhbic8hul5" class="article-share-link" data-share="baidu">分享到</a>
-      
-
-      
-
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
 
     </footer>
   </div>
@@ -331,13 +397,71 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2015/10/05/tween/" data-id="cih0ly1pz000u2yjhnditd2ds" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://yoursite.com/2015/10/05/tween/" data-id="cih0m01ku000u39jhs2ybc863" class="article-share-link" data-share="baidu">分享到</a>
       
 
       
 
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jsLib/">jsLib</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-hammer-js" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/10/05/hammer-js/" class="article-date">
+  <time datetime="2015-10-05T15:24:45.000Z" itemprop="datePublished">2015-10-05</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/javascript/">javascript</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/10/05/hammer-js/">hammerjs的初次学习</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="hammerjs的初次学习">hammerjs的初次学习</h2><h3 id="Hammer-js_手势库的学习与应用。">Hammer.js 手势库的学习与应用。</h3><blockquote>
+<p>上个礼拜公司交代的任务中有一个需求，商品详细页面的图片点击后可以缩放拖拽。本来想用原生的api取写，但是出来的效果兼容性很差，在双击，拖拽，放大绑定在同一元素的情况下，很容易误触发不相关的动作，比如在双指缩放时一不小心就触发了双击事件，能力还未够，所以在hammer.js官网学习了一下手势库，完成了那个需求。</p>
+</blockquote>
+<p><strong>1、hammerjs概括</strong><br>hammerjs一共有6种手势，<code>pan</code>(拖拽)，<code>pinch</code>(缩放)，<code>press</code>(长按) <code>rotate</code>(旋转)  <code>swipe</code>(滑动) <code>tap</code>(点)。这6个手势几乎涵盖了所有日常所需！<br><strong>2、用法</strong><br>需要实例化一个对象。<br>我这里提供一个我在项目中使用的通用写法。<br>我们写移动端一般都包含zepto的底层工具库。<br><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> wrap = $(<span class="string">'.wrap'</span>)[<span class="number">0</span>];</span><br><span class="line"><span class="comment">//定义一个元素节点，注意这里不能是jq或者zepto对象</span></span><br><span class="line"><span class="keyword">var</span> wrapHammer = <span class="keyword">new</span> Hammer(wrap);</span><br><span class="line"><span class="comment">//把需要绑定事件的节点传入，实例化。</span></span><br><span class="line"><span class="keyword">var</span> singletap = <span class="keyword">new</span> Hammer.Tap();</span><br><span class="line"><span class="comment">//实例化手势对象</span></span><br><span class="line"><span class="keyword">var</span> doubletap = <span class="keyword">new</span> Hammer.Tap(&#123;<span class="keyword">event</span>: <span class="string">'doubletap'</span>, taps: <span class="number">2</span>&#125;);</span><br><span class="line"><span class="keyword">var</span> pinch = <span class="keyword">new</span> Hammer.Pinch();</span><br><span class="line"><span class="keyword">var</span> pan = <span class="keyword">new</span> Hammer.Pan();</span><br><span class="line"><span class="keyword">var</span> swipe = <span class="keyword">new</span> Hammer.Swipe();</span><br></pre></td></tr></table></figure></p>
+<p>在实例化手势对象的时候可以传参数，不同的手势对象有不同的参数可以选择。具体可以参考官网。<br>例如想看<code>pan</code>在实例化的时候可以填什么参数，可以查看<a href="http://hammerjs.github.io/recognizer-pan/" target="_blank" rel="external">http://hammerjs.github.io/recognizer-pan/</a> 。有一个框表示了传入的对象里可以填什么参数。<br><strong>这里比较特殊的是Tap</strong>，不同数量的点击，需要实例化不同的对象。<br><strong>接下来</strong><br><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">wrapHammer.<span class="built_ins">add</span>(singletap);</span><br><span class="line">wrapHammer.<span class="built_ins">add</span>(doubletap);</span><br><span class="line">			  singletap.requireFailure(doubletap);			doubletap.requireFailure(singletap);</span><br><span class="line">			  </span><br><span class="line">wrapHammer.<span class="built_ins">add</span>(pinch);</span><br><span class="line">wrapHammer.<span class="built_ins">add</span>(pan);</span><br><span class="line">wrapHammer.<span class="built_ins">add</span>(swipe)</span><br><span class="line">//在实例出来的节点对象上<span class="built_ins">add</span>上一步实例化的手势对象，此时一个节点上将绑定了很多手势。</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight delphi"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">wrapHammer.<span class="keyword">on</span>(<span class="string">'tap'</span>, hideWrap);</span><br><span class="line">wrapHammer.<span class="keyword">on</span>(<span class="string">'doubletap'</span>, doubleScale);</span><br><span class="line">wrapHammer.<span class="keyword">on</span>(<span class="string">'pinchmove'</span>, scaleImg);</span><br><span class="line">wrapHammer.<span class="keyword">on</span>(<span class="string">'pinchend'</span>, scaleEndImg);</span><br><span class="line">wrapHammer.<span class="keyword">on</span>(<span class="string">'panstart'</span>, moveStartImg);</span><br><span class="line">wrapHammer.<span class="keyword">on</span>(<span class="string">'panmove'</span>, moveImg);</span><br><span class="line">wrapHammer.<span class="keyword">on</span>(<span class="string">'panend'</span>, moveEndImg);</span><br><span class="line"><span class="comment">//第三步就是绑定事件了</span></span><br></pre></td></tr></table></figure>
+<p><strong>注意</strong>第三步中的这些事件名，可以在官网上对应手势页面的events中找到。例如若要查看<code>pinch</code>则<br><a href="http://hammerjs.github.io/recognizer-pinch/" target="_blank" rel="external">http://hammerjs.github.io/recognizer-pinch/</a></p>
+<p><strong>3、注意点</strong><br>紧跟以上三步，基本就能做出基本的手势页面了。<br>接下来再介绍几个需要特殊设置的地方。<br><code>1</code>如果想要缩放与旋转同时触发，即边旋转边缩放。可以<br><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> pinch = new Hammer.Pinch();</span><br><span class="line"><span class="keyword">var</span> <span class="keyword">rotate</span> = new Hammer.<span class="keyword">Rotate</span>();</span><br><span class="line">pinch.recognizeWith(<span class="keyword">rotate</span>);</span><br></pre></td></tr></table></figure></p>
+<p>官网页面：<a href="http://hammerjs.github.io/recognize-with/" target="_blank" rel="external">http://hammerjs.github.io/recognize-with/</a><br><code>2</code>在doubletap时会在之前触发tap，此时可以设置<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">singleTap.requireFailure(doubleTap);</span><br></pre></td></tr></table></figure></p>
+<p>如此设置后在触发tap后稍微有些许停顿，以触发double。<br><code>3</code>在官网或者网上经常看到<code>pan</code> <code>swipe</code> 在默认情况下只能水平移动，如果要开启还需要设置。但采用我上面的写法，就不需要设置了，默认情况下上下左右都是打开的。<br><a href="http://hammerjs.github.io/recognizer-pan/" target="_blank" rel="external">http://hammerjs.github.io/recognizer-pan/</a><br>direction的默认值是DIRECTION_ALL，而且在最下面的note也说明了当采用<code>new Hanmmer()</code>实例化就默认水平，而我们是<code>new Hammer.pan()</code> 实例化。<br><code>pinch</code>道理也同，不需要再配置就可以用了。<br><code>4</code>在<code>on</code>的事件绑定中回调的event返回，最常用的也就是<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ev<span class="class">.type</span></span><br><span class="line">ev<span class="class">.deltaX</span></span><br><span class="line">ev<span class="class">.deltaY</span></span><br><span class="line">ev.scale</span><br></pre></td></tr></table></figure></p>
+<p>链接推荐：<br><a href="https://cdn.rawgit.com/hammerjs/hammer.js/master/tests/manual/visual.html" target="_blank" rel="external">https://cdn.rawgit.com/hammerjs/hammer.js/master/tests/manual/visual.html</a><br><a href="http://www.cnblogs.com/iamlilinfeng/p/4239957.html" target="_blank" rel="external">http://www.cnblogs.com/iamlilinfeng/p/4239957.html</a></p>
+<p>原创文章，转载请注明出处！</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://yoursite.com/2015/10/05/hammer-js/" data-id="cih0m01l3001439jh0s52hq7v" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
 
     </footer>
   </div>
@@ -374,7 +498,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2015/09/28/lazyload-js源码学习/" data-id="cih0ly1q300132yjhcbkoyth5" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://yoursite.com/2015/09/28/lazyload-js源码学习/" data-id="cih0m01l0001339jh0m200bfn" class="article-share-link" data-share="baidu">分享到</a>
       
 
       
@@ -501,7 +625,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2015/09/28/github学习/" data-id="cih0ly1q900172yjhri3sdy13" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://yoursite.com/2015/09/28/github学习/" data-id="cih0m01l9001739jhp8euxzq5" class="article-share-link" data-share="baidu">分享到</a>
       
 
       
@@ -549,7 +673,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2015/08/03/zepto-fullpage源码注释理解/" data-id="cih0ly1pq000n2yjh1lnyies2" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://yoursite.com/2015/08/03/zepto-fullpage源码注释理解/" data-id="cih0m01km000n39jhf4zawy6y" class="article-share-link" data-share="baidu">分享到</a>
       
 
       
@@ -613,7 +737,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2015/07/12/viewport/" data-id="cih0ly1pw000q2yjhxgk0osug" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://yoursite.com/2015/07/12/viewport/" data-id="cih0m01ks000q39jh65ftixc2" class="article-share-link" data-share="baidu">分享到</a>
       
 
       
@@ -681,72 +805,13 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2015/06/10/regexp/" data-id="cih0ly1q1000z2yjhbxlvoq2r" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://yoursite.com/2015/06/10/regexp/" data-id="cih0m01ky000z39jhjkkb240i" class="article-share-link" data-share="baidu">分享到</a>
       
 
       
 
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Regexp/">Regexp</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-函数调用的四种方式" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/06/10/函数调用的四种方式/" class="article-date">
-  <time datetime="2015-06-10T05:16:11.000Z" itemprop="datePublished">2015-06-10</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/javascript/">javascript</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/06/10/函数调用的四种方式/">函数调用的四种方式与this的关系</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><code>笔记思想来自javascript语言精粹一书</code></p>
-<h3 id="函数调用有4种方式，且不同方式对this的处理有差异。">函数调用有4种方式，且不同方式对this的处理有差异。</h3><ul>
-<li>方法调用模式</li>
-<li>函数调用模式</li>
-<li>构造器调用模式</li>
-<li>apply调用模式</li>
-</ul>
-<h4 id="方法调用模式">方法调用模式</h4><p>把函数保存为对象的一个属性，且被调用时，称为方法调用，此时的<code>this</code>指向自己所属的对象。<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">	name: <span class="string">"dada"</span>,</span><br><span class="line">	getName: <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">this</span>.name;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">obj.getName()<span class="comment">//dada</span></span><br></pre></td></tr></table></figure></p>
-<h4 id="函数调用模式">函数调用模式</h4><p>这种模式即为最普遍的函数调用，但此时的<code>this</code>有混淆的地方。<br>以此模式调用函数的时候，<code>this</code>指向全局对象，<strong>并不会指向外层函数的this</strong>。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.name = <span class="string">"nanyang"</span>;</span><br><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">	name: <span class="string">"dada"</span>,</span><br><span class="line">	getName: <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="comment">//that = this; 解决办法</span></span><br><span class="line">		<span class="keyword">var</span> helper = <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">			<span class="keyword">this</span>.name = <span class="string">'xx!'</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		helper();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">obj.name()<span class="comment">//dada</span></span><br><span class="line"><span class="built_in">window</span>.name<span class="comment">//xx!</span></span><br></pre></td></tr></table></figure></p>
-<h4 id="构造器调用模式">构造器调用模式</h4><p>这个模式跟方法调用类似，this指向所属的新对象。<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Abc = <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">this</span>.name = <span class="string">'xxx'</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> Abc();</span><br><span class="line">a.name<span class="comment">//<span class="label">xxx</span></span></span><br></pre></td></tr></table></figure></p>
-<h4 id="apply调用模式">apply调用模式</h4><p><code>apply</code>允许我们自己选择this，感觉精粹里的说法很直白<code>apply接受两个参数，第一个是要绑定给this的值，第二个是参数的数组</code>。<br>我的解释是，我们可以调用任意的方法，然后将方法中的this指向的对象换成我们在<code>apply</code>中加进去的第一个参数。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> some_obj = &#123;</span><br><span class="line">	name: ‘ldd’;</span><br><span class="line">	say: <span class="function"><span class="keyword">function</span> <span class="params">(who)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> ‘hi’ + who + ‘I am’ + <span class="keyword">this</span>.name;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">Some_obj.say(<span class="string">"xyn"</span>) <span class="comment">//hi xyn, I am ldd;</span></span><br><span class="line">Var my_obj = &#123; name: <span class="string">"xxx"</span>&#125;;</span><br><span class="line">Some_obj.say.apply(my_obj, [<span class="string">'xyn'</span>])</span><br><span class="line"><span class="comment">//hi xyn, I am <span class="label">xxx</span></span></span><br><span class="line">原本say方法中的<span class="string">`this`</span>指向<span class="string">`some_obj`</span>对象，利用apply就可以将<span class="keyword">this</span>指向my_obj</span><br></pre></td></tr></table></figure></p>
-<p><strong>当然call跟apply的用法几乎一样，就是在第二个参数上的形式有一些变化</strong></p>
-<p>原创文章！转载请注明出处</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="http://yoursite.com/2015/06/10/函数调用的四种方式/" data-id="cih0ly1pi000c2yjhxgffz2wk" class="article-share-link" data-share="baidu">分享到</a>
-      
-
-      
-
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
 
     </footer>
   </div>
@@ -777,7 +842,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">標簽</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Regexp/">Regexp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html-css/">html&css</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jsLib/">jsLib</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web移动端/">web移动端</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端性能监控/">前端性能监控</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/杂/">杂</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Regexp/">Regexp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html-css/">html&css</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jsLib/">jsLib</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web移动端/">web移动端</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/书籍阅读/">书籍阅读</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端性能监控/">前端性能监控</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/杂/">杂</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -786,7 +851,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">標簽雲</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Regexp/" style="font-size: 10px;">Regexp</a><a href="/tags/html-css/" style="font-size: 10px;">html&css</a><a href="/tags/javascript/" style="font-size: 20px;">javascript</a><a href="/tags/js/" style="font-size: 10px;">js</a><a href="/tags/jsLib/" style="font-size: 10px;">jsLib</a><a href="/tags/web移动端/" style="font-size: 10px;">web移动端</a><a href="/tags/前端性能监控/" style="font-size: 10px;">前端性能监控</a><a href="/tags/杂/" style="font-size: 10px;">杂</a>
+      <a href="/tags/Regexp/" style="font-size: 10px;">Regexp</a><a href="/tags/html-css/" style="font-size: 10px;">html&css</a><a href="/tags/javascript/" style="font-size: 20px;">javascript</a><a href="/tags/js/" style="font-size: 10px;">js</a><a href="/tags/jsLib/" style="font-size: 10px;">jsLib</a><a href="/tags/web移动端/" style="font-size: 10px;">web移动端</a><a href="/tags/书籍阅读/" style="font-size: 10px;">书籍阅读</a><a href="/tags/前端性能监控/" style="font-size: 10px;">前端性能监控</a><a href="/tags/杂/" style="font-size: 10px;">杂</a>
     </div>
   </div>
 
@@ -795,7 +860,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">歸檔</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">2</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">2</span></li></ul>
     </div>
   </div>
 
@@ -807,6 +872,10 @@
       <ul>
         
           <li>
+            <a href="/2015/11/15/编写可维护的javascript阅读笔记/">编写可维护的javascript阅读笔记</a>
+          </li>
+        
+          <li>
             <a href="/2015/11/12/破译关键渲染路径（翻译）/">破译关键渲染路径（翻译）</a>
           </li>
         
@@ -815,15 +884,11 @@
           </li>
         
           <li>
-            <a href="/2015/10/05/hammer-js/">hammerjs的初次学习</a>
-          </li>
-        
-          <li>
             <a href="/2015/10/05/tween/">tweenMax基础api的逐条随意翻译</a>
           </li>
         
           <li>
-            <a href="/2015/09/28/lazyload-js源码学习/">lazyload.js源码学习</a>
+            <a href="/2015/10/05/hammer-js/">hammerjs的初次学习</a>
           </li>
         
       </ul>

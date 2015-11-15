@@ -74,6 +74,65 @@
     <div class="outer">
       <section id="main">
   
+    <article id="post-函数调用的四种方式" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/06/10/函数调用的四种方式/" class="article-date">
+  <time datetime="2015-06-10T05:16:11.000Z" itemprop="datePublished">2015-06-10</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/javascript/">javascript</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/06/10/函数调用的四种方式/">函数调用的四种方式与this的关系</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><code>笔记思想来自javascript语言精粹一书</code></p>
+<h3 id="函数调用有4种方式，且不同方式对this的处理有差异。">函数调用有4种方式，且不同方式对this的处理有差异。</h3><ul>
+<li>方法调用模式</li>
+<li>函数调用模式</li>
+<li>构造器调用模式</li>
+<li>apply调用模式</li>
+</ul>
+<h4 id="方法调用模式">方法调用模式</h4><p>把函数保存为对象的一个属性，且被调用时，称为方法调用，此时的<code>this</code>指向自己所属的对象。<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">	name: <span class="string">"dada"</span>,</span><br><span class="line">	getName: <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">this</span>.name;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">obj.getName()<span class="comment">//dada</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="函数调用模式">函数调用模式</h4><p>这种模式即为最普遍的函数调用，但此时的<code>this</code>有混淆的地方。<br>以此模式调用函数的时候，<code>this</code>指向全局对象，<strong>并不会指向外层函数的this</strong>。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.name = <span class="string">"nanyang"</span>;</span><br><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">	name: <span class="string">"dada"</span>,</span><br><span class="line">	getName: <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="comment">//that = this; 解决办法</span></span><br><span class="line">		<span class="keyword">var</span> helper = <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">			<span class="keyword">this</span>.name = <span class="string">'xx!'</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		helper();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">obj.name()<span class="comment">//dada</span></span><br><span class="line"><span class="built_in">window</span>.name<span class="comment">//xx!</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="构造器调用模式">构造器调用模式</h4><p>这个模式跟方法调用类似，this指向所属的新对象。<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Abc = <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">this</span>.name = <span class="string">'xxx'</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> Abc();</span><br><span class="line">a.name<span class="comment">//<span class="label">xxx</span></span></span><br></pre></td></tr></table></figure></p>
+<h4 id="apply调用模式">apply调用模式</h4><p><code>apply</code>允许我们自己选择this，感觉精粹里的说法很直白<code>apply接受两个参数，第一个是要绑定给this的值，第二个是参数的数组</code>。<br>我的解释是，我们可以调用任意的方法，然后将方法中的this指向的对象换成我们在<code>apply</code>中加进去的第一个参数。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> some_obj = &#123;</span><br><span class="line">	name: ‘ldd’;</span><br><span class="line">	say: <span class="function"><span class="keyword">function</span> <span class="params">(who)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> ‘hi’ + who + ‘I am’ + <span class="keyword">this</span>.name;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">Some_obj.say(<span class="string">"xyn"</span>) <span class="comment">//hi xyn, I am ldd;</span></span><br><span class="line">Var my_obj = &#123; name: <span class="string">"xxx"</span>&#125;;</span><br><span class="line">Some_obj.say.apply(my_obj, [<span class="string">'xyn'</span>])</span><br><span class="line"><span class="comment">//hi xyn, I am <span class="label">xxx</span></span></span><br><span class="line">原本say方法中的<span class="string">`this`</span>指向<span class="string">`some_obj`</span>对象，利用apply就可以将<span class="keyword">this</span>指向my_obj</span><br></pre></td></tr></table></figure></p>
+<p><strong>当然call跟apply的用法几乎一样，就是在第二个参数上的形式有一些变化</strong></p>
+<p>原创文章！转载请注明出处</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://yoursite.com/2015/06/10/函数调用的四种方式/" data-id="cih0m01kd000c39jhb22s2ue8" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-关于BFC的一些事儿" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2015/06/08/关于BFC的一些事儿/" class="article-date">
@@ -117,7 +176,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2015/06/08/关于BFC的一些事儿/" data-id="cih0ly1pk000f2yjh1ilqtgwv" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://yoursite.com/2015/06/08/关于BFC的一些事儿/" data-id="cih0m01kg000f39jh4mxxe0ro" class="article-share-link" data-share="baidu">分享到</a>
       
 
       
@@ -173,7 +232,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2015/05/20/原型及原型链/" data-id="cih0ly1pf00072yjhgx8ywcif" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://yoursite.com/2015/05/20/原型及原型链/" data-id="cih0m01k8000739jhl4rfpvx0" class="article-share-link" data-share="baidu">分享到</a>
       
 
       
@@ -232,7 +291,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2015/05/11/作用域的理解/" data-id="cih0ly1pn000k2yjh4cr1m1gl" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://yoursite.com/2015/05/11/作用域的理解/" data-id="cih0m01kj000k39jh7mvr8x2z" class="article-share-link" data-share="baidu">分享到</a>
       
 
       
@@ -269,7 +328,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">標簽</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Regexp/">Regexp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html-css/">html&css</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jsLib/">jsLib</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web移动端/">web移动端</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端性能监控/">前端性能监控</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/杂/">杂</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Regexp/">Regexp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html-css/">html&css</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jsLib/">jsLib</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web移动端/">web移动端</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/书籍阅读/">书籍阅读</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端性能监控/">前端性能监控</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/杂/">杂</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -278,7 +337,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">標簽雲</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Regexp/" style="font-size: 10px;">Regexp</a><a href="/tags/html-css/" style="font-size: 10px;">html&css</a><a href="/tags/javascript/" style="font-size: 20px;">javascript</a><a href="/tags/js/" style="font-size: 10px;">js</a><a href="/tags/jsLib/" style="font-size: 10px;">jsLib</a><a href="/tags/web移动端/" style="font-size: 10px;">web移动端</a><a href="/tags/前端性能监控/" style="font-size: 10px;">前端性能监控</a><a href="/tags/杂/" style="font-size: 10px;">杂</a>
+      <a href="/tags/Regexp/" style="font-size: 10px;">Regexp</a><a href="/tags/html-css/" style="font-size: 10px;">html&css</a><a href="/tags/javascript/" style="font-size: 20px;">javascript</a><a href="/tags/js/" style="font-size: 10px;">js</a><a href="/tags/jsLib/" style="font-size: 10px;">jsLib</a><a href="/tags/web移动端/" style="font-size: 10px;">web移动端</a><a href="/tags/书籍阅读/" style="font-size: 10px;">书籍阅读</a><a href="/tags/前端性能监控/" style="font-size: 10px;">前端性能监控</a><a href="/tags/杂/" style="font-size: 10px;">杂</a>
     </div>
   </div>
 
@@ -287,7 +346,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">歸檔</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">2</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">2</span></li></ul>
     </div>
   </div>
 
@@ -299,6 +358,10 @@
       <ul>
         
           <li>
+            <a href="/2015/11/15/编写可维护的javascript阅读笔记/">编写可维护的javascript阅读笔记</a>
+          </li>
+        
+          <li>
             <a href="/2015/11/12/破译关键渲染路径（翻译）/">破译关键渲染路径（翻译）</a>
           </li>
         
@@ -307,15 +370,11 @@
           </li>
         
           <li>
-            <a href="/2015/10/05/hammer-js/">hammerjs的初次学习</a>
-          </li>
-        
-          <li>
             <a href="/2015/10/05/tween/">tweenMax基础api的逐条随意翻译</a>
           </li>
         
           <li>
-            <a href="/2015/09/28/lazyload-js源码学习/">lazyload.js源码学习</a>
+            <a href="/2015/10/05/hammer-js/">hammerjs的初次学习</a>
           </li>
         
       </ul>
