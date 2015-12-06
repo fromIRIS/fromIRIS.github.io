@@ -4,18 +4,17 @@
 <head>
   <meta charset="utf-8">
   
-  <title>viewport中的width、inital-scale简介 | Lyu Dada</title>
+  <title>Archives: 2015/12 | Lyu Dada</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="web移动端开发viewport1、css的一个像素只是一个抽象的单位，在不同的设备中代表的设备物理像素是不同的。2、devicePixelRatio一个css像素代表多少个设备像素3、浏览器默认的viewport 称为layout viewport ,且为比屏幕要宽的viewport，一般都为980px，可以通过以下代码获取1document.documentElement.clientWidt">
-<meta property="og:type" content="article">
-<meta property="og:title" content="viewport中的width、inital-scale简介">
-<meta property="og:url" content="http://yoursite.com/2015/07/12/viewport/index.html">
+  <meta name="description">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Lyu Dada">
+<meta property="og:url" content="http://yoursite.com/archives/2015/12/index.html">
 <meta property="og:site_name" content="Lyu Dada">
-<meta property="og:description" content="web移动端开发viewport1、css的一个像素只是一个抽象的单位，在不同的设备中代表的设备物理像素是不同的。2、devicePixelRatio一个css像素代表多少个设备像素3、浏览器默认的viewport 称为layout viewport ,且为比屏幕要宽的viewport，一般都为980px，可以通过以下代码获取1document.documentElement.clientWidt">
-<meta property="og:image" content="./1436681520937.png">
+<meta property="og:description">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="viewport中的width、inital-scale简介">
-<meta name="twitter:description" content="web移动端开发viewport1、css的一个像素只是一个抽象的单位，在不同的设备中代表的设备物理像素是不同的。2、devicePixelRatio一个css像素代表多少个设备像素3、浏览器默认的viewport 称为layout viewport ,且为比屏幕要宽的viewport，一般都为980px，可以通过以下代码获取1document.documentElement.clientWidt">
+<meta name="twitter:title" content="Lyu Dada">
+<meta name="twitter:description">
   
     <link rel="alternative" href="/atom.xml" title="Lyu Dada" type="application/atom+xml">
   
@@ -73,89 +72,39 @@
   </div>
 </header>
     <div class="outer">
-      <section id="main"><article id="post-viewport" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/07/12/viewport/" class="article-date">
-  <time datetime="2015-07-12T15:02:56.000Z" itemprop="datePublished">2015-07-12</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/html-css/">html&css</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
+      <section id="main">
   
-    <h1 class="article-title" itemprop="name">
-      viewport中的width、inital-scale简介
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2015" class="archive-year">2015</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2015/12/07/基于Gulp的前端静态页面开发工作流的思考/" class="archive-article-date">
+  <time datetime="2015-12-06T17:09:39.000Z" itemprop="datePublished">Dec 7</time>
+</a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2015/12/07/基于Gulp的前端静态页面开发工作流的思考/">基于Gulp的前端静态页面开发工作流的思考</a>
     </h1>
   
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="web移动端开发">web移动端开发</h2><h3 id="viewport">viewport</h3><p>1、css的一个像素只是一个抽象的单位，在不同的设备中代表的设备物理像素是不同的。<br>2、<code>devicePixelRatio</code>一个css像素代表多少个设备像素<br>3、<br><strong>浏览器默认的viewport</strong> 称为<code>layout viewport</code> ,且为比屏幕要宽的viewport，一般都为980px，可以通过以下代码获取<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">document<span class="class">.documentElement</span><span class="class">.clientWidth</span></span><br></pre></td></tr></table></figure></p>
-<p><strong>浏览器可视区域的宽度</strong>：<code>visual viewport</code>可以通过以下代码获取<br><figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.innerWidth</span><br></pre></td></tr></table></figure></p>
-<p><strong>浏览器理想宽度</strong>：<code>idea viewport</code></p>
-<ul>
-<li>不同的设备有不同的idea viewport，所有的iphone的idea都是320px（iphone6以前）。查看最新<code>各设备idea viewport</code>网址<a href="http://viewportsizes.com/" target="_blank" rel="external">http://viewportsizes.com/</a></li>
-<li><code>idea viewport</code> 的宽度就是移动设备的屏幕宽度，在css中设置某元素的宽度为<code>idea viewport</code>的宽度（单位px），那么这个元素在屏幕中就是现实100%</li>
-</ul>
-<p>4、<img src="./1436681520937.png" alt="Alt text"><br><strong>target-densititydpi</strong>已经被安卓废除，避免使用<br>5、<code>initial-scale</code>这个缩放初始值是相对于设备的<code>idea viewport</code>的值进行缩放的，也就是说<br><figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta <span class="variable">name=</span><span class="string">"viewport"</span> <span class="variable">content=</span><span class="string">"initial-scale=1"</span>&gt; </span><br><span class="line">//等效于</span><br><span class="line">&lt;meta <span class="variable">name=</span><span class="string">"viewport"</span> <span class="variable">content=</span><span class="string">"width=devive-width"</span></span><br><span class="line">//</span><br></pre></td></tr></table></figure></p>
-<p><strong>两者各有一个bug，所以生产时最好将两个一起写上</strong><br>但如果同时出现<code>width</code>和<code>initial-scale</code><br><figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta <span class="variable">name=</span><span class="string">"viewport"</span> <span class="variable">content=</span><span class="string">"width=500, initial-scale=1"</span>&gt;</span><br></pre></td></tr></table></figure></p>
-<p>并不是根据先后顺序比较，而是通过谁大取谁，比如设备是iphone5，<code>idea viewport</code>是320px，则此时<code>initial-scale=1</code>(320px)，所以此时viewport取<code>width=500</code><br>6、<strong>关于initial-scale缩放的默认值以及其理论</strong><br><code>visual viewport宽度 = idea viewport宽度 / 当前设置的缩放值</code><br><code>当前缩放值 = idea viewport宽度 / visual viewport宽度</code><br><strong>注</strong>这个理论不适合安卓原生浏览器<br><strong>关于默认值：（iphone及ipad下）</strong><br>在安卓浏览器下的<code>initial-scale</code>并不能默认设置自己的值，但ios下<code>initial-scale</code>会自动根据情况设置初始值（不写<code>initial-scale</code>）。<br>例：<br><figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta <span class="variable">name=</span><span class="string">"viewport"</span> <span class="variable">content=</span><span class="string">"width=375"</span>&gt;</span><br></pre></td></tr></table></figure></p>
-<p>此标签只写了<code>width=375</code>属性，表明了<code>visual viewport=375</code>而且<code>375</code>是iphone6的<code>idea viewport</code>，所以此时css设置样式<code>width: 375px</code>在6就是完全填充。但如何设备是苹果5，其<code>idea viewport</code>是<code>320</code>，根据理论，得出<code>initial-scale</code>的默认值为<code>320/375</code>。页面会自动缩放这样不会出现滚动条，这样就可以在<code>320</code>的视角下无障碍浏览375的内容。</p>
-<h3 id="viewport总结">viewport总结</h3><p>目前移动开发中关于页面布局有三种方式</p>
-<ul>
-<li>1.缩放 ，利用iPhone的initial-scale默认值会自动变化</li>
-<li>2.width=device-width，布局采用百分比 </li>
-<li>3.rem </li>
-</ul>
-<p>上文的<code>initical-scale</code>的默认值的应用就是第一种方式的详解。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="http://yoursite.com/2015/07/12/viewport/" data-id="cihusiofy000vxqjhflhel79k" class="article-share-link" data-share="baidu">分享到</a>
-      
-
-      
-
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/web移动端/">web移动端</a></li></ul>
-
-    </footer>
+    </header>
   </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2015/08/03/zepto-fullpage源码注释理解/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">下一篇</strong>
-      <div class="article-nav-title">
-        
-          zepto.fullpage源码注释理解
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2015/06/10/regexp/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">上一篇</strong>
-      <div class="article-nav-title">js中的正则表达式</div>
-    </a>
-  
-</nav>
-
-  
 </article>
-
+  
+  
+    </div></section>
+  
 </section>
       
       <aside id="sidebar">

@@ -1,0 +1,322 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>基于Gulp的前端静态页面开发工作流的思考 | Lyu Dada</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="基于Gulp的前端静态页面开发工作流的思考写静态页面的时候最常见的脚手架就是下方这样的形式，本地新建一个项目文件，然后再在里面新建js、less文件夹，配合一个less处理，js压缩混淆的可视化工具，边写边处理，写完后再到tinyPng上压缩一下图片，需要将图片地址换成cdn的还需要将图片手动传到服务器上，最后大功告成！
+1234567root---js/---src/---less/---css">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于Gulp的前端静态页面开发工作流的思考">
+<meta property="og:url" content="http://yoursite.com/2015/12/07/基于Gulp的前端静态页面开发工作流的思考/index.html">
+<meta property="og:site_name" content="Lyu Dada">
+<meta property="og:description" content="基于Gulp的前端静态页面开发工作流的思考写静态页面的时候最常见的脚手架就是下方这样的形式，本地新建一个项目文件，然后再在里面新建js、less文件夹，配合一个less处理，js压缩混淆的可视化工具，边写边处理，写完后再到tinyPng上压缩一下图片，需要将图片地址换成cdn的还需要将图片手动传到服务器上，最后大功告成！
+1234567root---js/---src/---less/---css">
+<meta property="og:image" content="../img/1449414186845.png">
+<meta property="og:image" content="../img/1449414710248.png">
+<meta property="og:image" content="../img/1449415103986.png">
+<meta property="og:image" content="../img/4120131606.gif">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="基于Gulp的前端静态页面开发工作流的思考">
+<meta name="twitter:description" content="基于Gulp的前端静态页面开发工作流的思考写静态页面的时候最常见的脚手架就是下方这样的形式，本地新建一个项目文件，然后再在里面新建js、less文件夹，配合一个less处理，js压缩混淆的可视化工具，边写边处理，写完后再到tinyPng上压缩一下图片，需要将图片地址换成cdn的还需要将图片手动传到服务器上，最后大功告成！
+1234567root---js/---src/---less/---css">
+  
+    <link rel="alternative" href="/atom.xml" title="Lyu Dada" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+  
+</head>
+<body>
+<div id="container">
+  <div id="wrap">
+    <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Lyu Dada</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">to love and get love</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="https://github.com/fromIRIS">MYGithub</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="http://www.baidu.com/baidu" method="get" accept-charset="utf-8" class="search-form">
+          <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="Search">
+          <input type="submit" value="" class="search-form-submit">
+          <input name=tn type=hidden value="bds">
+          <input name=cl type=hidden value="3">
+          <input name=ct type=hidden value="2097152">
+          <input type="hidden" name="si" value="yoursite.com">
+        </form>
+      </div>
+    </div>
+  </div>
+</header>
+    <div class="outer">
+      <section id="main"><article id="post-基于Gulp的前端静态页面开发工作流的思考" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/12/07/基于Gulp的前端静态页面开发工作流的思考/" class="article-date">
+  <time datetime="2015-12-06T17:09:39.000Z" itemprop="datePublished">2015-12-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      基于Gulp的前端静态页面开发工作流的思考
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="基于Gulp的前端静态页面开发工作流的思考">基于Gulp的前端静态页面开发工作流的思考</h2><p>写静态页面的时候最常见的脚手架就是下方这样的形式，本地新建一个项目文件，然后再在里面新建js、less文件夹，配合一个less处理，js压缩混淆的可视化工具，边写边处理，写完后再到tinyPng上压缩一下图片，需要将图片地址换成cdn的还需要将图片手动传到服务器上，最后大功告成！</p>
+<figure class="highlight haml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">root</span><br><span class="line">-<span class="ruby">--js/</span><br><span class="line"></span>-<span class="ruby">--src/</span><br><span class="line"></span>-<span class="ruby">--less/</span><br><span class="line"></span>-<span class="ruby">--css/</span><br><span class="line"></span>-<span class="ruby">--images/</span><br><span class="line"></span>-<span class="ruby">--html</span></span><br></pre></td></tr></table></figure>
+<p>但是可视化工具比如<code>codekit</code>的一个缺点就是可拓展性不高，局限于软件本身的功能。使用<code>gulp</code>以及强大的插件机制，可以带来无限的可能。<br>首先的问题就是项目文件目录该如何规划。如果只是上面提到的形式，生产代码跟发布代码混在同一个文件下，容易混淆。如果针对生产环境和发布环境分别对应一个文件夹就会清晰很多，如果两个文件夹的下属目录名称也相同，html文件引用资源的相对路径也就不需要改了。<br>先来看下项目脚手架的形式<br><img src="../img/1449414186845.png" alt="Alt text"></p>
+<ul>
+<li><code>src</code>为生产源代码，在编写的时候的代码都应该放入这个文件目录下，包括html文件。</li>
+<li><code>dist</code>为上线的代码，里面存放的都是从src文件夹里压缩编译后的优化代码，包括html文件。</li>
+<li><code>node_modules</code>存放的是相关于gulp的npm包。</li>
+<li><code>config.json</code>有一些关于部署或者gulp需要的配置信息。</li>
+<li><code>gulpfile.js</code>gulp的入口文件。</li>
+<li><code>package.json</code>gulp所需插件的包管理。</li>
+</ul>
+<p>再来展开看一下<code>src</code>目录。<br><img src="../img/1449414710248.png" alt="Alt text"><br>生产源代码文件src下的目录结构</p>
+<ul>
+<li><code>css</code> 同文件下less编译后得到。</li>
+<li><code>images</code> 图片</li>
+<li><code>js</code> js文件</li>
+<li><code>less</code>less文件</li>
+<li><code>lib</code> 第三方库</li>
+<li><code>index.html</code>  主页面</li>
+</ul>
+<p>再来看下<code>dist</code>文件目录<br><img src="../img/1449415103986.png" alt="Alt text"></p>
+<ul>
+<li><code>css</code>  src下的css文件压缩后得到</li>
+<li><code>images</code> src下的images压缩得到</li>
+<li><code>js</code>  src下的js文件压缩混淆得到</li>
+<li><code>lib</code> 第三方库</li>
+<li><code>index.html</code>  主页面</li>
+</ul>
+<hr>
+<p>这篇文章假设大家已经基本了解了gulp如何安装使用，以及nodejs，npm包的使用。<br><a href="http://markpop.github.io/2014/09/17/Gulp%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/" target="_blank" rel="external">http://markpop.github.io/2014/09/17/Gulp%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/</a><br>不清楚gulp初始使用的同学可以看下这边文章，跟着做基本就懂了几个大概的插件用法。</p>
+<hr>
+<p>首先从此github上clone下来这个脚手架 <a href="https://github.com/fromIRIS/NYGulp" target="_blank" rel="external">https://github.com/fromIRIS/NYGulp</a><br>然后<code>npm install</code>安装所有需要的gulp插件。</p>
+<hr>
+<h3 id="代码编写阶段">代码编写阶段</h3><p>我对于gulp的使用流程是这样思考的，在编写代码的时候，并不需要时刻对js进行压缩，也不需要对图片进行压缩，唯一要做的是对less文件的编译（因为我平时工作都是less，所以本文css预处理器的基于less的）。当然也可以对js进行代码风格的检查。<br>所以在编写代码的时候我们只需开一个gulp默认的命令行并在内部进行css文件的监听就好。<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gulp</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">gulp.task(<span class="string">"serve"</span>, [<span class="string">"less"</span>, <span class="string">"js-watch"</span>, <span class="string">"html"</span>], <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    browserSync.init(&#123;</span><br><span class="line">        server : <span class="string">"./src"</span></span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    gulp.watch(srcPath.LESS, [<span class="string">"less"</span>]);</span><br><span class="line">    gulp.watch(srcPath.JS, [<span class="string">"js-watch"</span>]);</span><br><span class="line">    gulp.watch(srcPath.HTML, [<span class="string">"html"</span>]);</span><br><span class="line">    gulp.watch(srcPath.HTML).on(<span class="string">"change"</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        browserSync.reload;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br><span class="line">gulp.task(<span class="string">"less"</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    gulp.src(srcPath.LESS)</span><br><span class="line">        .pipe(less())</span><br><span class="line">        .pipe(gulp.dest(srcPath.CSS))</span><br><span class="line">        .pipe(browserSync.stream());</span><br><span class="line">&#125;)</span><br><span class="line">gulp.task(<span class="string">"js-watch"</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    gulp.src(srcPath.JS)</span><br><span class="line">    .pipe(browserSync.stream());</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">gulp.task(<span class="string">"html"</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    gulp.src(srcPath.HTML)</span><br><span class="line">    .pipe(browserSync.stream());</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">gulp.task(<span class="string">"default"</span>, [<span class="string">"serve"</span>])</span><br></pre></td></tr></table></figure>
+<p>但是现在在编写代码的同时怎么还能持续的<code>command+R</code>呢，必须要用上时时刷新浏览器的功能啊，所以在代码编写的阶段，还要用到强大的<code>browser-sync</code>。这个插件最神奇的地方莫过于在一个终端操作，其他终端都能实时变化。比如在pc端填写表单，H5端也能实时的自动填写表单。<br><img src="../img/4120131606.gif" alt="Alt text"></p>
+<h3 id="发布阶段_/1">发布阶段 /1</h3><p>代码写完了，在各个端都测试过觉得样式交互都ok了，感觉可以放到测试环境看看了，这个时候就可以对js文件进行压缩混淆，对css文件进行压缩，对图片进行压缩了。<br>这个时候在这个项目的根目录下执行这样的语句。<br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">gulp</span> build</span><br></pre></td></tr></table></figure></p>
+<p>此时根目录下就会多了一个<code>dist</code>文件夹，就是上文提到的那个。这个<code>dist</code>文件夹里的文件都是用于线上/测试环境的，不能在这个文件夹里直接修改代码。</p>
+<h3 id="发布阶段_/2">发布阶段 /2</h3><p>如果需要这个项目中使用<code>sprite雪碧图</code>，可以换一个命令，目前NYGulp只支持到PC的雪碧图自动生成。这个命令可以根据特定的图片文件夹生成一张sprite图片，并且自动将css文件中的<code>background-image</code>的地址替换掉，自动设置背景的<code>position</code>属性。<br>图片需要放在这个<code>src/images/slice</code> 目录下。<strong>是必须的啊</strong><br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">gulp</span> buildspritePc</span><br></pre></td></tr></table></figure></p>
+<h3 id="更多思考">更多思考</h3><p>一个前端静态项目的js、less、图片的编译压缩通过gulp都自动进行着，最后还有一个问题，也是这个脚手架的最后一公里，就是如何自动化地根据项目中html文件中图片的相对路径将图片上传到公司所在的静态资源服务器，然后将相对路径自动替换成cdn地址。如果能做到这样，对于一个静态活动页面，就真正的做到了自动化，只用进行代码的书写，无需再处理图片的压缩上传。<br><a href="https://github.com/amfe/article/issues/8" target="_blank" rel="external">https://github.com/amfe/article/issues/8</a> , 事实上阿里的这个团队对前端自动化流的工具的研究已经很多了，从这篇文章里能找到解决思路，这也是我相继续深入的。<br>对于这样一个脚手架，在实际使用中已经较爽，可以利用 <a href="http://yeoman.io/" target="_blank" rel="external">Yeoman</a> 编写一个脚手架generator，这样在一个目录下执行一个命令就可以直接生成这个文件目录，免去了每次都要复制粘贴整个目录文档。</p>
+<hr>
+<p>参考资料：<br>browser-sync使用 <a href="http://segmentfault.com/a/1190000002919912" target="_blank" rel="external">http://segmentfault.com/a/1190000002919912</a><br>百度前端脚手架文档： <a href="https://github.com/ecomfe/spec/blob/master/directory.md#level1" target="_blank" rel="external">https://github.com/ecomfe/spec/blob/master/directory.md#level1</a><br>手淘前端自动化： <a href="https://github.com/amfe/article/issues/8" target="_blank" rel="external">https://github.com/amfe/article/issues/8</a><br>JGulp脚手架： <a href="http://segmentfault.com/a/1190000002658165" target="_blank" rel="external">http://segmentfault.com/a/1190000002658165</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://yoursite.com/2015/12/07/基于Gulp的前端静态页面开发工作流的思考/" data-id="cihusiofe0009xqjhzl7ych3h" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/杂/">杂</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2015/11/29/The-Principles-of-object-oriented-javascript阅读笔记/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">The Principles of object-oriented javascript阅读笔记</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+      
+      <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分類</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/html-css/">html&css</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/javascript/">javascript</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/动画库/">动画库</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">標簽</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Regexp/">Regexp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html-css/">html&css</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jsLib/">jsLib</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web移动端/">web移动端</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/书籍阅读/">书籍阅读</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端性能监控/">前端性能监控</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/杂/">杂</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">標簽雲</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Regexp/" style="font-size: 10px;">Regexp</a><a href="/tags/html-css/" style="font-size: 10px;">html&css</a><a href="/tags/javascript/" style="font-size: 20px;">javascript</a><a href="/tags/js/" style="font-size: 10px;">js</a><a href="/tags/jsLib/" style="font-size: 10px;">jsLib</a><a href="/tags/web移动端/" style="font-size: 10px;">web移动端</a><a href="/tags/书籍阅读/" style="font-size: 15px;">书籍阅读</a><a href="/tags/前端性能监控/" style="font-size: 10px;">前端性能监控</a><a href="/tags/杂/" style="font-size: 15px;">杂</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">歸檔</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">近期文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2015/12/07/基于Gulp的前端静态页面开发工作流的思考/">基于Gulp的前端静态页面开发工作流的思考</a>
+          </li>
+        
+          <li>
+            <a href="/2015/11/29/The-Principles-of-object-oriented-javascript阅读笔记/">The Principles of object-oriented javascript阅读笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2015/11/15/编写可维护的javascript阅读笔记/">编写可维护的javascript阅读笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2015/11/12/破译关键渲染路径（翻译）/">破译关键渲染路径（翻译）</a>
+          </li>
+        
+          <li>
+            <a href="/2015/10/12/attribute与property/">attribute与property</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">友情鏈接</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://xiguabaobao.com" target="_blank">主题作者</a>
+          </li>
+        
+          <li>
+            <a href="http://reqianduan.com" target="_blank">热前端</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015 Lyu Dada<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      .
+      Theme by <a href="https://github.com/xiangming/landscape-plus" target="_blank">Landscape-plus</a>
+    </div>
+  </div>
+</footer>
+  </div>
+  <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="https://github.com/fromIRIS" class="mobile-nav-link">MYGithub</a>
+  
+</nav>
+  <!-- totop start -->
+<div id="totop">
+<a title="返回頂部"><img src="/img/scrollup.png"/></a>
+</div>
+
+<!-- totop end -->
+
+
+<!-- 百度分享 start -->
+
+<div id="article-share-box" class="article-share-box">
+  <div id="bdshare" class="bdsharebuttonbox article-share-links">
+    <a class="article-share-weibo" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a class="article-share-weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a class="article-share-qq" data-cmd="sqq" title="分享到QQ"></a>
+    <a class="article-share-renren" data-cmd="renren" title="分享到人人网"></a>
+    <a class="article-share-more" data-cmd="more" title="更多"></a>
+  </div>
+</div>
+<script>window._bd_share_config={"common":{},"share":{"bdCustomStyle":"/css/bdshare.css"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+<!-- 百度分享 end -->
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+</div>
+</body>
+</html>
