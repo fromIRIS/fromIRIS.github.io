@@ -4,17 +4,17 @@
 <head>
   <meta charset="utf-8">
   
-  <title>作用域的初识 | Lyu Dada</title>
+  <title>Tag: 前端调试 | Lyu Dada</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="作用域的第一次总结，语言直白">
-<meta property="og:type" content="article">
-<meta property="og:title" content="作用域的初识">
-<meta property="og:url" content="http://yoursite.com/2015/05/11/作用域的理解/index.html">
+  <meta name="description">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Lyu Dada">
+<meta property="og:url" content="http://yoursite.com/tags/前端调试/index.html">
 <meta property="og:site_name" content="Lyu Dada">
-<meta property="og:description" content="作用域的第一次总结，语言直白">
+<meta property="og:description">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="作用域的初识">
-<meta name="twitter:description" content="作用域的第一次总结，语言直白">
+<meta name="twitter:title" content="Lyu Dada">
+<meta name="twitter:description">
   
     <link rel="alternative" href="/atom.xml" title="Lyu Dada" type="application/atom+xml">
   
@@ -72,79 +72,39 @@
   </div>
 </header>
     <div class="outer">
-      <section id="main"><article id="post-作用域的理解" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/05/11/作用域的理解/" class="article-date">
-  <time datetime="2015-05-11T15:23:25.000Z" itemprop="datePublished">2015-05-11</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/javascript/">javascript</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
+      <section id="main">
   
-    <h1 class="article-title" itemprop="name">
-      作用域的初识
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2015" class="archive-year">2015</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      <a href="/2015/12/20/移动端调试/" class="archive-article-date">
+  <time datetime="2015-12-20T15:52:13.000Z" itemprop="datePublished">Dec 20</time>
+</a>
+      
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2015/12/20/移动端调试/">移动端调试</a>
     </h1>
   
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="作用域">作用域</h2><ul>
-<li>首先从简单的方面去理解<code>变量提升</code>现象。在执行环境中，变量和<strong>函数声明</strong>(函数表达式不会)自动提升到最顶部，但变量赋值<code>undefined</code>，函数声明不会赋值<code>undefined</code>。<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="string">"outer"</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">funOne</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(a);<span class="comment">//undefined</span></span><br><span class="line">    <span class="keyword">var</span> a = <span class="string">"inner"</span></span><br><span class="line">&#125;</span><br><span class="line">funOne();</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>这个例子就能证明变量提升现象，此段代码相当于<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="string">"outer"</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">funOne</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> a;</span><br><span class="line">    <span class="built_in">console</span>.log(a);<span class="comment">//undefined</span></span><br><span class="line">    a = <span class="string">"inner"</span></span><br><span class="line">&#125;</span><br><span class="line">funOne();</span><br></pre></td></tr></table></figure></p>
-<p>至于为什么不是输出<code>outer</code>，这就牵扯到一句很重要的话：<strong>作用域是在<code>执行函数</code>时决定的，而不是在定义函数时</strong>。</p>
-<ul>
-<li>下面我就自己的白话解释下作用域是如何得到的。<br><code>首先</code>在定义函数的时候，即 function funOne() {}时，此时定义了一个作用域[[scope]],[[scope]]指向定义这个函数的环境，此例子这个环境就是全局环境，也可以把这个作用域看成一个对象，里面包含了全局环境中所有的变量，函数声明组成的键值对。<br><code>然后</code>代码解析到funOne()这个函数时，执行这个函数，此时真正决定这个函数作用域链的时刻到了。</li>
-<li>此时将发生跟前面提到的变量提升息息相关的事情。函数执行前夕，会进入<code>执行上下文</code>。这在段时间期间将发生如下工作：生成一个<code>活动对象</code>。并且1、函数的形参赋值或undefined，2、局部变量声明但赋值undefined，3、函数声明并赋值。接下来才开始逐句解析代码，该赋值赋值，该干嘛干嘛。</li>
-<li>通过刚才的函数定义函数调用，已经生成了两个对象，两个对象分别包含变量及值的键值对。而将两个对象串起来，就变成了<code>作用域链</code>。</li>
-<li>说白了，这个作用域链的作用是寻找变量标识名。还是在这个例子，调用函数时，进入这个函数，当解析到a时，就去作用域链中寻找a，先从活动对象找起，找不到再往上一级。</li>
-</ul>
-<p>原创文章，转载请注明出处！</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="http://yoursite.com/2015/05/11/作用域的理解/" data-id="ciiepr9ve000s43jh1fme2x4s" class="article-share-link" data-share="baidu">分享到</a>
-      
-
-      
-
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
-
-    </footer>
+    </header>
   </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2015/05/20/原型及原型链/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">下一篇</strong>
-      <div class="article-nav-title">
-        
-          原型及原型链
-        
-      </div>
-    </a>
-  
-  
-</nav>
-
-  
 </article>
-
+  
+  
+    </div></section>
+  
 </section>
       
       <aside id="sidebar">
