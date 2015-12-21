@@ -182,6 +182,7 @@
 </blockquote>
 <p><strong>调试移动端浏览器的H5页面（可进行js断点调试）</strong></p>
 <p>在安卓4.4版本以下的安卓机子，手机上安装了chrome的情况下，并且打开需要调试的页面，可以打开usb开发者模式，在pc端chrome地址栏输入<code>chrome://inspect</code>便可找到相应的手机的相应打开wap页面。调试方法跟pc chrome几乎一致。</p>
+<p>在第一次使用的时候点击<code>inspect</code>会弹出空白的调试页面，这个时候需要翻墙，再点<code>inspect</code>才会出现正常的调试页面。</p>
 <p><strong>优点：</strong>可进行js断点调试。<br><strong>缺点：</strong>浏览器限制。</p>
 <p><strong>调试公司APP内的webview页面（可进行js断点调试）</strong></p>
 <p>在安卓4.4版本以上的安卓机子，手机通过usb连接mac电脑后，手机打开usb开发者模式后，在电脑chrome的<code>chrome://inspect</code>页面里会找到除了手机浏览器打开的页面，还会找到App内打开的webview的页面。<br><img src="http://cdn1.showjoy.com/images/ce/ce98e4652b7f47c99612a3081e4e785f.png" alt="Alt text"><br>点开<code>inspect</code>就是一个调试界面。</p>
@@ -222,14 +223,16 @@
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这样设置过后的效果就是，在pc端修改代码，移动端线上的页面去请求本地修改后的代码并展示。</p>
 <p>讲完了<code>charles</code>,问题回到如何快速调试线上页面。</p>
 <p><strong>如果是H5页面</strong><br>遇上H5页面在PCchrome调试器上跟真实手机上的效果不一致时，可以使用万金油<code>weinre</code>，结合<code>charles</code>，就可以调试这种机型各种浏览器上的问题了。当然也可以使用上面提到的其他方法，都是适用的。</p>
-<p><strong>如果是webview</strong><br>同样不能少的是<code>charles抓包</code>，如果是安卓可以配合<code>genymotion</code>模拟器进行模拟。使用方法上文讲述过，再推荐一篇专门的文章：<a href="http://div.io/topic/1449。" target="_blank" rel="external">http://div.io/topic/1449。</a><br>如果是ios，也可以采用这样的方式，即模拟器+charles+mac safari。使用方法在上文的ios章节讲述过。<br>当然也是可以使用万金油<code>weinre</code>。weinre+charles调试App内的H5页面也是很方便的。跟上面两种方法比较，缺少的就是js断点调试功能。</p>
-<p><strong>参考文章</strong><br><a href="http://yujiangshui.com/multidevice-frontend-debug/" target="_blank" rel="external">移动端前端开发调试</a><br><a href="https://github.com/yujiangshui/CN-Chrome-DevTools/blob/remote-debugging/md/Use-Tools/remote-debugging.md#%E8%B0%83%E8%AF%95-webviews" target="_blank" rel="external">使用 Chrome 远程调试 Android 设备</a><br><a href="http://mp.weixin.qq.com/s?__biz=MjM5MTA1MjAxMQ==&amp;mid=400497314&amp;idx=1&amp;sn=850fad741fdb635c2403bafb2f1e636f&amp;scene=1&amp;srcid=1119TqsnfhBHSKzA2BUja9mk&amp;key=ac89cba618d2d97693fea624e810ff69a7385f5209ab2a26ec029ca8f618e760e87de444299655bad41c5d1a7dbbc76e&amp;ascene=0&amp;uin=Mjg1NTY1OTY2MA%3D%3D" target="_blank" rel="external">Charles 从入门到精通</a><br><a href="http://div.io/topic/1449" target="_blank" rel="external">打造最舒适的webview调试环境</a><br><a href="http://stackoverflow.com/questions/19700646/unable-to-create-genymotion-virtual-devicesconnection-timeout" target="_blank" rel="external">Unable to create Virtual Device</a></p>
+<p><strong>如果是webview</strong><br>同样不能少的是<code>charles抓包</code>，如果是安卓可以配合<code>genymotion</code>模拟器进行模拟。使用方法上文讲述过，再推荐一篇专门的文章：<a href="http://div.io/topic/1449。这篇文章讲到如何用charles监听genymotion。" target="_blank" rel="external">http://div.io/topic/1449。这篇文章讲到如何用charles监听genymotion。</a><br>如果是ios，也可以采用这样的方式，即模拟器+charles+mac safari。使用方法在上文的ios章节讲述过。<br>当然也是可以使用万金油<code>weinre</code>。weinre+charles调试App内的H5页面也是很方便的。跟上面两种方法比较，缺少的就是js断点调试功能。</p>
+<p><strong>参考文章</strong><br><a href="http://yujiangshui.com/multidevice-frontend-debug/" target="_blank" rel="external">移动端前端开发调试</a><br><a href="https://github.com/yujiangshui/CN-Chrome-DevTools/blob/remote-debugging/md/Use-Tools/remote-debugging.md#%E8%B0%83%E8%AF%95-webviews" target="_blank" rel="external">使用 Chrome 远程调试 Android 设备</a><br><a href="http://mp.weixin.qq.com/s?__biz=MjM5MTA1MjAxMQ==&amp;mid=400497314&amp;idx=1&amp;sn=850fad741fdb635c2403bafb2f1e636f&amp;scene=1&amp;srcid=1119TqsnfhBHSKzA2BUja9mk&amp;key=ac89cba618d2d97693fea624e810ff69a7385f5209ab2a26ec029ca8f618e760e87de444299655bad41c5d1a7dbbc76e&amp;ascene=0&amp;uin=Mjg1NTY1OTY2MA%3D%3D&amp;devicetype=iMac+MacBookPro12%2C1+OSX+OSX+10.10.4+build(14E46" target="_blank" rel="external">Charles 从入门到精通</a>&amp;version=11020201&amp;pass_ticket=WPlsSiFuGxw6Tb6CFkzaSOMvY2gLt%2BQJpfSggleLZT0K5fuNOiMAgjLF110wuOSp)<br><a href="http://div.io/topic/1449" target="_blank" rel="external">打造最舒适的webview调试环境</a><br><a href="http://stackoverflow.com/questions/19700646/unable-to-create-genymotion-virtual-devicesconnection-timeout" target="_blank" rel="external">Unable to create Virtual Device</a></p>
+<p>完！</p>
+<p>借鉴+原创文章，转载请注明出处！</p>
 
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2015/12/20/移动端调试/" data-id="ciifddu0y0006kgwl6bzklxs7" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://yoursite.com/2015/12/20/移动端调试/" data-id="ciiffvza10006u2wl4cu0p6vo" class="article-share-link" data-share="baidu">分享到</a>
       
 
       
