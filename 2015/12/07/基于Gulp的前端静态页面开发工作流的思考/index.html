@@ -14,10 +14,10 @@
 <meta property="og:site_name" content="Lyu Dada">
 <meta property="og:description" content="基于Gulp的前端静态页面开发工作流的思考写静态页面的时候最常见的脚手架就是下方这样的形式，本地新建一个项目文件，然后再在里面新建js、less文件夹，配合一个less处理，js压缩混淆的可视化工具，边写边处理，写完后再到tinyPng上压缩一下图片，需要将图片地址换成cdn的还需要将图片手动传到服务器上，最后大功告成！
 1234567root---js/---src/---less/---css">
-<meta property="og:image" content="../img/1449414186845.png">
-<meta property="og:image" content="../img/1449414710248.png">
-<meta property="og:image" content="../img/1449415103986.png">
-<meta property="og:image" content="../img/4120131606.gif">
+<meta property="og:image" content="http://7xpcne.com1.z0.glb.clouddn.com/NYGulp1.png">
+<meta property="og:image" content="http://7xpcne.com1.z0.glb.clouddn.com/NYGulp2.png">
+<meta property="og:image" content="http://7xpcne.com1.z0.glb.clouddn.com/NYGulp3.png">
+<meta property="og:image" content="http://7xpcne.com1.z0.glb.clouddn.com/NYGulp4120131606.gif">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="基于Gulp的前端静态页面开发工作流的思考">
 <meta name="twitter:description" content="基于Gulp的前端静态页面开发工作流的思考写静态页面的时候最常见的脚手架就是下方这样的形式，本地新建一个项目文件，然后再在里面新建js、less文件夹，配合一个less处理，js压缩混淆的可视化工具，边写边处理，写完后再到tinyPng上压缩一下图片，需要将图片地址换成cdn的还需要将图片手动传到服务器上，最后大功告成！
@@ -103,7 +103,7 @@
       
         <h2 id="基于Gulp的前端静态页面开发工作流的思考">基于Gulp的前端静态页面开发工作流的思考</h2><p>写静态页面的时候最常见的脚手架就是下方这样的形式，本地新建一个项目文件，然后再在里面新建js、less文件夹，配合一个less处理，js压缩混淆的可视化工具，边写边处理，写完后再到tinyPng上压缩一下图片，需要将图片地址换成cdn的还需要将图片手动传到服务器上，最后大功告成！</p>
 <figure class="highlight haml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">root</span><br><span class="line">-<span class="ruby">--js/</span><br><span class="line"></span>-<span class="ruby">--src/</span><br><span class="line"></span>-<span class="ruby">--less/</span><br><span class="line"></span>-<span class="ruby">--css/</span><br><span class="line"></span>-<span class="ruby">--images/</span><br><span class="line"></span>-<span class="ruby">--html</span></span><br></pre></td></tr></table></figure>
-<p>但是可视化工具比如<code>codekit</code>的一个缺点就是可拓展性不高，局限于软件本身的功能。使用<code>gulp</code>以及强大的插件机制，可以带来无限的可能。<br>首先的问题就是项目文件目录该如何规划。如果只是上面提到的形式，生产代码跟发布代码混在同一个文件下，容易混淆。如果针对生产环境和发布环境分别对应一个文件夹就会清晰很多，如果两个文件夹的下属目录名称也相同，html文件引用资源的相对路径也就不需要改了。<br>先来看下项目脚手架的形式<br><img src="../img/1449414186845.png" alt="Alt text"></p>
+<p>但是可视化工具比如<code>codekit</code>的一个缺点就是可拓展性不高，局限于软件本身的功能。使用<code>gulp</code>以及强大的插件机制，可以带来无限的可能。<br>首先的问题就是项目文件目录该如何规划。如果只是上面提到的形式，生产代码跟发布代码混在同一个文件下，容易混淆。如果针对生产环境和发布环境分别对应一个文件夹就会清晰很多，如果两个文件夹的下属目录名称也相同，html文件引用资源的相对路径也就不需要改了。<br>先来看下项目脚手架的形式<br><img src="http://7xpcne.com1.z0.glb.clouddn.com/NYGulp1.png" alt="Alt text"></p>
 <ul>
 <li><code>src</code>为生产源代码，在编写的时候的代码都应该放入这个文件目录下，包括html文件。</li>
 <li><code>dist</code>为上线的代码，里面存放的都是从src文件夹里压缩编译后的优化代码，包括html文件。</li>
@@ -112,7 +112,7 @@
 <li><code>gulpfile.js</code>gulp的入口文件。</li>
 <li><code>package.json</code>gulp所需插件的包管理。</li>
 </ul>
-<p>再来展开看一下<code>src</code>目录。<br><img src="../img/1449414710248.png" alt="Alt text"><br>生产源代码文件src下的目录结构</p>
+<p>再来展开看一下<code>src</code>目录。<br><img src="http://7xpcne.com1.z0.glb.clouddn.com/NYGulp2.png" alt="Alt text"><br>生产源代码文件src下的目录结构</p>
 <ul>
 <li><code>css</code> 同文件下less编译后得到。</li>
 <li><code>images</code> 图片</li>
@@ -121,7 +121,7 @@
 <li><code>lib</code> 第三方库</li>
 <li><code>index.html</code>  主页面</li>
 </ul>
-<p>再来看下<code>dist</code>文件目录<br><img src="../img/1449415103986.png" alt="Alt text"></p>
+<p>再来看下<code>dist</code>文件目录<br><img src="http://7xpcne.com1.z0.glb.clouddn.com/NYGulp3.png" alt="Alt text"></p>
 <ul>
 <li><code>css</code>  src下的css文件压缩后得到</li>
 <li><code>images</code> src下的images压缩得到</li>
@@ -136,19 +136,20 @@
 <hr>
 <h3 id="代码编写阶段">代码编写阶段</h3><p>我对于gulp的使用流程是这样思考的，在编写代码的时候，并不需要时刻对js进行压缩，也不需要对图片进行压缩，唯一要做的是对less文件的编译（因为我平时工作都是less，所以本文css预处理器的基于less的）。当然也可以对js进行代码风格的检查。<br>所以在编写代码的时候我们只需开一个gulp默认的命令行并在内部进行css文件的监听就好。<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gulp</span><br></pre></td></tr></table></figure></p>
 <figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">gulp.task(<span class="string">"serve"</span>, [<span class="string">"less"</span>, <span class="string">"js-watch"</span>, <span class="string">"html"</span>], <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    browserSync.init(&#123;</span><br><span class="line">        server : <span class="string">"./src"</span></span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    gulp.watch(srcPath.LESS, [<span class="string">"less"</span>]);</span><br><span class="line">    gulp.watch(srcPath.JS, [<span class="string">"js-watch"</span>]);</span><br><span class="line">    gulp.watch(srcPath.HTML, [<span class="string">"html"</span>]);</span><br><span class="line">    gulp.watch(srcPath.HTML).on(<span class="string">"change"</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        browserSync.reload;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br><span class="line">gulp.task(<span class="string">"less"</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    gulp.src(srcPath.LESS)</span><br><span class="line">        .pipe(less())</span><br><span class="line">        .pipe(gulp.dest(srcPath.CSS))</span><br><span class="line">        .pipe(browserSync.stream());</span><br><span class="line">&#125;)</span><br><span class="line">gulp.task(<span class="string">"js-watch"</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    gulp.src(srcPath.JS)</span><br><span class="line">    .pipe(browserSync.stream());</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">gulp.task(<span class="string">"html"</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    gulp.src(srcPath.HTML)</span><br><span class="line">    .pipe(browserSync.stream());</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">gulp.task(<span class="string">"default"</span>, [<span class="string">"serve"</span>])</span><br></pre></td></tr></table></figure>
-<p>但是现在在编写代码的同时怎么还能持续的<code>command+R</code>呢，必须要用上时时刷新浏览器的功能啊，所以在代码编写的阶段，还要用到强大的<code>browser-sync</code>。这个插件最神奇的地方莫过于在一个终端操作，其他终端都能实时变化。比如在pc端填写表单，H5端也能实时的自动填写表单。<br><img src="../img/4120131606.gif" alt="Alt text"></p>
+<p>但是现在在编写代码的同时怎么还能持续的<code>command+R</code>呢，必须要用上时时刷新浏览器的功能啊，所以在代码编写的阶段，还要用到强大的<code>browser-sync</code>。这个插件最神奇的地方莫过于在一个终端操作，其他终端都能实时变化。比如在pc端填写表单，H5端也能实时的自动填写表单。<br><img src="http://7xpcne.com1.z0.glb.clouddn.com/NYGulp4120131606.gif" alt=""></p>
 <h3 id="发布阶段_/1">发布阶段 /1</h3><p>代码写完了，在各个端都测试过觉得样式交互都ok了，感觉可以放到测试环境看看了，这个时候就可以对js文件进行压缩混淆，对css文件进行压缩，对图片进行压缩了。<br>这个时候在这个项目的根目录下执行这样的语句。<br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">gulp</span> build</span><br></pre></td></tr></table></figure></p>
 <p>此时根目录下就会多了一个<code>dist</code>文件夹，就是上文提到的那个。这个<code>dist</code>文件夹里的文件都是用于线上/测试环境的，不能在这个文件夹里直接修改代码。</p>
 <h3 id="发布阶段_/2">发布阶段 /2</h3><p>如果需要这个项目中使用<code>sprite雪碧图</code>，可以换一个命令，目前NYGulp只支持到PC的雪碧图自动生成。这个命令可以根据特定的图片文件夹生成一张sprite图片，并且自动将css文件中的<code>background-image</code>的地址替换掉，自动设置背景的<code>position</code>属性。<br>图片需要放在这个<code>src/images/slice</code> 目录下。<strong>是必须的啊</strong><br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">gulp</span> buildspritePc</span><br></pre></td></tr></table></figure></p>
 <h3 id="更多思考">更多思考</h3><p>一个前端静态项目的js、less、图片的编译压缩通过gulp都自动进行着，最后还有一个问题，也是这个脚手架的最后一公里，就是如何自动化地根据项目中html文件中图片的相对路径将图片上传到公司所在的静态资源服务器，然后将相对路径自动替换成cdn地址。如果能做到这样，对于一个静态活动页面，就真正的做到了自动化，只用进行代码的书写，无需再处理图片的压缩上传。<br><a href="https://github.com/amfe/article/issues/8" target="_blank" rel="external">https://github.com/amfe/article/issues/8</a> , 事实上阿里的这个团队对前端自动化流的工具的研究已经很多了，从这篇文章里能找到解决思路，这也是我相继续深入的。<br>对于这样一个脚手架，在实际使用中已经较爽，可以利用 <a href="http://yeoman.io/" target="_blank" rel="external">Yeoman</a> 编写一个脚手架generator，这样在一个目录下执行一个命令就可以直接生成这个文件目录，免去了每次都要复制粘贴整个目录文档。</p>
 <hr>
-<p>参考资料：<br>browser-sync使用 <a href="http://segmentfault.com/a/1190000002919912" target="_blank" rel="external">http://segmentfault.com/a/1190000002919912</a><br>百度前端脚手架文档： <a href="https://github.com/ecomfe/spec/blob/master/directory.md#level1" target="_blank" rel="external">https://github.com/ecomfe/spec/blob/master/directory.md#level1</a><br>手淘前端自动化： <a href="https://github.com/amfe/article/issues/8" target="_blank" rel="external">https://github.com/amfe/article/issues/8</a><br>JGulp脚手架： <a href="http://segmentfault.com/a/1190000002658165" target="_blank" rel="external">http://segmentfault.com/a/1190000002658165</a></p>
+<p>参考资料：<br>browser-sync使用 <a href="http://segmentfault.com/a/1190000002919912" target="_blank" rel="external">http://segmentfault.com/a/1190000002919912</a><br>百度前端脚手架文档： <a href="https://github.com/ecomfe/spec/blob/master/directory.md#level1" target="_blank" rel="external">https://github.com/ecomfe/spec/blob/master/directory.md#level1</a><br>手淘前端自动化： <a href="https://github.com/amfe/article/issues/8" target="_blank" rel="external">https://github.com/amfe/article/issues/8</a><br>JGulp脚手架： <a href="http://segmentfault.com/a/1190000002658165" target="_blank" rel="external">http://segmentfault.com/a/1190000002658165</a><br>完！</p>
+<p>原创文章，转载请注明出处！</p>
 
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2015/12/07/基于Gulp的前端静态页面开发工作流的思考/" data-id="ciiepr9v1000c43jhd6l9mm5v" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://yoursite.com/2015/12/07/基于Gulp的前端静态页面开发工作流的思考/" data-id="ciifddu12000ckgwloj7tdk79" class="article-share-link" data-share="baidu">分享到</a>
       
 
       

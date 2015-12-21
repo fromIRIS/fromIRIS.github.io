@@ -12,9 +12,9 @@
 <meta property="og:url" content="http://yoursite.com/2015/11/12/破译关键渲染路径（翻译）/index.html">
 <meta property="og:site_name" content="Lyu Dada">
 <meta property="og:description" content="一篇文章在理解的基础上进行的翻译">
-<meta property="og:image" content="./1447231291772.png">
-<meta property="og:image" content="./1447231979999.png">
-<meta property="og:image" content="./1447233476579.png">
+<meta property="og:image" content="http://chuantu.biz/t2/22/1450664869x1822611278.png">
+<meta property="og:image" content="http://chuantu.biz/t2/22/1450665095x-954498918.png">
+<meta property="og:image" content="http://7xpcne.com1.z0.glb.clouddn.com/3%20(2).png">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="破译关键渲染路径（翻译）">
 <meta name="twitter:description" content="一篇文章在理解的基础上进行的翻译">
@@ -104,20 +104,22 @@
 <li>白屏时间</li>
 <li>用户可交互时间</li>
 <li>总加载时间</li>
-<li>首屏时间<br>白屏时间跟总加载时间暂时可以在这个API直接获得，有分歧的是用户可交互时间，不知道怎么通过这个API取得，在阅读了上面这篇文章后就悟了。</li>
+<li>首屏时间</li>
 </ul>
-<p><strong>在文档中只存在异步脚本的不适用</strong><br><code>interactingTime = timing.domContentLoadedEventEnd - timing.navigationStart</code></p>
+<p>白屏时间跟总加载时间暂时可以在这个API直接获得，有分歧的是用户可交互时间，不知道怎么通过这个API取得，在阅读了上面这篇文章后就悟了。</p>
+<p><strong>在文档中只存在异步脚本的不适用</strong><br><code>interactingTime(用户可交互时间) = timing.domContentLoadedEventEnd - timing.navigationStart</code></p>
 <p>另外需要提前说明的是：在下文中出现了一张浏览器加载过程中的路径图，上面的的各种英文代表的是document的状态，什么时间点，浏览器完成了什么事，状态就会相应的改变，而下文中经常提到的<code>DOMContentLoaded（DCL）</code>跟<code>window.onload</code>类似，是事件，当document的状态相应变化时，就会触发相应的事件。而图中的<code>performance.timing.domContentLoadedEventStart</code>与<code>performance.timing.domContentLoadedEventEnd</code>之差就代表了<code>DOMContentLoaded</code>事件执行的时间。同理<code>performance.timing.loadEventStart</code>与<code>performance.timing.loadEventEnd</code>之差代表了<code>onload</code>事件执行的时间。</p>
 <h3 id="正文开始">正文开始</h3><p>正如steve在先前的文章中提到的，window.onload不是测量网站速度的最好方法。这个方法是最方便的也是最熟悉的，但是这并不能够获得一些现代页面的一些动态速度信息。我们想象用户能察觉到页面的一种表现：页面开始加载后多久后用户能跟页面进行交互？<br>交互的定义取决于你的页面，对于有些页面我们能获得可见的字就算是交互，而对于另外一些页面，写了狠多的js组件去构建UI（类似Gmail）。对于这两种例子，他们有一个共同点，那就是用户必须能看见的这个页面，换句话来讲就是浏览器需要呈现什么东西到屏幕上。<br>带着这个问题我们来探究一下，当第一批内容呈现在现代浏览器上的时候，到底发生了什么事情。</p>
-<h3 id="DOM_+_CSSOM_=_Render_Tree">DOM + CSSOM = Render Tree</h3><p>渲染管道的准确时间点和行为当然会取决于解析（parsing）布局（layout）还有一些管道的结合，抛开不同点来讲，为了得到一些可见的东西在屏幕上，所有浏览器必须要构建什么东西到渲染书（render tree）<br><img src="./1447231291772.png" alt="Alt text"><br>HTML文档的解析构建成了DOM树，在平行空间里有一个被遗忘了的兄弟—-CSSOM，CSSOM是有一些样式规则和样式资源所构建的，DOM树和CSSOM结合构成渲染树（render tree）。这时标明了浏览器有足够的信息区形成布局然后绘制在屏幕上，到目前为止，一切顺利。<br>然而，上图的例子是最乐观的，CSSOM和DOMtree相安无事的在两个平行空间里被构建。接下来很不幸的我将介绍我们最爱的朋友—javascript。</p>
+<h3 id="DOM_+_CSSOM_=_Render_Tree">DOM + CSSOM = Render Tree</h3><p>渲染管道的准确时间点和行为当然会取决于解析（parsing）布局（layout）还有一些管道的结合，抛开不同点来讲，为了得到一些可见的东西在屏幕上，所有浏览器必须要构建什么东西到渲染书（render tree）<br><img src="http://chuantu.biz/t2/22/1450664869x1822611278.png" alt="Alt text"><br>HTML文档的解析构建成了DOM树，在平行空间里有一个被遗忘了的兄弟—-CSSOM，CSSOM是有一些样式规则和样式资源所构建的，DOM树和CSSOM结合构成渲染树（render tree）。这时标明了浏览器有足够的信息区形成布局然后绘制在屏幕上，到目前为止，一切顺利。<br>然而，上图的例子是最乐观的，CSSOM和DOMtree相安无事的在两个平行空间里被构建。接下来很不幸的我将介绍我们最爱的朋友—javascript。</p>
 <ul>
 <li>同步的javascript可以改些文档在任何节点，因此DOMtree 一旦碰上script标签就会停止构建</li>
 <li><strong>javascript能查询dom对象的可被计算的样式，这意味着js可以阻塞css</strong></li>
 </ul>
-<p><img src="./1447231979999.png" alt="Alt text"></p>
+<p><img src="http://chuantu.biz/t2/22/1450665095x-954498918.png" alt="Alt text"></p>
 <p>不像上面那种DOM和CSSDOM相安无事的个子构建，现在两者潜在地互相牵制：DOMtree无法构建直到javascript被执行，javascript无法执行直到CSSOM是可行的，Yikes。。。</p>
 <p>Depending on how this dependency graph is resolved on your pages, which is governed by how, and how many resources you include in that first “critical path” of the page load, the time to first render will vary accordingly. Can we get some metrics, or insights into this process? Turns out, yes we can!</p>
-<h3 id="Document_Interactive_&amp;_DOMContentLoaded">Document Interactive &amp; DOMContentLoaded</h3><p>HTML5 定义了一系列浏览器从开始工作请求http到呈现页面必须执行的规则well documented sequence of steps.<br><img src="./1447233476579.png" alt="Alt text"><br><strong>浏览器加载关键路径图</strong><br>特别的，一系列步骤的较后方两个步骤能解决我们最开始提到的问题。在页面最开始的最开始的内容的出现之前，到底发生了什么事。</p>
+<h3 id="Document_Interactive_&amp;_DOMContentLoaded">Document Interactive &amp; DOMContentLoaded</h3><p>HTML5 定义了一系列浏览器从开始工作请求http到呈现页面必须执行的规则well documented sequence of steps.<br><img src="http://7xpcne.com1.z0.glb.clouddn.com/3%20(2).png" alt="Alt text"></p>
+<p><strong>浏览器加载关键路径图</strong><br>特别的，一系列步骤的较后方两个步骤能解决我们最开始提到的问题。在页面最开始的最开始的内容的出现之前，到底发生了什么事。</p>
 <ul>
 <li>document被标记为interactive状态，当浏览器结束DOMtree的构建，标明，DOMtree准备好了。</li>
 <li>一旦任何标有defer的script标签被执行了，浏览器就会触发了DOMContentLoaded事件，这个时候没有样式文件阻塞了脚本的执行（我注：当然这个script标签是在interactive状态之后的，如果没有表有defer的script，一旦document的状态变成interactive，就会触发DOMContentLoaded事件。）</li>
@@ -131,13 +133,14 @@
 <h3 id="沿着你的页面的关键路劲">沿着你的页面的关键路劲</h3><p>如果不出意外，监控<code>documenr interactive</code>状态，会给我们很好的一个指示：我们是否因为同步的脚本阻塞了DOMtree的构建，有时候测量这个阻塞的行为没有其他办法了，所以监控<code>interactive</code>状态会是一个折中的好办法。</p>
 <p>而DCL事件（domContentLoaded）也是个关键的指标，许多著名的库，类似<code>jquery</code>，在触发这个事件后开始执行他们的代码，换句话说，这可能是用户能跟页面交互的一个开始时间节点，而在这个事件中的回调，也是在这个事件触发后发给用户。如果你做对了工作，通过逐步的提高，你可以让页面的速度加快，因此用户可以跟页面交互而浏览器继续加载剩余的资源（img等）。IE团队有一个绝佳的例子演示了DCL与<code>window.onload</code>的不同。<br><a href="http://ie.microsoft.com/testdrive/HTML5/DOMContentLoaded/Default.html" target="_blank" rel="external">http://ie.microsoft.com/testdrive/HTML5/DOMContentLoaded/Default.html</a></p>
 <p>完。</p>
+<p>完。</p>
 <p>—<br>原创文章，转载请注明出处！</p>
 
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2015/11/12/破译关键渲染路径（翻译）/" data-id="ciiepr9uy000943jhhpsr1vra" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://yoursite.com/2015/11/12/破译关键渲染路径（翻译）/" data-id="ciifddu100009kgwl9gae3hpg" class="article-share-link" data-share="baidu">分享到</a>
       
 
       

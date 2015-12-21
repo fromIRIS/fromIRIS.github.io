@@ -221,7 +221,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2015/12/20/移动端调试/" data-id="ciiepr9uw000643jhl3ton7m6" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://yoursite.com/2015/12/20/移动端调试/" data-id="ciifddu0y0006kgwl6bzklxs7" class="article-share-link" data-share="baidu">分享到</a>
       
 
       
@@ -260,7 +260,7 @@
       
         <h2 id="基于Gulp的前端静态页面开发工作流的思考">基于Gulp的前端静态页面开发工作流的思考</h2><p>写静态页面的时候最常见的脚手架就是下方这样的形式，本地新建一个项目文件，然后再在里面新建js、less文件夹，配合一个less处理，js压缩混淆的可视化工具，边写边处理，写完后再到tinyPng上压缩一下图片，需要将图片地址换成cdn的还需要将图片手动传到服务器上，最后大功告成！</p>
 <figure class="highlight haml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">root</span><br><span class="line">-<span class="ruby">--js/</span><br><span class="line"></span>-<span class="ruby">--src/</span><br><span class="line"></span>-<span class="ruby">--less/</span><br><span class="line"></span>-<span class="ruby">--css/</span><br><span class="line"></span>-<span class="ruby">--images/</span><br><span class="line"></span>-<span class="ruby">--html</span></span><br></pre></td></tr></table></figure>
-<p>但是可视化工具比如<code>codekit</code>的一个缺点就是可拓展性不高，局限于软件本身的功能。使用<code>gulp</code>以及强大的插件机制，可以带来无限的可能。<br>首先的问题就是项目文件目录该如何规划。如果只是上面提到的形式，生产代码跟发布代码混在同一个文件下，容易混淆。如果针对生产环境和发布环境分别对应一个文件夹就会清晰很多，如果两个文件夹的下属目录名称也相同，html文件引用资源的相对路径也就不需要改了。<br>先来看下项目脚手架的形式<br><img src="../img/1449414186845.png" alt="Alt text"></p>
+<p>但是可视化工具比如<code>codekit</code>的一个缺点就是可拓展性不高，局限于软件本身的功能。使用<code>gulp</code>以及强大的插件机制，可以带来无限的可能。<br>首先的问题就是项目文件目录该如何规划。如果只是上面提到的形式，生产代码跟发布代码混在同一个文件下，容易混淆。如果针对生产环境和发布环境分别对应一个文件夹就会清晰很多，如果两个文件夹的下属目录名称也相同，html文件引用资源的相对路径也就不需要改了。<br>先来看下项目脚手架的形式<br><img src="http://7xpcne.com1.z0.glb.clouddn.com/NYGulp1.png" alt="Alt text"></p>
 <ul>
 <li><code>src</code>为生产源代码，在编写的时候的代码都应该放入这个文件目录下，包括html文件。</li>
 <li><code>dist</code>为上线的代码，里面存放的都是从src文件夹里压缩编译后的优化代码，包括html文件。</li>
@@ -269,7 +269,7 @@
 <li><code>gulpfile.js</code>gulp的入口文件。</li>
 <li><code>package.json</code>gulp所需插件的包管理。</li>
 </ul>
-<p>再来展开看一下<code>src</code>目录。<br><img src="../img/1449414710248.png" alt="Alt text"><br>生产源代码文件src下的目录结构</p>
+<p>再来展开看一下<code>src</code>目录。<br><img src="http://7xpcne.com1.z0.glb.clouddn.com/NYGulp2.png" alt="Alt text"><br>生产源代码文件src下的目录结构</p>
 <ul>
 <li><code>css</code> 同文件下less编译后得到。</li>
 <li><code>images</code> 图片</li>
@@ -278,7 +278,7 @@
 <li><code>lib</code> 第三方库</li>
 <li><code>index.html</code>  主页面</li>
 </ul>
-<p>再来看下<code>dist</code>文件目录<br><img src="../img/1449415103986.png" alt="Alt text"></p>
+<p>再来看下<code>dist</code>文件目录<br><img src="http://7xpcne.com1.z0.glb.clouddn.com/NYGulp3.png" alt="Alt text"></p>
 <ul>
 <li><code>css</code>  src下的css文件压缩后得到</li>
 <li><code>images</code> src下的images压缩得到</li>
@@ -293,19 +293,20 @@
 <hr>
 <h3 id="代码编写阶段">代码编写阶段</h3><p>我对于gulp的使用流程是这样思考的，在编写代码的时候，并不需要时刻对js进行压缩，也不需要对图片进行压缩，唯一要做的是对less文件的编译（因为我平时工作都是less，所以本文css预处理器的基于less的）。当然也可以对js进行代码风格的检查。<br>所以在编写代码的时候我们只需开一个gulp默认的命令行并在内部进行css文件的监听就好。<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gulp</span><br></pre></td></tr></table></figure></p>
 <figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">gulp.task(<span class="string">"serve"</span>, [<span class="string">"less"</span>, <span class="string">"js-watch"</span>, <span class="string">"html"</span>], <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    browserSync.init(&#123;</span><br><span class="line">        server : <span class="string">"./src"</span></span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    gulp.watch(srcPath.LESS, [<span class="string">"less"</span>]);</span><br><span class="line">    gulp.watch(srcPath.JS, [<span class="string">"js-watch"</span>]);</span><br><span class="line">    gulp.watch(srcPath.HTML, [<span class="string">"html"</span>]);</span><br><span class="line">    gulp.watch(srcPath.HTML).on(<span class="string">"change"</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        browserSync.reload;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br><span class="line">gulp.task(<span class="string">"less"</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    gulp.src(srcPath.LESS)</span><br><span class="line">        .pipe(less())</span><br><span class="line">        .pipe(gulp.dest(srcPath.CSS))</span><br><span class="line">        .pipe(browserSync.stream());</span><br><span class="line">&#125;)</span><br><span class="line">gulp.task(<span class="string">"js-watch"</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    gulp.src(srcPath.JS)</span><br><span class="line">    .pipe(browserSync.stream());</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">gulp.task(<span class="string">"html"</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    gulp.src(srcPath.HTML)</span><br><span class="line">    .pipe(browserSync.stream());</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">gulp.task(<span class="string">"default"</span>, [<span class="string">"serve"</span>])</span><br></pre></td></tr></table></figure>
-<p>但是现在在编写代码的同时怎么还能持续的<code>command+R</code>呢，必须要用上时时刷新浏览器的功能啊，所以在代码编写的阶段，还要用到强大的<code>browser-sync</code>。这个插件最神奇的地方莫过于在一个终端操作，其他终端都能实时变化。比如在pc端填写表单，H5端也能实时的自动填写表单。<br><img src="../img/4120131606.gif" alt="Alt text"></p>
+<p>但是现在在编写代码的同时怎么还能持续的<code>command+R</code>呢，必须要用上时时刷新浏览器的功能啊，所以在代码编写的阶段，还要用到强大的<code>browser-sync</code>。这个插件最神奇的地方莫过于在一个终端操作，其他终端都能实时变化。比如在pc端填写表单，H5端也能实时的自动填写表单。<br><img src="http://7xpcne.com1.z0.glb.clouddn.com/NYGulp4120131606.gif" alt=""></p>
 <h3 id="发布阶段_/1">发布阶段 /1</h3><p>代码写完了，在各个端都测试过觉得样式交互都ok了，感觉可以放到测试环境看看了，这个时候就可以对js文件进行压缩混淆，对css文件进行压缩，对图片进行压缩了。<br>这个时候在这个项目的根目录下执行这样的语句。<br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">gulp</span> build</span><br></pre></td></tr></table></figure></p>
 <p>此时根目录下就会多了一个<code>dist</code>文件夹，就是上文提到的那个。这个<code>dist</code>文件夹里的文件都是用于线上/测试环境的，不能在这个文件夹里直接修改代码。</p>
 <h3 id="发布阶段_/2">发布阶段 /2</h3><p>如果需要这个项目中使用<code>sprite雪碧图</code>，可以换一个命令，目前NYGulp只支持到PC的雪碧图自动生成。这个命令可以根据特定的图片文件夹生成一张sprite图片，并且自动将css文件中的<code>background-image</code>的地址替换掉，自动设置背景的<code>position</code>属性。<br>图片需要放在这个<code>src/images/slice</code> 目录下。<strong>是必须的啊</strong><br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">gulp</span> buildspritePc</span><br></pre></td></tr></table></figure></p>
 <h3 id="更多思考">更多思考</h3><p>一个前端静态项目的js、less、图片的编译压缩通过gulp都自动进行着，最后还有一个问题，也是这个脚手架的最后一公里，就是如何自动化地根据项目中html文件中图片的相对路径将图片上传到公司所在的静态资源服务器，然后将相对路径自动替换成cdn地址。如果能做到这样，对于一个静态活动页面，就真正的做到了自动化，只用进行代码的书写，无需再处理图片的压缩上传。<br><a href="https://github.com/amfe/article/issues/8" target="_blank" rel="external">https://github.com/amfe/article/issues/8</a> , 事实上阿里的这个团队对前端自动化流的工具的研究已经很多了，从这篇文章里能找到解决思路，这也是我相继续深入的。<br>对于这样一个脚手架，在实际使用中已经较爽，可以利用 <a href="http://yeoman.io/" target="_blank" rel="external">Yeoman</a> 编写一个脚手架generator，这样在一个目录下执行一个命令就可以直接生成这个文件目录，免去了每次都要复制粘贴整个目录文档。</p>
 <hr>
-<p>参考资料：<br>browser-sync使用 <a href="http://segmentfault.com/a/1190000002919912" target="_blank" rel="external">http://segmentfault.com/a/1190000002919912</a><br>百度前端脚手架文档： <a href="https://github.com/ecomfe/spec/blob/master/directory.md#level1" target="_blank" rel="external">https://github.com/ecomfe/spec/blob/master/directory.md#level1</a><br>手淘前端自动化： <a href="https://github.com/amfe/article/issues/8" target="_blank" rel="external">https://github.com/amfe/article/issues/8</a><br>JGulp脚手架： <a href="http://segmentfault.com/a/1190000002658165" target="_blank" rel="external">http://segmentfault.com/a/1190000002658165</a></p>
+<p>参考资料：<br>browser-sync使用 <a href="http://segmentfault.com/a/1190000002919912" target="_blank" rel="external">http://segmentfault.com/a/1190000002919912</a><br>百度前端脚手架文档： <a href="https://github.com/ecomfe/spec/blob/master/directory.md#level1" target="_blank" rel="external">https://github.com/ecomfe/spec/blob/master/directory.md#level1</a><br>手淘前端自动化： <a href="https://github.com/amfe/article/issues/8" target="_blank" rel="external">https://github.com/amfe/article/issues/8</a><br>JGulp脚手架： <a href="http://segmentfault.com/a/1190000002658165" target="_blank" rel="external">http://segmentfault.com/a/1190000002658165</a><br>完！</p>
+<p>原创文章，转载请注明出处！</p>
 
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2015/12/07/基于Gulp的前端静态页面开发工作流的思考/" data-id="ciiepr9v1000c43jhd6l9mm5v" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://yoursite.com/2015/12/07/基于Gulp的前端静态页面开发工作流的思考/" data-id="ciifddu12000ckgwloj7tdk79" class="article-share-link" data-share="baidu">分享到</a>
       
 
       
@@ -480,7 +481,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2015/11/29/The-Principles-of-object-oriented-javascript阅读笔记/" data-id="ciiepr9u8000043jhk1666v1v" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://yoursite.com/2015/11/29/The-Principles-of-object-oriented-javascript阅读笔记/" data-id="ciifddu0a0000kgwl5nvobeuz" class="article-share-link" data-share="baidu">分享到</a>
       
 
       
@@ -604,7 +605,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2015/11/15/编写可维护的javascript阅读笔记/" data-id="ciiepr9uv000443jh7vogones" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://yoursite.com/2015/11/15/编写可维护的javascript阅读笔记/" data-id="ciifddu0x0004kgwlavighwz7" class="article-share-link" data-share="baidu">分享到</a>
       
 
       
@@ -648,20 +649,22 @@
 <li>白屏时间</li>
 <li>用户可交互时间</li>
 <li>总加载时间</li>
-<li>首屏时间<br>白屏时间跟总加载时间暂时可以在这个API直接获得，有分歧的是用户可交互时间，不知道怎么通过这个API取得，在阅读了上面这篇文章后就悟了。</li>
+<li>首屏时间</li>
 </ul>
-<p><strong>在文档中只存在异步脚本的不适用</strong><br><code>interactingTime = timing.domContentLoadedEventEnd - timing.navigationStart</code></p>
+<p>白屏时间跟总加载时间暂时可以在这个API直接获得，有分歧的是用户可交互时间，不知道怎么通过这个API取得，在阅读了上面这篇文章后就悟了。</p>
+<p><strong>在文档中只存在异步脚本的不适用</strong><br><code>interactingTime(用户可交互时间) = timing.domContentLoadedEventEnd - timing.navigationStart</code></p>
 <p>另外需要提前说明的是：在下文中出现了一张浏览器加载过程中的路径图，上面的的各种英文代表的是document的状态，什么时间点，浏览器完成了什么事，状态就会相应的改变，而下文中经常提到的<code>DOMContentLoaded（DCL）</code>跟<code>window.onload</code>类似，是事件，当document的状态相应变化时，就会触发相应的事件。而图中的<code>performance.timing.domContentLoadedEventStart</code>与<code>performance.timing.domContentLoadedEventEnd</code>之差就代表了<code>DOMContentLoaded</code>事件执行的时间。同理<code>performance.timing.loadEventStart</code>与<code>performance.timing.loadEventEnd</code>之差代表了<code>onload</code>事件执行的时间。</p>
 <h3 id="正文开始">正文开始</h3><p>正如steve在先前的文章中提到的，window.onload不是测量网站速度的最好方法。这个方法是最方便的也是最熟悉的，但是这并不能够获得一些现代页面的一些动态速度信息。我们想象用户能察觉到页面的一种表现：页面开始加载后多久后用户能跟页面进行交互？<br>交互的定义取决于你的页面，对于有些页面我们能获得可见的字就算是交互，而对于另外一些页面，写了狠多的js组件去构建UI（类似Gmail）。对于这两种例子，他们有一个共同点，那就是用户必须能看见的这个页面，换句话来讲就是浏览器需要呈现什么东西到屏幕上。<br>带着这个问题我们来探究一下，当第一批内容呈现在现代浏览器上的时候，到底发生了什么事情。</p>
-<h3 id="DOM_+_CSSOM_=_Render_Tree">DOM + CSSOM = Render Tree</h3><p>渲染管道的准确时间点和行为当然会取决于解析（parsing）布局（layout）还有一些管道的结合，抛开不同点来讲，为了得到一些可见的东西在屏幕上，所有浏览器必须要构建什么东西到渲染书（render tree）<br><img src="./1447231291772.png" alt="Alt text"><br>HTML文档的解析构建成了DOM树，在平行空间里有一个被遗忘了的兄弟—-CSSOM，CSSOM是有一些样式规则和样式资源所构建的，DOM树和CSSOM结合构成渲染树（render tree）。这时标明了浏览器有足够的信息区形成布局然后绘制在屏幕上，到目前为止，一切顺利。<br>然而，上图的例子是最乐观的，CSSOM和DOMtree相安无事的在两个平行空间里被构建。接下来很不幸的我将介绍我们最爱的朋友—javascript。</p>
+<h3 id="DOM_+_CSSOM_=_Render_Tree">DOM + CSSOM = Render Tree</h3><p>渲染管道的准确时间点和行为当然会取决于解析（parsing）布局（layout）还有一些管道的结合，抛开不同点来讲，为了得到一些可见的东西在屏幕上，所有浏览器必须要构建什么东西到渲染书（render tree）<br><img src="http://chuantu.biz/t2/22/1450664869x1822611278.png" alt="Alt text"><br>HTML文档的解析构建成了DOM树，在平行空间里有一个被遗忘了的兄弟—-CSSOM，CSSOM是有一些样式规则和样式资源所构建的，DOM树和CSSOM结合构成渲染树（render tree）。这时标明了浏览器有足够的信息区形成布局然后绘制在屏幕上，到目前为止，一切顺利。<br>然而，上图的例子是最乐观的，CSSOM和DOMtree相安无事的在两个平行空间里被构建。接下来很不幸的我将介绍我们最爱的朋友—javascript。</p>
 <ul>
 <li>同步的javascript可以改些文档在任何节点，因此DOMtree 一旦碰上script标签就会停止构建</li>
 <li><strong>javascript能查询dom对象的可被计算的样式，这意味着js可以阻塞css</strong></li>
 </ul>
-<p><img src="./1447231979999.png" alt="Alt text"></p>
+<p><img src="http://chuantu.biz/t2/22/1450665095x-954498918.png" alt="Alt text"></p>
 <p>不像上面那种DOM和CSSDOM相安无事的个子构建，现在两者潜在地互相牵制：DOMtree无法构建直到javascript被执行，javascript无法执行直到CSSOM是可行的，Yikes。。。</p>
 <p>Depending on how this dependency graph is resolved on your pages, which is governed by how, and how many resources you include in that first “critical path” of the page load, the time to first render will vary accordingly. Can we get some metrics, or insights into this process? Turns out, yes we can!</p>
-<h3 id="Document_Interactive_&amp;_DOMContentLoaded">Document Interactive &amp; DOMContentLoaded</h3><p>HTML5 定义了一系列浏览器从开始工作请求http到呈现页面必须执行的规则well documented sequence of steps.<br><img src="./1447233476579.png" alt="Alt text"><br><strong>浏览器加载关键路径图</strong><br>特别的，一系列步骤的较后方两个步骤能解决我们最开始提到的问题。在页面最开始的最开始的内容的出现之前，到底发生了什么事。</p>
+<h3 id="Document_Interactive_&amp;_DOMContentLoaded">Document Interactive &amp; DOMContentLoaded</h3><p>HTML5 定义了一系列浏览器从开始工作请求http到呈现页面必须执行的规则well documented sequence of steps.<br><img src="http://7xpcne.com1.z0.glb.clouddn.com/3%20(2).png" alt="Alt text"></p>
+<p><strong>浏览器加载关键路径图</strong><br>特别的，一系列步骤的较后方两个步骤能解决我们最开始提到的问题。在页面最开始的最开始的内容的出现之前，到底发生了什么事。</p>
 <ul>
 <li>document被标记为interactive状态，当浏览器结束DOMtree的构建，标明，DOMtree准备好了。</li>
 <li>一旦任何标有defer的script标签被执行了，浏览器就会触发了DOMContentLoaded事件，这个时候没有样式文件阻塞了脚本的执行（我注：当然这个script标签是在interactive状态之后的，如果没有表有defer的script，一旦document的状态变成interactive，就会触发DOMContentLoaded事件。）</li>
@@ -675,13 +678,14 @@
 <h3 id="沿着你的页面的关键路劲">沿着你的页面的关键路劲</h3><p>如果不出意外，监控<code>documenr interactive</code>状态，会给我们很好的一个指示：我们是否因为同步的脚本阻塞了DOMtree的构建，有时候测量这个阻塞的行为没有其他办法了，所以监控<code>interactive</code>状态会是一个折中的好办法。</p>
 <p>而DCL事件（domContentLoaded）也是个关键的指标，许多著名的库，类似<code>jquery</code>，在触发这个事件后开始执行他们的代码，换句话说，这可能是用户能跟页面交互的一个开始时间节点，而在这个事件中的回调，也是在这个事件触发后发给用户。如果你做对了工作，通过逐步的提高，你可以让页面的速度加快，因此用户可以跟页面交互而浏览器继续加载剩余的资源（img等）。IE团队有一个绝佳的例子演示了DCL与<code>window.onload</code>的不同。<br><a href="http://ie.microsoft.com/testdrive/HTML5/DOMContentLoaded/Default.html" target="_blank" rel="external">http://ie.microsoft.com/testdrive/HTML5/DOMContentLoaded/Default.html</a></p>
 <p>完。</p>
+<p>完。</p>
 <p>—<br>原创文章，转载请注明出处！</p>
 
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2015/11/12/破译关键渲染路径（翻译）/" data-id="ciiepr9uy000943jhhpsr1vra" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://yoursite.com/2015/11/12/破译关键渲染路径（翻译）/" data-id="ciifddu100009kgwl9gae3hpg" class="article-share-link" data-share="baidu">分享到</a>
       
 
       
@@ -751,7 +755,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2015/10/12/attribute与property/" data-id="ciiepr9vw001j43jhobj9cp2l" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://yoursite.com/2015/10/12/attribute与property/" data-id="ciifddu1w001jkgwl7q5zw14y" class="article-share-link" data-share="baidu">分享到</a>
       
 
       
@@ -818,7 +822,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2015/10/05/tween/" data-id="ciiepr9vk001243jh8gb8idvq" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://yoursite.com/2015/10/05/tween/" data-id="ciifddu1l0012kgwla1c2vwcx" class="article-share-link" data-share="baidu">分享到</a>
       
 
       
@@ -876,7 +880,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2015/10/05/hammer-js/" data-id="ciiepr9vr001c43jh8bjv6z9d" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://yoursite.com/2015/10/05/hammer-js/" data-id="ciifddu1s001ckgwldr1x3a1n" class="article-share-link" data-share="baidu">分享到</a>
       
 
       
@@ -919,7 +923,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2015/09/28/lazyload-js源码学习/" data-id="ciiepr9vq001b43jh5ck61m13" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://yoursite.com/2015/09/28/lazyload-js源码学习/" data-id="ciifddu1q001bkgwl4b7vesqu" class="article-share-link" data-share="baidu">分享到</a>
       
 
       
@@ -1046,7 +1050,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2015/09/28/github学习/" data-id="ciiepr9vu001f43jhcco32sn7" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://yoursite.com/2015/09/28/github学习/" data-id="ciifddu1u001fkgwlsxcib21n" class="article-share-link" data-share="baidu">分享到</a>
       
 
       
