@@ -6,17 +6,17 @@
   
   <title>原型及原型链 | Lyu Dada</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="原型及原型链的第一次总结。">
+  <meta name="description" content="原型、原型链原型：对象。先理一理constructor、prototype、__proto__、Function、Object等之间的关系。123456function A() &amp;#123;&amp;#125;;A.prototype == A.constructor.prototype //fasle ------1A.prototype == A.__proto__  //false ------2A">
 <meta property="og:type" content="article">
 <meta property="og:title" content="原型及原型链">
 <meta property="og:url" content="http://yoursite.com/2015/05/20/原型及原型链/index.html">
 <meta property="og:site_name" content="Lyu Dada">
-<meta property="og:description" content="原型及原型链的第一次总结。">
-<meta property="og:image" content="../img/1430457189873.png">
-<meta property="og:image" content="../img/1430457225689.png">
+<meta property="og:description" content="原型、原型链原型：对象。先理一理constructor、prototype、__proto__、Function、Object等之间的关系。123456function A() &amp;#123;&amp;#125;;A.prototype == A.constructor.prototype //fasle ------1A.prototype == A.__proto__  //false ------2A">
+<meta property="og:image" content="http://7xpcne.com1.z0.glb.clouddn.com/prototype1430457225689.png">
+<meta property="og:image" content="http://7xpcne.com1.z0.glb.clouddn.com/prototype1430457189873.png">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="原型及原型链">
-<meta name="twitter:description" content="原型及原型链的第一次总结。">
+<meta name="twitter:description" content="原型、原型链原型：对象。先理一理constructor、prototype、__proto__、Function、Object等之间的关系。123456function A() &amp;#123;&amp;#125;;A.prototype == A.constructor.prototype //fasle ------1A.prototype == A.__proto__  //false ------2A">
   
     <link rel="alternative" href="/atom.xml" title="Lyu Dada" type="application/atom+xml">
   
@@ -81,7 +81,7 @@
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/javascript/">javascript</a>
+    <a class="article-category-link" href="/categories/js/">js</a>
   </div>
 
   </div>
@@ -102,7 +102,7 @@
       
         <h3 id="原型、原型链">原型、原型链</h3><p>原型：对象。<br>先理一理<code>constructor、prototype、__proto__、Function、Object</code>等之间的关系。<br><figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function <span class="literal">A</span>() &#123;&#125;<span class="comment">;</span></span><br><span class="line"><span class="literal">A</span>.prototype == <span class="literal">A</span>.constructor.prototype //fasle ------<span class="number">1</span></span><br><span class="line"><span class="literal">A</span>.prototype == <span class="literal">A</span>.__proto__  </span><br><span class="line">//<span class="literal">false</span> ------<span class="number">2</span></span><br><span class="line"><span class="literal">A</span>.__proto__ == <span class="literal">A</span>.constructor.prototype </span><br><span class="line">//<span class="literal">true</span> -------<span class="number">3</span></span><br></pre></td></tr></table></figure></p>
 <p>解释：此时A是一个构造函数，也是一个函数，而函数是<code>Function</code>的实例。<br>所以A.constructor // Function ,回到第一条，构造函数的原型不等于Function的原型。<br>再来通俗解释<code>__proto__</code>：属性<code>__proto__</code>引用了创建这个对象的函数（构造函数）的prototype。<br>根据这个定义，第二条<code>A.__proto__</code>//Function.prototype<br><strong><strong>proto</strong>是某个实体对象的属性（所以A.prototype也有这个属性，且指向Object.prototype，因为A.prototype初始化是个空对象（Object的实例）），prototype则是构造器函数的属性</strong>。</p>
-<p>根据以上的理解，再配合一幅图来理解。<br><img src="../img/1430457189873.png" alt="Alt text"><br><img src="../img/1430457225689.png" alt="Alt text"></p>
+<p>根据以上的理解，再配合一幅图来理解。<br><img src="http://7xpcne.com1.z0.glb.clouddn.com/prototype1430457225689.png" alt="Alt text"><br><img src="http://7xpcne.com1.z0.glb.clouddn.com/prototype1430457189873.png" alt="Alt text"></p>
 <p>图里的<code>__proto__</code>链就是传说中的原型链！，而原型链的作用跟作用域链相似，都是为了查找标识符（在我看来）。</p>
 <p>通过原型链实现继承时，不能使用对象字面量的方法创建原型方法<br><code>即</code>这样做原型先继承了实例，接着又重写了原型（对象字面量方法），导致继承失败。</p>
 <figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">A</span><span class="params">()</span> </span>&#123;&#125;;</span><br><span class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> A();</span><br><span class="line">a.__proto__ == A.prototype <span class="comment">//true</span></span><br></pre></td></tr></table></figure>
@@ -115,13 +115,13 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://yoursite.com/2015/05/20/原型及原型链/" data-id="ciig390o3000ffbjh6odratkw" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://yoursite.com/2015/05/20/原型及原型链/" data-id="ciigu64ts000ishwllan8n47c" class="article-share-link" data-share="baidu">分享到</a>
       
 
       
 
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/原型链/">原型链</a></li></ul>
 
     </footer>
   </div>
@@ -157,7 +157,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">分類</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/html-css/">html&css</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/javascript/">javascript</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/动画库/">动画库</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/css/">css</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/js/">js</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/书籍阅读/">书籍阅读</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端工程/">前端工程</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端性能/">前端性能</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/动画库/">动画库</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/源码/">源码</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/翻译/">翻译</a><span class="category-list-count">2</span></li></ul>
     </div>
   </div>
 
@@ -166,7 +166,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">標簽</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Regexp/">Regexp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html-css/">html&css</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jsLib/">jsLib</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/web移动端/">web移动端</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/书籍阅读/">书籍阅读</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端性能/">前端性能</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端性能监控/">前端性能监控</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端调试/">前端调试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/杂/">杂</a><span class="tag-list-count">2</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/BFC/">BFC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Regexp/">Regexp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ajax/">ajax</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gulp/">gulp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hammer/">hammer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js质量/">js质量</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lazyload/">lazyload</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/line-highe/">line-highe</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/property-attribute/">property&attribute</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tween/">tween</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/viewport/">viewport</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zepto-fullpage/">zepto.fullpage</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/作用域/">作用域</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/函数调用/">函数调用</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端性能/">前端性能</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端调试/">前端调试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/原型链/">原型链</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/点击穿透/">点击穿透</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面向对象的js/">面向对象的js</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -175,7 +175,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">標簽雲</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Regexp/" style="font-size: 10px;">Regexp</a><a href="/tags/html-css/" style="font-size: 10px;">html&css</a><a href="/tags/javascript/" style="font-size: 20px;">javascript</a><a href="/tags/js/" style="font-size: 10px;">js</a><a href="/tags/jsLib/" style="font-size: 10px;">jsLib</a><a href="/tags/web移动端/" style="font-size: 10px;">web移动端</a><a href="/tags/书籍阅读/" style="font-size: 15px;">书籍阅读</a><a href="/tags/前端性能/" style="font-size: 10px;">前端性能</a><a href="/tags/前端性能监控/" style="font-size: 10px;">前端性能监控</a><a href="/tags/前端调试/" style="font-size: 10px;">前端调试</a><a href="/tags/杂/" style="font-size: 15px;">杂</a>
+      <a href="/tags/BFC/" style="font-size: 10px;">BFC</a><a href="/tags/Regexp/" style="font-size: 10px;">Regexp</a><a href="/tags/ajax/" style="font-size: 10px;">ajax</a><a href="/tags/github/" style="font-size: 10px;">github</a><a href="/tags/gulp/" style="font-size: 10px;">gulp</a><a href="/tags/hammer/" style="font-size: 10px;">hammer</a><a href="/tags/http/" style="font-size: 10px;">http</a><a href="/tags/js质量/" style="font-size: 10px;">js质量</a><a href="/tags/lazyload/" style="font-size: 10px;">lazyload</a><a href="/tags/line-highe/" style="font-size: 10px;">line-highe</a><a href="/tags/property-attribute/" style="font-size: 10px;">property&attribute</a><a href="/tags/tween/" style="font-size: 10px;">tween</a><a href="/tags/viewport/" style="font-size: 15px;">viewport</a><a href="/tags/zepto-fullpage/" style="font-size: 10px;">zepto.fullpage</a><a href="/tags/作用域/" style="font-size: 10px;">作用域</a><a href="/tags/函数调用/" style="font-size: 10px;">函数调用</a><a href="/tags/前端性能/" style="font-size: 20px;">前端性能</a><a href="/tags/前端调试/" style="font-size: 10px;">前端调试</a><a href="/tags/原型链/" style="font-size: 10px;">原型链</a><a href="/tags/点击穿透/" style="font-size: 10px;">点击穿透</a><a href="/tags/面向对象的js/" style="font-size: 10px;">面向对象的js</a>
     </div>
   </div>
 
@@ -184,7 +184,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">歸檔</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">2</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">2</span></li></ul>
     </div>
   </div>
 
@@ -196,23 +196,23 @@
       <ul>
         
           <li>
-            <a href="/2015/12/21/前端性能的几个基础指标/">前端性能的几个基础指标</a>
+            <a href="/2015/12/22/tween/">tweenMax基础api的逐条随意翻译</a>
           </li>
         
           <li>
-            <a href="/2015/12/20/移动端调试/">移动端调试</a>
+            <a href="/2015/12/22/click300延迟与点击穿透/">click300延迟与点击穿透</a>
           </li>
         
           <li>
-            <a href="/2015/12/07/基于Gulp的前端静态页面开发工作流的思考/">基于Gulp的前端静态页面开发工作流的思考</a>
+            <a href="/2015/12/22/高性能动画/">高性能动画</a>
           </li>
         
           <li>
-            <a href="/2015/11/29/The-Principles-of-object-oriented-javascript阅读笔记/">The Principles of object-oriented javascript阅读笔记</a>
+            <a href="/2015/12/22/viewport翻译总结/">viewport翻译总结</a>
           </li>
         
           <li>
-            <a href="/2015/11/15/编写可维护的javascript阅读笔记/">编写可维护的javascript阅读笔记</a>
+            <a href="/2015/12/22/line-height与font-size的关系/">line-height与font-size的关系</a>
           </li>
         
       </ul>

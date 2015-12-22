@@ -1,0 +1,301 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>viewport翻译总结 | Lyu Dada</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="viewport详解（翻译+总结）来源：http://www.quirksmode.org/mobile/viewports.html首先需要了解的是css像素并不等于设备像素，因为存在一些情况比如300px的div却占了1000x1000的屏幕，这两者的像素并不相等。下文会经常出现css像素设备像素等名词。
+pc端1、screen.width&amp;amp;screen.height这是显示器的设备像">
+<meta property="og:type" content="article">
+<meta property="og:title" content="viewport翻译总结">
+<meta property="og:url" content="http://yoursite.com/2015/12/22/viewport翻译总结/index.html">
+<meta property="og:site_name" content="Lyu Dada">
+<meta property="og:description" content="viewport详解（翻译+总结）来源：http://www.quirksmode.org/mobile/viewports.html首先需要了解的是css像素并不等于设备像素，因为存在一些情况比如300px的div却占了1000x1000的屏幕，这两者的像素并不相等。下文会经常出现css像素设备像素等名词。
+pc端1、screen.width&amp;amp;screen.height这是显示器的设备像">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="viewport翻译总结">
+<meta name="twitter:description" content="viewport详解（翻译+总结）来源：http://www.quirksmode.org/mobile/viewports.html首先需要了解的是css像素并不等于设备像素，因为存在一些情况比如300px的div却占了1000x1000的屏幕，这两者的像素并不相等。下文会经常出现css像素设备像素等名词。
+pc端1、screen.width&amp;amp;screen.height这是显示器的设备像">
+  
+    <link rel="alternative" href="/atom.xml" title="Lyu Dada" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+  
+</head>
+<body>
+<div id="container">
+  <div id="wrap">
+    <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Lyu Dada</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">to love and get love</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="https://github.com/fromIRIS">MYGithub</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="http://www.baidu.com/baidu" method="get" accept-charset="utf-8" class="search-form">
+          <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="Search">
+          <input type="submit" value="" class="search-form-submit">
+          <input name=tn type=hidden value="bds">
+          <input name=cl type=hidden value="3">
+          <input name=ct type=hidden value="2097152">
+          <input type="hidden" name="si" value="yoursite.com">
+        </form>
+      </div>
+    </div>
+  </div>
+</header>
+    <div class="outer">
+      <section id="main"><article id="post-viewport翻译总结" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/12/22/viewport翻译总结/" class="article-date">
+  <time datetime="2015-12-22T03:20:57.000Z" itemprop="datePublished">2015-12-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/翻译/">翻译</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      viewport翻译总结
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="viewport详解（翻译+总结）">viewport详解（翻译+总结）</h3><p>来源：<a href="http://www.quirksmode.org/mobile/viewports.html" target="_blank" rel="external">http://www.quirksmode.org/mobile/viewports.html</a><br>首先需要了解的是css像素并不等于设备像素，因为存在一些情况比如300px的div却占了1000x1000的屏幕，这两者的像素并不相等。下文会经常出现css像素设备像素等名词。</p>
+<h2 id="pc端">pc端</h2><p><strong>1、</strong><code>screen.width&amp;screen.height</code><br>这是显示器的设备像素大小，永远不变，并不是浏览器的，包含了整个屏幕。但并没有什么卵用。<br><strong>2、</strong><code>window.innerWidth</code><br>浏览器的可视区域宽度，如果用户通过浏览器的zoom缩放，innerWidth也会随时变化。是通过css的像素进行测量的，而不是通过设备屏幕像素。<br>比如，300px宽的elem在zoom放大后占满了整个屏幕，但此时的innerWidth是300px；<br>但这个情况并不适合opera浏览器，且在移动端会有很严重的兼容性情况<br><strong>3、</strong><code>window.pageYOffset &amp; window.pageXOffset</code><br>获取浏览器滚动了多少像素，这个值也是根据css像素取得的，缩放时，浏览器会试图将当前视图固定，所以缩放时，pageYOffset并不会变化（或变化很小）。<br><strong>4、</strong><code>viewport</code><br>默认情况下块级元素的宽度沾满了父级元素的100%，一直到html，而html的宽度占了浏览器宽度的100%<br>在理论上来讲，<code>&lt;html&gt;</code>的宽度被viewport的宽度限制。<code>&lt;html&gt;</code>的宽度占据了100%的viewport的宽度。而正巧，在pc端viewport的宽度就等于window的宽度。所以在pc端，viewport的宽度就等于<code>&lt;html&gt;</code>的宽度，也就等于浏览器的宽度.<br>同理，这里的浏览器宽度（window.innerWidth）是根据css像素度量的，所以也就出现了一个问题。<br>如果给一个div设置了100%的宽，这个具体的值是根据window的css像素算的，是body直接子辈。在zoom=100%的时候，div是整个浏览器的宽。但是如果zoom放大，此时window的宽度是根据css计算的，所以window宽度变小了，从而导致viewport的宽度值也变小了，从而导致div的宽度值也变小了，所以此时将页面朝右滚动，div会出现断层。<br><strong>html的宽度是由viewport的宽度限制的，可以把viewport看成一个节点，里面包裹着html</strong><br><strong>5、</strong><code>viewport的度量</code><br><code>document.documentElement.clientWidth</code><br>这个属性只是显示了viewport的值，无视html的设置的宽度值。<br><strong>如此来说，<code>document.documentElement.clientWidth</code>跟<code>window.innerWidth</code>岂不是都能取得viewport的值？</strong><br>clientWidth不包含浏览器滚动条的宽度，而innerWidth却包含了滚动条的宽度。而且早期IE并不支持innerWidth。但这两者都涉及视口的宽度，跟文档宽度没多大关系。<br><strong>6、</strong><code>document.documentElement.offsetWidth</code>这个属性取得是html的宽度。在正常情况的<code>offsetWidth</code>跟<code>clientWidth</code>的值是一样的，但前者是html的宽度，后者是viewport的 宽度，前面还讲到了viewport是包裹html的关系，viewport是父元素。所以当给html设置宽度，比如400px，那这个时候两个值就将不同。<br>但<code>offsetHeight</code>跟<code>clientHeight</code>的值就不一样了，前者将是整个html内容的高度（有滚动条的情况包含看不见的内容的高度）<br><strong>7、</strong><code>事件event返回的坐标参数</code><br><code>pageX pageY</code>返回了相对于html的鼠标坐标，基于css像素。<br><code>clientX clientY</code>返回了相对于viewport的鼠标坐标，基于css像素。<br><code>screenX screenY</code>返回了相对于screen屏幕（不是浏览器）的鼠标坐标，基于设备像素。<br>我们一般90%的情况都会用到pageX， pageY。<br><strong>8、</strong><code>媒体查询</code><br>媒体查询一般根据width进行判断。但官方有两种宽度模式可以选择。<br><code>width &amp; device-width</code><br>这里的width指的的viewport宽度，也就是clientWidth，当然是基于css像素的，而device指的是设备宽度屏幕screen不是window，基于设备像素。<br>在pc端99.999%使用width。</p>
+<h2 id="移动端">移动端</h2><p>最重要的问题集中在css，尤其是度量viewport的尺寸。<br>html元素的宽取自layout viewport，那么不同机型浏览器的layout是不同的，ios980px，android800px。<br>最基础的是两个视角：<br><code>visual viewport &amp; layout viewport</code><br>都是基于css度量。<br>George Cummins在Stack Overflow上对基本概念给出了最佳解释：</p>
+<p>把layout viewport想像成为一张不会变更大小或者形状的大图。现在想像你有一个小一些的框架，你通过它来看这张大图。（译者：可以理解为「管中窥豹」）这个小框架的周围被不透明的材料所环绕，这掩盖了你所有的视线，只留这张大图的一部分给你。你通过这个框架所能看到的大图的部分就是visual viewport。当你保持框架（缩小）来看整个图片的时候，你可以不用管大图，或者你可以靠近一些（放大）只看局部。你也可以改变框架的方向，但是大图（layout viewport）的大小和形状永远不会变。</p>
+<p>也看一下Chris给出的解释。</p>
+<p>visual viewport是页面当前显示在屏幕上的部分。用户可以通过滚动来改变他所看到的页面的部分，或者通过缩放来改变visual viewport的大小。<br>visual的值是不能大于layout的。<br>当缩放的时候，<code>visual viewport</code>会变化，因为视觉上能容纳的css像素在变化，但<code>layout viewport</code>保持不会。</p>
+<p><strong>9、移动端viewport的度量</strong><br>在移动端，用<code>clientWidth</code>度量<code>layout viewport</code>的宽度，用<code>innerWidth</code>度量<code>visual viewport</code>的宽度。在不设置viewport标签的时候，ios的<code>layout viewport</code>都为980px，而且浏览器都会默认将<code>visual viewport</code>放大到跟<code>layout viewport</code>一样大，所以默认情况下手机屏幕能看到整个网页的内容（缩小版）。<br>很明显的当zoomin或zoomout时候，<code>visual viewport</code>会时刻改变，因为容纳的css像素是不同的。<br><strong>10、screen.width</strong><br>在pc端这个属性基本没用，但在移动端，这个值代表了手机的屏幕的设备像素大小。这个尺寸大小在chrome的模拟器里对各个机型都有标识。而且这个值跟ideal viewport是一样的。<br><strong>11、window.pageXOffset &amp; window.pageYOffset</strong><br>visual 相对于 layout的位置，这个解释起来其实跟pc端的是一样的，因为这个滚动的值是根据css像素取度量的，不管怎么缩放，css像素值是不会变的。<br><strong>12、document.documentElement.offsetHeight</strong>整个html元素的高度。同pc端的用法<br><strong>13、meta viewport</strong><br><figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta <span class="variable">name=</span><span class="string">"viewport"</span> <span class="variable">content=</span><span class="string">"width=320"</span>&gt;</span><br></pre></td></tr></table></figure></p>
+<p>这里的width的作用就是重置layout viewport的值。<br><code>initial-scale</code>设置初始页面的缩放和layout viewport的宽度。<br><code>device-width</code>这个值可以设置layout viewport，取得是idea viewport的值。<br> <code>Android WebKit’s</code>的最小的layout viewport是320px，所以当设置viewport的width为320px以下时，浏览器将会自动设置width为ideal的宽度。</p>
+<p><strong>14、ideal viewport</strong><br>有两点是ideal最重要的：<br>1、layout viewport 可以被设置成idael 的值，<code>width=divice-width &amp; initial-scale=1</code><br>这两者有兼容性问题，所以要设置成ideal需要将两者都写上。<br>2、最大最小缩放值都是根据ideal viewport的值确定的。 所以 maximum-scale=3 意味着最大的缩放值是 300% of the ideal viewport.。<br><strong>15、缩放ZOOM</strong><br>我们不能直接在js中取得缩放的值。<br>下面有两条计算公式<br><figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">visual viewport <span class="variable">width</span> = ideal viewport <span class="variable">width</span> / zoom factor</span><br><span class="line">zoom factor = ideal viewport <span class="variable">width</span> / visual viewport <span class="variable">width</span></span><br></pre></td></tr></table></figure></p>
+<p>layout viewport不参与这个计算<br><strong>16、initial-scale</strong><br>设置这个命令实际上做了两件事：<br>1、设置了初始缩放值zoom，根据上面的公式，再计算出visual viewport的宽度。<br>2、根据算出来的visual值就等于layout viewport的值。<br>所以当在viewport里只设置了initial-scale，计算出来的visual跟layout是一样的。</p>
+<p><strong>注意</strong>initial-scale的设置在安卓原生浏览器上是没用的，在安卓原生上只能=1是有效的，并且不能设置width<br>,但这个情况也只存在部分安卓原生浏览器上，很奇怪。</p>
+<p>翻译文章！</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://yoursite.com/2015/12/22/viewport翻译总结/" data-id="ciigu64ua0014shwluachzqda" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/viewport/">viewport</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/12/22/高性能动画/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">
+        
+          高性能动画
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/12/22/line-height与font-size的关系/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">line-height与font-size的关系</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+      
+      <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分類</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/css/">css</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/js/">js</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/书籍阅读/">书籍阅读</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端工程/">前端工程</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端性能/">前端性能</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/动画库/">动画库</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/源码/">源码</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/翻译/">翻译</a><span class="category-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">標簽</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/BFC/">BFC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Regexp/">Regexp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ajax/">ajax</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gulp/">gulp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hammer/">hammer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js质量/">js质量</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lazyload/">lazyload</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/line-highe/">line-highe</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/property-attribute/">property&attribute</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tween/">tween</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/viewport/">viewport</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zepto-fullpage/">zepto.fullpage</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/作用域/">作用域</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/函数调用/">函数调用</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端性能/">前端性能</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端调试/">前端调试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/原型链/">原型链</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/点击穿透/">点击穿透</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面向对象的js/">面向对象的js</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">標簽雲</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/BFC/" style="font-size: 10px;">BFC</a><a href="/tags/Regexp/" style="font-size: 10px;">Regexp</a><a href="/tags/ajax/" style="font-size: 10px;">ajax</a><a href="/tags/github/" style="font-size: 10px;">github</a><a href="/tags/gulp/" style="font-size: 10px;">gulp</a><a href="/tags/hammer/" style="font-size: 10px;">hammer</a><a href="/tags/http/" style="font-size: 10px;">http</a><a href="/tags/js质量/" style="font-size: 10px;">js质量</a><a href="/tags/lazyload/" style="font-size: 10px;">lazyload</a><a href="/tags/line-highe/" style="font-size: 10px;">line-highe</a><a href="/tags/property-attribute/" style="font-size: 10px;">property&attribute</a><a href="/tags/tween/" style="font-size: 10px;">tween</a><a href="/tags/viewport/" style="font-size: 15px;">viewport</a><a href="/tags/zepto-fullpage/" style="font-size: 10px;">zepto.fullpage</a><a href="/tags/作用域/" style="font-size: 10px;">作用域</a><a href="/tags/函数调用/" style="font-size: 10px;">函数调用</a><a href="/tags/前端性能/" style="font-size: 20px;">前端性能</a><a href="/tags/前端调试/" style="font-size: 10px;">前端调试</a><a href="/tags/原型链/" style="font-size: 10px;">原型链</a><a href="/tags/点击穿透/" style="font-size: 10px;">点击穿透</a><a href="/tags/面向对象的js/" style="font-size: 10px;">面向对象的js</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">歸檔</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">近期文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2015/12/22/tween/">tweenMax基础api的逐条随意翻译</a>
+          </li>
+        
+          <li>
+            <a href="/2015/12/22/click300延迟与点击穿透/">click300延迟与点击穿透</a>
+          </li>
+        
+          <li>
+            <a href="/2015/12/22/高性能动画/">高性能动画</a>
+          </li>
+        
+          <li>
+            <a href="/2015/12/22/viewport翻译总结/">viewport翻译总结</a>
+          </li>
+        
+          <li>
+            <a href="/2015/12/22/line-height与font-size的关系/">line-height与font-size的关系</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">友情鏈接</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://xiguabaobao.com" target="_blank">主题作者</a>
+          </li>
+        
+          <li>
+            <a href="http://reqianduan.com" target="_blank">热前端</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015 Lyu Dada<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      .
+      Theme by <a href="https://github.com/xiangming/landscape-plus" target="_blank">Landscape-plus</a>
+    </div>
+  </div>
+</footer>
+  </div>
+  <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="https://github.com/fromIRIS" class="mobile-nav-link">MYGithub</a>
+  
+</nav>
+  <!-- totop start -->
+<div id="totop">
+<a title="返回頂部"><img src="/img/scrollup.png"/></a>
+</div>
+
+<!-- totop end -->
+
+
+<!-- 百度分享 start -->
+
+<div id="article-share-box" class="article-share-box">
+  <div id="bdshare" class="bdsharebuttonbox article-share-links">
+    <a class="article-share-weibo" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a class="article-share-weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a class="article-share-qq" data-cmd="sqq" title="分享到QQ"></a>
+    <a class="article-share-renren" data-cmd="renren" title="分享到人人网"></a>
+    <a class="article-share-more" data-cmd="more" title="更多"></a>
+  </div>
+</div>
+<script>window._bd_share_config={"common":{},"share":{"bdCustomStyle":"/css/bdshare.css"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+<!-- 百度分享 end -->
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+</div>
+</body>
+</html>

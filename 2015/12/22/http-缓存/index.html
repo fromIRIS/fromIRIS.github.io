@@ -1,0 +1,348 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>http+缓存 | Lyu Dada</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="HTTP+缓存引用：http://www.bokeyy.com/post/200-ok-from-cache-vs-304-not-modified.htmlhttp://www.cnblogs.com/zhwl/archive/2012/02/28/2371691.htmlhttp://div.io/topic/854下方hefangshi的评论
+
+http缓存概念
+
+1、当web请求抵达缓存时">
+<meta property="og:type" content="article">
+<meta property="og:title" content="http+缓存">
+<meta property="og:url" content="http://yoursite.com/2015/12/22/http-缓存/index.html">
+<meta property="og:site_name" content="Lyu Dada">
+<meta property="og:description" content="HTTP+缓存引用：http://www.bokeyy.com/post/200-ok-from-cache-vs-304-not-modified.htmlhttp://www.cnblogs.com/zhwl/archive/2012/02/28/2371691.htmlhttp://div.io/topic/854下方hefangshi的评论
+
+http缓存概念
+
+1、当web请求抵达缓存时">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="http+缓存">
+<meta name="twitter:description" content="HTTP+缓存引用：http://www.bokeyy.com/post/200-ok-from-cache-vs-304-not-modified.htmlhttp://www.cnblogs.com/zhwl/archive/2012/02/28/2371691.htmlhttp://div.io/topic/854下方hefangshi的评论
+
+http缓存概念
+
+1、当web请求抵达缓存时">
+  
+    <link rel="alternative" href="/atom.xml" title="Lyu Dada" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+  
+</head>
+<body>
+<div id="container">
+  <div id="wrap">
+    <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Lyu Dada</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">to love and get love</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="https://github.com/fromIRIS">MYGithub</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="http://www.baidu.com/baidu" method="get" accept-charset="utf-8" class="search-form">
+          <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="Search">
+          <input type="submit" value="" class="search-form-submit">
+          <input name=tn type=hidden value="bds">
+          <input name=cl type=hidden value="3">
+          <input name=ct type=hidden value="2097152">
+          <input type="hidden" name="si" value="yoursite.com">
+        </form>
+      </div>
+    </div>
+  </div>
+</header>
+    <div class="outer">
+      <section id="main"><article id="post-http-缓存" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/12/22/http-缓存/" class="article-date">
+  <time datetime="2015-12-22T03:12:07.000Z" itemprop="datePublished">2015-12-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/前端/">前端</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      http+缓存
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="HTTP+缓存">HTTP+缓存</h2><p>引用：<a href="http://www.bokeyy.com/post/200-ok-from-cache-vs-304-not-modified.html" target="_blank" rel="external">http://www.bokeyy.com/post/200-ok-from-cache-vs-304-not-modified.html</a><br><a href="http://www.cnblogs.com/zhwl/archive/2012/02/28/2371691.html" target="_blank" rel="external">http://www.cnblogs.com/zhwl/archive/2012/02/28/2371691.html</a><br><a href="http://div.io/topic/854下方hefangshi的评论" target="_blank" rel="external">http://div.io/topic/854下方hefangshi的评论</a></p>
+<blockquote>
+<p>http缓存概念</p>
+</blockquote>
+<p>1、当web请求抵达缓存时，如果本地有“已缓存的”副本，就可以直接从本地存储设备，而不是从原始远程服务器上拉去数据。<br>2、与缓存相关的header<br><strong>request</strong></p>
+<ul>
+<li>Cache-Control: max-age=0 以秒为单位</li>
+<li>If-Modifiled-Since: xxxxxx 缓存文件的最后修改时间</li>
+<li>If-None-Match: “676767xxxx” 缓存文件的Etag值</li>
+<li>Cache-Control: no-cache 不使用缓存</li>
+<li>Pragma: no-cache 不使用缓存</li>
+</ul>
+<p><strong>response</strong></p>
+<ul>
+<li>Cache-Control: public  响应被缓存，并且在多用户间共享</li>
+<li>Cache-Control: private  响应只能作为私有缓存，不能在用户之间共享</li>
+<li>Cache-Control:no-cache  提醒浏览器要从服务器提取文档进行验证</li>
+<li>Cache-Control:no-store  绝对禁止缓存（用于机密，敏感文件</li>
+<li>Cache-Control: max-age=60  60秒之后缓存过期（相对时间）</li>
+<li>Date: Mon, 19 Nov 2012 08:39:00 GMT  当前response发送的时间</li>
+<li>Expires: Mon, 19 Nov 2012 08:40:01 GMT 缓存过期的时间（绝对时间）</li>
+<li>Last-Modified: Mon, 19 Nov 2012 08:38:01 GMT  服务器端文件的最后修改时间</li>
+<li>ETag: “20b1add7ec1cd1:0”  服务器端文件的Etag值</li>
+</ul>
+<p>3、直接使用缓存，不去服务器验证<br><strong>按F5刷新浏览器跟在地址栏输入网址回车，这两个行为是不一样的。</strong></p>
+<ul>
+<li>按F5浏览器会去web服务器验证缓存。</li>
+<li>而在地址栏输入网址，浏览器会直接使用有效的缓存，不会发httprequest去服务器。—缓存命中</li>
+</ul>
+<blockquote>
+<p>Status Code:200 OK (from cache) vs Status Code:304 Not Modified</p>
+</blockquote>
+<p>如果浏览器进行资源请求，使用了缓存就无外乎以上两种response情况。<br>区别：</p>
+<ul>
+<li>200OK： 是浏览器没有跟服务器确认，直接使用了浏览器缓存。</li>
+<li>304 NOT Modified 是浏览器跟服务器多确认了一次缓存有效性，再用的缓存。</li>
+</ul>
+<p><strong>1、两者触发的时机区别</strong><br>总结：200 OK (from cache) 是直接点击链接访问，输入网址按回车访问也能触发，后退也触发；而 304 Not Modified 是刷新页面时触发。</p>
+<p><strong>2、具体原因：</strong><br>浏览器的缓存机制分为两块，也是规范中的4.2Freshness和4.3的Validation<br>这两块跟服务器的返回response头信息中的几个参数有关。<br>Freshness</p>
+<ul>
+<li>Expires 缓存过期具体时间  —http1</li>
+<li>cache Contrpl：max-age=60（注秒）缓存有效时间 —http1.1</li>
+</ul>
+<p>解释：第一次浏览器请求资源后得到respone中的这两个参数信息，当再一次请求时浏览器会拿本地时间跟expires比较（http1），若判断此时的缓存是新鲜的，则直接调用缓存中的数据。状态码显示200ok<br>Validation</p>
+<ul>
+<li>Last-Modifiled 数据最后修改的时间</li>
+<li>ETag 类似于md5</li>
+</ul>
+<p>解释：当第一步的Freshness验证不通过后，浏览器就会请求服务器，并将这两个参数传过去，如果服务器验证服务器端的数据没有过时，则返回304，如果数据过时了，则返回200和新的内容。</p>
+<p>比如<a href="http://119.showjoy.com/activity/119meeting" target="_blank" rel="external">http://119.showjoy.com/activity/119meeting</a> command+r刷新跟地址栏回车进入页面相同的资源，状态码不同，load的时间也不同。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://yoursite.com/2015/12/22/http-缓存/" data-id="ciigu64up001oshwl07hk85vg" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/http/">http</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/12/22/line-height与font-size的关系/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">
+        
+          line-height与font-size的关系
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/12/22/ajax基础以及jsonp跨域原理/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">ajax基础以及jsonp跨域原理</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+      
+      <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分類</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/css/">css</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/js/">js</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/书籍阅读/">书籍阅读</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端工程/">前端工程</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端性能/">前端性能</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/动画库/">动画库</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/源码/">源码</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/翻译/">翻译</a><span class="category-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">標簽</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/BFC/">BFC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Regexp/">Regexp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ajax/">ajax</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gulp/">gulp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hammer/">hammer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js质量/">js质量</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lazyload/">lazyload</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/line-highe/">line-highe</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/property-attribute/">property&attribute</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tween/">tween</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/viewport/">viewport</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zepto-fullpage/">zepto.fullpage</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/作用域/">作用域</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/函数调用/">函数调用</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端性能/">前端性能</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端调试/">前端调试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/原型链/">原型链</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/点击穿透/">点击穿透</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面向对象的js/">面向对象的js</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">標簽雲</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/BFC/" style="font-size: 10px;">BFC</a><a href="/tags/Regexp/" style="font-size: 10px;">Regexp</a><a href="/tags/ajax/" style="font-size: 10px;">ajax</a><a href="/tags/github/" style="font-size: 10px;">github</a><a href="/tags/gulp/" style="font-size: 10px;">gulp</a><a href="/tags/hammer/" style="font-size: 10px;">hammer</a><a href="/tags/http/" style="font-size: 10px;">http</a><a href="/tags/js质量/" style="font-size: 10px;">js质量</a><a href="/tags/lazyload/" style="font-size: 10px;">lazyload</a><a href="/tags/line-highe/" style="font-size: 10px;">line-highe</a><a href="/tags/property-attribute/" style="font-size: 10px;">property&attribute</a><a href="/tags/tween/" style="font-size: 10px;">tween</a><a href="/tags/viewport/" style="font-size: 15px;">viewport</a><a href="/tags/zepto-fullpage/" style="font-size: 10px;">zepto.fullpage</a><a href="/tags/作用域/" style="font-size: 10px;">作用域</a><a href="/tags/函数调用/" style="font-size: 10px;">函数调用</a><a href="/tags/前端性能/" style="font-size: 20px;">前端性能</a><a href="/tags/前端调试/" style="font-size: 10px;">前端调试</a><a href="/tags/原型链/" style="font-size: 10px;">原型链</a><a href="/tags/点击穿透/" style="font-size: 10px;">点击穿透</a><a href="/tags/面向对象的js/" style="font-size: 10px;">面向对象的js</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">歸檔</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">近期文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2015/12/22/tween/">tweenMax基础api的逐条随意翻译</a>
+          </li>
+        
+          <li>
+            <a href="/2015/12/22/click300延迟与点击穿透/">click300延迟与点击穿透</a>
+          </li>
+        
+          <li>
+            <a href="/2015/12/22/高性能动画/">高性能动画</a>
+          </li>
+        
+          <li>
+            <a href="/2015/12/22/viewport翻译总结/">viewport翻译总结</a>
+          </li>
+        
+          <li>
+            <a href="/2015/12/22/line-height与font-size的关系/">line-height与font-size的关系</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">友情鏈接</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://xiguabaobao.com" target="_blank">主题作者</a>
+          </li>
+        
+          <li>
+            <a href="http://reqianduan.com" target="_blank">热前端</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015 Lyu Dada<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      .
+      Theme by <a href="https://github.com/xiangming/landscape-plus" target="_blank">Landscape-plus</a>
+    </div>
+  </div>
+</footer>
+  </div>
+  <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="https://github.com/fromIRIS" class="mobile-nav-link">MYGithub</a>
+  
+</nav>
+  <!-- totop start -->
+<div id="totop">
+<a title="返回頂部"><img src="/img/scrollup.png"/></a>
+</div>
+
+<!-- totop end -->
+
+
+<!-- 百度分享 start -->
+
+<div id="article-share-box" class="article-share-box">
+  <div id="bdshare" class="bdsharebuttonbox article-share-links">
+    <a class="article-share-weibo" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a class="article-share-weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a class="article-share-qq" data-cmd="sqq" title="分享到QQ"></a>
+    <a class="article-share-renren" data-cmd="renren" title="分享到人人网"></a>
+    <a class="article-share-more" data-cmd="more" title="更多"></a>
+  </div>
+</div>
+<script>window._bd_share_config={"common":{},"share":{"bdCustomStyle":"/css/bdshare.css"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+<!-- 百度分享 end -->
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+</div>
+</body>
+</html>

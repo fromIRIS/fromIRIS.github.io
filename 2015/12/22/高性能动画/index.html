@@ -1,0 +1,308 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>高性能动画 | Lyu Dada</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="高性能动画
+参考资料http://melonh.com/sharing/slides.html?file=high_performance_animation#/奇舞团黄薇 
+
+一、简介&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;先按照浏览器渲染页面的顺序介绍下浏览器是如何渲染一个页面的。结合chrome开发工具中的timeline。1、解析HT">
+<meta property="og:type" content="article">
+<meta property="og:title" content="高性能动画">
+<meta property="og:url" content="http://yoursite.com/2015/12/22/高性能动画/index.html">
+<meta property="og:site_name" content="Lyu Dada">
+<meta property="og:description" content="高性能动画
+参考资料http://melonh.com/sharing/slides.html?file=high_performance_animation#/奇舞团黄薇 
+
+一、简介&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;先按照浏览器渲染页面的顺序介绍下浏览器是如何渲染一个页面的。结合chrome开发工具中的timeline。1、解析HT">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="高性能动画">
+<meta name="twitter:description" content="高性能动画
+参考资料http://melonh.com/sharing/slides.html?file=high_performance_animation#/奇舞团黄薇 
+
+一、简介&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;先按照浏览器渲染页面的顺序介绍下浏览器是如何渲染一个页面的。结合chrome开发工具中的timeline。1、解析HT">
+  
+    <link rel="alternative" href="/atom.xml" title="Lyu Dada" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+  
+</head>
+<body>
+<div id="container">
+  <div id="wrap">
+    <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Lyu Dada</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">to love and get love</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="https://github.com/fromIRIS">MYGithub</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="http://www.baidu.com/baidu" method="get" accept-charset="utf-8" class="search-form">
+          <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="Search">
+          <input type="submit" value="" class="search-form-submit">
+          <input name=tn type=hidden value="bds">
+          <input name=cl type=hidden value="3">
+          <input name=ct type=hidden value="2097152">
+          <input type="hidden" name="si" value="yoursite.com">
+        </form>
+      </div>
+    </div>
+  </div>
+</header>
+    <div class="outer">
+      <section id="main"><article id="post-高性能动画" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/12/22/高性能动画/" class="article-date">
+  <time datetime="2015-12-22T03:22:42.000Z" itemprop="datePublished">2015-12-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/js/">js</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      高性能动画
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="高性能动画">高性能动画</h3><blockquote>
+<p>参考资料<a href="http://melonh.com/sharing/slides.html?file=high_performance_animation#/" target="_blank" rel="external">http://melonh.com/sharing/slides.html?file=high_performance_animation#/</a><br>奇舞团黄薇 </p>
+</blockquote>
+<h4 id="一、简介">一、简介</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;先按照浏览器渲染页面的顺序介绍下浏览器是如何渲染一个页面的。结合chrome开发工具中的timeline。<br>1、解析HTML—对应chrome中的<code>Parse HTML</code><br>2、根据解析后的Dom节点和CSS构成了render-tree — 对应timeline中的<code>Recalculate Style</code><br>3、再由render-tree进行第一次渲染，将css中的布局属性（宽高大小定位）结合dom渲染 — <code>Layout</code><br>4、第二次渲染，将css中的跟展示效果相关的属性结合dom进行渲染 — <code>Paint</code><br>5、将Paint给到GPU，再显示在浏览器上，或者经过transform偏移旋转缩放透明度等绘制，最后渲染到屏幕上 — <code>Composite Layer</code></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>小结：</strong>三个渲染过程都是对各自对应的css属性。即当某属性改变时，会对应到各自的渲染步骤开始重新绘制。<strong>当涉及到transform偏移旋转缩放时会生成新的脱离的layer，在GPU中独立绘制</strong></p>
+<h4 id="二、硬件加速">二、硬件加速</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如何开启硬件加速就不说了，接下来讲讲其原理，就拿开个定时器对css属性<code>margin-left</code> <code>translateY</code>两者改变大小做个说明。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;由第一部分可知修改了margin-left属性时会触发Layout的重绘，然后是Paint、composite，即将Paint给到GPU进行处理，假设每一秒修改margin-left一次，那么每一秒都会进行Layout 和paint的重绘，而这两者又是很需要时间的。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;而定时修改translateY，因为这个步骤已经在第三个步骤，并不影响layout和paint，所以直接在GPU中重绘，省去了多次的layout、paint的重绘时间。这里就节省了大量的时间。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;至于为何节省了时间就能大大提升动画的性能和流畅度，第三节分析。</p>
+<h4 id="三、60FPS_屏幕刷新时间">三、60FPS 屏幕刷新时间</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;大部分的屏幕每一秒会有60帧的画面，如果我们做好了每一帧的画面就能产生流畅的动画效果，而每一帧需要的时间是16.7ms。这也就意味着我们要赶在16.7秒之前要根据css重绘好页面，以备给浏览器每隔16.7秒的刷新所需的页面，如果没准备好，动画也就会有一些停顿，产生卡顿的感觉。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;所以我们需要对三个渲染阶段都要尽可能的压缩时间。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;接下来谈谈间隔时间问题，就是动画时采用的间隔时间，以前采用的是setTimeout（callback， 1000/60），但这个方法会有掉帧的现象，而html5得新特性requireAnimationFrame方法，是根据浏览器的每一帧需要的时间自动设置，这样就无需担心掉帧的问题，值得注意的是这个方法的兼容性。</p>
+<h4 id="四、三个渲染阶段的优化">四、三个渲染阶段的优化</h4><p><code>layout</code><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;layout主要跟css中的布局属性改变有关,而这个也是大多数动画的基础。对于layout属性的读或写都会有可能导致layout的重绘。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;区别在于如果单纯是js中写属性，浏览器会把一段时间的写操作集中在一个时间段进行layout的重绘，并不是想象中的每当重写一个css-top属性就会重绘一次。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;而写完属性又去读其他elem的top等属性，浏览器会强制进行layout的重绘，理由是这个读取操作可能会受上次的写操作的影响，导致读取错误。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;根据上面的理论我们以后再js中写操作css的语句时，尽可能的写操作写一起，读操作写一起。<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Read</span></span><br><span class="line"><span class="keyword">var</span> h1 = element1.clientHeight;</span><br><span class="line"><span class="keyword">var</span> h2 = element2.clientHeight;</span><br><span class="line"><span class="keyword">var</span> h3 = element3.clientHeight;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Write</span></span><br><span class="line">element1.style.height = (h1 * <span class="number">2</span>) + <span class="string">'px'</span>;</span><br><span class="line">element2.style.height = (h2 * <span class="number">2</span>) + <span class="string">'px'</span>;</span><br><span class="line">element3.style.height = (h3 * <span class="number">2</span>) + <span class="string">'px'</span>;</span><br></pre></td></tr></table></figure></p>
+<p><code>paint</code><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;paint渲染阶段是当css改变了border-radius,color,box0shadow等展示型属性是触发的。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关于此阶段可以优化的点罗列在下面：</p>
+<ul>
+<li>gif图片也会时时出发paint，而且当zindex而看不见时还是会触发，所以不用时最好display=none</li>
+</ul>
+<p><code>composite layer</code><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;避免生成独立的layer层，因为在手机端GPU是有限制的，没有pc那么强大。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;z-index比layer层要高的元素也会自动生成layer。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://yoursite.com/2015/12/22/高性能动画/" data-id="ciigu64th0004shwlhpvq7pco" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端性能/">前端性能</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/12/22/click300延迟与点击穿透/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">
+        
+          click300延迟与点击穿透
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/12/22/viewport翻译总结/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">viewport翻译总结</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+      
+      <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分類</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/css/">css</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/js/">js</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/书籍阅读/">书籍阅读</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端工程/">前端工程</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端性能/">前端性能</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/动画库/">动画库</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/源码/">源码</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/翻译/">翻译</a><span class="category-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">標簽</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/BFC/">BFC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Regexp/">Regexp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ajax/">ajax</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gulp/">gulp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hammer/">hammer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js质量/">js质量</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lazyload/">lazyload</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/line-highe/">line-highe</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/property-attribute/">property&attribute</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tween/">tween</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/viewport/">viewport</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zepto-fullpage/">zepto.fullpage</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/作用域/">作用域</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/函数调用/">函数调用</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端性能/">前端性能</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端调试/">前端调试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/原型链/">原型链</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/点击穿透/">点击穿透</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面向对象的js/">面向对象的js</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">標簽雲</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/BFC/" style="font-size: 10px;">BFC</a><a href="/tags/Regexp/" style="font-size: 10px;">Regexp</a><a href="/tags/ajax/" style="font-size: 10px;">ajax</a><a href="/tags/github/" style="font-size: 10px;">github</a><a href="/tags/gulp/" style="font-size: 10px;">gulp</a><a href="/tags/hammer/" style="font-size: 10px;">hammer</a><a href="/tags/http/" style="font-size: 10px;">http</a><a href="/tags/js质量/" style="font-size: 10px;">js质量</a><a href="/tags/lazyload/" style="font-size: 10px;">lazyload</a><a href="/tags/line-highe/" style="font-size: 10px;">line-highe</a><a href="/tags/property-attribute/" style="font-size: 10px;">property&attribute</a><a href="/tags/tween/" style="font-size: 10px;">tween</a><a href="/tags/viewport/" style="font-size: 15px;">viewport</a><a href="/tags/zepto-fullpage/" style="font-size: 10px;">zepto.fullpage</a><a href="/tags/作用域/" style="font-size: 10px;">作用域</a><a href="/tags/函数调用/" style="font-size: 10px;">函数调用</a><a href="/tags/前端性能/" style="font-size: 20px;">前端性能</a><a href="/tags/前端调试/" style="font-size: 10px;">前端调试</a><a href="/tags/原型链/" style="font-size: 10px;">原型链</a><a href="/tags/点击穿透/" style="font-size: 10px;">点击穿透</a><a href="/tags/面向对象的js/" style="font-size: 10px;">面向对象的js</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">歸檔</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">近期文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2015/12/22/tween/">tweenMax基础api的逐条随意翻译</a>
+          </li>
+        
+          <li>
+            <a href="/2015/12/22/click300延迟与点击穿透/">click300延迟与点击穿透</a>
+          </li>
+        
+          <li>
+            <a href="/2015/12/22/高性能动画/">高性能动画</a>
+          </li>
+        
+          <li>
+            <a href="/2015/12/22/viewport翻译总结/">viewport翻译总结</a>
+          </li>
+        
+          <li>
+            <a href="/2015/12/22/line-height与font-size的关系/">line-height与font-size的关系</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">友情鏈接</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://xiguabaobao.com" target="_blank">主题作者</a>
+          </li>
+        
+          <li>
+            <a href="http://reqianduan.com" target="_blank">热前端</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015 Lyu Dada<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      .
+      Theme by <a href="https://github.com/xiangming/landscape-plus" target="_blank">Landscape-plus</a>
+    </div>
+  </div>
+</footer>
+  </div>
+  <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="https://github.com/fromIRIS" class="mobile-nav-link">MYGithub</a>
+  
+</nav>
+  <!-- totop start -->
+<div id="totop">
+<a title="返回頂部"><img src="/img/scrollup.png"/></a>
+</div>
+
+<!-- totop end -->
+
+
+<!-- 百度分享 start -->
+
+<div id="article-share-box" class="article-share-box">
+  <div id="bdshare" class="bdsharebuttonbox article-share-links">
+    <a class="article-share-weibo" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a class="article-share-weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a class="article-share-qq" data-cmd="sqq" title="分享到QQ"></a>
+    <a class="article-share-renren" data-cmd="renren" title="分享到人人网"></a>
+    <a class="article-share-more" data-cmd="more" title="更多"></a>
+  </div>
+</div>
+<script>window._bd_share_config={"common":{},"share":{"bdCustomStyle":"/css/bdshare.css"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+<!-- 百度分享 end -->
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+</div>
+</body>
+</html>
