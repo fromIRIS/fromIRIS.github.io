@@ -264,30 +264,16 @@
         
           <span itemprop="articleBody">
             
-              <h3 id="tweenMax基础api的逐条随意翻译">tweenMax基础api的逐条随意翻译</h3><p><code>1</code>tween没有内置的选择器引擎，在没有载入jquery等类库的情况下只能通过<code>getElementById</code>进行选择。<br><code>2.ticker</code><br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">TweenMax.ticker.addEventListener(<span class="string">"tick"</span>, myFunction);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">myFunction</span><span class="params">(event)</span> </span>&#123;</span><br><span class="line"><span class="comment">//executes on every tick after the core engine updates</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p><code>3.delay()</code><br><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable"><span class="keyword">var</span> currentDelay</span> = myAnimation.delay(); <span class="comment">//gets current delay</span></span><br><span class="line">myAnimation.delay(<span class="number">2</span>); <span class="comment">//sets delay</span></span><br></pre></td></tr></table></figure></p>
-<p>dalay方法可以设置或者获取某一个实例的延迟。<br>数值是以秒为单位的。<br>在设置了延迟的tween中，一切开始的动画都在delay之后开始，除了from()方法，from方法是不管延迟的，直接开始，除非设置了immediateRender:false参数在vars对象里。<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">TweenMax ( <span class="string">target:</span>Object, <span class="string">duration:</span>Number, <span class="string">vars:</span>Object ) ;</span><br><span class="line"><span class="comment">//就是设置运动参数的vars对象。</span></span><br></pre></td></tr></table></figure></p>
-<p><code>4.TweenMax.delayedCall()</code><br>定义一个实例，这个实例表示延迟了多少秒后调用一个函数，而且回调函数可以传参数，<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//calls myFunction after 1 second and passes 2 parameters:</span></span><br><span class="line">TweenMax.delayedCall(<span class="number">1</span>, myFunction, [<span class="string">"param1"</span>, <span class="string">"param2"</span>]);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">myFunction</span><span class="params">(param1, param2)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//do stuff</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//即如果这个方法写在文档加载后，即代表文档加载后过1秒执行myFunction函数，并且可以传一个数组的参数进去</span></span><br></pre></td></tr></table></figure></p>
-<p><code>5.duration(time)</code><br>获取tween实例的动画时长或者设置其动画时长<br><figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">var</span> currentDuration <span class="subst">=</span> myAnimation<span class="built_in">.</span><span class="built_in">duration</span>(); <span class="comment">//gets current duration</span></span><br><span class="line">myAnimation<span class="built_in">.</span><span class="built_in">duration</span>(<span class="number">2</span>); <span class="comment">//sets duration</span></span><br></pre></td></tr></table></figure></p>
-<p><code>6.endTime()</code><br>只返回tween实例结束动画的时间<br><code>7.eventCallback( type:String, callback:Function, params:Array, scope:* )</code><br>作用跟在tween的vars对象里直接写上事件是一样的，区别是这样做可以解除这个事件的绑定。<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//the following two lines produce IDENTICAL results:</span></span><br><span class="line">var myAnimation = <span class="keyword">new</span> TweenLite(mc, <span class="number">1</span>, &#123;<span class="string">x:</span><span class="number">100</span>, <span class="string">onComplete:</span>myFunction, <span class="string">onCompleteParams:</span>[<span class="string">"param1"</span>,<span class="string">"param2"</span>]&#125;);</span><br><span class="line">myAnimation.eventCallback(<span class="string">"onComplete"</span>, myFunction, [<span class="string">"param1"</span>,<span class="string">"param2"</span>]);</span><br></pre></td></tr></table></figure></p>
-<p>如果要给一个tween实例绑定不同的多个事件，则可以<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">myAnimation.<span class="function"><span class="title">eventCallback</span><span class="params">(<span class="string">"onComplete"</span>, completeHandler)</span></span>.<span class="function"><span class="title">eventCallback</span><span class="params">(<span class="string">"onUpdate"</span>, updateHandler, [<span class="string">"param1"</span>,<span class="string">"&#123;self&#125;"</span>])</span></span></span><br><span class="line"><span class="comment">//链式调用</span></span><br></pre></td></tr></table></figure></p>
-<p>如何解除绑定<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//deletes the onUpdate</span></span><br><span class="line">myAnimation.eventCallback(<span class="string">"onUpdate"</span>, <span class="literal">null</span>);</span><br></pre></td></tr></table></figure></p>
-<p><strong>需要注意的是一个事件只能有一个callback，如果写多个callback那将会覆盖</strong><br><code>8、TweenMax.fromTo( target:Object, duration:Number, fromVars:Object, toVars:Object )</code><br>需要注意的是一般的vars的属性写在fromVars里，而特殊的类似onComplete等方法需要写在toVars对象里。<br><code>9、TweenMax.getAllTweens( includeTimelines:Boolean ) : Array</code><br>返回一个数组，包含所以的tween实例，参数可以选择是否返回timeline实例，如果想要实现对所有的实例同意操作，比如暂停，开始等，可以考虑使用<code>TimelineLite.exportRoot()</code><br><code>10、TweenMax.getTweensOf( target:Object, onlyActive:Boolean );</code><br>在当前寻找到操作元素对象是Object的tween，并返回。也可能返回多个tween的数组.若onlyActive为true则只返回正在运行的tween。<br><figure class="highlight delphi"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">TweenMax.<span class="keyword">to</span>(myObject1, <span class="number">1</span>, <span class="comment">&#123;x:100&#125;</span>);</span><br><span class="line">TweenMax.<span class="keyword">to</span>(myObject2, <span class="number">1</span>, <span class="comment">&#123;x:100&#125;</span>);</span><br><span class="line">TweenMax.<span class="keyword">to</span>([myObject1, myObject2], <span class="number">1</span>, <span class="comment">&#123;opacity:0&#125;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> a1 = TweenMax.getTweensOf(myObject1); <span class="comment">//finds 2 tweens</span></span><br><span class="line"><span class="keyword">var</span> a2 = TweenMax.getTweensOf([myObject1, myObject2]); <span class="comment">//finds 3 tweens</span></span><br></pre></td></tr></table></figure></p>
-<p><code>11、TweenMax.globalTimeScale( value:Number );</code><br>设置全部tween的速度，大于1则表示速度越大。<br><code>12、.invalidate()</code>不懂<br><code>13、.isActive( ) : Boolean</code><br>可以查看这个tween是否是在运动中，没开始，结束，暂停都不算在运动中。<br><code>14、TweenMax.isTweening(target: object)</code><br>Reports whether or not a particular object is actively tweening. If a tween is paused, is completed, or hasn’t started yet, it isn’t considered active.<br><code>15、.kill()</code><br>看下方官方给出的示例代码就能清楚的知道.kill()方法的用途<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// <span class="operator"><span class="keyword">kill</span> the entire animation:</span><br><span class="line">myAnimation.<span class="keyword">kill</span>();</span></span><br><span class="line"> </span><br><span class="line">//<span class="operator"><span class="keyword">kill</span> <span class="keyword">only</span> the <span class="string">"x"</span> <span class="keyword">and</span> <span class="string">"y"</span> properties <span class="keyword">of</span> the animation (<span class="keyword">all</span> targets):</span><br><span class="line">myAnimation.<span class="keyword">kill</span>(&#123;x:<span class="literal">true</span>, y:<span class="literal">true</span>&#125;);</span></span><br><span class="line"> </span><br><span class="line">//<span class="operator"><span class="keyword">kill</span> <span class="keyword">all</span> parts <span class="keyword">of</span> the animation related <span class="keyword">to</span> the target <span class="string">"myObject"</span> (<span class="keyword">if</span> the tween has multiple targets, the others will <span class="keyword">not</span> be affected):</span><br><span class="line">myAnimation.<span class="keyword">kill</span>(<span class="literal">null</span>, myObject);</span></span><br><span class="line"> </span><br><span class="line">//<span class="operator"><span class="keyword">kill</span> <span class="keyword">only</span> the <span class="string">"x"</span> <span class="keyword">and</span> <span class="string">"y"</span> properties <span class="keyword">of</span> animations <span class="keyword">of</span> the target <span class="string">"myObject"</span>:</span><br><span class="line">myAnimation.<span class="keyword">kill</span>(&#123;x:<span class="literal">true</span>, y:<span class="literal">true</span>&#125;, myObject);</span></span><br><span class="line">  </span><br><span class="line">//<span class="operator"><span class="keyword">kill</span> <span class="keyword">only</span> the <span class="string">"opacity"</span> properties <span class="keyword">of</span> animations <span class="keyword">of</span> the targets <span class="string">"myObject1"</span> <span class="keyword">and</span> <span class="string">"myObject2"</span>:</span><br><span class="line">myAnimation.<span class="keyword">kill</span>(&#123;opacity:<span class="literal">true</span>&#125;, [myObject1, myObject2]);</span></span><br></pre></td></tr></table></figure></p>
-<p><code>16、TweenMax.killAll( complete:Boolean, tweens:Boolean, delayedCalls:Boolean, timelines:Boolean );</code><br><code>17、TweenMax.killChildTweensOf( parent:Object, complete:Boolean );</code><br>去除父元素下的所有tween，可选的complete若为true则先完成动画 再kill。<br><code>18、TweenMax.lagSmoothing()</code>不懂<br><code>19、.pause( atTime:*, suppressEvents:Boolean ) : *</code><br>如果括号内有秒计数的数字，则表示运动到atTime秒后在暂停<br><code>20、TweenMax.pauseAll( tweens:Boolean, delayedCalls:Boolean, timelines:Boolean );</code><br>括号内可选的属性的默认值都是true 表示默认暂停这些所有<br><code>21、paused(boolean)</code><br>getter or setter 判断当前tween实例是否处于停止状态。<br>下方代码的toggles比较有用<br><figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var paused = myAnimation.paused(); //gets current paused <span class="keyword">state</span></span><br><span class="line">myAnimation.paused( true ); //sets paused <span class="keyword">state</span> <span class="keyword">to</span> true (just like pause())</span><br><span class="line">myAnimation.paused( !myAnimation.paused() ); //toggles the paused <span class="keyword">state</span></span><br></pre></td></tr></table></figure></p>
-<p><code>22、play(from:num, suppressEvents:Boolean)</code><br>from值默认情况下是在元素当前的位置开始动。设置的数值代表直接从第几分钟开始运动<br><figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//begins playing from wherever the playhead currently is:</span></span><br><span class="line">myAnimation.<span class="keyword">play</span>();</span><br><span class="line"><span class="comment">//begins playing from exactly 2-seconds into the animation:</span></span><br><span class="line">myAnimation.<span class="keyword">play</span>(<span class="number">2</span>);</span><br><span class="line"><span class="comment">//begins playing from exactly 2-seconds into the animation but doesn't suppress events during the initial move:</span></span><br><span class="line">myAnimation.<span class="keyword">play</span>(<span class="number">2</span>, false);</span><br></pre></td></tr></table></figure></p>
-<p><code>23、.progress( value:Number, suppressEvents:Boolean )</code><br>指示tween跳转到进程的某一个阶段（0-1），比如0.5就代表跳到进程的一半。<br><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable"><span class="keyword">var</span> progress</span> = myTween.progress(); <span class="comment">//gets current progress</span></span><br><span class="line">myTween.progress( <span class="number">0.25</span> ); <span class="comment">//sets progress to one quarter finished</span></span><br></pre></td></tr></table></figure></p>
-<p><code>24、.repeat( value:Number )</code><br>可以写在vars对象里<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var <span class="built_in">repeat</span> = myTween.<span class="built_in">repeat</span>(); //gets current <span class="built_in">repeat</span> value&lt;<span class="keyword">br</span> /&gt;</span><br><span class="line">myTween.<span class="built_in">repeat</span>(<span class="number">2</span>); //sets <span class="built_in">repeat</span> <span class="keyword">to</span> <span class="number">2</span></span><br></pre></td></tr></table></figure></p>
-<p><code>25、.repeatDelay( value:Number )</code><br>延迟几秒再重复<br>可以写在vars对象里<br><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">TweenMax</span><span class="class">.to</span>(mc, <span class="number">1</span>, &#123;<span class="attribute">x</span>:<span class="number">100</span>, <span class="attribute">repeat</span>:<span class="number">2</span>, <span class="attribute">repeatDelay</span>:<span class="number">1</span>&#125;);</span><br></pre></td></tr></table></figure></p>
-<p>也可以当方法写<br><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable"><span class="keyword">var</span> repeatDelay</span> = myTween.repeatDelay(); <span class="comment">//gets current repeatDelay value</span></span><br><span class="line">myTween.repeatDelay(<span class="number">2</span>); <span class="comment">//sets repeatDelay to 2</span></span><br></pre></td></tr></table></figure></p>
-<p><code>26、.restart( includeDelay:Boolean, suppressEvents:Boolean )</code><br>第一个参数表示是否包含上一次的延迟效果，如果为true，则表示重复的时候还有继承上一次的延迟，即触发的时候会延迟几秒再开始动作。<br><code>27、.reverse( from:*, suppressEvents:Boolean )</code><br>往相反的方向运动，如果将值设置为0，则从先前运动的最后时刻开始往反方向运动。如果是-1，则跳到距离终点还有1秒的时刻开始掉头运动。<br><figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//reverses playback from wherever the playhead currently is:</span></span><br><span class="line"> myAnimation.<span class="keyword">reverse</span>();</span><br><span class="line"> </span><br><span class="line"> <span class="comment">//reverses playback from exactly 2 seconds into the animation:</span></span><br><span class="line"> myAnimation.<span class="keyword">reverse</span>(<span class="number">2</span>);</span><br><span class="line"> </span><br><span class="line"> <span class="comment">//reverses playback from exactly 2 seconds into the animation but doesn't suppress events during the initial move:</span></span><br><span class="line">myAnimation.<span class="keyword">reverse</span>(<span class="number">2</span>, <span class="keyword">false</span>);</span><br><span class="line"> </span><br><span class="line"><span class="comment">//reverses playback from the very END of the animation:</span></span><br><span class="line">myAnimation.<span class="keyword">reverse</span>(<span class="number">0</span>);</span><br><span class="line">  </span><br><span class="line"><span class="comment">//reverses playback starting from exactly 1 second before the end of the animation:</span></span><br><span class="line">myAnimation.<span class="keyword">reverse</span>(-<span class="number">1</span>);</span><br><span class="line"> </span><br><span class="line"><span class="comment">//flips the orientation (if it's forward, it will go backward, if it is backward, it will go forward):</span></span><br><span class="line"><span class="keyword">if</span> (myAnimation.reversed()) &#123;</span><br><span class="line">    myAnimation.play();</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    myAnimation.<span class="keyword">reverse</span>();</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="comment">//flips the orientation using the reversed() method instead (shorter version of the code above):</span></span><br><span class="line">myAnimation.reversed( !myAnimation.reversed() );</span><br></pre></td></tr></table></figure></p>
-<p><code>28、.reversed( value:Boolean )</code><br>判断是否在相反的方向，用法跟pasued()一样<br><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable"><span class="keyword">var</span> rev</span> = myAnimation.reversed(); <span class="comment">//gets current orientation</span></span><br><span class="line">myAnimation.reversed( <span class="literal">true</span> ); <span class="comment">//sets the orientation to reversed</span></span><br><span class="line">myAnimation.reversed( !myAnimation.reversed() ); <span class="comment">//toggles the orientation</span></span><br></pre></td></tr></table></figure></p>
-<p><code>29、TweenMax.set( target:Object, vars:Object )</code><br><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">TweenMax</span><span class="class">.set</span>(myObject, &#123;<span class="attribute">x</span>:<span class="number">100</span>, <span class="attribute">y</span>:<span class="number">50</span>, <span class="attribute">opacity</span>:<span class="number">0</span>&#125;);</span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="tag">TweenMax</span><span class="class">.to</span>(myObject, <span class="number">0</span>, &#123;<span class="attribute">x</span>:<span class="number">100</span>, <span class="attribute">y</span>:<span class="number">50</span>, <span class="attribute">opacity</span>:<span class="number">0</span>&#125;);</span><br></pre></td></tr></table></figure></p>
-<p><code>30、.time()</code><br>获取或设置tween的当前运动的时间点<br><code>30、.timeScale()</code><br>获取或设置当前tween的速度缩放数值</p>
-<p>原整理文章，转载请注明出处！</p>
-
-            
+            tweenMax基础api的逐条随意翻译1tween没有内置的选择器引擎，在没有载入jquery等类库的情况下只能通过getElementById进行选择。2.ticker12345TweenMax.ticker.addEventListener("tick", myFunction);function myFunction(event) &#123;//executes on every tick after the core engine updates&#125;
+3.delay()12var currentDelay = myAnimation.delay(); //gets current delaymyAnimation.delay(2); //sets delay
+dalay方
+            ...
           </span>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/12/22/tween/#more" rel="contents">
+              閱讀全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -380,11 +366,14 @@
         
           <span itemprop="articleBody">
             
-              <h1 id="click300延迟与点击穿透">click300延迟与点击穿透</h1><p><strong>由来：</strong>ios safari双击放大页面，由于浏览器大都具备这种特性，所以浏览器都约定在300毫秒的间隔来判断是否是双击还是单击，超过300毫秒还没第二次点击浏览器才判断此次点击是单击。<br>点击穿透事件介绍：并不是说绑定了click事件然后产生了穿透，而是一系列因果集合而产生了穿透这个不需要的现象。<br><strong>产生穿透事件的条件：</strong><br>1、两个dom在屏幕的垂直方向是重叠的，并且z-index不同。<br>2、采用touch系列的点击事件去点击朝外的dom，并且这个dom隐藏或者移开。<br>3、在下方的dom绑定了click或者默认的点击事件（a标签，buttom等）<br>只有满足上述条件才会触发穿透事件，就是点击外dom，外dom消失，但下边的dom也会触发click事件（比如跳转链接）<br><strong>产生此现象的原因：</strong><br>因为click的300延迟，导致用户体验不佳，所以很多人都会采用touch系列代替click。<br>在点击事件中，点击的顺序是这样的：<br><code>touchstart &gt; touchmove &gt; touchend &gt; click</code><br>而轮到click事件的时候还在再延迟了300毫秒，所以touchstart的触发速度是远大于click的，回到上述的产生穿透的条件中去<br>1、touchstart事件触发，外层dom消失，<strong>可是点击屏幕后会有个浏览器默认的click产生，首先就作用于当时click触发时点击的屏幕最外层的dom，即在重叠的条件下，zindex最大的dom，然后顺着dom树往上爬</strong><br>2、因为有300毫秒的延迟，所以在第一步的touchstart后，外层dom就消失了，等300毫秒后click触发了，等着他的dom却是在下面那层的dom（因为此时这个dom已经在最上层了），所以原本在下面的这个dom就触发了click事件。<br>所以说外层dom会消失是很重要的条件，如果外层dom没有消失，那延迟的click触发时还是作用在外层的dom上，而外层dom没绑定click事件。<br><strong>这就是穿透的原理。</strong><br><strong>如何解决穿透：</strong><br>1、顺着这个思路，既然每次单击是都会有个浏览器的click默认事件触发，既然我们不需要，那就把这个默认事件取消掉就好了，所以在js中加上这句话<br><figure class="highlight ocaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (ev.<span class="keyword">type</span> == <span class="symbol">'touchend'</span>) &#123;</span><br><span class="line">	ev.preventDefault<span class="literal">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>2、或者干脆给外层的dom绑定click事件，全部解决了。。对于关闭弹框啥的，300毫秒的延迟关闭还是可以接受的。<br>3、引入fastClick.js<br>公司里用的就是这个插件库，用了这个插件库，绑定touchstart不用担心引发迟来的click，直接绑定click也不会有300毫秒的延迟了，也就是很完美的解决了问题。</p>
-
-            
+            click300延迟与点击穿透由来：ios safari双击放大页面，由于浏览器大都具备这种特性，所以浏览器都约定在300毫秒的间隔来判断是否是双击还是单击，超过300毫秒还没第二次点击浏览器才判断此次点击是单击。点击穿透事件介绍：并不是说绑定了click事件然后产生了穿透，而是一系列因果集合而产生了穿透这个不需要的现象。产生穿透事件的条件：1、两个dom在屏幕的垂直方向是重叠的，并且z-index不同。2、采用touch系列的点击事件去点击朝外的dom，并且这个dom隐藏或者移开。3、在下方的dom绑定了click或者默认的点击事件（a标签，buttom等）只有满足上述条件才会触发穿透事件，就是点击外dom，外dom消失，但下边的dom也会触发click事件（比如跳转链接）产生此现象的原因
+            ...
           </span>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/12/22/click300延迟与点击穿透/#more" rel="contents">
+              閱讀全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -477,22 +466,17 @@
         
           <span itemprop="articleBody">
             
-              <h3 id="高性能动画">高性能动画</h3><blockquote>
-<p>参考资料<a href="http://melonh.com/sharing/slides.html?file=high_performance_animation#/" target="_blank" rel="external">http://melonh.com/sharing/slides.html?file=high_performance_animation#/</a><br>奇舞团黄薇 </p>
-</blockquote>
-<h4 id="一、简介">一、简介</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;先按照浏览器渲染页面的顺序介绍下浏览器是如何渲染一个页面的。结合chrome开发工具中的timeline。<br>1、解析HTML—对应chrome中的<code>Parse HTML</code><br>2、根据解析后的Dom节点和CSS构成了render-tree — 对应timeline中的<code>Recalculate Style</code><br>3、再由render-tree进行第一次渲染，将css中的布局属性（宽高大小定位）结合dom渲染 — <code>Layout</code><br>4、第二次渲染，将css中的跟展示效果相关的属性结合dom进行渲染 — <code>Paint</code><br>5、将Paint给到GPU，再显示在浏览器上，或者经过transform偏移旋转缩放透明度等绘制，最后渲染到屏幕上 — <code>Composite Layer</code></p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>小结：</strong>三个渲染过程都是对各自对应的css属性。即当某属性改变时，会对应到各自的渲染步骤开始重新绘制。<strong>当涉及到transform偏移旋转缩放时会生成新的脱离的layer，在GPU中独立绘制</strong></p>
-<h4 id="二、硬件加速">二、硬件加速</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如何开启硬件加速就不说了，接下来讲讲其原理，就拿开个定时器对css属性<code>margin-left</code> <code>translateY</code>两者改变大小做个说明。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;由第一部分可知修改了margin-left属性时会触发Layout的重绘，然后是Paint、composite，即将Paint给到GPU进行处理，假设每一秒修改margin-left一次，那么每一秒都会进行Layout 和paint的重绘，而这两者又是很需要时间的。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;而定时修改translateY，因为这个步骤已经在第三个步骤，并不影响layout和paint，所以直接在GPU中重绘，省去了多次的layout、paint的重绘时间。这里就节省了大量的时间。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;至于为何节省了时间就能大大提升动画的性能和流畅度，第三节分析。</p>
-<h4 id="三、60FPS_屏幕刷新时间">三、60FPS 屏幕刷新时间</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;大部分的屏幕每一秒会有60帧的画面，如果我们做好了每一帧的画面就能产生流畅的动画效果，而每一帧需要的时间是16.7ms。这也就意味着我们要赶在16.7秒之前要根据css重绘好页面，以备给浏览器每隔16.7秒的刷新所需的页面，如果没准备好，动画也就会有一些停顿，产生卡顿的感觉。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;所以我们需要对三个渲染阶段都要尽可能的压缩时间。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;接下来谈谈间隔时间问题，就是动画时采用的间隔时间，以前采用的是setTimeout（callback， 1000/60），但这个方法会有掉帧的现象，而html5得新特性requireAnimationFrame方法，是根据浏览器的每一帧需要的时间自动设置，这样就无需担心掉帧的问题，值得注意的是这个方法的兼容性。</p>
-<h4 id="四、三个渲染阶段的优化">四、三个渲染阶段的优化</h4><p><code>layout</code><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;layout主要跟css中的布局属性改变有关,而这个也是大多数动画的基础。对于layout属性的读或写都会有可能导致layout的重绘。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;区别在于如果单纯是js中写属性，浏览器会把一段时间的写操作集中在一个时间段进行layout的重绘，并不是想象中的每当重写一个css-top属性就会重绘一次。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;而写完属性又去读其他elem的top等属性，浏览器会强制进行layout的重绘，理由是这个读取操作可能会受上次的写操作的影响，导致读取错误。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;根据上面的理论我们以后再js中写操作css的语句时，尽可能的写操作写一起，读操作写一起。<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Read</span></span><br><span class="line"><span class="keyword">var</span> h1 = element1.clientHeight;</span><br><span class="line"><span class="keyword">var</span> h2 = element2.clientHeight;</span><br><span class="line"><span class="keyword">var</span> h3 = element3.clientHeight;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Write</span></span><br><span class="line">element1.style.height = (h1 * <span class="number">2</span>) + <span class="string">'px'</span>;</span><br><span class="line">element2.style.height = (h2 * <span class="number">2</span>) + <span class="string">'px'</span>;</span><br><span class="line">element3.style.height = (h3 * <span class="number">2</span>) + <span class="string">'px'</span>;</span><br></pre></td></tr></table></figure></p>
-<p><code>paint</code><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;paint渲染阶段是当css改变了border-radius,color,box0shadow等展示型属性是触发的。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;关于此阶段可以优化的点罗列在下面：</p>
-<ul>
-<li>gif图片也会时时出发paint，而且当zindex而看不见时还是会触发，所以不用时最好display=none</li>
-</ul>
-<p><code>composite layer</code><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;避免生成独立的layer层，因为在手机端GPU是有限制的，没有pc那么强大。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;z-index比layer层要高的元素也会自动生成layer。</p>
+            高性能动画
+参考资料http://melonh.com/sharing/slides.html?file=high_performance_animation#/奇舞团黄薇 
 
-            
+一、简介&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;先按照浏览器渲染页面的顺序介绍下浏览器是如何渲染一个页面的。结合chrome开发工具中的timeline。1、解析HTML—对应chrome中的Parse HTML2、根据解析后的Dom节点和CSS构成了render-tree — 对应timeline中的Recalculate Style3、再由render-tree进行第一次渲染，将css中的布局属性（宽高大小定位）结合dom渲染 — Layout4、第二次渲染
+            ...
           </span>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/12/22/高性能动画/#more" rel="contents">
+              閱讀全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -585,21 +569,15 @@
         
           <span itemprop="articleBody">
             
-              <h3 id="viewport详解（翻译+总结）">viewport详解（翻译+总结）</h3><p>来源：<a href="http://www.quirksmode.org/mobile/viewports.html" target="_blank" rel="external">http://www.quirksmode.org/mobile/viewports.html</a><br>首先需要了解的是css像素并不等于设备像素，因为存在一些情况比如300px的div却占了1000x1000的屏幕，这两者的像素并不相等。下文会经常出现css像素设备像素等名词。</p>
-<h2 id="pc端">pc端</h2><p><strong>1、</strong><code>screen.width&amp;screen.height</code><br>这是显示器的设备像素大小，永远不变，并不是浏览器的，包含了整个屏幕。但并没有什么卵用。<br><strong>2、</strong><code>window.innerWidth</code><br>浏览器的可视区域宽度，如果用户通过浏览器的zoom缩放，innerWidth也会随时变化。是通过css的像素进行测量的，而不是通过设备屏幕像素。<br>比如，300px宽的elem在zoom放大后占满了整个屏幕，但此时的innerWidth是300px；<br>但这个情况并不适合opera浏览器，且在移动端会有很严重的兼容性情况<br><strong>3、</strong><code>window.pageYOffset &amp; window.pageXOffset</code><br>获取浏览器滚动了多少像素，这个值也是根据css像素取得的，缩放时，浏览器会试图将当前视图固定，所以缩放时，pageYOffset并不会变化（或变化很小）。<br><strong>4、</strong><code>viewport</code><br>默认情况下块级元素的宽度沾满了父级元素的100%，一直到html，而html的宽度占了浏览器宽度的100%<br>在理论上来讲，<code>&lt;html&gt;</code>的宽度被viewport的宽度限制。<code>&lt;html&gt;</code>的宽度占据了100%的viewport的宽度。而正巧，在pc端viewport的宽度就等于window的宽度。所以在pc端，viewport的宽度就等于<code>&lt;html&gt;</code>的宽度，也就等于浏览器的宽度.<br>同理，这里的浏览器宽度（window.innerWidth）是根据css像素度量的，所以也就出现了一个问题。<br>如果给一个div设置了100%的宽，这个具体的值是根据window的css像素算的，是body直接子辈。在zoom=100%的时候，div是整个浏览器的宽。但是如果zoom放大，此时window的宽度是根据css计算的，所以window宽度变小了，从而导致viewport的宽度值也变小了，从而导致div的宽度值也变小了，所以此时将页面朝右滚动，div会出现断层。<br><strong>html的宽度是由viewport的宽度限制的，可以把viewport看成一个节点，里面包裹着html</strong><br><strong>5、</strong><code>viewport的度量</code><br><code>document.documentElement.clientWidth</code><br>这个属性只是显示了viewport的值，无视html的设置的宽度值。<br><strong>如此来说，<code>document.documentElement.clientWidth</code>跟<code>window.innerWidth</code>岂不是都能取得viewport的值？</strong><br>clientWidth不包含浏览器滚动条的宽度，而innerWidth却包含了滚动条的宽度。而且早期IE并不支持innerWidth。但这两者都涉及视口的宽度，跟文档宽度没多大关系。<br><strong>6、</strong><code>document.documentElement.offsetWidth</code>这个属性取得是html的宽度。在正常情况的<code>offsetWidth</code>跟<code>clientWidth</code>的值是一样的，但前者是html的宽度，后者是viewport的 宽度，前面还讲到了viewport是包裹html的关系，viewport是父元素。所以当给html设置宽度，比如400px，那这个时候两个值就将不同。<br>但<code>offsetHeight</code>跟<code>clientHeight</code>的值就不一样了，前者将是整个html内容的高度（有滚动条的情况包含看不见的内容的高度）<br><strong>7、</strong><code>事件event返回的坐标参数</code><br><code>pageX pageY</code>返回了相对于html的鼠标坐标，基于css像素。<br><code>clientX clientY</code>返回了相对于viewport的鼠标坐标，基于css像素。<br><code>screenX screenY</code>返回了相对于screen屏幕（不是浏览器）的鼠标坐标，基于设备像素。<br>我们一般90%的情况都会用到pageX， pageY。<br><strong>8、</strong><code>媒体查询</code><br>媒体查询一般根据width进行判断。但官方有两种宽度模式可以选择。<br><code>width &amp; device-width</code><br>这里的width指的的viewport宽度，也就是clientWidth，当然是基于css像素的，而device指的是设备宽度屏幕screen不是window，基于设备像素。<br>在pc端99.999%使用width。</p>
-<h2 id="移动端">移动端</h2><p>最重要的问题集中在css，尤其是度量viewport的尺寸。<br>html元素的宽取自layout viewport，那么不同机型浏览器的layout是不同的，ios980px，android800px。<br>最基础的是两个视角：<br><code>visual viewport &amp; layout viewport</code><br>都是基于css度量。<br>George Cummins在Stack Overflow上对基本概念给出了最佳解释：</p>
-<p>把layout viewport想像成为一张不会变更大小或者形状的大图。现在想像你有一个小一些的框架，你通过它来看这张大图。（译者：可以理解为「管中窥豹」）这个小框架的周围被不透明的材料所环绕，这掩盖了你所有的视线，只留这张大图的一部分给你。你通过这个框架所能看到的大图的部分就是visual viewport。当你保持框架（缩小）来看整个图片的时候，你可以不用管大图，或者你可以靠近一些（放大）只看局部。你也可以改变框架的方向，但是大图（layout viewport）的大小和形状永远不会变。</p>
-<p>也看一下Chris给出的解释。</p>
-<p>visual viewport是页面当前显示在屏幕上的部分。用户可以通过滚动来改变他所看到的页面的部分，或者通过缩放来改变visual viewport的大小。<br>visual的值是不能大于layout的。<br>当缩放的时候，<code>visual viewport</code>会变化，因为视觉上能容纳的css像素在变化，但<code>layout viewport</code>保持不会。</p>
-<p><strong>9、移动端viewport的度量</strong><br>在移动端，用<code>clientWidth</code>度量<code>layout viewport</code>的宽度，用<code>innerWidth</code>度量<code>visual viewport</code>的宽度。在不设置viewport标签的时候，ios的<code>layout viewport</code>都为980px，而且浏览器都会默认将<code>visual viewport</code>放大到跟<code>layout viewport</code>一样大，所以默认情况下手机屏幕能看到整个网页的内容（缩小版）。<br>很明显的当zoomin或zoomout时候，<code>visual viewport</code>会时刻改变，因为容纳的css像素是不同的。<br><strong>10、screen.width</strong><br>在pc端这个属性基本没用，但在移动端，这个值代表了手机的屏幕的设备像素大小。这个尺寸大小在chrome的模拟器里对各个机型都有标识。而且这个值跟ideal viewport是一样的。<br><strong>11、window.pageXOffset &amp; window.pageYOffset</strong><br>visual 相对于 layout的位置，这个解释起来其实跟pc端的是一样的，因为这个滚动的值是根据css像素取度量的，不管怎么缩放，css像素值是不会变的。<br><strong>12、document.documentElement.offsetHeight</strong>整个html元素的高度。同pc端的用法<br><strong>13、meta viewport</strong><br><figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta <span class="variable">name=</span><span class="string">"viewport"</span> <span class="variable">content=</span><span class="string">"width=320"</span>&gt;</span><br></pre></td></tr></table></figure></p>
-<p>这里的width的作用就是重置layout viewport的值。<br><code>initial-scale</code>设置初始页面的缩放和layout viewport的宽度。<br><code>device-width</code>这个值可以设置layout viewport，取得是idea viewport的值。<br> <code>Android WebKit’s</code>的最小的layout viewport是320px，所以当设置viewport的width为320px以下时，浏览器将会自动设置width为ideal的宽度。</p>
-<p><strong>14、ideal viewport</strong><br>有两点是ideal最重要的：<br>1、layout viewport 可以被设置成idael 的值，<code>width=divice-width &amp; initial-scale=1</code><br>这两者有兼容性问题，所以要设置成ideal需要将两者都写上。<br>2、最大最小缩放值都是根据ideal viewport的值确定的。 所以 maximum-scale=3 意味着最大的缩放值是 300% of the ideal viewport.。<br><strong>15、缩放ZOOM</strong><br>我们不能直接在js中取得缩放的值。<br>下面有两条计算公式<br><figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">visual viewport <span class="variable">width</span> = ideal viewport <span class="variable">width</span> / zoom factor</span><br><span class="line">zoom factor = ideal viewport <span class="variable">width</span> / visual viewport <span class="variable">width</span></span><br></pre></td></tr></table></figure></p>
-<p>layout viewport不参与这个计算<br><strong>16、initial-scale</strong><br>设置这个命令实际上做了两件事：<br>1、设置了初始缩放值zoom，根据上面的公式，再计算出visual viewport的宽度。<br>2、根据算出来的visual值就等于layout viewport的值。<br>所以当在viewport里只设置了initial-scale，计算出来的visual跟layout是一样的。</p>
-<p><strong>注意</strong>initial-scale的设置在安卓原生浏览器上是没用的，在安卓原生上只能=1是有效的，并且不能设置width<br>,但这个情况也只存在部分安卓原生浏览器上，很奇怪。</p>
-<p>翻译文章！</p>
-
-            
+            viewport详解（翻译+总结）来源：http://www.quirksmode.org/mobile/viewports.html首先需要了解的是css像素并不等于设备像素，因为存在一些情况比如300px的div却占了1000x1000的屏幕，这两者的像素并不相等。下文会经常出现css像素设备像素等名词。
+pc端1、screen.width&amp;screen.height这是显示器的设备像素大小，永远不变，并不是浏览器的，包含了整个屏幕。但并没有什么卵用。2、window.innerWidth浏览器的可视区域宽度，如果用户通过浏览器的zoom缩放，innerWidth也会随时变化。是通过css的像素进行测量的，而不是通过设备屏幕像素。比如，300px宽的elem在zoom放大后占满了
+            ...
           </span>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/12/22/viewport翻译总结/#more" rel="contents">
+              閱讀全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -692,55 +670,17 @@
         
           <span itemprop="articleBody">
             
-              <h2 id="line-height与font-size的关系">line-height与font-size的关系</h2><blockquote>
-<p>对于P元素，当文字超出一行时，决定每行之间的间隙的css是line-height和font-size</p>
-</blockquote>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;解释：P元素中有两行文字，每一行是一个<code>inlineBox</code>,其高对应的css是<code>line-height</code>。在<code>inlineBox</code>里有一个区域叫做<code>contentArea</code>，这里显示的是文字，其高对应的css是<code>font-size</code>。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>浏览器自动将contentArea区域设置在inlineBox区域的垂直居中位置。</strong><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;所以，当inlineBox的高大于contentArea的高，在视图里展现的样子是两行文字之间有一定的间隙，间隙的大小取决于两者高度的差值。</p>
-<blockquote>
-<p>接下来讲一下css属性中line-height继承问题。</p>
-</blockquote>
-<p>当在css中要继承父元素的line-height时，有几种写法：</p>
-<ul>
-<li><code>1、</code>px   </li>
-<li><code>2、</code>%</li>
-<li><code>3、</code>num </li>
-<li><code>4、</code>normal(1.2)</li>
-</ul>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>px</code> 当在父元素上使用px时，其子元素都会不顾自己的font-size而继承px的确切值。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这样造成的影响是子元素的inlineBox的高度都是相同，而子元素的font-size不同的话就会造成各个文字区块的行间距不同，影响美观。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>&amp;</code> 是将此时元素的font-size乘以%得到现有的line-hight，同px，子元素继承固定值。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>normal</code>相当于数字1.2 ，子元素同样继承固定的line-height。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>num</code>子元素只继承num这个数值，但具体line-height数值会跟每个子元素的自身font-size相乘得出line-height。</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">element</th>
-<th style="text-align:right">font-size</th>
-<th style="text-align:center">line-height</th>
-<th>after line-height</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">body</td>
-<td style="text-align:right">14</td>
-<td style="text-align:center">1.2</td>
-<td>28px</td>
-</tr>
-<tr>
-<td style="text-align:left">p</td>
-<td style="text-align:right">30</td>
-<td style="text-align:center">1.2</td>
-<td>36</td>
-</tr>
-<tr>
-<td style="text-align:left">h1</td>
-<td style="text-align:right">24</td>
-<td style="text-align:center">1.2</td>
-<td>28</td>
-</tr>
-</tbody>
-</table>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这样的效果是每个文字区块中的文字段落的行间距都是根据自己的font-size得出的，整体文字排版的行间距很统一。</p>
+            line-height与font-size的关系
+对于P元素，当文字超出一行时，决定每行之间的间隙的css是line-height和font-size
 
-            
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;解释：P元素中有两行文字，每一行是一个inlineBox,其高对应的css是line-height。在inlineBox里有一个区域叫做contentArea，这里显示的是文字，其高对应的css是font-size。&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;浏览器自动将contentArea区域设置在inlineBox区域的垂直居中位置。&nbsp;&nbsp;&nbsp;&nbsp;&nbs
+            ...
           </span>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/12/22/line-height与font-size的关系/#more" rel="contents">
+              閱讀全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -833,59 +773,22 @@
         
           <span itemprop="articleBody">
             
-              <h2 id="HTTP+缓存">HTTP+缓存</h2><p>引用：<a href="http://www.bokeyy.com/post/200-ok-from-cache-vs-304-not-modified.html" target="_blank" rel="external">http://www.bokeyy.com/post/200-ok-from-cache-vs-304-not-modified.html</a><br><a href="http://www.cnblogs.com/zhwl/archive/2012/02/28/2371691.html" target="_blank" rel="external">http://www.cnblogs.com/zhwl/archive/2012/02/28/2371691.html</a><br><a href="http://div.io/topic/854下方hefangshi的评论" target="_blank" rel="external">http://div.io/topic/854下方hefangshi的评论</a></p>
-<blockquote>
-<p>http缓存概念</p>
-</blockquote>
-<p>1、当web请求抵达缓存时，如果本地有“已缓存的”副本，就可以直接从本地存储设备，而不是从原始远程服务器上拉去数据。<br>2、与缓存相关的header<br><strong>request</strong></p>
-<ul>
-<li>Cache-Control: max-age=0 以秒为单位</li>
-<li>If-Modifiled-Since: xxxxxx 缓存文件的最后修改时间</li>
-<li>If-None-Match: “676767xxxx” 缓存文件的Etag值</li>
-<li>Cache-Control: no-cache 不使用缓存</li>
-<li>Pragma: no-cache 不使用缓存</li>
-</ul>
-<p><strong>response</strong></p>
-<ul>
-<li>Cache-Control: public  响应被缓存，并且在多用户间共享</li>
-<li>Cache-Control: private  响应只能作为私有缓存，不能在用户之间共享</li>
-<li>Cache-Control:no-cache  提醒浏览器要从服务器提取文档进行验证</li>
-<li>Cache-Control:no-store  绝对禁止缓存（用于机密，敏感文件</li>
-<li>Cache-Control: max-age=60  60秒之后缓存过期（相对时间）</li>
-<li>Date: Mon, 19 Nov 2012 08:39:00 GMT  当前response发送的时间</li>
-<li>Expires: Mon, 19 Nov 2012 08:40:01 GMT 缓存过期的时间（绝对时间）</li>
-<li>Last-Modified: Mon, 19 Nov 2012 08:38:01 GMT  服务器端文件的最后修改时间</li>
-<li>ETag: “20b1add7ec1cd1:0”  服务器端文件的Etag值</li>
-</ul>
-<p>3、直接使用缓存，不去服务器验证<br><strong>按F5刷新浏览器跟在地址栏输入网址回车，这两个行为是不一样的。</strong></p>
-<ul>
-<li>按F5浏览器会去web服务器验证缓存。</li>
-<li>而在地址栏输入网址，浏览器会直接使用有效的缓存，不会发httprequest去服务器。—缓存命中</li>
-</ul>
-<blockquote>
-<p>Status Code:200 OK (from cache) vs Status Code:304 Not Modified</p>
-</blockquote>
-<p>如果浏览器进行资源请求，使用了缓存就无外乎以上两种response情况。<br>区别：</p>
-<ul>
-<li>200OK： 是浏览器没有跟服务器确认，直接使用了浏览器缓存。</li>
-<li>304 NOT Modified 是浏览器跟服务器多确认了一次缓存有效性，再用的缓存。</li>
-</ul>
-<p><strong>1、两者触发的时机区别</strong><br>总结：200 OK (from cache) 是直接点击链接访问，输入网址按回车访问也能触发，后退也触发；而 304 Not Modified 是刷新页面时触发。</p>
-<p><strong>2、具体原因：</strong><br>浏览器的缓存机制分为两块，也是规范中的4.2Freshness和4.3的Validation<br>这两块跟服务器的返回response头信息中的几个参数有关。<br>Freshness</p>
-<ul>
-<li>Expires 缓存过期具体时间  —http1</li>
-<li>cache Contrpl：max-age=60（注秒）缓存有效时间 —http1.1</li>
-</ul>
-<p>解释：第一次浏览器请求资源后得到respone中的这两个参数信息，当再一次请求时浏览器会拿本地时间跟expires比较（http1），若判断此时的缓存是新鲜的，则直接调用缓存中的数据。状态码显示200ok<br>Validation</p>
-<ul>
-<li>Last-Modifiled 数据最后修改的时间</li>
-<li>ETag 类似于md5</li>
-</ul>
-<p>解释：当第一步的Freshness验证不通过后，浏览器就会请求服务器，并将这两个参数传过去，如果服务器验证服务器端的数据没有过时，则返回304，如果数据过时了，则返回200和新的内容。</p>
-<p>比如<a href="http://119.showjoy.com/activity/119meeting" target="_blank" rel="external">http://119.showjoy.com/activity/119meeting</a> command+r刷新跟地址栏回车进入页面相同的资源，状态码不同，load的时间也不同。</p>
+            HTTP+缓存引用：http://www.bokeyy.com/post/200-ok-from-cache-vs-304-not-modified.htmlhttp://www.cnblogs.com/zhwl/archive/2012/02/28/2371691.htmlhttp://div.io/topic/854下方hefangshi的评论
 
-            
+http缓存概念
+
+1、当web请求抵达缓存时，如果本地有“已缓存的”副本，就可以直接从本地存储设备，而不是从原始远程服务器上拉去数据。2、与缓存相关的headerrequest
+
+Cache-Control: max-age=0 以秒为单位
+If-Modifiled-Since: xxxxxx 缓存文件的最后修改时间
+If-None-Matc
+            ...
           </span>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/12/22/http-缓存/#more" rel="contents">
+              閱讀全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -978,72 +881,21 @@
         
           <span itemprop="articleBody">
             
-              <h2 id="ajax详解">ajax详解</h2><p>参考：<br><a href="http://segmentfault.com/a/1190000000490034" target="_blank" rel="external">http://segmentfault.com/a/1190000000490034</a><br><a href="http://stackoverflow.com/questions/6792878/jquery-ajax-error-function" target="_blank" rel="external">http://stackoverflow.com/questions/6792878/jquery-ajax-error-function</a><br><a href="http://www.cnblogs.com/rainman/archive/2011/02/20/1959325.html" target="_blank" rel="external">http://www.cnblogs.com/rainman/archive/2011/02/20/1959325.html</a></p>
-<p>全称：Asynchronous JavaScript and XML（异步的JavaScript 和XML）</p>
-<blockquote>
-<p><strong>XMLHttpRequest</strong><br>简称xhr，是ajax最底层最核心的对象。</p>
-</blockquote>
-<ul>
-<li><p>兼容性</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createXHR</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (<span class="built_in">window</span>.XMLHttpRequest) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">	&#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="built_in">window</span>.ActiveXObject)&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> ActiveXObject(<span class="string">'Microsoft.XMLHTTP'</span>);</span><br><span class="line">	&#125; ese &#123;</span><br><span class="line">	alert(<span class="string">'此浏览器不支持XHR'</span>)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>XMLHttpRequest方法</p>
-<ul>
-<li><code>open(param1, param2, param3)</code><br>XMLHttpRequest调用的第一个方法。<br>param1：string | “GET” | “POST” 代表将要通过什么方式进行数据交互。<br>param2：string | url 代表请求的地址。如果是GET请求，则将查询参数追加到url末尾，但是每一个名值对要经过encodeURIComponent()的编码。如果是post请求则不需要追加参数，直接写url。<br>param3：boolum | true | false true | 代表请求是异步的，不等待数据返回。</li>
-<li><code>send(param1)</code><br>必须接受一个参数。如果是get请求要传递的数据已经在open里写过了，此处就为null。如果是post请求，则此时的参数写要传递的data。</li>
-<li><code>onreadystateChange()</code><br>绑定readystateChange事件，当XMLHttpRequest的属性readystate变化时触发此事件。</li>
-<li><code>setRequestHeader()</code> 设置请求时的http头信息，说明数据的格式。这个方法只在post请求时用到，并且要在open、send方法之间调用。</li>
-</ul>
-</li>
-<li>XMLHttpRequest属性<ul>
-<li><code>responseText</code></li>
-<li><code>responseXML</code></li>
-<li><code>status</code>从服务器响应回来的http状态码</li>
-<li><code>readystate</code>服务器传回数据的状态，当为4时代表数据传回完毕。</li>
-</ul>
-</li>
-</ul>
-<blockquote>
-<p>http简介</p>
-</blockquote>
-<ul>
-<li><img src="http://7xpcne.com1.z0.glb.clouddn.com/ajax1.png" alt="Alt text"></li>
-<li><img src="http://7xpcne.com1.z0.glb.clouddn.com/ajax2.png" alt="Alt text"><br><img src="http://7xpcne.com1.z0.glb.clouddn.com/ajax3.png" alt="Alt text"></li>
-</ul>
-<blockquote>
-<p>跨域 + 如何处理</p>
-</blockquote>
-<p>出于安全方面的考虑，当前url下加载的页面的javascript无法访问其他地址上的数据。<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">http:</span><span class="comment">// www.  showjoy.net   :8080   /u/orderRefund.html</span></span><br></pre></td></tr></table></figure></p>
-<p><img src="http://7xpcne.com1.z0.glb.clouddn.com/ajax4.png" alt="Alt text"><br>(协议+子域名+主域名+端口)任意一个变化代表了域的不同。</p>
-<ul>
-<li>如何处理跨域的问题？<ul>
-<li>jsonp （只针对get请求方式）?<br>维基百科的定义是：JSONP（JSON with Padding）是资料格式 JSON 的一种“使用模式”，可以让网页从别的网域要资料。<br><strong>jsonp跨域的原理：</strong></li>
-</ul>
-<ol>
-<li>服务端（php）<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$json</span> = <span class="variable">$_GET</span>[<span class="string">'callback'</span>] . <span class="string">'('</span> . <span class="variable">$json</span> . <span class="string">')'</span>;</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$json</span></span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-</li>
-</ul>
-<ol>
-<li>定义一个foo()函数</li>
-<li><p>动态的生成一个script标签，src地址存放请求地址,带上查询的参数和<code>callback=foo</code></p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span> <span class="attribute">src</span>=<span class="value">"http://www.nanyang.com/user?id=123?callback=foo"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<ol>
-<li>此时服务器会返回来一个foo(data)，调用已经存在的foo函数。<br>jquery中的jsonp也是这种原理。<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$<span class="class">.ajax</span>(<span class="rules">&#123;</span><br><span class="line">          <span class="rule"><span class="attribute">url</span>:<span class="value"> <span class="string">"http://nanyang.com/user?id=111"</span>,</span><br><span class="line">          dataType: <span class="string">"jsonp"</span>,</span><br><span class="line">          jsonp: <span class="string">"callback"</span>,//传递给请求处理程序，调用内部的方法，用以获得jsonp回调函数名的参数名(一般默认为:callback)，其实跟ajax已经没有关系了。</span><br><span class="line">          jsonpCallback:<span class="string">"foo"</span>,//自定义的jsonp回调函数名称，默认为jQuery自动生成的随机函数名，也可以写<span class="string">"?"</span>，jQuery会自动为你处理数据</span><br><span class="line">          success: <span class="function">function</span>(json)&#123;</span><br><span class="line">              <span class="function">alert</span>(<span class="string">'=='</span>)</span></span>;</span><br><span class="line">          &#125;</span>,</span><br><span class="line">          <span class="rule"><span class="attribute">error</span>:<span class="value"> <span class="function">function</span>()&#123;</span><br><span class="line">              <span class="function">alert</span>(<span class="string">'fail'</span>)</span></span>;</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;);</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-</li>
-</ol>
-<ul>
-<li>window.name + iframe跨域方法<figure class="highlight dust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml">1/在应用页面（a.com/app.html）中创建一个iframe，把其src指向数据页面（b.com/data.html）。</span><br><span class="line">数据页面会把数据附加到这个iframe的window.name上，data.html代码如下：</span><br><span class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span>&gt;</span><span class="dart"></span><br><span class="line">    <span class="built_in">window</span>.name = <span class="string">'I was there!'</span>;    <span class="comment">// 这里是要传输的数据，大小一般为2M，IE和firefox下可以大至32M左右</span></span><br><span class="line">                                     <span class="comment">// 数据格式可以自定义，如json、字符串</span></span><br><span class="line"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line">2/在应用页面（a.com/app.html）中监听iframe的onload事件，在此事件中设置这个iframe的src指向本地域的代理文件（代理文件和应用页面在同一域下，所以可以相互通信）。app.html部分代码如下：</span><br><span class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span>&gt;</span><span class="stylus"></span><br><span class="line">    <span class="tag">var</span> state = <span class="number">0</span>, </span><br><span class="line">    <span class="tag">iframe</span> = document.<span class="function"><span class="title">createElement</span><span class="params">(<span class="string">'iframe'</span>)</span></span>,</span><br><span class="line">    loadfn = <span class="function"><span class="title">function</span><span class="params">()</span></span> </span></span><span class="expression">&#123;</span><br><span class="line">        <span class="variable"><span class="keyword">if</span></span> (<span class="variable">state</span> === 1) &#123;</span><br><span class="line">            <span class="variable">var</span> <span class="variable">data</span> = <span class="variable">iframe.contentWindow.name</span>;    /<span class="end-block">/ </span>读取数据</span><br><span class="line">            <span class="variable">alert</span>(<span class="variable">data</span>);    //弹出'<span class="variable">I</span> <span class="variable">was</span> <span class="variable">there</span>!'</span><br><span class="line">        &#125;</span><span class="xml"><span class="pf"> else if (<span class="keyword">state</span> === <span class="number">0</span>) </span></span><span class="expression">&#123;</span><br><span class="line">            <span class="variable">state</span> = 1;</span><br><span class="line">            <span class="variable">iframe.contentWindow.location</span> = <span class="string">"http://a.com/proxy.html"</span>;    /<span class="end-block">/ </span>设置的代理文件</span><br><span class="line">        &#125;</span><span class="xml"><span class="gcode">  </span><br><span class="line">    &#125;;</span><br><span class="line">    iframe.src = <span class="string">'http://b.com/data.html'</span>;</span><br><span class="line">    <span class="keyword">if</span> <span class="comment">(iframe.attachEvent)</span> </span></span><span class="expression">&#123;</span><br><span class="line">        <span class="variable">iframe.attachEvent</span>('<span class="variable">onload</span>', <span class="variable">loadfn</span>);</span><br><span class="line">    &#125;</span><span class="xml"><span class="actionscript"> <span class="keyword">else</span> </span></span><span class="expression">&#123;</span><br><span class="line">        <span class="variable">iframe.onload</span>  = <span class="variable">loadfn</span>;</span><br><span class="line">    &#125;</span><span class="xml"><span class="coffeescript"></span><br><span class="line">    <span class="built_in">document</span>.body.appendChild(iframe);</span><br><span class="line"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line">3/获取数据以后销毁这个iframe，释放内存；这也保证了安全（不被其他域frame js访问）。</span><br><span class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span>&gt;</span><span class="coffeescript"></span><br><span class="line">    iframe.contentWindow.<span class="built_in">document</span>.write(<span class="string">''</span>);</span><br><span class="line">    iframe.contentWindow.close();</span><br><span class="line">    <span class="built_in">document</span>.body.removeChild(iframe);</span><br><span class="line"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>完！</p>
-<p>原创文章，转载注明出处~</p>
+            ajax详解参考：http://segmentfault.com/a/1190000000490034http://stackoverflow.com/questions/6792878/jquery-ajax-error-functionhttp://www.cnblogs.com/rainman/archive/2011/02/20/1959325.html
+全称：Asynchronous JavaScript and XML（异步的JavaScript 和XML）
 
-            
+XMLHttpRequest简称xhr，是ajax最底层最核心的对象。
+
+
+兼容性
+123456789function createXHR () &#123;	if (window.XMLHttpRequest) &#12
+            ...
           </span>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/12/22/ajax基础以及jsonp跨域原理/#more" rel="contents">
+              閱讀全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -1136,51 +988,23 @@
         
           <span itemprop="articleBody">
             
-              <h2 id="前端性能的几个基础指标">前端性能的几个基础指标</h2><p>先开门见山的罗列前端性能相关的几个基础指标名词。</p>
-<ul>
-<li>白屏时间</li>
-<li>首屏时间</li>
-<li>用户可操作时间</li>
-<li>页面总下载时间</li>
-</ul>
-<p>为何会选择这几个时间节点以及各自的含义可以参考这篇文章 <a href="http://fex.baidu.com/blog/2014/05/build-performance-monitor-in-7-days/" target="_blank" rel="external">七天打造前端性能监控系统</a><br>另外本文搜集性能相关数据是用了高级浏览器的<code>Performance Api</code>,大家可以参考这篇文章先行了解<a href="http://www.alloyteam.com/2015/09/explore-performance/" target="_blank" rel="external">初探erformancep</a></p>
-<h3 id="正文">正文</h3><p><img src="http://7xpcne.com1.z0.glb.clouddn.com/perf1.gif" alt="白屏"><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;上图看了有和感受？当页面刷新后可视区域长时间停留在白屏状态，当一个阶段后页面突然全部刷出，而不是我们追崇的逐步加载显示的状态。</p>
-<p><img src="http://7xpcne.com1.z0.glb.clouddn.com/perf2.gif" alt="Alt text"><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;上图显示的是视口上部分已经展示，但是由于某种原因页面下部分的视图被阻塞，一段时间后，剩余页面突然刷出，也不符合页面逐步显示的体验。</p>
-<p><img src="http://7xpcne.com1.z0.glb.clouddn.com/perf3.gif" alt="可交互时间"><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;上图的现象是可交互的区域已经出现在视口中了，用户也已经在可点击的地方进行狂点，但是图片资源没有加载完可导致点击事件没有绑定，点击无效。这种交互体验也是不能容忍的。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-<h4 id="上面几个例子正好可以带出两个性能指标_白屏时间_和_用户可操作时间">上面几个例子正好可以带出两个性能指标 <code>白屏时间</code> 和 <code>用户可操作时间</code></h4><p>白屏时间：     用户从打开页面开始到有页面开始呈现为止。<br>用户可操作时间：    用户可以进行正常的事件输入交互操作。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;接下来我们通过<code>Performance Api</code>看看如何得到这两个指标的数据。</p>
-<p><img src="http://7xpcne.com1.z0.glb.clouddn.com/perf4.png" alt="performance 流程图"><br><a href="http://www.w3.org/TR/navigation-timing/#dom-performancetiming-navigationstart" target="_blank" rel="external">http://www.w3.org/TR/navigation-timing/#dom-performancetiming-navigationstart</a><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;上图来自官方，从左到右代表了浏览器打开一个页面内部的一系列状态。左边红线代表的是网络传输层面的过程，这篇文章不过多讲述，右边红线代表了服务器传输回字节后浏览器的各种事件状态，也就是上图中的<code>responseEnd</code>之后。这个阶段包含了浏览器对文档的解析，dom树构建，布局，绘制等等。下面详细说明。</p>
-<p><img src="http://7xpcne.com1.z0.glb.clouddn.com/perf5.png" alt="performance timing api"><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在浏览器console中输入<code>performance.timing</code>，返回的各字节跟上图performance流程的各状态一一对应，并返回时间。</p>
-<p><img src="http://7xpcne.com1.z0.glb.clouddn.com/perf6.png" alt="Alt text"><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;上图简单说明了一下<code>performance timing api</code>在几个流程下所代表的含义。至于为何到达<code>domInteractive</code>状态时代表了<code>Dom tree 构建完成</code>我在下文还会解释到。</p>
-<p><img src="http://7xpcne.com1.z0.glb.clouddn.com/perf7.gif" alt="Alt text"><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;上图演示了一个页面加载时Chrome的调试工具中的<code>Network</code>会显示两条竖线，一蓝一红，蓝的代表document触发了<code>domContentLoaded</code>事件，红线代表了document触发了<code>load</code>事件。</p>
-<h4 id="理一理">理一理</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;我们说到了当document到达<code>domInteractive</code>状态时代表了<code>dom树的构建完成</code>，也代表了可以绑定事件，即用户可交互时间已经到达，也代表了触发<code>domContentLoaded</code>事件，也即代表Chrome调试中蓝线的出现。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;但这一连串因果又是从何得到的呢？</p>
-<h4 id="深剖why">深剖why</h4><p><img src="http://7xpcne.com1.z0.glb.clouddn.com/perf8.png" alt="Alt text"><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;上图说明在浏览器拿到文档首字节之后，即上文提到的<code>responseEnd</code>之后。浏览器将html解析并构建成DOM tree，并同时将css解析成CSSOM。在没有js的参与下，这个过程是同步的。</p>
-<p><img src="http://7xpcne.com1.z0.glb.clouddn.com/perf9.png" alt="Alt text"><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;但一旦有js的参与，这个平衡就被破坏了。</p>
-<ul>
-<li>同步的javascript可以改写文档在任何节点，因此DOMtree 一旦碰上script标签（同步）就会停止构建。script也会阻塞img资源的下载。</li>
-<li>javascript能查询dom对象的可被计算的样式，CSSOM构建完才能轮到js的执行（<strong>仅位于script之前的css文件（内嵌、外链）才会阻塞js的执行，若样式文件在script之后，则此样式文件不会阻塞script</strong>）<br>这两点的解释说明可以看<a href="https://lifesinger.wordpress.com/2012/02/03/performance-impact-of-js-css-loading-order/" target="_blank" rel="external">这里</a>和<a href="http://hikejun.com/blog/2012/02/02/js%E5%92%8Ccss%E7%9A%84%E9%A1%BA%E5%BA%8F%E5%85%B3%E7%B3%BB/" target="_blank" rel="external">这里</a></li>
-</ul>
-<p>由于上面两个原因，导致html的解析构建与css构建成CSSOM有了依赖关系<br><img src="http://7xpcne.com1.z0.glb.clouddn.com/perf10.png" alt="Alt text"></p>
-<p>然后我们看一下官方文档<br><img src="http://7xpcne.com1.z0.glb.clouddn.com/perf11.png" alt="Alt text"></p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这里解释了document到达<code>interactive</code>状态所代表的含义，我先将其中一块信息隐藏。根据这个说明，当文档解析完成但是，一些例如图片这些资源还没有加载完成的情况下，document到达<code>interactive</code>状态，并且触发<code>DOMContentLoaded</code>事件触发。下面来看一个实例。<br><img src="http://7xpcne.com1.z0.glb.clouddn.com/perf12.png" alt="Alt text"><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;结合上面的深剖，CSSOM构建阻塞了js的执行，所以在这幅图中js早已加载完，还是要等到css的下载完成才能执行，而js的被阻塞，又导致了html文档的解析DOM树的构建。再根据官方的说明，dom树的构建完成才意味着<code>interactive</code>到达，意味着蓝线的出现。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;但我们再看下官方说明的原话。<br><img src="http://7xpcne.com1.z0.glb.clouddn.com/perf13.png" alt="Alt text"><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;是的，刚刚被我遮盖掉的是<code>stylesheets</code>样式表。这里又明确提到了不等<code>stylesheets</code>样式表下载完成，一旦html解析dom树构建完document就立马到达<code>interactive</code>状态。这不是跟我们刚刚的例子相反了吗？<br>再看个例子<br><img src="http://7xpcne.com1.z0.glb.clouddn.com/perf14.png" alt="Alt text"><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这个例子蓝线停在了css文件下载完成之前，说明也验证了后一种说法。那到底是哪个对？<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;答案当然是都对，我们在最之前就说明了，在没有js参与的情况下，html的解析DOM树的构建和CSSOM的构建是平行的，谁也不碍着谁，<code>interactive</code>状态的变更直接取决于html的解析完成度，所以在这种情况下，不等css加载完，html一旦解析完成，document状态立马变更为<code>interactive</code>。第二个例子是没有js引入的。</p>
-<h4 id="深剖小结">深剖小结</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;上述的引入的js只是同步的。也就是不带defer 或 async的script标签。一旦引入了带defer或async的script标签，js、css的依赖关系又变了。这里就不详谈了，可以看一篇外文<a href="http://calendar.perfplanet.com/2012/deciphering-the-critical-rendering-path/" target="_blank" rel="external">Deciphering the Critical Rendering Path</a><br>或者我的翻译版本<a href="http://fromiris.github.io/2015/11/12/%E7%A0%B4%E8%AF%91%E5%85%B3%E9%94%AE%E6%B8%B2%E6%9F%93%E8%B7%AF%E5%BE%84%EF%BC%88%E7%BF%BB%E8%AF%91%EF%BC%89/" target="_blank" rel="external">我的翻译</a></p>
-<h3 id="总结">总结</h3><p>现在我们再来看一下<code>domContentLoaded</code>和<code>load</code>事件。现在应该能清楚为何<code>domContentLoaded</code>事件触发代表了用户可交互事件，以及<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
-<p>jquery中的这个写法就是基于这个事件。</p>
-<p>最后，我们回头看下开头指出的衡量页面性能的四个基础指标，以及各自的求法。</p>
-<ul>
-<li>白屏时间：除了可以使用现成的<code>performance api</code>，我们还可以在head之间头尾插入两个script计算时间差<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">script</span>&gt;</span><span class="javascript"></span><br><span class="line"><span class="keyword">var</span> t = <span class="keyword">new</span> <span class="built_in">Date</span>().getTime();</span><br><span class="line"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">link</span> <span class="attribute">src</span>=<span class="value">""</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">link</span> <span class="attribute">src</span>=<span class="value">""</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">link</span> <span class="attribute">src</span>=<span class="value">""</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="title">script</span>&gt;</span><span class="ocaml"></span><br><span class="line">tNow = <span class="keyword">new</span> <span class="type">Date</span><span class="literal">()</span>.getTime<span class="literal">()</span> - t;</span><br><span class="line"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">head</span>&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>这样做可行的原理：第一个script不受css阻塞，最后的script受css阻塞，会等到样式都下载完才执行，执行完后便是<code>body</code>的解析，之后是dom tree构建，布局，绘制然后呈现在屏幕上。</p>
-<ul>
-<li>用户可交互时间：根据<code>performance api</code>在根据之前的讲述，可得<code>domContentLoadedEventEnd - navigationStart</code></li>
-</ul>
-<p>参考：<br><a href="http://www.w3.org/TR/2014/CR-resource-timing-20140325/" target="_blank" rel="external">performance api</a><br><a href="http://calendar.perfplanet.com/2012/deciphering-the-critical-rendering-path/" target="_blank" rel="external">关键路径</a><br><a href="https://github.com/addyosmani/timing.js/blob/master/timing.js" target="_blank" rel="external">performance api github</a><br><a href="https://developers.google.com/web/fundamentals/performance/critical-rendering-path/analyzing-crp?hl=zh-cn" target="_blank" rel="external">分析关键呈现路径性能</a><br><a href="http://www.alloyteam.com/2015/09/explore-performance/" target="_blank" rel="external">初识performance</a><br><a href="http://hikejun.com/blog/2012/02/02/js%E5%92%8Ccss%E7%9A%84%E9%A1%BA%E5%BA%8F%E5%85%B3%E7%B3%BB/" target="_blank" rel="external">jscss顺序</a><br><a href="https://lifesinger.wordpress.com/2012/02/03/performance-impact-of-js-css-loading-order/" target="_blank" rel="external">S 和 CSS 的位置对其他资源加载顺序的影响</a><br><a href="http://fex.baidu.com/blog/2014/05/build-performance-monitor-in-7-days/" target="_blank" rel="external">7 天打造前端性能监控系统</a><br>完！</p>
-<p>原创文章 转载请注明出处！</p>
+            前端性能的几个基础指标先开门见山的罗列前端性能相关的几个基础指标名词。
 
-            
+白屏时间
+首屏时间
+用户可操作时间
+页面总下载时间
+
+为何会选择这几个时间节点以及各自的含义可以参考这篇文章 七天打造前端性能监控系统另外本文搜集性能相关数据是用了高级浏览器的Performance Api,大家可以参考这篇文章先行了解初探erformancep
+正文&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;上图看了有和感受？当页面刷新后可视区域长时间停留在白屏状态，当一个阶段后页面突然全部刷出，而不是我们追崇的逐步加载显示的状态。
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;上图显示的是视口上部分已经展示，但是由
+            ...
           </span>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/12/21/前端性能的几个基础指标/#more" rel="contents">
+              閱讀全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -1273,132 +1097,14 @@
         
           <span itemprop="articleBody">
             
-              <h2 id="移动端调试">移动端调试</h2><h3 id="前言">前言</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;移动端调试不同于桌面端调试，在桌面时代，chrome的调试器已经无比强大。但是在手机上调试web页面就没有这么原始的方式了。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本文就如何调试移动端web页面，借鉴了一些博文和目前市面上好用的工具，针对<code>移动端web页面</code>以及<code>APP内嵌webview页面</code>如何调试做了一个试用和整理。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;先谈谈需求。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;最理想的方式是什么？</p>
-<ul>
-<li>ios设备下<ul>
-<li>H5页面</li>
-<li>webview页面</li>
-</ul>
-</li>
-<li>安卓设备<ul>
-<li>H5页面</li>
-<li>webview页面</li>
-</ul>
-</li>
-</ul>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;最理想的状态就是在上述四种情况下，H5页面在各种浏览器下都可以进行调试，且调试的方式跟PC chrome类似，包含js断点调试。webview页面在微信以及公司的APP产品内可以进行类似PC chrome类似的调试方式，包含js断点调试。</p>
-<hr>
-<h3 id="IOS_设备">IOS 设备</h3><blockquote>
-<p>1、 ios safari + mac safari + iphone真机  </p>
-</blockquote>
-<p><strong>调试safari浏览器的H5页面</strong></p>
-<p>启用功能：</p>
-<p>手机端：设置 → Safari → 高级 → Web 检查器 → 开。</p>
-<p>mac端：Safari → 偏好设置 → 高级 → 在菜单栏中显示“开发”菜单。</p>
-<p>然后就可以在电脑端调试iphone上的safari浏览器上的样式。在调试器及资源里<strong>可以对js打断点</strong>。操作方式跟chrome的调试器一样。不同的是我们是在手机上对页面进行操作，触发断点环境会更真实。</p>
-<p>若在js中埋入一些console，在IOS真机上执行一些操作，mac端safari上调试器能打印，这能极大的方便复杂手势的一些操作。</p>
-<p><strong>优点：包含js断点功能，调试方式跟桌面端chrome几乎一样</strong><br><strong>缺点：只能在手机上的safari浏览器上操作，不能覆盖其他手机环境，另外也不支持webview的调试。</strong></p>
-<blockquote>
-<p>2、万金油 weinre  + 真机</p>
-</blockquote>
-<p><strong>调试任意浏览器的H5页面以及webview页面</strong></p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;使用场景：有些时候样式在桌面chrome模拟是好的，但是在部分webview或者真机上就有问题。</p>
-<ul>
-<li>第一步：<code>npm install -g weinre</code></li>
-<li>第二步：<code>weinre –boundHost xx ip</code><br>类似于<code>weinre –boundHost 172.16.28.162</code></li>
-<li>第三步：此时weinre会返回一个可用的地址<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2015</span>-<span class="number">12</span>-<span class="number">14</span><span class="string">T03:</span><span class="number">58</span>:<span class="number">50.349</span>Z <span class="string">weinre:</span> starting server at <span class="string">http:</span><span class="comment">//10.1.2.77:8080</span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>也可以指定端口号<br><code>weinre --httpPort 8081 --boundHost 172.16.28.162</code></p>
-<ul>
-<li>第四步：可以访问之前weinre分配过来的地址，进入后在页面最上部分可以看到<code>Access Points</code>下的<code>debug client user interface http://10.1.2.77:8080/client/#anonymous</code></li>
-</ul>
-<p><img src="http://cdn1.showjoy.com/images/9a/9a259c3bbf5d438399842c11d53054c9.png" alt="Alt text"><br>这是之后要点击的链接 ，我们先往当前网页下方看。可以看到<code>Target Script栏目</code><br><img src="http://cdn1.showjoy.com/images/ad/add8ce371e0e4f52898fe4f652427f50.png" alt="Alt text"><br>我们需要将<code>Example</code>的script标签复制粘贴到需要调试的项目中去。</p>
-<ul>
-<li><p>第五步：开启本地静态服务器（XMAPP等），进入到需要调试的项目的页面，例如<br><code>http://10.1.2.77:8000/index.html</code>我是利用nodejs开的一个小型服务器。<br><img src="http://cdn1.showjoy.com/images/d5/d53d31ba1bcd41749446ae158e923ed8.png" alt="Alt text"></p>
-</li>
-<li><p>第六步：此时可以回到第四步中的weine分配给你的地址，<br><img src="http://cdn1.showjoy.com/images/42/42eadf2d9af545629e14387a9c6c64bf.png" alt="Alt text"><br>点击第一条<code>debug client user interface:    http://10.1.2.77:8080/client/#anonymous</code>,进入预备调试页面。</p>
-</li>
-<li><p>第七步：在预备调试页面我们可以看到<br><img src="http://cdn1.showjoy.com/images/ca/ca2a26ecf08d4eca807ea1ec2374eee9.png" alt="Alt text"><br><code>Targets</code>下有一条可以选择的调试页面，对应着刚刚在本地静态服务器中打开的页面。但是这个页面是PC的，现在我们通过手机（浏览器、APP、微信等）进入这个项目ip地址<a href="http://10.1.2.77:8000/index.html" target="_blank" rel="external">http://10.1.2.77:8000/index.html</a><br>此时预备调试页面将会出现两条可调试地址<br><img src="http://cdn1.showjoy.com/images/42/426b2c9ab5504cc18c77b1da504e7270.png" alt="Alt text"><br>选择手机端进入后新增的地址。</p>
-</li>
-<li>第八步：点开链接后链接状态从蓝色变成绿色，然后再点击页面左上角的Element按钮。<br><img src="http://cdn1.showjoy.com/images/ae/ae11cb7dc7034bc4981503af603c6300.png" alt="Alt text"><br>现在就可以在pc端调试，手机端直接显示修改的变化啦。</li>
-</ul>
-<p><strong>优点：</strong>为何称weinre为万金油呢？因为只要在需要调试的项目的文件中引入weinre给出的<code>&lt;script&gt;标签</code>，再配合本地静态服务器的ip。<strong>可以在任何ios或安卓机型的包括浏览器和app的webview中去调试。</strong></p>
-<p><strong>缺点：</strong> weinre不支持js的断点调试，这是一个缺憾，并且要在<strong>项目中引入额外的调试js标签</strong>。<br>但是对于js断点，可以在js逻辑中埋入console，然后在手机端真实操作，再在pc端的调试器中查看打印信息这种方式来代替。</p>
-<blockquote>
-<p>3、MIHTool </p>
-</blockquote>
-<p><strong>调试chrome safari浏览器的H5页面</strong><br>注意关闭翻墙代理噢。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;基于weinre 开发的一款APP， 只针对ios手机。大概使用方式是在APP内打开需要调试的页面，相应的在pc端浏览器会出现调试器，方可进行调试。使用MIHTool的最大优点之一在于不需要显式的引入调试所需的脚本。在此基础上，作者还增加了一些方便的功能。</p>
-<ol>
-<li>Performance API.</li>
-<li>Polyfill管理器(模拟javascript与Native App互相调用,demo)</li>
-<li>NPM Modules (在 web inspector console 里通过 require() 加载 npm 模块)</li>
-</ol>
-<p>具体可以看官网：<a href="http://www.mihtool.com/" target="_blank" rel="external">http://www.mihtool.com/</a></p>
-<blockquote>
-<p>4、ios模拟器 + mac safari</p>
-</blockquote>
-<p><strong>调试safari浏览器的H5页面（可进行js断点调试）</strong></p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在没有真机的情况下，可以采用模拟机的方式去运行ios系统下的safari浏览器，然后在safari浏览器内输入想要调试的页面。当然模拟ios系统必须在<code>Xcode</code>这个开发软件下进行。一旦在<code>Xcode</code>里开启了模拟机，再进入模拟机里的<code>safari</code>，之后按照上边介绍过的<code>真机 safari + mac safari</code>介绍的方式进行操作便可。<br><img src="http://cdn1.showjoy.com/images/ab/ab12718e529e4f03b1e17091e592b694.png" alt="Alt text"></p>
-<blockquote>
-<p>5、ios模拟器 + mac safari</p>
-</blockquote>
-<p><strong>调试公司APP内的webview页面（可进行js断点调试）</strong></p>
-<p>参考 <a href="https://github.com/paulirish/iOS-WebView-App，因为不懂IOS开发，也不知道是如何进行的，但大概是在iOS项目内写一些方法抛出一个地址，然后在mac上的safari开发模式内识别出这个地址，然后就可以调试的。默认情况下，mac" target="_blank" rel="external">https://github.com/paulirish/iOS-WebView-App，因为不懂IOS开发，也不知道是如何进行的，但大概是在iOS项目内写一些方法抛出一个地址，然后在mac上的safari开发模式内识别出这个地址，然后就可以调试的。默认情况下，mac</a> safari只能识别usb连接的ios设备上的safari浏览器上的H5页面。（上面介绍过）</p>
-<hr>
-<h3 id="Android_设备">Android 设备</h3><blockquote>
-<p>1、Android chrome 真机 + pc chrome</p>
-</blockquote>
-<p><strong>调试移动端浏览器的H5页面（可进行js断点调试）</strong></p>
-<p>在安卓4.4版本以下的安卓机子，手机上安装了chrome的情况下，并且打开需要调试的页面，可以打开usb开发者模式，在pc端chrome地址栏输入<code>chrome://inspect</code>便可找到相应的手机的相应打开wap页面。调试方法跟pc chrome几乎一致。</p>
-<p>在第一次使用的时候点击<code>inspect</code>会弹出空白的调试页面，这个时候需要翻墙，再点<code>inspect</code>才会出现正常的调试页面。</p>
-<p><strong>优点：</strong>可进行js断点调试。<br><strong>缺点：</strong>浏览器限制。</p>
-<p><strong>调试公司APP内的webview页面（可进行js断点调试）</strong></p>
-<p>在安卓4.4版本以上的安卓机子，手机通过usb连接mac电脑后，手机打开usb开发者模式后，在电脑chrome的<code>chrome://inspect</code>页面里会找到除了手机浏览器打开的页面，还会找到App内打开的webview的页面。<br><img src="http://cdn1.showjoy.com/images/ce/ce98e4652b7f47c99612a3081e4e785f.png" alt="Alt text"><br>点开<code>inspect</code>就是一个调试界面。</p>
-<p>进行webview页面的调试 需要在应用的代码内设置才能生效（根据<a href="https://github.com/yujiangshui/CN-Chrome-DevTools/blob/remote-debugging/md/Use-Tools/remote-debugging.md#%E8%B0%83%E8%AF%95-webviews）" target="_blank" rel="external">https://github.com/yujiangshui/CN-Chrome-DevTools/blob/remote-debugging/md/Use-Tools/remote-debugging.md#%E8%B0%83%E8%AF%95-webviews）</a></p>
-<blockquote>
-<p>2、Android 模拟机 + pc chrome</p>
-</blockquote>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;安卓模拟机配置成功的情况下调试的方式跟上面<code>1</code>方法是一样的，在安卓4.4版本以上才能进行webview的调试。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;下面就介绍下大名鼎鼎的安卓模拟器<code>genymotion</code>.个人使用是免费的。</p>
-<ol>
-<li>在其官网注册（必须）<a href="https://www.genymotion.com/" target="_blank" rel="external">https://www.genymotion.com/</a></li>
-<li>在其官网下载最新的软件，下载完将genymotion和genymotion shell都放到应用程序内。</li>
-<li>下完这个之后还需要下载virtualBox，<a href="https://www.virtualbox.org/wiki/Downloads" target="_blank" rel="external">https://www.virtualbox.org/wiki/Downloads</a></li>
-<li>之后就可以选择不同版本的模拟器了，网上的教程都是推荐下载安卓4.3版本，因为4.3版本有对应的补丁，装上后可以避免一些应用下载失败。但4.3版本不支持调试webview。我推荐下载 HTC one 4.4.4版本，本人试了很多版本，只有这个可以调试我司App内嵌的H5页面。<br><img src="http://cdn1.showjoy.com/images/b3/b38d848454e34984a0436989c4847139.png" alt="Alt text"></li>
-</ol>
-<p>推荐一个专门讲解<code>genymotion</code>的资源。<br><a href="http://www.ziliao1.com/Article/Show/DCDFC03FE4902A1AC353C74695DAC2E9.html" target="_blank" rel="external">http://www.ziliao1.com/Article/Show/DCDFC03FE4902A1AC353C74695DAC2E9.html</a><br>以及模拟机版本下载失败的解决办法<br><a href="http://www.cnblogs.com/wliangde/p/3678649.html" target="_blank" rel="external">http://www.cnblogs.com/wliangde/p/3678649.html</a></p>
-<blockquote>
-<p>3、万金油 weinre + pc chrome</p>
-</blockquote>
-<p><strong>调试任意浏览器的H5页面以及webview页面</strong></p>
-<p>这个方法在之上iOS 部分已经讲解过了。weinre通吃安卓与ios，兼容性不要太高。</p>
-<blockquote>
-<p>4、微信调试</p>
-</blockquote>
-<p><strong>调试微信客户端的webview页面（支持js断点调试）</strong> </p>
-<p>目前微信已经出了官方的调试工具，照着做就好了。<br><a href="http://blog.qqbrowser.cc/" target="_blank" rel="external">http://blog.qqbrowser.cc/</a></p>
-<blockquote>
-<p>5、UC浏览器 + 真机 + mac chrome</p>
-</blockquote>
-<p><strong>调试uc浏览器的H5页面（支持js断点）</strong></p>
-<p>方法一是真机加上chrome浏览器，这个方法是真机加uc浏览器，<br><a href="http://www.uc.cn/business/developer/" target="_blank" rel="external">http://www.uc.cn/business/developer/</a></p>
-<hr>
-<h3 id="总结">总结</h3><p>上面罗列的多种方法，在本地开发的情况下基本都已经覆盖到了。但是如果线上页面出现bug了。该怎么办？最快的方法直接对线上页面进行调试。<br>先介绍一下mac抓包工具<code>charles</code></p>
-<h4 id="charles">charles</h4><p><a href="http://mp.weixin.qq.com/s?__biz=MjM5MTA1MjAxMQ==&amp;mid=400497314&amp;idx=1&amp;sn=850fad741fdb635c2403bafb2f1e636f&amp;scene=1&amp;srcid=1119TqsnfhBHSKzA2BUja9mk&amp;key=ac89cba618d2d97693fea624e810ff69a7385f5209ab2a26ec029ca8f618e760e87de444299655bad41c5d1a7dbbc76e&amp;ascene=0&amp;uin=Mjg1NTY1OTY2MA%3D%3D&amp;devicetype=iMac+MacBookPro12%2C1+OSX+OSX+10.10.4+build(14E46" target="_blank" rel="external">charles使用详解 推荐</a>&amp;version=11020201&amp;pass_ticket=WPlsSiFuGxw6Tb6CFkzaSOMvY2gLt%2BQJpfSggleLZT0K5fuNOiMAgjLF110wuOSp)</p>
-<p>1、截取http网络封包<br>2、支持修改网络请求参数<br>3、支持网络请求的截获并动态修改<br>4、支持重发网络请求<br>5、模拟网速网络</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;刚刚给出的链接中有charles的全方位解读，我这里就简单介绍下http网络封包。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在pc上charles可以很容易的创建一个代理，将设定的一部分网络请求全部转到charles代理上，并且可以将其中某个资源map到本地，从而实现使用本地代码调试线上代码的功能。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;但是我们现在是调试手机等移动端设备，但稍微做一些设置，就可以实现通过pc上的charles去代理移动端去请求资源。然后将需要的资源map到本地，进行修改和调试。</p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这样设置过后的效果就是，在pc端修改代码，移动端线上的页面去请求本地修改后的代码并展示。</p>
-<p>讲完了<code>charles</code>,问题回到如何快速调试线上页面。</p>
-<p><strong>如果是H5页面</strong><br>遇上H5页面在PCchrome调试器上跟真实手机上的效果不一致时，可以使用万金油<code>weinre</code>，结合<code>charles</code>，就可以调试这种机型各种浏览器上的问题了。当然也可以使用上面提到的其他方法，都是适用的。</p>
-<p><strong>如果是webview</strong><br>同样不能少的是<code>charles抓包</code>，如果是安卓可以配合<code>genymotion</code>模拟器进行模拟。使用方法上文讲述过，再推荐一篇专门的文章：<a href="http://div.io/topic/1449。这篇文章讲到如何用charles监听genymotion。" target="_blank" rel="external">http://div.io/topic/1449。这篇文章讲到如何用charles监听genymotion。</a><br>如果是ios，也可以采用这样的方式，即模拟器+charles+mac safari。使用方法在上文的ios章节讲述过。<br>当然也是可以使用万金油<code>weinre</code>。weinre+charles调试App内的H5页面也是很方便的。跟上面两种方法比较，缺少的就是js断点调试功能。</p>
-<p><strong>参考文章</strong><br><a href="http://yujiangshui.com/multidevice-frontend-debug/" target="_blank" rel="external">移动端前端开发调试</a><br><a href="https://github.com/yujiangshui/CN-Chrome-DevTools/blob/remote-debugging/md/Use-Tools/remote-debugging.md#%E8%B0%83%E8%AF%95-webviews" target="_blank" rel="external">使用 Chrome 远程调试 Android 设备</a><br><a href="http://mp.weixin.qq.com/s?__biz=MjM5MTA1MjAxMQ==&amp;mid=400497314&amp;idx=1&amp;sn=850fad741fdb635c2403bafb2f1e636f&amp;scene=1&amp;srcid=1119TqsnfhBHSKzA2BUja9mk&amp;key=ac89cba618d2d97693fea624e810ff69a7385f5209ab2a26ec029ca8f618e760e87de444299655bad41c5d1a7dbbc76e&amp;ascene=0&amp;uin=Mjg1NTY1OTY2MA%3D%3D&amp;devicetype=iMac+MacBookPro12%2C1+OSX+OSX+10.10.4+build(14E46" target="_blank" rel="external">Charles 从入门到精通</a>&amp;version=11020201&amp;pass_ticket=WPlsSiFuGxw6Tb6CFkzaSOMvY2gLt%2BQJpfSggleLZT0K5fuNOiMAgjLF110wuOSp)<br><a href="http://div.io/topic/1449" target="_blank" rel="external">打造最舒适的webview调试环境</a><br><a href="http://stackoverflow.com/questions/19700646/unable-to-create-genymotion-virtual-devicesconnection-timeout" target="_blank" rel="external">Unable to create Virtual Device</a></p>
-<p>完！</p>
-<p>借鉴+原创文章，转载请注明出处！</p>
-
-            
+            移动端调试前言&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;移动端调试不同于桌面端调试，在桌面时代，chrome的调试器已经无比强大。但是在手机上调试web页面就没有这么原始的方式了。&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本文就如何调试移动端web页面，借鉴了一些博文和目前市面上好用的工具，针对移动端web页面以及APP内嵌webview页面如何调试做了一个试用和整理。&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;先谈谈需求。&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;最理想的方式是什
+            ...
           </span>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/12/20/移动端调试/#more" rel="contents">
+              閱讀全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -1491,52 +1197,16 @@
         
           <span itemprop="articleBody">
             
-              <h2 id="基于Gulp的前端静态页面开发工作流的思考">基于Gulp的前端静态页面开发工作流的思考</h2><p>写静态页面的时候最常见的脚手架就是下方这样的形式，本地新建一个项目文件，然后再在里面新建js、less文件夹，配合一个less处理，js压缩混淆的可视化工具，边写边处理，写完后再到tinyPng上压缩一下图片，需要将图片地址换成cdn的还需要将图片手动传到服务器上，最后大功告成！</p>
-<figure class="highlight haml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">root</span><br><span class="line">-<span class="ruby">--js/</span><br><span class="line"></span>-<span class="ruby">--src/</span><br><span class="line"></span>-<span class="ruby">--less/</span><br><span class="line"></span>-<span class="ruby">--css/</span><br><span class="line"></span>-<span class="ruby">--images/</span><br><span class="line"></span>-<span class="ruby">--html</span></span><br></pre></td></tr></table></figure>
-<p>但是可视化工具比如<code>codekit</code>的一个缺点就是可拓展性不高，局限于软件本身的功能。使用<code>gulp</code>以及强大的插件机制，可以带来无限的可能。<br>首先的问题就是项目文件目录该如何规划。如果只是上面提到的形式，生产代码跟发布代码混在同一个文件下，容易混淆。如果针对生产环境和发布环境分别对应一个文件夹就会清晰很多，如果两个文件夹的下属目录名称也相同，html文件引用资源的相对路径也就不需要改了。<br>先来看下项目脚手架的形式<br><img src="http://7xpcne.com1.z0.glb.clouddn.com/NYGulp1.png" alt="Alt text"></p>
-<ul>
-<li><code>src</code>为生产源代码，在编写的时候的代码都应该放入这个文件目录下，包括html文件。</li>
-<li><code>dist</code>为上线的代码，里面存放的都是从src文件夹里压缩编译后的优化代码，包括html文件。</li>
-<li><code>node_modules</code>存放的是相关于gulp的npm包。</li>
-<li><code>config.json</code>有一些关于部署或者gulp需要的配置信息。</li>
-<li><code>gulpfile.js</code>gulp的入口文件。</li>
-<li><code>package.json</code>gulp所需插件的包管理。</li>
-</ul>
-<p>再来展开看一下<code>src</code>目录。<br><img src="http://7xpcne.com1.z0.glb.clouddn.com/NYGulp2.png" alt="Alt text"><br>生产源代码文件src下的目录结构</p>
-<ul>
-<li><code>css</code> 同文件下less编译后得到。</li>
-<li><code>images</code> 图片</li>
-<li><code>js</code> js文件</li>
-<li><code>less</code>less文件</li>
-<li><code>lib</code> 第三方库</li>
-<li><code>index.html</code>  主页面</li>
-</ul>
-<p>再来看下<code>dist</code>文件目录<br><img src="http://7xpcne.com1.z0.glb.clouddn.com/NYGulp3.png" alt="Alt text"></p>
-<ul>
-<li><code>css</code>  src下的css文件压缩后得到</li>
-<li><code>images</code> src下的images压缩得到</li>
-<li><code>js</code>  src下的js文件压缩混淆得到</li>
-<li><code>lib</code> 第三方库</li>
-<li><code>index.html</code>  主页面</li>
-</ul>
-<hr>
-<p>这篇文章假设大家已经基本了解了gulp如何安装使用，以及nodejs，npm包的使用。<br><a href="http://markpop.github.io/2014/09/17/Gulp%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/" target="_blank" rel="external">http://markpop.github.io/2014/09/17/Gulp%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/</a><br>不清楚gulp初始使用的同学可以看下这边文章，跟着做基本就懂了几个大概的插件用法。</p>
-<hr>
-<p>首先从此github上clone下来这个脚手架 <a href="https://github.com/fromIRIS/NYGulp" target="_blank" rel="external">https://github.com/fromIRIS/NYGulp</a><br>然后<code>npm install</code>安装所有需要的gulp插件。</p>
-<hr>
-<h3 id="代码编写阶段">代码编写阶段</h3><p>我对于gulp的使用流程是这样思考的，在编写代码的时候，并不需要时刻对js进行压缩，也不需要对图片进行压缩，唯一要做的是对less文件的编译（因为我平时工作都是less，所以本文css预处理器的基于less的）。当然也可以对js进行代码风格的检查。<br>所以在编写代码的时候我们只需开一个gulp默认的命令行并在内部进行css文件的监听就好。<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gulp</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">gulp.task(<span class="string">"serve"</span>, [<span class="string">"less"</span>, <span class="string">"js-watch"</span>, <span class="string">"html"</span>], <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    browserSync.init(&#123;</span><br><span class="line">        server : <span class="string">"./src"</span></span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    gulp.watch(srcPath.LESS, [<span class="string">"less"</span>]);</span><br><span class="line">    gulp.watch(srcPath.JS, [<span class="string">"js-watch"</span>]);</span><br><span class="line">    gulp.watch(srcPath.HTML, [<span class="string">"html"</span>]);</span><br><span class="line">    gulp.watch(srcPath.HTML).on(<span class="string">"change"</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        browserSync.reload;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br><span class="line">gulp.task(<span class="string">"less"</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    gulp.src(srcPath.LESS)</span><br><span class="line">        .pipe(less())</span><br><span class="line">        .pipe(gulp.dest(srcPath.CSS))</span><br><span class="line">        .pipe(browserSync.stream());</span><br><span class="line">&#125;)</span><br><span class="line">gulp.task(<span class="string">"js-watch"</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    gulp.src(srcPath.JS)</span><br><span class="line">    .pipe(browserSync.stream());</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">gulp.task(<span class="string">"html"</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    gulp.src(srcPath.HTML)</span><br><span class="line">    .pipe(browserSync.stream());</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">gulp.task(<span class="string">"default"</span>, [<span class="string">"serve"</span>])</span><br></pre></td></tr></table></figure>
-<p>但是现在在编写代码的同时怎么还能持续的<code>command+R</code>呢，必须要用上时时刷新浏览器的功能啊，所以在代码编写的阶段，还要用到强大的<code>browser-sync</code>。这个插件最神奇的地方莫过于在一个终端操作，其他终端都能实时变化。比如在pc端填写表单，H5端也能实时的自动填写表单。<br><img src="http://7xpcne.com1.z0.glb.clouddn.com/NYGulp4120131606.gif" alt=""></p>
-<h3 id="发布阶段_/1">发布阶段 /1</h3><p>代码写完了，在各个端都测试过觉得样式交互都ok了，感觉可以放到测试环境看看了，这个时候就可以对js文件进行压缩混淆，对css文件进行压缩，对图片进行压缩了。<br>这个时候在这个项目的根目录下执行这样的语句。<br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">gulp</span> build</span><br></pre></td></tr></table></figure></p>
-<p>此时根目录下就会多了一个<code>dist</code>文件夹，就是上文提到的那个。这个<code>dist</code>文件夹里的文件都是用于线上/测试环境的，不能在这个文件夹里直接修改代码。</p>
-<h3 id="发布阶段_/2">发布阶段 /2</h3><p>如果需要这个项目中使用<code>sprite雪碧图</code>，可以换一个命令，目前NYGulp只支持到PC的雪碧图自动生成。这个命令可以根据特定的图片文件夹生成一张sprite图片，并且自动将css文件中的<code>background-image</code>的地址替换掉，自动设置背景的<code>position</code>属性。<br>图片需要放在这个<code>src/images/slice</code> 目录下。<strong>是必须的啊</strong><br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">gulp</span> buildspritePc</span><br></pre></td></tr></table></figure></p>
-<h3 id="更多思考">更多思考</h3><p>一个前端静态项目的js、less、图片的编译压缩通过gulp都自动进行着，最后还有一个问题，也是这个脚手架的最后一公里，就是如何自动化地根据项目中html文件中图片的相对路径将图片上传到公司所在的静态资源服务器，然后将相对路径自动替换成cdn地址。如果能做到这样，对于一个静态活动页面，就真正的做到了自动化，只用进行代码的书写，无需再处理图片的压缩上传。<br><a href="https://github.com/amfe/article/issues/8" target="_blank" rel="external">https://github.com/amfe/article/issues/8</a> , 事实上阿里的这个团队对前端自动化流的工具的研究已经很多了，从这篇文章里能找到解决思路，这也是我相继续深入的。<br>对于这样一个脚手架，在实际使用中已经较爽，可以利用 <a href="http://yeoman.io/" target="_blank" rel="external">Yeoman</a> 编写一个脚手架generator，这样在一个目录下执行一个命令就可以直接生成这个文件目录，免去了每次都要复制粘贴整个目录文档。</p>
-<hr>
-<p>参考资料：<br>browser-sync使用 <a href="http://segmentfault.com/a/1190000002919912" target="_blank" rel="external">http://segmentfault.com/a/1190000002919912</a><br>百度前端脚手架文档： <a href="https://github.com/ecomfe/spec/blob/master/directory.md#level1" target="_blank" rel="external">https://github.com/ecomfe/spec/blob/master/directory.md#level1</a><br>手淘前端自动化： <a href="https://github.com/amfe/article/issues/8" target="_blank" rel="external">https://github.com/amfe/article/issues/8</a><br>JGulp脚手架： <a href="http://segmentfault.com/a/1190000002658165" target="_blank" rel="external">http://segmentfault.com/a/1190000002658165</a><br>完！</p>
-<p>原创文章，转载请注明出处！</p>
-
-            
+            基于Gulp的前端静态页面开发工作流的思考写静态页面的时候最常见的脚手架就是下方这样的形式，本地新建一个项目文件，然后再在里面新建js、less文件夹，配合一个less处理，js压缩混淆的可视化工具，边写边处理，写完后再到tinyPng上压缩一下图片，需要将图片地址换成cdn的还需要将图片手动传到服务器上，最后大功告成！
+1234567root---js/---src/---less/---css/---images/---html
+但是可视化工具比如codekit的一个缺点就是可拓展性不高，局限于软件本身的功能。使用gulp以及强大的插件机制，可以带来无限的可能。首先的问题就是项目文件目录该如何规划。如果只是上面提到的形式，生产代码跟发布代码混在同一个文件下，容易混淆。如果针对生产环境和发
+            ...
           </span>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/12/07/基于Gulp的前端静态页面开发工作流的思考/#more" rel="contents">
+              閱讀全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -1594,7 +1264,7 @@
 
       <section class="site-overview sidebar-panel  sidebar-panel-active ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" src="/images/default_avatar.jpg" alt="Lyu Dada" itemprop="image"/>
+          <img class="site-author-image" src="https://avatars3.githubusercontent.com/u/8492963?v=3&s=460" alt="Lyu Dada" itemprop="image"/>
           <p class="site-author-name" itemprop="name">Lyu Dada</p>
         </div>
         <p class="site-description motion-element" itemprop="description"></p>
@@ -1657,7 +1327,7 @@
       <div class="footer-inner">
         <div class="copyright" >
   
-  &copy; 
+  &copy;  2015 - 
   <span itemprop="copyrightYear">2016</span>
   <span class="with-love">
     <i class="icon-next-heart fa fa-heart"></i>

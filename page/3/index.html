@@ -260,22 +260,22 @@
         
           <span itemprop="articleBody">
             
-              <p><code>笔记思想来自javascript语言精粹一书</code></p>
-<h3 id="函数调用有4种方式，且不同方式对this的处理有差异。">函数调用有4种方式，且不同方式对this的处理有差异。</h3><ul>
-<li>方法调用模式</li>
-<li>函数调用模式</li>
-<li>构造器调用模式</li>
-<li>apply调用模式</li>
-</ul>
-<h4 id="方法调用模式">方法调用模式</h4><p>把函数保存为对象的一个属性，且被调用时，称为方法调用，此时的<code>this</code>指向自己所属的对象。<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">	name: <span class="string">"dada"</span>,</span><br><span class="line">	getName: <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">this</span>.name;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">obj.getName()<span class="comment">//dada</span></span><br></pre></td></tr></table></figure></p>
-<h4 id="函数调用模式">函数调用模式</h4><p>这种模式即为最普遍的函数调用，但此时的<code>this</code>有混淆的地方。<br>以此模式调用函数的时候，<code>this</code>指向全局对象，<strong>并不会指向外层函数的this</strong>。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.name = <span class="string">"nanyang"</span>;</span><br><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">	name: <span class="string">"dada"</span>,</span><br><span class="line">	getName: <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="comment">//that = this; 解决办法</span></span><br><span class="line">		<span class="keyword">var</span> helper = <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">			<span class="keyword">this</span>.name = <span class="string">'xx!'</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		helper();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">obj.name()<span class="comment">//dada</span></span><br><span class="line"><span class="built_in">window</span>.name<span class="comment">//xx!</span></span><br></pre></td></tr></table></figure></p>
-<h4 id="构造器调用模式">构造器调用模式</h4><p>这个模式跟方法调用类似，this指向所属的新对象。<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Abc = <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">this</span>.name = <span class="string">'xxx'</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> Abc();</span><br><span class="line">a.name<span class="comment">//<span class="label">xxx</span></span></span><br></pre></td></tr></table></figure></p>
-<h4 id="apply调用模式">apply调用模式</h4><p><code>apply</code>允许我们自己选择this，感觉精粹里的说法很直白<code>apply接受两个参数，第一个是要绑定给this的值，第二个是参数的数组</code>。<br>我的解释是，我们可以调用任意的方法，然后将方法中的this指向的对象换成我们在<code>apply</code>中加进去的第一个参数。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> some_obj = &#123;</span><br><span class="line">	name: ‘ldd’;</span><br><span class="line">	say: <span class="function"><span class="keyword">function</span> <span class="params">(who)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> ‘hi’ + who + ‘I am’ + <span class="keyword">this</span>.name;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">Some_obj.say(<span class="string">"xyn"</span>) <span class="comment">//hi xyn, I am ldd;</span></span><br><span class="line">Var my_obj = &#123; name: <span class="string">"xxx"</span>&#125;;</span><br><span class="line">Some_obj.say.apply(my_obj, [<span class="string">'xyn'</span>])</span><br><span class="line"><span class="comment">//hi xyn, I am <span class="label">xxx</span></span></span><br><span class="line">原本say方法中的<span class="string">`this`</span>指向<span class="string">`some_obj`</span>对象，利用apply就可以将<span class="keyword">this</span>指向my_obj</span><br></pre></td></tr></table></figure></p>
-<p><strong>当然call跟apply的用法几乎一样，就是在第二个参数上的形式有一些变化</strong></p>
-<p>原创文章！转载请注明出处</p>
+            笔记思想来自javascript语言精粹一书
+函数调用有4种方式，且不同方式对this的处理有差异。
+方法调用模式
+函数调用模式
+构造器调用模式
+apply调用模式
 
-            
+方法调用模式把函数保存为对象的一个属性，且被调用时，称为方法调用，此时的this指向自己所属的对象。1234567var obj = &#123;	name: "dada",	getName: function () &#123;		return this.name;	&#125;&#125;obj.getName()//dada
+函数调用模式这种模式即为最普遍的函数调用，但此时的this有混淆的地方。以此模式调用函数的时候，this指向全局对象，并不会指向外层函数的this。12345678910111213window.n
+            ...
           </span>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/06/10/函数调用的四种方式/#more" rel="contents">
+              閱讀全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -368,21 +368,15 @@
         
           <span itemprop="articleBody">
             
-              <h2 id="关于BFC的一些事儿："><strong>关于BFC的一些事儿</strong>：</h2><p>阅读：穆乙 <a href="http://www.cnblogs.com/pigtail/" target="_blank" rel="external">http://www.cnblogs.com/pigtail/</a><br><a href="http://www.iyunlu.com/view/css-xhtml/55.html" target="_blank" rel="external">http://www.iyunlu.com/view/css-xhtml/55.html</a></p>
-<p><code>什么是BFC</code><br>BFC（Block Formatting Context），中文为块状格式化上下文。<br>按我的理解，就是触发BFC环境的元素在文档流中各自独立，谁也不碍着谁，这个元素的子元素还是按照普通的文档流进行排列。<br><strong>触发BFC常见的有几种方式</strong>：overflow不为visible，float不为none， display的值为table-cell, table-caption, inline-block中的任何一个， position为absolute<br>在IE中，个人理解BFC是hasLayout，而触发hasLayout的简便方法就是zoom: 1;</p>
-<p><strong>触发BFC的好处主要在两方面，第一点是清除浮动，第二点在于处理上下margin的塌陷。</strong></p>
-<p><code>BFC与清除浮动</code><br>在需要清除浮动的时候<br><code>1</code>overflow: hidden<br><img src="http://7xpcne.com1.z0.glb.clouddn.com/BFC1433772289741.png" alt="Alt text"><br><strong>解释如下：</strong><br>根据 CSS2.1 规范第 10.6.3 部分的高度计算规则，在进行普通流中的块级非替换元素的高度计算时，浮动子元素不参与计算。</p>
-<p>同时 CSS2.1 规范第10.6.7部分的高度计算规则，在计算生成了 block formatting context 的元素的高度时，其浮动子元素应该参与计算。</p>
-<p>所以，触发外部容器BFC，高度将重新计算。比如给outer加上属性overflow:hidden触发其BFC。</p>
-<p><code>2</code>触发BFC的元素与浮动元素不会重叠<br>若两个Div排列，第一个div浮动，此时两个div会重叠，但将第二个div触发BFC，则此两个div分开（横向）</p>
-<p><code>BFC与margin上下塌陷</code><br>在普通流中的两个元素，不管是在同级还是包含关系中，margin-top和margin-bottom接触就会塌陷只留下较大方。<br><strong>即使父元素触发BFC，里面的正常流中的子元素之间还是会发生塌陷。</strong><br>因为触发BFC的两个元素相对独立，所以解决了塌陷，这个比较好理解。<br>对于嵌套元素之间的塌陷，即下图：<br><img src="http://7xpcne.com1.z0.glb.clouddn.com/BFC1433775283824.png" alt="Alt text"></p>
-<p><strong>合理解释为：</strong><br>根据 CSS 2.1 8.3.1 Collapsing margins 第三条，生成 block formatting context 的元素不会和在流中的子元素发生空白边折叠。<br>所以在父元素上触发BFC即可。</p>
-<h4 id="清除浮动的两种方法："><strong>清除浮动的两种方法</strong>：</h4><p><code>1</code><br><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.container</span><span class="pseudo">:before</span>,</span><br><span class="line"><span class="class">.container</span><span class="pseudo">:after</span> &#123;</span><br><span class="line">  <span class="attribute">content</span>:<span class="string">""</span>;</span><br><span class="line">  <span class="attribute">display</span>:table;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class">.container</span><span class="pseudo">:after</span> &#123;</span><br><span class="line">  <span class="attribute">clear</span>:both;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class">.container</span> &#123;</span><br><span class="line">  <span class="attribute">zoom</span>:<span class="number">1</span>; <span class="comment">/* For IE 6/7 (trigger hasLayout) */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p><code>2</code><br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.container</span> <span class="rules">&#123;</span><br><span class="line">    <span class="rule"><span class="attribute">overflow</span>:<span class="value"> hidden</span></span>; <span class="comment">/* Clearfix! */</span></span><br><span class="line">    <span class="rule"><span class="attribute">zoom</span>:<span class="value"> <span class="number">1</span></span></span>;  <span class="comment">/* Triggering "hasLayout" in IE */</span></span><br><span class="line">    <span class="rule"><span class="attribute">display</span>:<span class="value"> block</span></span>; <span class="comment">/* Element must be a block to wrap around contents. Unnecessary if only using block-level elements. */</span></span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure></p>
-<p>原创文章，转载请注明出处！</p>
-
-            
+            关于BFC的一些事儿：阅读：穆乙 http://www.cnblogs.com/pigtail/http://www.iyunlu.com/view/css-xhtml/55.html
+什么是BFCBFC（Block Formatting Context），中文为块状格式化上下文。按我的理解，就是触发BFC环境的元素在文档流中各自独立，谁也不碍着谁，这个元素的子元素还是按照普通的文档流进行排列。触发BFC常见的有几种方式：overflow不为visible，float不为none， display的值为table-cell, table-caption, inline-block中的任何一个， position为absolute在IE中，个人理解BFC是hasLayout，而触发hasLay
+            ...
           </span>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/06/08/关于BFC的一些事儿/#more" rel="contents">
+              閱讀全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -475,19 +469,15 @@
         
           <span itemprop="articleBody">
             
-              <h3 id="原型、原型链">原型、原型链</h3><p>原型：对象。<br>先理一理<code>constructor、prototype、__proto__、Function、Object</code>等之间的关系。<br><figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function <span class="literal">A</span>() &#123;&#125;<span class="comment">;</span></span><br><span class="line"><span class="literal">A</span>.prototype == <span class="literal">A</span>.constructor.prototype //fasle ------<span class="number">1</span></span><br><span class="line"><span class="literal">A</span>.prototype == <span class="literal">A</span>.__proto__  </span><br><span class="line">//<span class="literal">false</span> ------<span class="number">2</span></span><br><span class="line"><span class="literal">A</span>.__proto__ == <span class="literal">A</span>.constructor.prototype </span><br><span class="line">//<span class="literal">true</span> -------<span class="number">3</span></span><br></pre></td></tr></table></figure></p>
-<p>解释：此时A是一个构造函数，也是一个函数，而函数是<code>Function</code>的实例。<br>所以A.constructor // Function ,回到第一条，构造函数的原型不等于Function的原型。<br>再来通俗解释<code>__proto__</code>：属性<code>__proto__</code>引用了创建这个对象的函数（构造函数）的prototype。<br>根据这个定义，第二条<code>A.__proto__</code>//Function.prototype<br><strong><strong>proto</strong>是某个实体对象的属性（所以A.prototype也有这个属性，且指向Object.prototype，因为A.prototype初始化是个空对象（Object的实例）），prototype则是构造器函数的属性</strong>。</p>
-<p>根据以上的理解，再配合一幅图来理解。<br><img src="http://7xpcne.com1.z0.glb.clouddn.com/prototype1430457225689.png" alt="Alt text"><br><img src="http://7xpcne.com1.z0.glb.clouddn.com/prototype1430457189873.png" alt="Alt text"></p>
-<p>图里的<code>__proto__</code>链就是传说中的原型链！，而原型链的作用跟作用域链相似，都是为了查找标识符（在我看来）。</p>
-<p>通过原型链实现继承时，不能使用对象字面量的方法创建原型方法<br><code>即</code>这样做原型先继承了实例，接着又重写了原型（对象字面量方法），导致继承失败。</p>
-<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">A</span><span class="params">()</span> </span>&#123;&#125;;</span><br><span class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> A();</span><br><span class="line">a.__proto__ == A.prototype <span class="comment">//true</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">A</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">B</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line">B.prototype = <span class="keyword">new</span> A();</span><br><span class="line">B.prototype.constructor = B;</span><br><span class="line"><span class="comment">//需要手动将constructor调整回到B</span></span><br><span class="line">b = <span class="keyword">new</span> B();</span><br></pre></td></tr></table></figure>
-<p>因为<code>B.prototype = new A()</code> 继承后，<code>B.prototype的__proto__</code>指向了<code>A.prototype</code>,而<code>A.prototype</code>有个<code>constructor属性</code>指向A所以<code>B.prototype.constructor</code>变成了A<br>如果不手动调整constructor的话<code>b.constructor</code> 会成A</p>
-<p><strong>constructor</strong>属性<br>这个属性引用的是一个构造函数。<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">A</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">&#125; </span><br><span class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> A();</span><br><span class="line"><span class="comment">//a.constructor →function A() &#123;&#125;</span></span><br><span class="line"><span class="keyword">var</span> b = <span class="keyword">new</span> a.constructor();</span><br></pre></td></tr></table></figure></p>
-<p>原创文章，转载请注明出处！</p>
-
-            
+            原型、原型链原型：对象。先理一理constructor、prototype、__proto__、Function、Object等之间的关系。123456function A() &#123;&#125;;A.prototype == A.constructor.prototype //fasle ------1A.prototype == A.__proto__  //false ------2A.__proto__ == A.constructor.prototype //true -------3
+解释：此时A是一个构造函数，也是一个函数，而函数是Function的实例。所以A.constructor // Function ,回到第一条，构造函数的原型不等于Function的原型。再来
+            ...
           </span>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/05/20/原型及原型链/#more" rel="contents">
+              閱讀全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -580,22 +570,19 @@
         
           <span itemprop="articleBody">
             
-              <h2 id="作用域">作用域</h2><ul>
-<li>首先从简单的方面去理解<code>变量提升</code>现象。在执行环境中，变量和<strong>函数声明</strong>(函数表达式不会)自动提升到最顶部，但变量赋值<code>undefined</code>，函数声明不会赋值<code>undefined</code>。<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="string">"outer"</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">funOne</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(a);<span class="comment">//undefined</span></span><br><span class="line">    <span class="keyword">var</span> a = <span class="string">"inner"</span></span><br><span class="line">&#125;</span><br><span class="line">funOne();</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>这个例子就能证明变量提升现象，此段代码相当于<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="string">"outer"</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">funOne</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> a;</span><br><span class="line">    <span class="built_in">console</span>.log(a);<span class="comment">//undefined</span></span><br><span class="line">    a = <span class="string">"inner"</span></span><br><span class="line">&#125;</span><br><span class="line">funOne();</span><br></pre></td></tr></table></figure></p>
-<p>至于为什么不是输出<code>outer</code>，这就牵扯到一句很重要的话：<strong>作用域是在<code>执行函数</code>时决定的，而不是在定义函数时</strong>。</p>
-<ul>
-<li>下面我就自己的白话解释下作用域是如何得到的。<br><code>首先</code>在定义函数的时候，即 function funOne() {}时，此时定义了一个作用域[[scope]],[[scope]]指向定义这个函数的环境，此例子这个环境就是全局环境，也可以把这个作用域看成一个对象，里面包含了全局环境中所有的变量，函数声明组成的键值对。<br><code>然后</code>代码解析到funOne()这个函数时，执行这个函数，此时真正决定这个函数作用域链的时刻到了。</li>
-<li>此时将发生跟前面提到的变量提升息息相关的事情。函数执行前夕，会进入<code>执行上下文</code>。这在段时间期间将发生如下工作：生成一个<code>活动对象</code>。并且1、函数的形参赋值或undefined，2、局部变量声明但赋值undefined，3、函数声明并赋值。接下来才开始逐句解析代码，该赋值赋值，该干嘛干嘛。</li>
-<li>通过刚才的函数定义函数调用，已经生成了两个对象，两个对象分别包含变量及值的键值对。而将两个对象串起来，就变成了<code>作用域链</code>。</li>
-<li>说白了，这个作用域链的作用是寻找变量标识名。还是在这个例子，调用函数时，进入这个函数，当解析到a时，就去作用域链中寻找a，先从活动对象找起，找不到再往上一级。</li>
-</ul>
-<p>原创文章，转载请注明出处！</p>
+            作用域
+首先从简单的方面去理解变量提升现象。在执行环境中，变量和函数声明(函数表达式不会)自动提升到最顶部，但变量赋值undefined，函数声明不会赋值undefined。123456var a = "outer";function funOne() &#123;    console.log(a);//undefined    var a = "inner"&#125;funOne();
 
-            
+
+这个例子就能证明变量提升现象，此段代码相当于1234567var a = "outer";function funOne() &#123;	var a;    console.log(a);//undefined    a = "inner"&#125;funOne();
+至于为什么不是输出oute
+            ...
           </span>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/05/11/作用域的理解/#more" rel="contents">
+              閱讀全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -653,7 +640,7 @@
 
       <section class="site-overview sidebar-panel  sidebar-panel-active ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" src="/images/default_avatar.jpg" alt="Lyu Dada" itemprop="image"/>
+          <img class="site-author-image" src="https://avatars3.githubusercontent.com/u/8492963?v=3&s=460" alt="Lyu Dada" itemprop="image"/>
           <p class="site-author-name" itemprop="name">Lyu Dada</p>
         </div>
         <p class="site-description motion-element" itemprop="description"></p>
@@ -716,7 +703,7 @@
       <div class="footer-inner">
         <div class="copyright" >
   
-  &copy; 
+  &copy;  2015 - 
   <span itemprop="copyrightYear">2016</span>
   <span class="with-love">
     <i class="icon-next-heart fa fa-heart"></i>
