@@ -1,12 +1,59 @@
-
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html class="theme-next   use-motion ">
 <head>
-  <meta charset="utf-8">
-  
-  <title>viewport翻译总结 | Lyu Dada</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="viewport详解（翻译+总结）来源：http://www.quirksmode.org/mobile/viewports.html首先需要了解的是css像素并不等于设备像素，因为存在一些情况比如300px的div却占了1000x1000的屏幕，这两者的像素并不相等。下文会经常出现css像素设备像素等名词。
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="viewport," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Lyu Dada" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.2" />
+
+
+
+
+
+
+<meta name="description" content="viewport详解（翻译+总结）来源：http://www.quirksmode.org/mobile/viewports.html首先需要了解的是css像素并不等于设备像素，因为存在一些情况比如300px的div却占了1000x1000的屏幕，这两者的像素并不相等。下文会经常出现css像素设备像素等名词。
 pc端1、screen.width&amp;amp;screen.height这是显示器的设备像">
 <meta property="og:type" content="article">
 <meta property="og:title" content="viewport翻译总结">
@@ -18,90 +65,186 @@ pc端1、screen.width&amp;amp;screen.height这是显示器的设备像">
 <meta name="twitter:title" content="viewport翻译总结">
 <meta name="twitter:description" content="viewport详解（翻译+总结）来源：http://www.quirksmode.org/mobile/viewports.html首先需要了解的是css像素并不等于设备像素，因为存在一些情况比如300px的div却占了1000x1000的屏幕，这两者的像素并不相等。下文会经常出现css像素设备像素等名词。
 pc端1、screen.width&amp;amp;screen.height这是显示器的设备像">
-  
-    <link rel="alternative" href="/atom.xml" title="Lyu Dada" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  <link rel="stylesheet" href="/css/style.css" type="text/css">
-  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
-  
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: '',
+    sidebar: 'post',
+    motion: true
+  };
+</script>
+
+  <title> viewport翻译总结 | Lyu Dada </title>
 </head>
-<body>
-<div id="container">
-  <div id="wrap">
-    <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Lyu Dada</a>
-      </h1>
-      
-        <h2 id="subtitle-wrap">
-          <a href="/" id="subtitle">to love and get love</a>
-        </h2>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-          <a class="main-nav-link" href="https://github.com/fromIRIS">MYGithub</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="http://www.baidu.com/baidu" method="get" accept-charset="utf-8" class="search-form">
-          <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="Search">
-          <input type="submit" value="" class="search-form-submit">
-          <input name=tn type=hidden value="bds">
-          <input name=cl type=hidden value="3">
-          <input name=ct type=hidden value="2097152">
-          <input type="hidden" name="si" value="yoursite.com">
-        </form>
-      </div>
-    </div>
-  </div>
-</header>
-    <div class="outer">
-      <section id="main"><article id="post-viewport翻译总结" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/12/22/viewport翻译总结/" class="article-date">
-  <time datetime="2015-12-22T03:20:57.000Z" itemprop="datePublished">2015-12-22</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/翻译/">翻译</a>
-  </div>
 
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-hk">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
   </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      viewport翻译总结
-    </h1>
+<![endif]-->
   
 
+
+
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Lyu Dada</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">to love and get love</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            歸檔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            標籤
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                viewport翻译总结
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            發表於
+            <time itemprop="dateCreated" datetime="2015-12-22T11:20:57+08:00" content="2015-12-22">
+              2015-12-22
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分類於
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/翻译/" itemprop="url" rel="index">
+                    <span itemprop="name">翻译</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+        </div>
       </header>
     
-    <div class="article-entry" itemprop="articleBody">
+
+
+    <div class="post-body">
+
       
-        <h3 id="viewport详解（翻译+总结）">viewport详解（翻译+总结）</h3><p>来源：<a href="http://www.quirksmode.org/mobile/viewports.html" target="_blank" rel="external">http://www.quirksmode.org/mobile/viewports.html</a><br>首先需要了解的是css像素并不等于设备像素，因为存在一些情况比如300px的div却占了1000x1000的屏幕，这两者的像素并不相等。下文会经常出现css像素设备像素等名词。</p>
+      
+
+      
+        <span itemprop="articleBody"><h3 id="viewport详解（翻译+总结）">viewport详解（翻译+总结）</h3><p>来源：<a href="http://www.quirksmode.org/mobile/viewports.html" target="_blank" rel="external">http://www.quirksmode.org/mobile/viewports.html</a><br>首先需要了解的是css像素并不等于设备像素，因为存在一些情况比如300px的div却占了1000x1000的屏幕，这两者的像素并不相等。下文会经常出现css像素设备像素等名词。</p>
 <h2 id="pc端">pc端</h2><p><strong>1、</strong><code>screen.width&amp;screen.height</code><br>这是显示器的设备像素大小，永远不变，并不是浏览器的，包含了整个屏幕。但并没有什么卵用。<br><strong>2、</strong><code>window.innerWidth</code><br>浏览器的可视区域宽度，如果用户通过浏览器的zoom缩放，innerWidth也会随时变化。是通过css的像素进行测量的，而不是通过设备屏幕像素。<br>比如，300px宽的elem在zoom放大后占满了整个屏幕，但此时的innerWidth是300px；<br>但这个情况并不适合opera浏览器，且在移动端会有很严重的兼容性情况<br><strong>3、</strong><code>window.pageYOffset &amp; window.pageXOffset</code><br>获取浏览器滚动了多少像素，这个值也是根据css像素取得的，缩放时，浏览器会试图将当前视图固定，所以缩放时，pageYOffset并不会变化（或变化很小）。<br><strong>4、</strong><code>viewport</code><br>默认情况下块级元素的宽度沾满了父级元素的100%，一直到html，而html的宽度占了浏览器宽度的100%<br>在理论上来讲，<code>&lt;html&gt;</code>的宽度被viewport的宽度限制。<code>&lt;html&gt;</code>的宽度占据了100%的viewport的宽度。而正巧，在pc端viewport的宽度就等于window的宽度。所以在pc端，viewport的宽度就等于<code>&lt;html&gt;</code>的宽度，也就等于浏览器的宽度.<br>同理，这里的浏览器宽度（window.innerWidth）是根据css像素度量的，所以也就出现了一个问题。<br>如果给一个div设置了100%的宽，这个具体的值是根据window的css像素算的，是body直接子辈。在zoom=100%的时候，div是整个浏览器的宽。但是如果zoom放大，此时window的宽度是根据css计算的，所以window宽度变小了，从而导致viewport的宽度值也变小了，从而导致div的宽度值也变小了，所以此时将页面朝右滚动，div会出现断层。<br><strong>html的宽度是由viewport的宽度限制的，可以把viewport看成一个节点，里面包裹着html</strong><br><strong>5、</strong><code>viewport的度量</code><br><code>document.documentElement.clientWidth</code><br>这个属性只是显示了viewport的值，无视html的设置的宽度值。<br><strong>如此来说，<code>document.documentElement.clientWidth</code>跟<code>window.innerWidth</code>岂不是都能取得viewport的值？</strong><br>clientWidth不包含浏览器滚动条的宽度，而innerWidth却包含了滚动条的宽度。而且早期IE并不支持innerWidth。但这两者都涉及视口的宽度，跟文档宽度没多大关系。<br><strong>6、</strong><code>document.documentElement.offsetWidth</code>这个属性取得是html的宽度。在正常情况的<code>offsetWidth</code>跟<code>clientWidth</code>的值是一样的，但前者是html的宽度，后者是viewport的 宽度，前面还讲到了viewport是包裹html的关系，viewport是父元素。所以当给html设置宽度，比如400px，那这个时候两个值就将不同。<br>但<code>offsetHeight</code>跟<code>clientHeight</code>的值就不一样了，前者将是整个html内容的高度（有滚动条的情况包含看不见的内容的高度）<br><strong>7、</strong><code>事件event返回的坐标参数</code><br><code>pageX pageY</code>返回了相对于html的鼠标坐标，基于css像素。<br><code>clientX clientY</code>返回了相对于viewport的鼠标坐标，基于css像素。<br><code>screenX screenY</code>返回了相对于screen屏幕（不是浏览器）的鼠标坐标，基于设备像素。<br>我们一般90%的情况都会用到pageX， pageY。<br><strong>8、</strong><code>媒体查询</code><br>媒体查询一般根据width进行判断。但官方有两种宽度模式可以选择。<br><code>width &amp; device-width</code><br>这里的width指的的viewport宽度，也就是clientWidth，当然是基于css像素的，而device指的是设备宽度屏幕screen不是window，基于设备像素。<br>在pc端99.999%使用width。</p>
 <h2 id="移动端">移动端</h2><p>最重要的问题集中在css，尤其是度量viewport的尺寸。<br>html元素的宽取自layout viewport，那么不同机型浏览器的layout是不同的，ios980px，android800px。<br>最基础的是两个视角：<br><code>visual viewport &amp; layout viewport</code><br>都是基于css度量。<br>George Cummins在Stack Overflow上对基本概念给出了最佳解释：</p>
 <p>把layout viewport想像成为一张不会变更大小或者形状的大图。现在想像你有一个小一些的框架，你通过它来看这张大图。（译者：可以理解为「管中窥豹」）这个小框架的周围被不透明的材料所环绕，这掩盖了你所有的视线，只留这张大图的一部分给你。你通过这个框架所能看到的大图的部分就是visual viewport。当你保持框架（缩小）来看整个图片的时候，你可以不用管大图，或者你可以靠近一些（放大）只看局部。你也可以改变框架的方向，但是大图（layout viewport）的大小和形状永远不会变。</p>
@@ -113,189 +256,400 @@ pc端1、screen.width&amp;amp;screen.height这是显示器的设备像">
 <p>layout viewport不参与这个计算<br><strong>16、initial-scale</strong><br>设置这个命令实际上做了两件事：<br>1、设置了初始缩放值zoom，根据上面的公式，再计算出visual viewport的宽度。<br>2、根据算出来的visual值就等于layout viewport的值。<br>所以当在viewport里只设置了initial-scale，计算出来的visual跟layout是一样的。</p>
 <p><strong>注意</strong>initial-scale的设置在安卓原生浏览器上是没用的，在安卓原生上只能=1是有效的，并且不能设置width<br>,但这个情况也只存在部分安卓原生浏览器上，很奇怪。</p>
 <p>翻译文章！</p>
-
+</span>
       
     </div>
-    <footer class="article-footer">
+
+    <footer class="post-footer">
       
-        <a data-url="http://yoursite.com/2015/12/22/viewport翻译总结/" data-id="ciigu64ua0014shwluachzqda" class="article-share-link" data-share="baidu">分享到</a>
+        <div class="post-tags">
+          
+            <a href="/tags/viewport/" rel="tag">#viewport</a>
+          
+        </div>
       
 
       
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/12/22/line-height与font-size的关系/" rel="next" title="line-height与font-size的关系">
+                <i class="fa fa-chevron-left"></i> line-height与font-size的关系
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/12/22/高性能动画/" rel="prev" title="高性能动画">
+                高性能动画 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
 
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/viewport/">viewport</a></li></ul>
-
+      
     </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
   </div>
-  
+
+
+        </div>
+
+        
+
+
+        
+  <div class="comments" id="comments">
     
-<nav id="article-nav">
-  
-    <a href="/2015/12/22/高性能动画/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">下一篇</strong>
-      <div class="article-nav-title">
-        
-          高性能动画
-        
+  </div>
+
+
       </div>
-    </a>
-  
-  
-    <a href="/2015/12/22/line-height与font-size的关系/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">上一篇</strong>
-      <div class="article-nav-title">line-height与font-size的关系</div>
-    </a>
-  
-</nav>
 
-  
-</article>
-
-</section>
       
-      <aside id="sidebar">
+        
   
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">分類</h3>
-    <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/css/">css</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/js/">js</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/书籍阅读/">书籍阅读</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端工程/">前端工程</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端性能/">前端性能</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/动画库/">动画库</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/源码/">源码</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/翻译/">翻译</a><span class="category-list-count">2</span></li></ul>
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
     </div>
   </div>
 
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">標簽</h3>
-    <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/BFC/">BFC</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Regexp/">Regexp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ajax/">ajax</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/">github</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gulp/">gulp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hammer/">hammer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js质量/">js质量</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lazyload/">lazyload</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/line-highe/">line-highe</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/property-attribute/">property&attribute</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tween/">tween</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/viewport/">viewport</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zepto-fullpage/">zepto.fullpage</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/作用域/">作用域</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/函数调用/">函数调用</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端性能/">前端性能</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端调试/">前端调试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/原型链/">原型链</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/点击穿透/">点击穿透</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/面向对象的js/">面向对象的js</a><span class="tag-list-count">1</span></li></ul>
-    </div>
-  </div>
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
 
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">標簽雲</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/BFC/" style="font-size: 10px;">BFC</a><a href="/tags/Regexp/" style="font-size: 10px;">Regexp</a><a href="/tags/ajax/" style="font-size: 10px;">ajax</a><a href="/tags/github/" style="font-size: 10px;">github</a><a href="/tags/gulp/" style="font-size: 10px;">gulp</a><a href="/tags/hammer/" style="font-size: 10px;">hammer</a><a href="/tags/http/" style="font-size: 10px;">http</a><a href="/tags/js质量/" style="font-size: 10px;">js质量</a><a href="/tags/lazyload/" style="font-size: 10px;">lazyload</a><a href="/tags/line-highe/" style="font-size: 10px;">line-highe</a><a href="/tags/property-attribute/" style="font-size: 10px;">property&attribute</a><a href="/tags/tween/" style="font-size: 10px;">tween</a><a href="/tags/viewport/" style="font-size: 15px;">viewport</a><a href="/tags/zepto-fullpage/" style="font-size: 10px;">zepto.fullpage</a><a href="/tags/作用域/" style="font-size: 10px;">作用域</a><a href="/tags/函数调用/" style="font-size: 10px;">函数调用</a><a href="/tags/前端性能/" style="font-size: 20px;">前端性能</a><a href="/tags/前端调试/" style="font-size: 10px;">前端调试</a><a href="/tags/原型链/" style="font-size: 10px;">原型链</a><a href="/tags/点击穿透/" style="font-size: 10px;">点击穿透</a><a href="/tags/面向对象的js/" style="font-size: 10px;">面向对象的js</a>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">歸檔</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">December 2015</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">2</span></li></ul>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">近期文章</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2015/12/22/tween/">tweenMax基础api的逐条随意翻译</a>
-          </li>
-        
-          <li>
-            <a href="/2015/12/22/click300延迟与点击穿透/">click300延迟与点击穿透</a>
-          </li>
-        
-          <li>
-            <a href="/2015/12/22/高性能动画/">高性能动画</a>
-          </li>
-        
-          <li>
-            <a href="/2015/12/22/viewport翻译总结/">viewport翻译总结</a>
-          </li>
-        
-          <li>
-            <a href="/2015/12/22/line-height与font-size的关系/">line-height与font-size的关系</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">友情鏈接</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="http://xiguabaobao.com" target="_blank">主题作者</a>
-          </li>
-        
-          <li>
-            <a href="http://reqianduan.com" target="_blank">热前端</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
       
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            本站概覽
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/default_avatar.jpg" alt="Lyu Dada" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">Lyu Dada</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description"></p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">24</span>
+              <span class="site-state-item-name">文章</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">9</span>
+              <span class="site-state-item-name">分類</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">21</span>
+              <span class="site-state-item-name">標籤</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#viewport详解（翻译+总结）"><span class="nav-number">1.</span> <span class="nav-text">viewport详解（翻译+总结）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pc端"><span class="nav-number"></span> <span class="nav-text">pc端</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#移动端"><span class="nav-number"></span> <span class="nav-text">移动端</span></a></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
     </div>
-    <footer id="footer">
+  </aside>
+
+
+      
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
   
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2015 Lyu Dada<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
-      .
-      Theme by <a href="https://github.com/xiangming/landscape-plus" target="_blank">Landscape-plus</a>
-    </div>
-  </div>
-</footer>
-  </div>
-  <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-    <a href="https://github.com/fromIRIS" class="mobile-nav-link">MYGithub</a>
-  
-</nav>
-  <!-- totop start -->
-<div id="totop">
-<a title="返回頂部"><img src="/img/scrollup.png"/></a>
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="icon-next-heart fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lyu Dada</span>
 </div>
 
-<!-- totop end -->
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 強力驅動
+</div>
+
+<div class="theme-info">
+  主題 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT
+  </a>
+</div>
 
 
-<!-- 百度分享 start -->
 
-<div id="article-share-box" class="article-share-box">
-  <div id="bdshare" class="bdsharebuttonbox article-share-links">
-    <a class="article-share-weibo" data-cmd="tsina" title="分享到新浪微博"></a>
-    <a class="article-share-weixin" data-cmd="weixin" title="分享到微信"></a>
-    <a class="article-share-qq" data-cmd="sqq" title="分享到QQ"></a>
-    <a class="article-share-renren" data-cmd="renren" title="分享到人人网"></a>
-    <a class="article-share-more" data-cmd="more" title="更多"></a>
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
   </div>
-</div>
-<script>window._bd_share_config={"common":{},"share":{"bdCustomStyle":"/css/bdshare.css"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];</script>
 
-<!-- 百度分享 end -->
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
 
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  
+  
+
+  
+    
+    
+
+  
+
+
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.2"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.2"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+<script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+<script type="text/javascript" src="/js/motion.js?v=0.4.5.2" id="motion.global"></script>
+
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.2" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    motionMiddleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    };
+  });
+</script>
 
 
 
+  <script type="text/javascript" src="/js/bootstrap.js"></script>
 
-<script src="/js/script.js" type="text/javascript"></script>
+  
+  
 
-</div>
+  
+  
+
 </body>
 </html>
