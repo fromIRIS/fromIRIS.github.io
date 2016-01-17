@@ -1,0 +1,727 @@
+<!doctype html>
+<html class="theme-next   use-motion ">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="js语言," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Lyu Dada" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.2" />
+
+
+
+
+
+
+<meta name="description" content="@(南洋)
+You don’t konw JS 阅读心得———by lyu dada
+javascript作用域
+一门语言需要一套设计良好的规则来存储变量，并且之后可以方便的找到这些变量，这逃规则被称为作用域。
+
+这也意味着当我们访问一个变量的时候，决定这个变量能否访问到的依据就是这个作用域。
+一、词法作用域作用域共有两种主要的工作模型，第一种是最为普通的，被大多数编程语言（包括javascrip">
+<meta property="og:type" content="article">
+<meta property="og:title" content="youDon'tKnowJs">
+<meta property="og:url" content="http://yoursite.com/2016/01/17/youDon-tKnowJs/index.html">
+<meta property="og:site_name" content="Lyu Dada">
+<meta property="og:description" content="@(南洋)
+You don’t konw JS 阅读心得———by lyu dada
+javascript作用域
+一门语言需要一套设计良好的规则来存储变量，并且之后可以方便的找到这些变量，这逃规则被称为作用域。
+
+这也意味着当我们访问一个变量的时候，决定这个变量能否访问到的依据就是这个作用域。
+一、词法作用域作用域共有两种主要的工作模型，第一种是最为普通的，被大多数编程语言（包括javascrip">
+<meta property="og:image" content="http://7xpcne.com1.z0.glb.clouddn.com/-1453026668155.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="youDon'tKnowJs">
+<meta name="twitter:description" content="@(南洋)
+You don’t konw JS 阅读心得———by lyu dada
+javascript作用域
+一门语言需要一套设计良好的规则来存储变量，并且之后可以方便的找到这些变量，这逃规则被称为作用域。
+
+这也意味着当我们访问一个变量的时候，决定这个变量能否访问到的依据就是这个作用域。
+一、词法作用域作用域共有两种主要的工作模型，第一种是最为普通的，被大多数编程语言（包括javascrip">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: '',
+    sidebar: 'post',
+    motion: true
+  };
+</script>
+
+  <title> youDon'tKnowJs | Lyu Dada </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-hk">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+
+
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Lyu Dada</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">to love and get love</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            歸檔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            標籤
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                youDon'tKnowJs
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            發表於
+            <time itemprop="dateCreated" datetime="2016-01-17T22:25:32+08:00" content="2016-01-17">
+              2016-01-17
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分類於
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/书籍阅读/" itemprop="url" rel="index">
+                    <span itemprop="name">书籍阅读</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><p>@(南洋)</p>
+<h2 id="You_don’t_konw_JS_阅读心得">You don’t konw JS 阅读心得</h2><p>———by lyu dada</p>
+<h3 id="javascript作用域">javascript作用域</h3><blockquote>
+<p>一门语言需要一套设计良好的规则来存储变量，并且之后可以方便的找到这些变量，这逃规则被称为作用域。</p>
+</blockquote>
+<p>这也意味着当我们访问一个变量的时候，决定这个变量能否访问到的依据就是这个作用域。</p>
+<h4 id="一、词法作用域">一、词法作用域</h4><p>作用域共有两种主要的工作模型，第一种是最为普通的，被大多数编程语言（包括javascript）采用的<code>词法作用域</code>，另一种叫做<code>动态作用域</code>。而我们平时所提及的作用域，就是这里所说的<code>词法作用域</code>。</p>
+<p>要了解词法作用域，必须要了解javascript引擎以及编译器的大概工作方式。一般程序中的源码在执行前会进行编译三步骤。</p>
+<ul>
+<li>分词/语法分析</li>
+<li>解析/语法分析</li>
+<li>代码生成</li>
+</ul>
+<p>而在分词/词法分析这个步骤，就已经确定了词法作用域。也就说作用域在我们书写代码的时候就已经确定了，引用书中的文字</p>
+<blockquote>
+<p>词法作用域就是定义在词法阶段的作用域，换句话说，词法作用域是由你在写代码时将变量和块作用域写在哪里来决定的。</p>
+</blockquote>
+<p>具体结合<code>编译器</code>、<code>作用域</code>、<code>引擎</code>来讲，编译器在分词阶段，针对特定的环境就会生成一个词法作用域，然后对源代码中的<code>var a = 3；</code>类似的声明进行识别，当遇到<code>var a</code>，编译器会询问作用域中是否有a变量，若无，则在作用域中新增一个a变量。编译完成之后，引擎执行编译后的代码，引擎在执行的过程中遇到<code>a</code>变量，会去作用域中查找是否有<code>a</code>变量，若有，则将<code>a</code>赋值2。对于<code>var a = 2；</code>一条语句会在两个过程中操作，正是变量提升现象的原因。（稍后讲到）</p>
+<p>那什么时候会生成一个词法作用域呢？</p>
+<h4 id="二、函数作用域">二、函数作用域</h4><p><img src="http://7xpcne.com1.z0.glb.clouddn.com/-1453026668155.png" alt="Alt text"></p>
+<p>这幅图所展示的三个气泡，就代表了三个作用域，而编译器遇到一个函数定义，就会生成一个作用域。例如当编译器遇到<code>foo函数</code>，会创建一个作用域，再将这个函数内部的标识符（a/b/bar）放到词法作用域中。这个步骤在编译阶段就完成了。当js引擎执行<code>foo函数</code>的时候，遇到<code>a</code>变量，就会去询问早就创建好的作用域是否有<code>a</code>变量存在。</p>
+<p>在作用域外，是无法访问作用域内的变量的。</p>
+<p>例如<br><figure class="highlight delphi"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span><span class="params">()</span> <span class="comment">&#123;</span><br><span class="line">	var a = 3;</span><br><span class="line">&#125;</span></span><br><span class="line"><span class="title">console</span>.<span class="title">log</span><span class="params">(a)</span>;</span> <span class="comment">//undefied</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>正是这个特性，可以被用来实现隐藏内部变量</strong><br>将重要变量声明放入一个函数声明的作用域中，可以防止被作用域外部的语句所引用甚至更改。</p>
+<p><strong>根据函数作用域，可以引申出如何判断一个函数是函数声明还是一个函数表达式。</strong><br>最重要的区别是他们的名称标识符将会绑定在何处。</p>
+<p>先声明一点，任何匿名函数都是可以添加名称标识符的。例如<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">setTimeout(<span class="function"><span class="keyword">function</span> <span class="title">timer</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="number">1</span>)</span><br><span class="line">&#125;, <span class="number">1000</span>)</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>对于函数声明，名称标识符是绑定在当前作用域上的。即可在函数当前作用域调用这个名称标识符。</li>
+<li>而函数表达式，名称标识符是绑定在自身的函数作用域中的。</li>
+</ul>
+<p>按照这个区别，来看以下几个函数。<br><figure class="highlight delphi"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo1</span><span class="params">()</span> <span class="comment">&#123;console.log(1)&#125;</span></span><br><span class="line"><span class="title">foo1</span><span class="params">()</span>;</span> <span class="comment">// 1</span></span><br></pre></td></tr></table></figure></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> bar = <span class="function"><span class="keyword">function</span> <span class="title">foo2</span><span class="params">()</span> </span>&#123;<span class="built_in">console</span>.log(<span class="number">1</span>)&#125;</span><br><span class="line">foo2() <span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="list">(<span class="keyword">function</span> foo3<span class="list">()</span> &#123;console.log<span class="list">(<span class="number">1</span>)</span>&#125;)</span><span class="list">()</span></span><br><span class="line">foo3<span class="list">()</span> // undefined</span><br></pre></td></tr></table></figure>
+<p>以上的函数就只有<code>foo1</code>是函数声明。</p>
+<h4 id="三、块作用域">三、块作用域</h4><p>在js语言中，除了函数，创建作用域的方式还可以通过块作用域。对于js而言，循环、ifelse块并没有创建块作用域的功能。</p>
+<p><strong>通过ES3规范的<code>try/catch</code>的catch语句可以创建一个块作用域，其中声明的变量仅在catch中有效。</strong><br>而<code>try-catch</code>也正是<code>let</code>关键字的向前兼容方。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line"> <span class="literal">undefined</span>(); <span class="comment">// 执行一个非法操作来强制制造一个异常</span></span><br><span class="line">&#125; <span class="keyword">catch</span>(err) &#123;</span><br><span class="line">	<span class="built_in">console</span>.log(err);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(err); <span class="comment">// err not found</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>ES6引入了<code>let</code>关键字，提供了除var以外的另一种变量声明方式，let为其声明的变量隐式地劫持了所在的块作用域。</strong><br><figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="reserved">let</span> bar = <span class="number">3</span>;</span><br><span class="line">		bar = someting(bar);</span><br><span class="line">		<span class="built_in">console</span>.log(bar)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(bar) <span class="regexp">//</span> <span class="literal">undefined</span></span><br></pre></td></tr></table></figure></p>
+<p>作于的一个中括号起到划分块作用域的作用，显示的区别于<code>var</code>等变量。我们可能在之后会修改代码，看到这个中括号会直白的认识到这个是一个块作用域。</p>
+<h4 id="四、变量提升">四、变量提升</h4><p>在第一节我已经提到了，对于<code>var a = 3;</code>这样一条语句，编译器通过分词、解析、最后生成机器可以读的代码。</p>
+<blockquote>
+<p>而javascript实际上会将其看成两个声明：<code>var a</code>、<code>a = 3</code>。第一个声明在编译阶段进行，第二个赋值声明会留在原地等待执行。</p>
+</blockquote>
+<p>所以在引擎工作去执行代码时，进入到函数作用域内时，首先会执行<code>var a</code>操作，而这个过程就好像变量从原先的位置被移动作用域最上面一样。<br><figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(a); <span class="regexp">//</span> <span class="literal">undefined</span></span><br><span class="line"><span class="reserved">var</span> a = <span class="number">3</span>;</span><br></pre></td></tr></table></figure></p>
+<p>相当于<br><figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var <span class="literal">a</span><span class="comment">;</span></span><br><span class="line">console.log(<span class="literal">a</span>)<span class="comment">; // undefined</span></span><br><span class="line"><span class="literal">a</span> = <span class="number">3</span><span class="comment">;</span></span><br></pre></td></tr></table></figure></p>
+<p>另外函数声明也会发生变量提升的现象（连实际函数值也提升，即可以在函数声明前调用）。而行数表达式<code>var a = function foo1() {}</code>发生提升的是a变量，函数本身不会发生提升。<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">foo(); <span class="comment">// 不是ReferenceError 而是 TypeError</span></span><br><span class="line"><span class="keyword">var</span> foo = <span class="function"><span class="keyword">function</span> <span class="title">bar</span><span class="params">()</span> </span>&#123;&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>ReferenceError  TypeError</strong><br>这是两个错误标记，第一个错误标记是查询变量时，若在作用域中查找不到这个变量则发出，第二个标记是能查找到变量（即使是endefined），但是这个变量被错误的调用（比如对null，undefined进行调用），发出。</p>
+<h3 id="作用域闭包">作用域闭包</h3><h4 id="一、经典的闭包">一、经典的闭包</h4><blockquote>
+<p>闭包是基于词法作用域书写代码时所产生的自然结果。</p>
+</blockquote>
+<p>基于词法作用域产生的结果，这有点类似于词法作用域的产生条件。这也意味着闭包在书写代码的时候就已经形成了。</p>
+<p>看一个最经典的闭包例子<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line">	<span class="function"><span class="keyword">function</span> <span class="title">bar</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(a); <span class="comment">//1</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> bar;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> baz = foo();</span><br><span class="line">baz();</span><br></pre></td></tr></table></figure></p>
+<p>基于这个经典的例子，结合书中的话</p>
+<blockquote>
+<p>一个函数在定义时的词法作用域以外的地方被调用，可以记住并访问原先所在的词法作用域时，就产生了闭包。也即被返回出去的函数被调用时依然持有对该作用域的引用。这个引用就是闭包。</p>
+</blockquote>
+<p>先确定一点，javascript中函数是可以作为值被传递的。基于这个特性，有多种方法可以行成闭包。只要在一个作用域中，将函数作为值传递到另一个词法作用域中并调用，就会形成闭包。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> a = <span class="number">2</span>;</span><br><span class="line">	<span class="function"><span class="keyword">function</span> <span class="title">baz</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(a);</span><br><span class="line">	&#125;</span><br><span class="line">	bar(baz);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bar</span><span class="params">(fn)</span> </span>&#123;</span><br><span class="line">	fn();</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 回调传递函数</span></span><br></pre></td></tr></table></figure></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fn;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> a = <span class="number">2</span>;</span><br><span class="line">	<span class="function"><span class="keyword">function</span> <span class="title">baz</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(a);</span><br><span class="line">	&#125;</span><br><span class="line">	fn = baz;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bar</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	fn();</span><br><span class="line">&#125;</span><br><span class="line">foo();</span><br><span class="line">bar(); <span class="comment">//2</span></span><br><span class="line"><span class="comment">// 间接传递函数</span></span><br></pre></td></tr></table></figure>
+<p>无论通过何种手段将内部函数传递到所在的词法作用域以外，它都会持有对原始定义作用域的引用，无论在何处执行这个函数都会使用闭包。</p>
+<h4 id="二、回调_==_闭包">二、回调 == 闭包</h4><p>再看上一节，回调中传递函数的例子。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> a = <span class="number">2</span>;</span><br><span class="line">	<span class="function"><span class="keyword">function</span> <span class="title">baz</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(a);</span><br><span class="line">	&#125;</span><br><span class="line">	bar(baz);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bar</span><span class="params">(fn)</span> </span>&#123;</span><br><span class="line">	fn();</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 回调传递函数</span></span><br></pre></td></tr></table></figure></p>
+<p>是将函数当做值并作为参数传递给函数。再来看<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">wait</span><span class="params">(message)</span> </span>&#123;</span><br><span class="line">	setTimeout(<span class="function"><span class="keyword">function</span> <span class="title">timer</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(message); <span class="comment">// hello world</span></span><br><span class="line">	&#125;, <span class="number">1000</span>)</span><br><span class="line">&#125;</span><br><span class="line">wait(<span class="string">'hello world'</span>);</span><br></pre></td></tr></table></figure></p>
+<p><code>setTimeout</code>作为js内置的工具函数，将<code>timer 函数</code>当做值传进去，在setTimeout定义函数内对传进来的<code>timer</code>进行了调用。类似于<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">setTimeout</span><span class="params">(fn)</span> </span>&#123;</span><br><span class="line">	<span class="comment">// 延迟多少毫秒</span></span><br><span class="line">	fn();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>回调函数<code>timer</code>在另一个词法作用域内调用，但是能访问原先作用域内的参数（message）。</p>
+<p>类似jquery中的事件绑定，涉及到传递回调函数，就都有闭包的产生！</p>
+<h4 id="三、闭包在循环中的表现">三、闭包在循环中的表现</h4><p>最令人困惑的闭包表现就是在循环中了。像我们刚刚提及到的setTimeout、事件绑定等回调函数都会产生闭包。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">1</span>; i &lt;= <span class="number">5</span>; i++) &#123;</span><br><span class="line">	setTimeout(<span class="function"><span class="keyword">function</span> <span class="title">timer</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="built_in">console</span>.log(i);</span><br><span class="line">	&#125;, i*<span class="number">1000</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这个循环的本意是想间隔1秒打印1、2、3、4、5，结果却每隔1秒输出了5次6！<br>结合在第二节中对setTimeout函数的解析，这个误区将很快解开。</p>
+<p>首先要明白for循环没有块作用域的概念，即在这个循环中5次迭代都是在同一个作用域中进行的。<br>要清楚<code>timer</code>函数不是在这个作用域中被调用的，它作为参数在其他的作用域中调用。<br><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">timer</span><span class="params">()</span> &#123;</span></span><br><span class="line">	console.<span class="built_in">log</span>(<span class="built_in">i</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这个函数包括其中的形式参数<code>i</code>原原本本的被传递，在迭代过程中<code>i</code>不会被赋值。<br>而五次迭代完成后，共用的作用域中的<code>i</code>的值已经变成了6 。在其他作用域中的<code>timer</code>函数调用过程中需要查询<code>i</code>，因为产生了闭包，<code>i</code>的值会去原始的作用域中查找，即全是<code>6</code>。</p>
+<p>得不到预期效果的错其实都在于for循环中共用一个作用域。想改进也很简单，即在迭代的过程中，创建对应的作用域。另外值得注意的一点是需要把每次迭代的<code>i</code>值传到作用域内。<br><figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">for<span class="list">(<span class="keyword">var</span> i = <span class="number">1</span><span class="comment">; i &lt;= 5; i++) &#123;</span></span><br><span class="line">	<span class="list">(<span class="keyword">function</span> <span class="list">(<span class="keyword">j</span>)</span> &#123;</span><br><span class="line">		setTimeout<span class="list">(<span class="keyword">function</span> timer <span class="list">()</span> &#123;</span><br><span class="line">			console.log<span class="list">(<span class="keyword">j</span>)</span></span><br><span class="line">		&#125;, j* <span class="number">1000</span>)</span></span><br><span class="line">	&#125;)</span><span class="list">(<span class="keyword">i</span>)</span></span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="四、闭包的垃圾回收">四、闭包的垃圾回收</h4><p>本来一个变量被使用完之后就可以利用垃圾回收机制进行垃圾回收，但因为闭包的产生，阻止了这一行为。<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">process</span><span class="params">(data)</span> </span>&#123;</span><br><span class="line">	<span class="comment">//</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> someReallyBigData = &#123;&#125;;</span><br><span class="line">process( someReallyBigData );</span><br><span class="line"><span class="keyword">var</span> <span class="variable">$btn</span> = $(<span class="string">'.j_Btn'</span>);</span><br><span class="line"><span class="variable">$btn</span>.on(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span> <span class="title">clicker</span><span class="params">()</span> </span>&#123;&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>这个例子中就是因为事件绑定机制中的传入了<code>clicker</code>回调函数，产生了闭包，引用着clicker所在的作用域，所以此处的someReallyBigData数据无法从内存中释放。</p>
+<p>解决办法也有，声明一个块作用域，让引擎清楚的知道没有必要保存someReallyBigData饿了。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">process</span><span class="params">(data)</span> </span>&#123;</span><br><span class="line">	<span class="comment">//</span></span><br><span class="line">&#125;</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">let</span> someReallyBigData = &#123;&#125;;</span><br><span class="line">	process( someReallyBigData );</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> $btn = $(<span class="string">'.j_Btn'</span>);</span><br><span class="line">$btn.on(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span> <span class="title">clicker</span><span class="params">()</span> </span>&#123;&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>阅读心得，转载请注明出处。</p>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/js语言/" rel="tag">#js语言</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/12/22/tween/" rel="next" title="tweenMax基础api的逐条随意翻译">
+                <i class="fa fa-chevron-left"></i> tweenMax基础api的逐条随意翻译
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+        </div>
+
+        
+
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </div>
+
+      
+        
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            本站概覽
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="https://avatars3.githubusercontent.com/u/8492963?v=3&s=460" alt="Lyu Dada" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">Lyu Dada</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description"></p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">25</span>
+              <span class="site-state-item-name">文章</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">9</span>
+              <span class="site-state-item-name">分類</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">22</span>
+              <span class="site-state-item-name">標籤</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#You_don’t_konw_JS_阅读心得"><span class="nav-number">1.</span> <span class="nav-text">You don’t konw JS 阅读心得</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#javascript作用域"><span class="nav-number">1.1.</span> <span class="nav-text">javascript作用域</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#一、词法作用域"><span class="nav-number">1.1.1.</span> <span class="nav-text">一、词法作用域</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二、函数作用域"><span class="nav-number">1.1.2.</span> <span class="nav-text">二、函数作用域</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三、块作用域"><span class="nav-number">1.1.3.</span> <span class="nav-text">三、块作用域</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#四、变量提升"><span class="nav-number">1.1.4.</span> <span class="nav-text">四、变量提升</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#作用域闭包"><span class="nav-number">1.2.</span> <span class="nav-text">作用域闭包</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#一、经典的闭包"><span class="nav-number">1.2.1.</span> <span class="nav-text">一、经典的闭包</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二、回调_==_闭包"><span class="nav-number">1.2.2.</span> <span class="nav-text">二、回调 == 闭包</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三、闭包在循环中的表现"><span class="nav-number">1.2.3.</span> <span class="nav-text">三、闭包在循环中的表现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#四、闭包的垃圾回收"><span class="nav-number">1.2.4.</span> <span class="nav-text">四、闭包的垃圾回收</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+      
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="icon-next-heart fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lyu Dada</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 強力驅動
+</div>
+
+<div class="theme-info">
+  主題 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+    
+    
+
+  
+
+
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.2"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.2"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+<script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+<script type="text/javascript" src="/js/motion.js?v=0.4.5.2" id="motion.global"></script>
+
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.2" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    motionMiddleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  <script type="text/javascript" src="/js/bootstrap.js"></script>
+
+  
+  
+
+  
+  
+
+</body>
+</html>
