@@ -35,7 +35,7 @@
 <link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="line-highe," />
+  <meta name="keywords" content="seajs," />
 
 
 
@@ -53,24 +53,23 @@
 
 
 
-<meta name="description" content="line-height与font-size的关系
-对于P元素，当文字超出一行时，决定每行之间的间隙的css是line-height和font-size
-
-&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;解释：P元素中有两行文字，每一行是一个inlineBox,其高对应的css是line-height。在inlineBox里有一个区域叫做content">
+<meta name="description" content="seajs在IE9及以下的window.load事件调用失败&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;最近在在项目中遇到一个情况。项目使用seajs作为模块加载器，在js文件中的define回调中我们把函数都放在$(function () {})回调中去执行，意味着在文档加载完成后执行。
+&amp;nbsp;&amp;nbsp;&amp;nbs">
 <meta property="og:type" content="article">
-<meta property="og:title" content="line-height与font-size的关系">
-<meta property="og:url" content="http://yoursite.com/2015/12/22/line-height与font-size的关系/index.html">
+<meta property="og:title" content="seajs模块加载器在IE9及以下window.onload失效">
+<meta property="og:url" content="http://yoursite.com/2016/01/22/seajs模块加载器在IE9及以下window-onload失效/index.html">
 <meta property="og:site_name" content="Lyu Dada">
-<meta property="og:description" content="line-height与font-size的关系
-对于P元素，当文字超出一行时，决定每行之间的间隙的css是line-height和font-size
-
-&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;解释：P元素中有两行文字，每一行是一个inlineBox,其高对应的css是line-height。在inlineBox里有一个区域叫做content">
+<meta property="og:description" content="seajs在IE9及以下的window.load事件调用失败&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;最近在在项目中遇到一个情况。项目使用seajs作为模块加载器，在js文件中的define回调中我们把函数都放在$(function () {})回调中去执行，意味着在文档加载完成后执行。
+&amp;nbsp;&amp;nbsp;&amp;nbs">
+<meta property="og:image" content="http://7xpcne.com1.z0.glb.clouddn.com/seajs-load-1453433652471.png">
+<meta property="og:image" content="http://7xpcne.com1.z0.glb.clouddn.com/seajs-load-1453433717727.png">
+<meta property="og:image" content="http://7xpcne.com1.z0.glb.clouddn.com/seajs-load-1453435088012.png">
+<meta property="og:image" content="http://7xpcne.com1.z0.glb.clouddn.com/seajs-load-1453439293592.png">
+<meta property="og:image" content="http://7xpcne.com1.z0.glb.clouddn.com/seajs-load-1453437393053.png">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="line-height与font-size的关系">
-<meta name="twitter:description" content="line-height与font-size的关系
-对于P元素，当文字超出一行时，决定每行之间的间隙的css是line-height和font-size
-
-&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;解释：P元素中有两行文字，每一行是一个inlineBox,其高对应的css是line-height。在inlineBox里有一个区域叫做content">
+<meta name="twitter:title" content="seajs模块加载器在IE9及以下window.onload失效">
+<meta name="twitter:description" content="seajs在IE9及以下的window.load事件调用失败&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;最近在在项目中遇到一个情况。项目使用seajs作为模块加载器，在js文件中的define回调中我们把函数都放在$(function () {})回调中去执行，意味着在文档加载完成后执行。
+&amp;nbsp;&amp;nbsp;&amp;nbs">
 
 
 
@@ -82,7 +81,7 @@
   };
 </script>
 
-  <title> line-height与font-size的关系 | Lyu Dada </title>
+  <title> seajs模块加载器在IE9及以下window.onload失效 | Lyu Dada </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-hk">
@@ -202,7 +201,7 @@
             
             
               
-                line-height与font-size的关系
+                seajs模块加载器在IE9及以下window.onload失效
               
             
           </h1>
@@ -211,26 +210,11 @@
         <div class="post-meta">
           <span class="post-time">
             發表於
-            <time itemprop="dateCreated" datetime="2015-12-22T11:14:34+08:00" content="2015-12-22">
-              2015-12-22
+            <time itemprop="dateCreated" datetime="2016-01-22T13:21:11+08:00" content="2016-01-22">
+              2016-01-22
             </time>
           </span>
 
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp; 分類於
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/css/" itemprop="url" rel="index">
-                    <span itemprop="name">css</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
           
 
           
@@ -250,52 +234,29 @@
       
 
       
-        <span itemprop="articleBody"><h2 id="line-height与font-size的关系">line-height与font-size的关系</h2><blockquote>
-<p>对于P元素，当文字超出一行时，决定每行之间的间隙的css是line-height和font-size</p>
-</blockquote>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;解释：P元素中有两行文字，每一行是一个<code>inlineBox</code>,其高对应的css是<code>line-height</code>。在<code>inlineBox</code>里有一个区域叫做<code>contentArea</code>，这里显示的是文字，其高对应的css是<code>font-size</code>。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>浏览器自动将contentArea区域设置在inlineBox区域的垂直居中位置。</strong><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;所以，当inlineBox的高大于contentArea的高，在视图里展现的样子是两行文字之间有一定的间隙，间隙的大小取决于两者高度的差值。</p>
-<blockquote>
-<p>接下来讲一下css属性中line-height继承问题。</p>
-</blockquote>
-<p>当在css中要继承父元素的line-height时，有几种写法：</p>
-<ul>
-<li><code>1、</code>px   </li>
-<li><code>2、</code>%</li>
-<li><code>3、</code>num </li>
-<li><code>4、</code>normal(1.2)</li>
-</ul>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>px</code> 当在父元素上使用px时，其子元素都会不顾自己的font-size而继承px的确切值。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这样造成的影响是子元素的inlineBox的高度都是相同，而子元素的font-size不同的话就会造成各个文字区块的行间距不同，影响美观。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>&amp;</code> 是将此时元素的font-size乘以%得到现有的line-hight，同px，子元素继承固定值。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>normal</code>相当于数字1.2 ，子元素同样继承固定的line-height。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<code>num</code>子元素只继承num这个数值，但具体line-height数值会跟每个子元素的自身font-size相乘得出line-height。</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">element</th>
-<th style="text-align:right">font-size</th>
-<th style="text-align:center">line-height</th>
-<th>after line-height</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">body</td>
-<td style="text-align:right">14</td>
-<td style="text-align:center">1.2</td>
-<td>28px</td>
-</tr>
-<tr>
-<td style="text-align:left">p</td>
-<td style="text-align:right">30</td>
-<td style="text-align:center">1.2</td>
-<td>36</td>
-</tr>
-<tr>
-<td style="text-align:left">h1</td>
-<td style="text-align:right">24</td>
-<td style="text-align:center">1.2</td>
-<td>28</td>
-</tr>
-</tbody>
-</table>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这样的效果是每个文字区块中的文字段落的行间距都是根据自己的font-size得出的，整体文字排版的行间距很统一。</p>
+        <span itemprop="articleBody"><h2 id="seajs在IE9及以下的window-load事件调用失败">seajs在IE9及以下的window.load事件调用失败</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;最近在在项目中遇到一个情况。项目使用seajs作为模块加载器，在js文件中的define回调中我们把函数都放在<code>$(function () {})</code>回调中去执行，意味着在文档加载完成后执行。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;但是这个页面是商品详情页，包含着大量的详情图片，众所周知，加载的图片都会影响最后的load时间。</p>
+<p><img src="http://7xpcne.com1.z0.glb.clouddn.com/seajs-load-1453433652471.png" alt="Alt text"></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;就是最后红色的load时间，而这个时间的长短会影响页面加载旋转菊花的时间，<img src="http://7xpcne.com1.z0.glb.clouddn.com/seajs-load-1453433717727.png" alt="Alt text"></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;而这个旋转菊花的转态非常影响用户体验（很多人看这个菊花转太久就直接走人了）</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;为了体验上的改进，项目中的详情页的商品详情区块都采用异步加载的方式加载。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;但是在<code>$(function () {})</code>中异步加载商品详情区块并没有什么用，还是会影响最后的load时间。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;所以最后采用的是在define回调中使用<code>window.onload</code>方法，强制把商品详情区块在window.onload之后执行，这样加载的图片就不会影响load时间了。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">addEventWhenOnload(<span class="built_in">window</span>,<span class="string">'load'</span>,<span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="comment">// 更多活动信息加载</span></span><br><span class="line">    <span class="keyword">new</span> LoadActivity().init();</span><br><span class="line">    <span class="comment">// 商品详情信息加载</span></span><br><span class="line">    <span class="keyword">new</span> LoadDetails().init();</span><br><span class="line">    <span class="keyword">new</span> DetailTab().init();</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>在现代浏览器上很正常:smile:<br><img src="http://7xpcne.com1.z0.glb.clouddn.com/seajs-load-1453435088012.png" alt="Alt text"></p>
+<p>商品详情区块的图片都在红线之后加载（红线代表load时间）。</p>
+<p>到这应该就圆满结束了。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;但是万恶的IE8、IE9的问题又出来了。在IE8/IE9下异步加载的区块都没执行了。相应的页面中详情图片区块都空了。</p>
+<p>一番搜索之后，问题找到了seajs上。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;seajs模块加载器的实现方法是动态的生成一个script，然后对这个script设置<code>async</code>属性。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;对这个async属性做个简单的介绍，就是这个外部脚本不会阻塞domtree的构建，异步下载，一旦下载就会执行。<br>具体的可以看我翻译的一篇文章<br><a href="http://lvdada.org/2015/11/12/%E7%A0%B4%E8%AF%91%E5%85%B3%E9%94%AE%E6%B8%B2%E6%9F%93%E8%B7%AF%E5%BE%84%EF%BC%88%E7%BF%BB%E8%AF%91%EF%BC%89/" target="_blank" rel="external">http://lvdada.org/2015/11/12/%E7%A0%B4%E8%AF%91%E5%85%B3%E9%94%AE%E6%B8%B2%E6%9F%93%E8%B7%AF%E5%BE%84%EF%BC%88%E7%BF%BB%E8%AF%91%EF%BC%89/</a></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这个机制本来对于我们之前的方案也没有影响，即使<br><img src="http://7xpcne.com1.z0.glb.clouddn.com/seajs-load-1453439293592.png" alt="Alt text"><br><code>item-detail.js</code>这个异步脚本会在蓝线之后再加载执行，但是jquery的<code>$(function () {})</code>的实现会判断目前文档是否到了domready状态，若执行的时候已经过了domready状态，就会立即执行。</p>
+<p>但是<code>async</code><strong>只支持IE10及以上！</strong></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;就是这个问题，在IE8、9浏览器上加载标有了<code>async</code>的外部脚本会什么时候开始加载执行呢，我们看实际的timeline。</p>
+<p><img src="http://7xpcne.com1.z0.glb.clouddn.com/seajs-load-1453437393053.png" alt="Alt text"></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;黄框就是加了<code>async</code>的脚本的加载执行时间，注意看图，加载的时间在load之后。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;现在就能清晰的知道原因了，业务js脚本在IE8/9下在load之后才加载，那在脚本中绑定的window.onload事件肯定就绑定不到了。</p>
+<h3 id="总结">总结</h3><p>在seajs中还是慎用window.onload啊。。</p>
 </span>
       
     </div>
@@ -304,7 +265,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/line-highe/" rel="tag">#line-highe</a>
+            <a href="/tags/seajs/" rel="tag">#seajs</a>
           
         </div>
       
@@ -313,17 +274,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/12/22/http-缓存/" rel="next" title="http+缓存">
-                <i class="fa fa-chevron-left"></i> http+缓存
+              <a href="/2016/01/17/youDon-tKnowJs/" rel="next" title="youDon'tKnowJs">
+                <i class="fa fa-chevron-left"></i> youDon'tKnowJs
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2015/12/22/viewport翻译总结/" rel="prev" title="viewport翻译总结">
-                viewport翻译总结 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -444,7 +401,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#line-height与font-size的关系"><span class="nav-number">1.</span> <span class="nav-text">line-height与font-size的关系</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#seajs在IE9及以下的window-load事件调用失败"><span class="nav-number">1.</span> <span class="nav-text">seajs在IE9及以下的window.load事件调用失败</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">1.1.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
