@@ -35,7 +35,7 @@
 <link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="点击穿透," />
+  <meta name="keywords" content="viewport," />
 
 
 
@@ -53,15 +53,22 @@
 
 
 
-<meta name="description" content="click300延迟与点击穿透由来：ios safari双击放大页面，由于浏览器大都具备这种特性，所以浏览器都约定在300毫秒的间隔来判断是否是双击还是单击，超过300毫秒还没第二次点击浏览器才判断此次点击是单击。点击穿透事件介绍：并不是说绑定了click事件然后产生了穿透，而是一系列因果集合而产生了穿透这个不需要的现象。产生穿透事件的条件：1、两个dom在屏幕的垂直方向是重叠的，并且z-inde">
+<meta name="description" content="原文：http://www.quirksmode.org/mobile/metaviewport/#t10
+第三种viewport多年前 我提到了移动端的浏览器有两种viewport：visual viewport很layout viewport。如果有必要可以重读这几篇文章。文章我假设这两个viewport的知识大家已经掌握了。
+ideal viewport结果表明存在第三种viewport，我">
 <meta property="og:type" content="article">
-<meta property="og:title" content="click300延迟与点击穿透">
-<meta property="og:url" content="http://yoursite.com/2015/12/22/click300延迟与点击穿透/index.html">
+<meta property="og:title" content="the-3th-viewport-translate">
+<meta property="og:url" content="http://yoursite.com/2016/01/27/the-3th-viewport-translate/index.html">
 <meta property="og:site_name" content="Lyu Dada">
-<meta property="og:description" content="click300延迟与点击穿透由来：ios safari双击放大页面，由于浏览器大都具备这种特性，所以浏览器都约定在300毫秒的间隔来判断是否是双击还是单击，超过300毫秒还没第二次点击浏览器才判断此次点击是单击。点击穿透事件介绍：并不是说绑定了click事件然后产生了穿透，而是一系列因果集合而产生了穿透这个不需要的现象。产生穿透事件的条件：1、两个dom在屏幕的垂直方向是重叠的，并且z-inde">
+<meta property="og:description" content="原文：http://www.quirksmode.org/mobile/metaviewport/#t10
+第三种viewport多年前 我提到了移动端的浏览器有两种viewport：visual viewport很layout viewport。如果有必要可以重读这几篇文章。文章我假设这两个viewport的知识大家已经掌握了。
+ideal viewport结果表明存在第三种viewport，我">
+<meta property="og:image" content="http://7xpcne.com1.z0.glb.clouddn.com/viewport-1453693967543.png">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="click300延迟与点击穿透">
-<meta name="twitter:description" content="click300延迟与点击穿透由来：ios safari双击放大页面，由于浏览器大都具备这种特性，所以浏览器都约定在300毫秒的间隔来判断是否是双击还是单击，超过300毫秒还没第二次点击浏览器才判断此次点击是单击。点击穿透事件介绍：并不是说绑定了click事件然后产生了穿透，而是一系列因果集合而产生了穿透这个不需要的现象。产生穿透事件的条件：1、两个dom在屏幕的垂直方向是重叠的，并且z-inde">
+<meta name="twitter:title" content="the-3th-viewport-translate">
+<meta name="twitter:description" content="原文：http://www.quirksmode.org/mobile/metaviewport/#t10
+第三种viewport多年前 我提到了移动端的浏览器有两种viewport：visual viewport很layout viewport。如果有必要可以重读这几篇文章。文章我假设这两个viewport的知识大家已经掌握了。
+ideal viewport结果表明存在第三种viewport，我">
 
 
 
@@ -73,7 +80,7 @@
   };
 </script>
 
-  <title> click300延迟与点击穿透 | Lyu Dada </title>
+  <title> the-3th-viewport-translate | Lyu Dada </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-hk">
@@ -193,7 +200,7 @@
             
             
               
-                click300延迟与点击穿透
+                the-3th-viewport-translate
               
             
           </h1>
@@ -202,26 +209,11 @@
         <div class="post-meta">
           <span class="post-time">
             發表於
-            <time itemprop="dateCreated" datetime="2015-12-22T11:32:09+08:00" content="2015-12-22">
-              2015-12-22
+            <time itemprop="dateCreated" datetime="2016-01-27T20:16:20+08:00" content="2016-01-27">
+              2016-01-27
             </time>
           </span>
 
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp; 分類於
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/js/" itemprop="url" rel="index">
-                    <span itemprop="name">js</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
           
 
           
@@ -241,8 +233,55 @@
       
 
       
-        <span itemprop="articleBody"><h1 id="click300延迟与点击穿透">click300延迟与点击穿透</h1><p><strong>由来：</strong>ios safari双击放大页面，由于浏览器大都具备这种特性，所以浏览器都约定在300毫秒的间隔来判断是否是双击还是单击，超过300毫秒还没第二次点击浏览器才判断此次点击是单击。<br>点击穿透事件介绍：并不是说绑定了click事件然后产生了穿透，而是一系列因果集合而产生了穿透这个不需要的现象。<br><strong>产生穿透事件的条件：</strong><br>1、两个dom在屏幕的垂直方向是重叠的，并且z-index不同。<br>2、采用touch系列的点击事件去点击朝外的dom，并且这个dom隐藏或者移开。<br>3、在下方的dom绑定了click或者默认的点击事件（a标签，buttom等）<br>只有满足上述条件才会触发穿透事件，就是点击外dom，外dom消失，但下边的dom也会触发click事件（比如跳转链接）<br><strong>产生此现象的原因：</strong><br>因为click的300延迟，导致用户体验不佳，所以很多人都会采用touch系列代替click。<br>在点击事件中，点击的顺序是这样的：<br><code>touchstart &gt; touchmove &gt; touchend &gt; click</code><br>而轮到click事件的时候还在再延迟了300毫秒，所以touchstart的触发速度是远大于click的，回到上述的产生穿透的条件中去<br>1、touchstart事件触发，外层dom消失，<strong>可是点击屏幕后会有个浏览器默认的click产生，首先就作用于当时click触发时点击的屏幕最外层的dom，即在重叠的条件下，zindex最大的dom，然后顺着dom树往上爬</strong><br>2、因为有300毫秒的延迟，所以在第一步的touchstart后，外层dom就消失了，等300毫秒后click触发了，等着他的dom却是在下面那层的dom（因为此时这个dom已经在最上层了），所以原本在下面的这个dom就触发了click事件。<br>所以说外层dom会消失是很重要的条件，如果外层dom没有消失，那延迟的click触发时还是作用在外层的dom上，而外层dom没绑定click事件。<br><strong>这就是穿透的原理。</strong><br><strong>如何解决穿透：</strong><br>1、顺着这个思路，既然每次单击是都会有个浏览器的click默认事件触发，既然我们不需要，那就把这个默认事件取消掉就好了，所以在js中加上这句话<br><figure class="highlight ocaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (ev.<span class="keyword">type</span> == <span class="symbol">'touchend'</span>) &#123;</span><br><span class="line">	ev.preventDefault<span class="literal">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>2、或者干脆给外层的dom绑定click事件，全部解决了。。对于关闭弹框啥的，300毫秒的延迟关闭还是可以接受的。<br>3、引入fastClick.js<br>公司里用的就是这个插件库，用了这个插件库，绑定touchstart不用担心引发迟来的click，直接绑定click也不会有300毫秒的延迟了，也就是很完美的解决了问题。</p>
+        <span itemprop="articleBody"><p>原文：<a href="http://www.quirksmode.org/mobile/metaviewport/#t10" target="_blank" rel="external">http://www.quirksmode.org/mobile/metaviewport/#t10</a></p>
+<h3 id="第三种viewport">第三种viewport</h3><p>多年前 我提到了移动端的浏览器有两种viewport：visual viewport很layout viewport。如果有必要可以重读这几篇文章。<a href="http://www.quirksmode.org/mobile/viewports2.html" target="_blank" rel="external">文章</a><br>我假设这两个viewport的知识大家已经掌握了。</p>
+<h4 id="ideal_viewport">ideal viewport</h4><p>结果表明存在第三种viewport，我把他叫做ideal viewport。这个viewport能将设备上的页面设置能最理想的尺寸。因此，每种设备的ideal viewport的尺寸是不一样的。</p>
+<p>在老的便宜的没有retina屏幕的机型上，ideal viewport跟物理像素一致，但这不是必须的。更新物理像素更高的设备保持旧的ideal viewport，因为这是最理想最适合设备的。</p>
+<p>直到iphone4s，不管是否有retina屏，他的ideal viewport都是320x480。因为320x480对于在这种iphone上的页面来说，是最理想的。</p>
+<p>关于idealviewport 最重要的两点内容：</p>
+<ol>
+<li>layout viewport能被设置成ideal viewport。<code>width=device-width和initial-scale=1</code>指令可以做到。</li>
+<li>所有的<code>scale</code>指令都是相对于ideal viewport的。无视layout viewport设置了多少，所以<code>maximum-scale=3</code>意味着最大的缩放值是ideal viewport的300%</li>
+</ol>
+<h4 id="寻找ideal_viewport">寻找ideal viewport</h4><p>读取到ideal viewport的值在某些情况下是有用的。<br>是的，你可以读取到。给页面设置一个如下显示的meta标签，然后使用<code>document.documentElement.clientWidth</code>读取到当前设备的ideal viewport。<br><figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta <span class="variable">name=</span><span class="string">"viewport"</span> <span class="variable">content=</span><span class="string">"width=device-width,initial-scale=1"</span>&gt;</span><br></pre></td></tr></table></figure></p>
+<p>如果上面这个方法你不能选择而导致你不能读取到ideal viewport的值，我希望<code>screen.width</code>可以帮助到你，但是只有BlackBerry能给出正确的信息。其他浏览器会得出不同的无用的信息。</p>
+<p>开放的问题：<code>screen.width</code>应该取得ideal viewport的值吗<br>赞成：这个属性至少应该取得有用的信息<br>反对：ideal viewport 跟物理像素一样无用</p>
+<p><img src="http://7xpcne.com1.z0.glb.clouddn.com/viewport-1453693967543.png" alt="Alt text"></p>
+<h4 id="layout_viewport">layout viewport</h4><p>在呈现页面之前，浏览器需要知道layout viewpoint的宽是多少。这个viewport的值是相对于css声明来计算的，例如<code>width：20%</code></p>
+<p>在没有任何指令的情况下，移动端浏览器会自己选择一个默认值，大部分是980px。这无关对错，只是浏览器供应商自己的选择。</p>
+<p>当你在meta viewport标签里设置了width=400或者其他任何数值，layout viewport会被设置成这个值，我们已经知道了。</p>
+<p>然而Android WebKit’s and IE 的最小layout viewport是320px，当设置的值小于320，会自动变为ideal viewport的值。</p>
+<p>有一种情况是layout viewport跟ideal viewport的值相同，这发生在设置了<code>width=device-width or initial-scale=1</code>。这是复杂的，因为safari和ie10有一些bugs，使用<code>inittial-scale</code>也是有陷阱的，但是这是普通的规则。</p>
+<h4 id="最小、最大的尺寸">最小、最大的尺寸</h4><p>最大的layout viewport的宽度是10000像素，我不是十分相信这个数字，因为浏览器不会允许你缩小到这个数值，到目前为止我是接受这个官方数字的。</p>
+<p>最小的layout viewport的值大约是1/10的ideal viewport，这也是最大的缩放等级。（layout viewport 永远不会变的比最小的visual viewport还要小）例外：Android WebKit and IE最小的layout viewport不会小于320px</p>
+<h4 id="缩放">缩放</h4><p>zoom缩放是狡猾的。理论上听起来很简单：决定用户缩放的缩放因素包含两个方面：</p>
+<ol>
+<li>我们不能直接读取缩放因素，取而代之的是我们不得不读取与缩放因素互相关联的visual viewport的宽度。<br>所以最小的缩放因素决定了最大的visual viewport的宽度，反之亦然。</li>
+<li>结果表明所有的缩放因素都是相对于ideal viewport的，不管当前的layout viewport的值是多少。</li>
+</ol>
+<p>然后就是关于名字的讨论，用Apple的语言来讲，zoom就是scale，类似meta viewport的指令<code>initial-scale, minimum-scale, and maximum-scale</code>，其他浏览器厂商被迫遵从为了保持对已经兼容了iphone的页面的兼容性。</p>
+<p>这三个指令预示着缩放因素，initial-scale=2意味着缩放到200%的ideal viewport的宽度。</p>
+<h4 id="公式">公式</h4><p>首先让我们定义公式：<br><figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">visual viewport <span class="variable">width</span> = ideal viewport <span class="variable">width</span> / zoom factor</span><br><span class="line">zoom factor = ideal viewport <span class="variable">width</span> / visual viewport <span class="variable">width</span></span><br></pre></td></tr></table></figure></p>
+<p>因此，ideal viewport为320px设置了缩放值2我们会得到160px的的visual viewport。layout viewport的宽度不参与计算。</p>
+<h4 id="最小、最大的缩放因素">最小、最大的缩放因素</h4><p>浏览器支持的最小和最大的缩放因素是多少呢？</p>
+<p>首先会有一个限制，visual viewport永远不会比layout viewport要宽，所以大多数情况下最下的缩放因素为<code>ideal viewport width / layout viewport width</code></p>
+<h4 id="initial-scale">initial-scale</h4><p>设置initial-scale指令实际上做了两件事：</p>
+<ol>
+<li>把页面的初始缩放因素设置了一个有意义的值，是相对于ideal viewport进行计算的，产生了visual viewport的宽度。</li>
+<li>根据刚刚计算得到的visual viewport的宽度值去设置layout viewport 的宽度值。</li>
+</ol>
+<p>让我们看看一台竖屏的iphone（译者：4s），我们设置<code>initial-scale=2</code>，并且不设置其他的指令。这个指令将visual viewport的宽设置为160px（320 /2），这应该不会让你感到惊讶。这就是缩放指令工作的方式。</p>
+<p>然而，这个指令同样让layout viewport的宽设置为160px，所以我们有一个缩放值最小状态下160px宽的页面。（visual viewport 不会变的比layout viewport更大，所以不能再缩小了）</p>
+<p>但是这没什么意义，如果要问我的意见我可能会说：完全没有任何意义。然而，毫无疑问的是浏览器的行为就是这样的。</p>
+<h4 id="浏览器bugs">浏览器bugs</h4><p>对于安卓，明显的，安卓允许在其值等于1的情况下，<code>initial-scale</code>去设置layout viewport的宽。并且不能设置<code>width</code>的值。所以只有在没有其他指令的情况下<code>initial-scale=1</code>的设置会启到作用。</p>
+<p>对于IE，他提供了错误的ideal viewport（320x320和不是320x480），而且IE假装所有initial-scale的值都为1，所有对于IE来讲设置initial-scale的值是无用的。</p>
+<h4 id="指令的混淆">指令的混淆</h4><p> 因为<code>initial-scale</code>能设置layout viewport的宽，你现在可以创建一个有争议的指令<br> <figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta <span class="variable">name=</span><span class="string">"viewport"</span> <span class="variable">coontent=</span><span class="string">"initial-scale=1, width=400"</span>&gt;</span><br></pre></td></tr></table></figure></p>
+<p> 现在会发生什么？浏览器得到混淆的指令，我们再回到4s上，</p>
+<ol>
+<li><code>initial-scale=1</code>告诉浏览器设置layout viewport的宽为320px</li>
+<li><code>width=400</code>告诉浏览器设置layout viewport 的宽为400px</li>
+</ol>
+<p>翻译文章！经验有限，慎用！</p>
 </span>
       
     </div>
@@ -251,7 +290,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/点击穿透/" rel="tag">#点击穿透</a>
+            <a href="/tags/viewport/" rel="tag">#viewport</a>
           
         </div>
       
@@ -260,17 +299,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/12/22/高性能动画/" rel="next" title="高性能动画">
-                <i class="fa fa-chevron-left"></i> 高性能动画
+              <a href="/2016/01/22/seajs模块加载器在IE9及以下window-onload失效/" rel="next" title="seajs模块加载器在IE9及以下window.onload失效">
+                <i class="fa fa-chevron-left"></i> seajs模块加载器在IE9及以下window.onload失效
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2015/12/22/tween/" rel="prev" title="tweenMax基础api的逐条随意翻译">
-                tweenMax基础api的逐条随意翻译 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -391,7 +426,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#click300延迟与点击穿透"><span class="nav-number">1.</span> <span class="nav-text">click300延迟与点击穿透</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#第三种viewport"><span class="nav-number">1.</span> <span class="nav-text">第三种viewport</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ideal_viewport"><span class="nav-number">1.1.</span> <span class="nav-text">ideal viewport</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#寻找ideal_viewport"><span class="nav-number">1.2.</span> <span class="nav-text">寻找ideal viewport</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#layout_viewport"><span class="nav-number">1.3.</span> <span class="nav-text">layout viewport</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#最小、最大的尺寸"><span class="nav-number">1.4.</span> <span class="nav-text">最小、最大的尺寸</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#缩放"><span class="nav-number">1.5.</span> <span class="nav-text">缩放</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#公式"><span class="nav-number">1.6.</span> <span class="nav-text">公式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#最小、最大的缩放因素"><span class="nav-number">1.7.</span> <span class="nav-text">最小、最大的缩放因素</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#initial-scale"><span class="nav-number">1.8.</span> <span class="nav-text">initial-scale</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#浏览器bugs"><span class="nav-number">1.9.</span> <span class="nav-text">浏览器bugs</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#指令的混淆"><span class="nav-number">1.10.</span> <span class="nav-text">指令的混淆</span></a></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
