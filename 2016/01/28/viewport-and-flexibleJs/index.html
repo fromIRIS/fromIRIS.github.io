@@ -1,0 +1,774 @@
+<!doctype html>
+<html class="theme-next   use-motion ">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="viewport," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Lyu Dada" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.2" />
+
+
+
+
+
+
+<meta name="description" content="viewport探索 flexible.js解读http://www.quirksmode.org/mobile/viewports.htmlhttp://www.quirksmode.org/mobile/viewports2.htmlhttp://www.quirksmode.org/mobile/metaviewport/#t10http://www.w3cplus.com/mobile/l">
+<meta property="og:type" content="article">
+<meta property="og:title" content="viewport-and-flexibleJs">
+<meta property="og:url" content="http://yoursite.com/2016/01/28/viewport-and-flexibleJs/index.html">
+<meta property="og:site_name" content="Lyu Dada">
+<meta property="og:description" content="viewport探索 flexible.js解读http://www.quirksmode.org/mobile/viewports.htmlhttp://www.quirksmode.org/mobile/viewports2.htmlhttp://www.quirksmode.org/mobile/metaviewport/#t10http://www.w3cplus.com/mobile/l">
+<meta property="og:image" content="http://7xpcne.com1.z0.glb.clouddn.com/viewport-1453953104575.png">
+<meta property="og:image" content="http://7xpcne.com1.z0.glb.clouddn.com/viewport-1453953119375.png">
+<meta property="og:image" content="http://7xpcne.com1.z0.glb.clouddn.com/viewport-1453953129374.png">
+<meta property="og:image" content="http://7xpcne.com1.z0.glb.clouddn.com/viewport-1453617924515.png">
+<meta property="og:image" content="http://7xpcne.com1.z0.glb.clouddn.com/viewport-1453618966971.png">
+<meta property="og:image" content="http://7xpcne.com1.z0.glb.clouddn.com/viewport-1453620161800.png">
+<meta property="og:image" content="http://7xpcne.com1.z0.glb.clouddn.com/viewport-1453959085296.png">
+<meta property="og:image" content="http://7xpcne.com1.z0.glb.clouddn.com/viewport-%E8%83%8C%E6%99%AF%E7%BC%BA%E5%A4%B1.gif">
+<meta property="og:image" content="http://7xpcne.com1.z0.glb.clouddn.com/viewport-1453627362062.png">
+<meta property="og:image" content="http://7xpcne.com1.z0.glb.clouddn.com/viewport-1453640203641.png">
+<meta property="og:image" content="http://7xpcne.com1.z0.glb.clouddn.com/viewport-1453909523104.png">
+<meta property="og:image" content="http://7xpcne.com1.z0.glb.clouddn.com/viewport-1453633924318.png">
+<meta property="og:image" content="http://7xpcne.com1.z0.glb.clouddn.com/viewport-%E6%94%BE%E5%A4%A7.gif">
+<meta property="og:image" content="http://7xpcne.com1.z0.glb.clouddn.com/viewport-%E6%94%BE%E5%A4%A7%E4%BC%98%E5%8C%96.gif">
+<meta property="og:image" content="http://7xpcne.com1.z0.glb.clouddn.com/viewport-1453910179713.png">
+<meta property="og:image" content="http://7xpcne.com1.z0.glb.clouddn.com/viewport-1453910238490.png">
+<meta property="og:image" content="http://7xpcne.com1.z0.glb.clouddn.com/viewport-1453910323569.png">
+<meta property="og:image" content="http://7xpcne.com1.z0.glb.clouddn.com/viewport-%E5%AE%89%E5%8D%93%E5%B7%A6%E5%8F%B3%E6%BB%91%E5%8A%A8.gif">
+<meta property="og:image" content="http://7xpcne.com1.z0.glb.clouddn.com/viewport-1453861548105.png">
+<meta property="og:image" content="http://7xpcne.com1.z0.glb.clouddn.com/viewport-1453861770598.png">
+<meta property="og:image" content="http://7xpcne.com1.z0.glb.clouddn.com/viewport-1453865034011.png">
+<meta property="og:image" content="http://7xpcne.com1.z0.glb.clouddn.com/viewport-1453865456333.png">
+<meta property="og:image" content="http://7xpcne.com1.z0.glb.clouddn.com/viewport-1453885901203.png">
+<meta property="og:image" content="http://7xpcne.com1.z0.glb.clouddn.com/viewport-1453886405621.png">
+<meta property="og:image" content="http://7xpcne.com1.z0.glb.clouddn.com/viewport-IMG_3850.JPG">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="viewport-and-flexibleJs">
+<meta name="twitter:description" content="viewport探索 flexible.js解读http://www.quirksmode.org/mobile/viewports.htmlhttp://www.quirksmode.org/mobile/viewports2.htmlhttp://www.quirksmode.org/mobile/metaviewport/#t10http://www.w3cplus.com/mobile/l">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: '',
+    sidebar: 'post',
+    motion: true
+  };
+</script>
+
+  <title> viewport-and-flexibleJs | Lyu Dada </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-hk">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+
+
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Lyu Dada</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">to love and get love</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            歸檔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            標籤
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                viewport-and-flexibleJs
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            發表於
+            <time itemprop="dateCreated" datetime="2016-01-28T17:56:39+08:00" content="2016-01-28">
+              2016-01-28
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><h2 id="viewport探索_flexible-js解读">viewport探索 flexible.js解读</h2><p><a href="http://www.quirksmode.org/mobile/viewports.html" target="_blank" rel="external">http://www.quirksmode.org/mobile/viewports.html</a><br><a href="http://www.quirksmode.org/mobile/viewports2.html" target="_blank" rel="external">http://www.quirksmode.org/mobile/viewports2.html</a><br><a href="http://www.quirksmode.org/mobile/metaviewport/#t10" target="_blank" rel="external">http://www.quirksmode.org/mobile/metaviewport/#t10</a><br><a href="http://www.w3cplus.com/mobile/lib-flexible-for-html5-layout.html" target="_blank" rel="external">http://www.w3cplus.com/mobile/lib-flexible-for-html5-layout.html</a></p>
+<blockquote>
+<p>这在这篇文章介绍了viewport的三种视口、以及等过此三视口分析了淘宝的flexible.js方案的实现原理。</p>
+</blockquote>
+<p>现代浏览器中实现缩放的方式，无怪乎都是「拉伸」像素。</p>
+<p>在屏幕上，首先介绍的两个概念。「css像素」、「设备像素」</p>
+<p>css像素与写在样式表中定义的宽的度量单位是一致的。</p>
+<p>可以这么理解，css像素和设备像素 是容纳的关系。在缩放倍数是200%的情况下，1个css像素容纳了4个设备像素。。<br><img src="http://7xpcne.com1.z0.glb.clouddn.com/viewport-1453953104575.png" alt="Alt text"> <img src="http://7xpcne.com1.z0.glb.clouddn.com/viewport-1453953119375.png" alt="Alt text"> <img src="http://7xpcne.com1.z0.glb.clouddn.com/viewport-1453953129374.png" alt="Alt text"></p>
+<p>缩放的作用就是改变一个css像素可以容纳设备像素的多少。</p>
+<h3 id="PC端">PC端</h3><p>在正常情况下，一css像素等于一设备像素。放大到200%的情况下，一个css像素等于四个设备像素。（宽2倍 高2倍）</p>
+<h4 id="window-innerWidth">window.innerWidth</h4><p>屏幕、页面有很多属性。</p>
+<ul>
+<li>screen.width</li>
+<li>window.innerWidth</li>
+<li>document.documentElement.clientWidth</li>
+<li>document.documentElement.offsetwidth</li>
+<li>等</li>
+</ul>
+<p>而这些属性的值的单位就是像素pixels。区别就是其中一些属性值的度量单位是「设备pixels」而大部分是「css pixels」</p>
+<p>window.innerWidth度量的是浏览器窗口的宽度。度量单位是css pixels。<br><img src="http://7xpcne.com1.z0.glb.clouddn.com/viewport-1453617924515.png" alt="Alt text"><br>window.innerWidth的例子。</p>
+<p><img src="http://7xpcne.com1.z0.glb.clouddn.com/viewport-1453618966971.png" alt="Alt text"></p>
+<p>这是缩放100%的情况。header的宽1220px ，几乎沾满了浏览器屏幕宽度，window.innerWidth的值为1231px，根据这个现状很容易证明window.innerWidth的度量单位是css pixels。</p>
+<p>现在将这个页面放大到200%。<br><img src="http://7xpcne.com1.z0.glb.clouddn.com/viewport-1453620161800.png" alt="Alt text"></p>
+<p>我们发现现在的window.innerWidth变为了刚才的一半。就是因为这个属性的度量单位是css 像素（包含多少css像素），衡量css像素的直观大小，跟页面中的dom的css大小比较就ok。</p>
+<p>看我们的页面，header还是1220px没有变。但是在浏览器中展示出来的却只有刚才的一半。由直观上的判断，目前浏览器窗口范围内的css宽的值为之前的一半。而这个值 就是当前window.innerWidth的值的大小。</p>
+<p>一个dom元素的css在数值上大小不变，而设备的像素大小是物理值，也不变，所以也符合之前提到的。缩放实际改变的是一个css像素容纳的设备像素的多少。</p>
+<p>viewport，用来约束网站中最顶级包含块元素<code>&lt;html&gt;</code>。</p>
+<p>默认「body」的宽度取自「HTML」，而「HTML」的宽度取自「viewport」，「viewport」的宽度正好等于「浏览器」窗口的宽度。</p>
+<p>可以把「viewport」当成比「html」更高一层的元素，不管我们有没有给「html」设置宽，<code>document.documentElement.clientWidth</code>取到的都是「viewport」的宽。而<code>window.innerWidth</code>能取到「浏览器」窗口的宽。在PC端这两者的区别仅仅区分在<code>window.innerWidth</code>包含滚动条的宽。<br><img src="http://7xpcne.com1.z0.glb.clouddn.com/viewport-1453959085296.png" alt="Alt text"></p>
+<p>这个定义有一个问题出现，红色背景设为100%宽，内元素设置min-width980px，当屏幕缩小到980以下时，会出现横向滚动条，但把滚动条右移就会发现背景缺失了。这就是因为100%的宽其实最大就是浏览器窗口的宽。当浏览器窗口小于980px时，红色背景也会缩小到小于980px，所以右划会出现空白。<br><img src="http://7xpcne.com1.z0.glb.clouddn.com/viewport-%E8%83%8C%E6%99%AF%E7%BC%BA%E5%A4%B1.gif" alt="Alt text"></p>
+<h4 id="offsetWidth">offsetWidth</h4><p><code>document.documentElement.offsetWidth</code>这个属性取得是html的宽度。（IE中度量的是viewport）</p>
+<p>如果将html当做一个块级元素来讲，html的宽默认为父元素的100%,高度默认被子元素撑开。<br>所以默认情况下，offsetWidth取得值是继承于viewport的宽，而viewport的宽等于浏览器窗口的宽。<br>而offsetHeight的值默认由子元素的高决定。<br>显式书写了html的height或者width的时候，offsetHeight/width取的就是显式设置的值。</p>
+<p>还有个情况就是设置html为100%的时候，实际上这个意思就是将html的高设置为viewport的高的100%，同理，viewport的高等于浏览器窗口的高。可以用window.innerHeight取得。</p>
+<p><img src="http://7xpcne.com1.z0.glb.clouddn.com/viewport-1453627362062.png" alt="Alt text"></p>
+<h4 id="pc端小结">pc端小结</h4><ol>
+<li><code>window.innerWidth</code>的度量单位是「css像素」，表象的概念就是当前浏览器窗口包含了多少css像素大小的dom。</li>
+<li>默认「body」的宽度取自「HTML」，而「HTML」的宽度取自「viewport」，「viewport」的宽度正好等于「浏览器」窗口的宽度。<h3 id="移动端">移动端</h3></li>
+</ol>
+<ul>
+<li>layout viewport</li>
+<li>visual viewport</li>
+</ul>
+<h4 id="layout_viewport和visual_viewport">layout viewport和visual viewport</h4><p>layout viewport的概念其实跟pc端的viewport是一样的，<strong>是作为html的”上层“元素</strong>。将宽继承给html。html内的各元素都是以layout viewport为基准进行布局的。但跟pc端不同的是，pc端的viewport的宽是由浏览器的窗口的宽决定的，用户可以手动拖动窗口改变宽的大小。但是移动端的不同平台的浏览器呈现不同的layout viewport。</p>
+<p>ios980px，android800px。</p>
+<p>将visual viewport想象成覆盖手机屏幕的一个框，这个框带有类似pc端缩放的功能，而且这个框的度量单位也是css像素。这就意味着，在layout viewport不变的情况，我们能看到多少css像素的东西，取决于这个框的缩放程度。默认情况下。大多数移动端浏览器会将visual viewport这个框缩放到与layout viewport相同。</p>
+<p>拿ios设备举例，layout viewport固定为980px，默认打开页面的情况下，visual viewport会将这个框缩放到980px。这样我们就能看到全部的内容了。</p>
+<p><img src="http://7xpcne.com1.z0.glb.clouddn.com/viewport-1453640203641.png" alt="Alt text"> <img src="http://7xpcne.com1.z0.glb.clouddn.com/viewport-1453909523104.png" alt="Alt text"></p>
+<p>默认情况下html元素的宽取自layout viewport，那么不同机型浏览器的layout是不同的，ios980px，android800px。</p>
+<p>所以在不设置任何条件的情况下，一个宽度是1220px的div在ios模拟器下是这样的。</p>
+<p><img src="http://7xpcne.com1.z0.glb.clouddn.com/viewport-1453633924318.png" alt="Alt text"></p>
+<p>html的宽继承自layout viewport，980px。多出的240px在layout viewport之外，需要通过滑动屏幕才能见到。</p>
+<p>在pc端我们通过<code>document.documentElement.clientWidth</code>取得viewport的宽度。</p>
+<p>但是移动端有layout和visual两个viewport，该怎么取值?</p>
+<p>之前讲到了layout viewport的概念跟pc端的viewport相近，都是来约束html元素的宽的。即html元素是以layout viewport作为参考系进行布局的。所以这里的<code>document.documentElement.clientWidth</code>能获取到layout viewport的宽度尺寸。</p>
+<p>在pc端是通过<code>window.innerWidth</code>来度量浏览器窗口的宽的，而在移动端，之前讲到的visual viewport模拟的那个框，就相当于浏览器的窗口。所以在移动端可以通过<code>window.innerWidth</code>来取得visual viewport的宽。其值会根据缩放的程度而改变。读到的值为当前屏幕上x方向的css像素的值。</p>
+<p>在pc端我们总结过<code>window.innerWidth</code>和<code>document.documentElement.clientWidth</code>在缩放不同的情况下只是相差一个滚动条的宽度。但是在移动端，<code>window.innerWidth（visual viewport）</code>和<code>document.documentElement.clientWidth（layout viewport）</code>在缩放的情况下值是不同的。原因在于移动端的<code>document.documentElement.clientWidth（layout viewport）</code>总是固定的。</p>
+<h4 id="viewport_meta标签">viewport meta标签</h4><figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">width</span>：控制 layout viewport 的大小。</span><br><span class="line"><span class="variable">height</span>：和 <span class="variable">width</span> 相对应，指定高度。</span><br><span class="line">initial-<span class="built_in">scale</span>：初始缩放比例，也即是当页面第一次 load 的时候缩放比例。</span><br><span class="line">maximum-<span class="built_in">scale</span>：允许用户缩放到的最大比例。</span><br><span class="line">minimum-<span class="built_in">scale</span>：允许用户缩放到的最小比例。</span><br><span class="line">user-scalable：用户是否可以手动缩放</span><br></pre></td></tr></table></figure>
+<p>width 设置layout viewport的宽度</p>
+<p>为什么要设置这个属性？</p>
+<p><img src="http://7xpcne.com1.z0.glb.clouddn.com/viewport-%E6%94%BE%E5%A4%A7.gif" alt="Alt text"></p>
+<p>我们之前提到过在原始的页面上visual viewport会自动将视口缩放到与layout viewport同宽，这样就能看到全部的内容，用户自然会放大页面，但是遇到较长的文字段落需要将屏幕左右滑动才能阅读完全。<br>在没有viewport meta标签之前可以这样优化。</p>
+<p><img src="http://7xpcne.com1.z0.glb.clouddn.com/viewport-%E6%94%BE%E5%A4%A7%E4%BC%98%E5%8C%96.gif" alt="Alt text"></p>
+<p>将html的宽度设置为375px,这样文字就能在一个页面内显示完全，放大的时候不需要左右滑动了。</p>
+<p>但是在初始化的时候内容太小，不易于阅读。</p>
+<p>于是苹果为了解决这个问题提出了viewport meta。</p>
+<p>目的之一就是可以手动的设置layout viewport的值。</p>
+<p>既然在移动端用不了这么大的像素宽度，那干脆就把layout viewport的值减小，visual viewport也会自动缩放在屏幕上显示所有的layout viewport的内容。</p>
+<p>但是我们之前也讲到了layout viewport的宽是限制HTML元素的宽度的。所以html元素内的元素的宽需要设置不大于layout viewport的宽度值，才能保证完全显示在visual viewport内。</p>
+<p><img src="http://7xpcne.com1.z0.glb.clouddn.com/viewport-1453910179713.png" alt="Alt text"><br><img src="http://7xpcne.com1.z0.glb.clouddn.com/viewport-1453910238490.png" alt="Alt text"><br><img src="http://7xpcne.com1.z0.glb.clouddn.com/viewport-1453910323569.png" alt="Alt text"></p>
+<p>此时对于viewport meta标签里只设置了width=300字段，依靠缩放的现象，visual viewport 和 layout viewport的宽度一致</p>
+<p>根据这个现象我们只要根据设计稿中规划好的宽度，进行viewport width的宽度相同的设置就可以了。依靠缩放原理就可以在全部机型上呈现一样的宽度。（高度是根据宽度自适应的）</p>
+<p>但是目前的viewport只设置了width，现在的页面用户还是可以进行手动缩放的，为了禁止手动缩放，需要增加一个字段<br><figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta <span class="variable">name=</span><span class="string">"viewport"</span> <span class="variable">content=</span><span class="string">"width=375"</span> <span class="variable">user-scalable=</span>no&gt;</span><br></pre></td></tr></table></figure></p>
+<p>但是这个<code>user-scalable=no</code>字段给部分安卓原生浏览器及部分安卓webview的自动缩放功能带来了限制。<br>本例中设置的layout viewport width为375px。</p>
+<p><img src="http://7xpcne.com1.z0.glb.clouddn.com/viewport-%E5%AE%89%E5%8D%93%E5%B7%A6%E5%8F%B3%E6%BB%91%E5%8A%A8.gif" alt="Alt text"></p>
+<p>本来应该在屏幕上正好填充内容的，现在出现了左右滚动条。<br>这个现象的原因就是layout viewport的宽度由viewport meta的width值设置成了375px，但是visual viewport的值只有360px，所以屏幕上只能显示360px的内容，剩下的需要左右滑动。</p>
+<p>至于这里为什么是360px，而不是其他的值。<br>来看看ideal viewport的概念。</p>
+<h4 id="ideal_viewport">ideal viewport</h4><p>最开始提到了visual viewport 和 layout viewport的概念。这两个值都是跟页面实际的大小有关的，但是这个ideal viewport，用最直观的话来讲，就是每一种机型所对应的屏幕尺寸，当然也是css像素来度量的。</p>
+<p><img src="http://7xpcne.com1.z0.glb.clouddn.com/viewport-1453861548105.png" alt="Alt text"><br><img src="http://7xpcne.com1.z0.glb.clouddn.com/viewport-1453861770598.png" alt="Alt text"></p>
+<p>拿Note2举例，就是刚刚gif里展示的那台机子，ideal viewport的值就是360px，而这个值与缩放值和visual viewport是息息相关的。是作为一个基准值。  （「ideal viewport」「缩放值」「visual viewport」三者息息相关）</p>
+<figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">visual viewport <span class="variable">width</span> = ideal viewport <span class="variable">width</span> / zoom factor</span><br></pre></td></tr></table></figure>
+<p>这个zoom factor缩放值之前也讲到过，在大部分情况下是自动计算的。拿note2举例，layout viewport的宽设置了375px（没有设置user-scalable=no），当前的ideal viewport的宽为360px。<br><figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta <span class="variable">name=</span><span class="string">"viewport"</span> <span class="variable">content=</span><span class="string">"width=375"</span>&gt;</span><br></pre></td></tr></table></figure></p>
+<p>页面自动缩放visual viewport会计算得为375。所以此时在屏幕的visual viewport能看到所有的layout viewport的宽度的内容。</p>
+<p><img src="http://7xpcne.com1.z0.glb.clouddn.com/viewport-1453865034011.png" alt="Alt text"></p>
+<p>一旦设置了<br><figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta <span class="variable">name=</span><span class="string">"viewport"</span> <span class="variable">content=</span><span class="string">"width=375, user-scalable=no"</span>&gt;</span><br></pre></td></tr></table></figure></p>
+<p>之后，在部分安卓原生浏览器以及安卓webview上，缩放值就不会自动计算了，而是取固定值1。<br>根据上述的计算公式，<br>visual viewport width =  360 / 1 = 360px<br>即这个时候页面呈现如下<br><img src="http://7xpcne.com1.z0.glb.clouddn.com/viewport-1453865456333.png" alt="Alt text"></p>
+<p>既然缩放值不会自动缩放，那么可以通过js去动态设置缩放值，看看能不能修复这个问题。</p>
+<p>再来看viewport meta的一个属性：<code>initial-scale</code> 这个值可以显式地设置缩放值。记着，根据上述的公式，缩放值是相对ideal viewport width进行缩放的。</p>
+<p>一个特殊的width的值<code>width=device-width</code>。设置这个值，浏览器会将当前页面的layout viewport的宽度设置为设备的ideal viewport的宽度。而layout viewport的值我们可以通过<code>document.documentElement.clientWidth</code>取得。</p>
+<p>设置initial-scale指令实际上做了两件事：</p>
+<ol>
+<li>把页面的初始缩放因素设置了一个有意义的值，是相对于ideal viewport进行计算的，产生了visual viewport的宽度。</li>
+<li>根据刚刚计算得到的visual viewport的宽度值去设置layout viewport 的宽度值。</li>
+</ol>
+<p>有了这些概念，开始我们的测试。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta name=<span class="string">"viewport"</span> content=<span class="string">"width=device-width, initial-scale = 1, user-scalable=no"</span> /&gt;<span class="comment">// 目的是讲当前页面的layout viewport设置成ideal viewport width</span></span><br><span class="line"><span class="keyword">var</span> idaelViewport = <span class="built_in">document</span>.documentElement.clientWidth; <span class="comment">// 取得当前页面的ideal viewport width</span></span><br><span class="line"><span class="keyword">var</span> visualViewport = <span class="number">375</span>;</span><br><span class="line">alert(idaelViewport)</span><br><span class="line"><span class="keyword">var</span> zoomView = idaelViewport/visualViewport;  <span class="comment">// 动态计算缩放值</span></span><br><span class="line">$(<span class="string">'.j_Viewport'</span>).attr(<span class="string">'content'</span>, <span class="string">'user-scalable=no, initial-scale='</span>+zoomView ); <span class="comment">// 动态设置viewport meta</span></span><br><span class="line">alert(zoomView)</span><br></pre></td></tr></table></figure></p>
+<p>问题是在某些安卓下initial-scale在设置成1的情况下才能通过计算设置layout viewport 和 visual viewport的值，所在在这个方案里这个也是失败的。</p>
+<p>基于上述的知识点，再来看淘宝出品flexible.js的实现原理就很简单了。</p>
+<p>flexible.js一共做了这么几件事，我们拿iphone5举例子，<br>iphone5的ideal viewport width为320。</p>
+<ol>
+<li>根据设备定义<code>dpr</code><figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (isIPhone) &#123;</span><br><span class="line">   // iOS下，对于<span class="number">2</span>和<span class="number">3</span>的屏，用<span class="number">2</span>倍的方案，其余的用<span class="number">1</span>倍方案</span><br><span class="line">   <span class="keyword">if</span> (devicePixelRatio &gt;= <span class="number">3</span> &amp;&amp; (!dpr || dpr &gt;= <span class="number">3</span>)) &#123;                </span><br><span class="line">       <span class="variable">dpr =</span> <span class="number">3</span>;</span><br><span class="line">   &#125; <span class="keyword">else</span> <span class="keyword">if</span> (devicePixelRatio &gt;= <span class="number">2</span> &amp;&amp; (!dpr || dpr &gt;= <span class="number">2</span>))&#123;</span><br><span class="line">       <span class="variable">dpr =</span> <span class="number">2</span>;</span><br><span class="line">   &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">       <span class="variable">dpr =</span> <span class="number">1</span>;</span><br><span class="line">   &#125;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">   // 其他设备下，仍旧使用<span class="number">1</span>倍的方案</span><br><span class="line">   <span class="variable">dpr =</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">scale =</span> <span class="number">1</span> / dpr;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>将iphone的不同型号划分为1、2、3<br>将安卓的dpr统一设为1<br>iphone5环境下，此时dpr=2，scale=0.5</p>
+<ol>
+<li><p>给html设置一个data-dpr属性</p>
+<figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">docEl</span>.setAttribute('<span class="typedef"><span class="keyword">data</span>-dpr', dpr);</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>动态设置viewport meta</p>
+<figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">metaEl = doc.createElement(<span class="string">'meta'</span>);</span><br><span class="line">metaEl.setAttribute(<span class="string">'name'</span>, <span class="string">'viewport'</span>);</span><br><span class="line">metaEl.setAttribute(<span class="string">'content'</span>, <span class="string">'initial-scale='</span> + <span class="keyword">scale</span> + <span class="string">', maximum-scale='</span> + <span class="keyword">scale</span> + <span class="string">', minimum-scale='</span> + <span class="keyword">scale</span> + <span class="string">', user-scalable=no'</span>);</span><br><span class="line"><span class="keyword">if</span> (docEl.firstElementChild) &#123;</span><br><span class="line">    docEl.firstElementChild.appendChild(metaEl);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    var wrap = doc.createElement(<span class="string">'div'</span>);</span><br><span class="line">    wrap.appendChild(metaEl);</span><br><span class="line">    doc.write(wrap.innerHTML);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p><img src="http://7xpcne.com1.z0.glb.clouddn.com/viewport-1453885901203.png" alt="Alt text"></p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta <span class="variable">name=</span><span class="string">"viewport"</span> <span class="variable">content=</span><span class="string">"initial-scale=0.5, maximum-scale=0.5, minimum-scale=0.5, user-scalable=no"</span>&gt;</span><br></pre></td></tr></table></figure>
+<p>现在在iphone5的环境，单独设置initial-scale=0.5有两个作用，之前也提到。根据公式<br><figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">visual viewport <span class="variable">width</span> = ideal viewport <span class="variable">width</span> / zoom factor</span><br></pre></td></tr></table></figure></p>
+<p>可以得到visual viewport width=320/0.5 = 640<br>就是讲此时页面的visual viewport width和layout viewport width的值都设置为640px。</p>
+<p>同时将html的宽也设置成640px。<br><img src="http://7xpcne.com1.z0.glb.clouddn.com/viewport-1453886405621.png" alt="Alt text"></p>
+<p>现在这个库已经把当前设备上的html宽度设置好了，不能缩放，visual viewport width和layout viewport width的值也相同，完全展示。</p>
+<p>接下来就是要处理页面中的元素的大小了。</p>
+<ol>
+<li>利用rem设置页面元素大小<figure class="highlight dos"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">function refresh<span class="comment">Rem()&#123;</span></span><br><span class="line">   var width = docEl.getBoundingClientRect().width;</span><br><span class="line">   <span class="flow">if</span> (width / dpr &gt; <span class="number">540</span>) &#123;</span><br><span class="line">       width = <span class="number">540</span> * dpr;</span><br><span class="line">   &#125;</span><br><span class="line">   var <span class="comment">rem = width / 10;</span></span><br><span class="line">   docEl.style.fontSize = <span class="comment">rem + 'px';</span></span><br><span class="line">   flexible.<span class="comment">rem = win.rem = rem;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>这段代码中的<code>docEl.getBoundingClientRect().width;</code>取得的就是html的宽，也就是当前页面的最大宽。<br><code>var rem = width / 10;</code><br>然后将宽度/10得到一个基准数，在iphone下，这个值就rem=640/10 = 64。<br><code>docEl.style.fontSize = rem + &#39;px&#39;;</code>将hmtl元素的fontSize设置为64px。</p>
+<p>rem的工作方式就是相对于html元素的fontSize值进行计算的。</p>
+<p>这个库的功能大概已经完成了，几段逻辑最后的目的就是将hmtl的fontSize值设置成64px，这该如何工作？</p>
+<p><img src="http://7xpcne.com1.z0.glb.clouddn.com/viewport-IMG_3850.JPG" alt="Alt text"></p>
+<p>我们一般拿到的设计稿都是750px的，默认将设计稿分成10份，将75px的像素对应一个rem，量的多少的像素相应的做一下换算，若量的的一张图片为30px，则对应的rem为30/75=0.4rem。然后在对应的页面里定义这个图片的宽就为0.4rem。</p>
+<p>这就是flexible.js的工作方式。</p>
+<p>原创文章，转载请注明出处。</p>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/viewport/" rel="tag">#viewport</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/01/27/the-3th-viewport-translate/" rel="next" title="the-3th-viewport-translate">
+                <i class="fa fa-chevron-left"></i> the-3th-viewport-translate
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+        </div>
+
+        
+
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </div>
+
+      
+        
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            本站概覽
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="https://avatars3.githubusercontent.com/u/8492963?v=3&s=460" alt="Lyu Dada" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">Lyu Dada</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description"></p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">28</span>
+              <span class="site-state-item-name">文章</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">9</span>
+              <span class="site-state-item-name">分類</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">23</span>
+              <span class="site-state-item-name">標籤</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#viewport探索_flexible-js解读"><span class="nav-number">1.</span> <span class="nav-text">viewport探索 flexible.js解读</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#PC端"><span class="nav-number">1.1.</span> <span class="nav-text">PC端</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#window-innerWidth"><span class="nav-number">1.1.1.</span> <span class="nav-text">window.innerWidth</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#offsetWidth"><span class="nav-number">1.1.2.</span> <span class="nav-text">offsetWidth</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#pc端小结"><span class="nav-number">1.1.3.</span> <span class="nav-text">pc端小结</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#移动端"><span class="nav-number">1.2.</span> <span class="nav-text">移动端</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#layout_viewport和visual_viewport"><span class="nav-number">1.2.1.</span> <span class="nav-text">layout viewport和visual viewport</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#viewport_meta标签"><span class="nav-number">1.2.2.</span> <span class="nav-text">viewport meta标签</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ideal_viewport"><span class="nav-number">1.2.3.</span> <span class="nav-text">ideal viewport</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+      
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="icon-next-heart fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lyu Dada</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 強力驅動
+</div>
+
+<div class="theme-info">
+  主題 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+    
+    
+
+  
+
+
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.2"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.2"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+<script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+<script type="text/javascript" src="/js/motion.js?v=0.4.5.2" id="motion.global"></script>
+
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.2" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    motionMiddleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  <script type="text/javascript" src="/js/bootstrap.js"></script>
+
+  
+  
+
+  
+  
+
+</body>
+</html>
