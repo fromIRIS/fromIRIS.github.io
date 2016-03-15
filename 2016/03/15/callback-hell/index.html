@@ -1,0 +1,720 @@
+<!doctype html>
+<html class="theme-next   use-motion ">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="callback," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Lyu Dada" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.2" />
+
+
+
+
+
+
+<meta name="description" content="callback hell翻译
+文章来源 http://callbackhell.com/
+
+回调地狱一篇如何进行javascript异步编程的指导文章。
+什么是“回调地狱”？javascript异步编程，或者说使用回调进行javascript编程，是很难凭直觉得到想要的返回值的。很多代码长的像下面一样：
+123456789101112131415161718192021222324fs.read">
+<meta property="og:type" content="article">
+<meta property="og:title" content="callback-hell">
+<meta property="og:url" content="http://yoursite.com/2016/03/15/callback-hell/index.html">
+<meta property="og:site_name" content="Lyu Dada">
+<meta property="og:description" content="callback hell翻译
+文章来源 http://callbackhell.com/
+
+回调地狱一篇如何进行javascript异步编程的指导文章。
+什么是“回调地狱”？javascript异步编程，或者说使用回调进行javascript编程，是很难凭直觉得到想要的返回值的。很多代码长的像下面一样：
+123456789101112131415161718192021222324fs.read">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="callback-hell">
+<meta name="twitter:description" content="callback hell翻译
+文章来源 http://callbackhell.com/
+
+回调地狱一篇如何进行javascript异步编程的指导文章。
+什么是“回调地狱”？javascript异步编程，或者说使用回调进行javascript编程，是很难凭直觉得到想要的返回值的。很多代码长的像下面一样：
+123456789101112131415161718192021222324fs.read">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: '',
+    sidebar: 'post',
+    motion: true
+  };
+</script>
+
+  <title> callback-hell | Lyu Dada </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-hk">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+
+
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Lyu Dada</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">to love and get love</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            歸檔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            標籤
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                callback-hell
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            發表於
+            <time itemprop="dateCreated" datetime="2016-03-15T15:47:04+08:00" content="2016-03-15">
+              2016-03-15
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><h2 id="callback_hell翻译">callback hell翻译</h2><blockquote>
+<p>文章来源 <a href="http://callbackhell.com/" target="_blank" rel="external">http://callbackhell.com/</a></p>
+</blockquote>
+<h2 id="回调地狱">回调地狱</h2><p>一篇如何进行javascript异步编程的指导文章。</p>
+<p>什么是“回调地狱”？<br>javascript异步编程，或者说使用回调进行javascript编程，是很难凭直觉得到想要的返回值的。很多代码长的像下面一样：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">fs.readdir(source, <span class="function"><span class="keyword">function</span> <span class="params">(err, files)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (err) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'Error finding files: '</span> + err)</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    files.forEach(<span class="function"><span class="keyword">function</span> <span class="params">(filename, fileIndex)</span> </span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(filename)</span><br><span class="line">      gm(source + filename).size(<span class="function"><span class="keyword">function</span> <span class="params">(err, values)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (err) &#123;</span><br><span class="line">          <span class="built_in">console</span>.log(<span class="string">'Error identifying file size: '</span> + err)</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          <span class="built_in">console</span>.log(filename + <span class="string">' : '</span> + values)</span><br><span class="line">          aspect = (values.width / values.height)</span><br><span class="line">          widths.forEach(<span class="function"><span class="keyword">function</span> <span class="params">(width, widthIndex)</span> </span>&#123;</span><br><span class="line">            height = <span class="built_in">Math</span>.round(width / aspect)</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">'resizing '</span> + filename + <span class="string">'to '</span> + height + <span class="string">'x'</span> + height)</span><br><span class="line">            <span class="keyword">this</span>.resize(width, height).write(dest + <span class="string">'w'</span> + width + <span class="string">'_'</span> + filename, <span class="function"><span class="keyword">function</span><span class="params">(err)</span> </span>&#123;</span><br><span class="line">              <span class="keyword">if</span> (err) <span class="built_in">console</span>.log(<span class="string">'Error writing file: '</span> + err)</span><br><span class="line">            &#125;)</span><br><span class="line">          &#125;.bind(<span class="keyword">this</span>))</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>看这个金字塔形状还有到处以<code>})</code>的结尾，是的！这就是著名的回调地狱。</p>
+<p>造成回调地狱的原因在于，一些开发者想要用一种看起来是从上到下顺序执行的一种方式进行javascript编码。多数开发者都犯了这种错误。其他像<code>c/ruby/python</code>一样的语言不出意外地在执行时都是无论在第一行发生了什么，都会在第二行开始前结束，正如你接下来会看到的，javascript是不同的。</p>
+<h3 id="什么是回调？">什么是回调？</h3><p>回调只是使用javascript函数的一个约定俗成的名称。在javascript语法里没有专门的一个称为回调的名词。这只是一个约定俗成。跟大部分直接返回结果的函数不同，使用回调的函数会花费一些时间处理结果。<code>asynchronous</code>简称<code>async</code>只是意味着花费一些时间或发生在将来，而不是现在。通常情况下回调被使用在处理<code>I/O</code>上，类似于下载，读取文件，或处理大数据上等等。</p>
+<p>当你调用一个普通的函数你可以使用他的返回值。</p>
+<figure class="highlight nimrod"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> <span class="literal">result</span> = multiplyTwoNumbers(<span class="number">5</span>, <span class="number">10</span>)</span><br><span class="line">console.log(<span class="literal">result</span>)</span><br><span class="line">// <span class="number">50</span> gets printed <span class="keyword">out</span></span><br></pre></td></tr></table></figure>
+<p>然而，使用回调的异步的函数不会立马得到返回值。</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">var</span> photo = <span class="function"><span class="title">downloadPhoto</span><span class="params">(<span class="string">'http://coolcats.com/cat.gif'</span>)</span></span></span><br><span class="line"><span class="comment">// photo is 'undefined'!</span></span><br></pre></td></tr></table></figure>
+<p>在这个例子gif图可以能花费大量时间下载，你并不像让你的程序在等待下载结束前暂停（又称 阻塞）。</p>
+<p>相反，这段应该在下载后才执行的代码在一个函数中完成，这就是回调！你把这个回调传递给了<code>downloadPhoto</code>函数，这个函数在下载完成后会调用你的回调（e.g. 稍后调用），然后将值传递给<code>photo</code>参数。（出错的情况下会传值给error）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">downloadPhoto(<span class="string">'http://coolcats.com/cat.gif'</span>, handlePhoto)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">handlePhoto</span> <span class="params">(error, photo)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (error) <span class="built_in">console</span>.error(<span class="string">'Download error!'</span>, error)</span><br><span class="line">  <span class="keyword">else</span> <span class="built_in">console</span>.log(<span class="string">'Download finished'</span>, photo)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'Download started'</span>)</span><br></pre></td></tr></table></figure>
+<p>开发者理解回调最大的障碍就是理解程序运行时的执行顺序。在这个例子中三件事情发生。第一件事<code>handlePhoto</code>函数被声明了，然后<code>downloadPhoto</code>函数被调用并将<code>handlePhoto</code>函数作为回调传递进来，最后<code>Download started</code>打印。</p>
+<p>值得注意的是<code>handlePhoto</code>函数目前为止还没有被调用。这个函数只是被创建被当做回调被传递进<code>downloadPhoto</code>函数。但直到<code>downloadPhoto</code>函数完成他的任务前<code>handlePhoto</code>是不会被调用的。取决于网速这可能会花费大量时间。</p>
+<p>这个例子目的是展示了两个重要的内容：</p>
+<ul>
+<li><code>handlePhoto</code>回调只是存储一些稍后执行的代码块</li>
+<li>代码执行的顺序将不会是从上到下的，这取决于什么时候完成。</li>
+</ul>
+<h3 id="我如何解决回调地狱？">我如何解决回调地狱？</h3><p>回调地狱造成的原因是差劲的编码实践，幸运的是书写优美的代码没这么难！</p>
+<h4 id="1-保持你的代码是有易懂的">1.保持你的代码是有易懂的</h4><p>以下是使用<code>browser-request</code>请求ajax的浏览器端js代码。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> form = <span class="built_in">document</span>.querySelector(<span class="string">'form'</span>)</span><br><span class="line">form.onsubmit = <span class="function"><span class="keyword">function</span> <span class="params">(submitEvent)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> name = <span class="built_in">document</span>.querySelector(<span class="string">'input'</span>).value</span><br><span class="line">  request(&#123;</span><br><span class="line">    uri: <span class="string">"http://example.com/upload"</span>,</span><br><span class="line">    body: name,</span><br><span class="line">    method: <span class="string">"POST"</span></span><br><span class="line">  &#125;, <span class="function"><span class="keyword">function</span> <span class="params">(err, response, body)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> statusMessage = <span class="built_in">document</span>.querySelector(<span class="string">'.status'</span>)</span><br><span class="line">    <span class="keyword">if</span> (err) <span class="keyword">return</span> statusMessage.value = err</span><br><span class="line">    statusMessage.value = body</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这段代码有两个匿名函数，让我们给他名字！</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> form = <span class="built_in">document</span>.querySelector(<span class="string">'form'</span>)</span><br><span class="line">form.onsubmit = <span class="function"><span class="keyword">function</span> <span class="title">formSubmit</span> <span class="params">(submitEvent)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> name = <span class="built_in">document</span>.querySelector(<span class="string">'input'</span>).value</span><br><span class="line">  request(&#123;</span><br><span class="line">    uri: <span class="string">"http://example.com/upload"</span>,</span><br><span class="line">    body: name,</span><br><span class="line">    method: <span class="string">"POST"</span></span><br><span class="line">  &#125;, <span class="function"><span class="keyword">function</span> <span class="title">postResponse</span> <span class="params">(err, response, body)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> statusMessage = <span class="built_in">document</span>.querySelector(<span class="string">'.status'</span>)</span><br><span class="line">    <span class="keyword">if</span> (err) <span class="keyword">return</span> statusMessage.value = err</span><br><span class="line">    statusMessage.value = body</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>正如我们所能看到的给函数命名非常简单并且有立显的好处：</p>
+<ul>
+<li>由于描述性的函数名字使代码更易读。</li>
+<li>当意外发生的时候你可以得到确切函数名提及的堆栈信息而不是「匿名函数」</li>
+<li>能够移动函数或者通过名字引用函数</li>
+</ul>
+<p>现在让我们把函数移动到程序的顶部：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.querySelector(<span class="string">'form'</span>).onsubmit = formSubmit</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">formSubmit</span> <span class="params">(submitEvent)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> name = <span class="built_in">document</span>.querySelector(<span class="string">'input'</span>).value</span><br><span class="line">  request(&#123;</span><br><span class="line">    uri: <span class="string">"http://example.com/upload"</span>,</span><br><span class="line">    body: name,</span><br><span class="line">    method: <span class="string">"POST"</span></span><br><span class="line">  &#125;, postResponse)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">postResponse</span> <span class="params">(err, response, body)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> statusMessage = <span class="built_in">document</span>.querySelector(<span class="string">'.status'</span>)</span><br><span class="line">  <span class="keyword">if</span> (err) <span class="keyword">return</span> statusMessage.value = err</span><br><span class="line">  statusMessage.value = body</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>值得注意的是函数声明在文件的最底部声明，这多亏了<a href="https://gist.github.com/maxogden/4bed247d9852de93c94c" target="_blank" rel="external">函数提升</a>.</p>
+<h4 id="2-模块化">2.模块化</h4><p>这是最重要的部分：每个开发者都有能力创建模块（类似第三方库）。引用<code>Isaac Schlueter</code>（一个node项目） 「写一些各司其职的小模块，然后把他们装配在一个大模块里去产生更大的作用。」You can’t get into callback hell if you don’t go there</p>
+<p>我们把上面提到的实例代码拿来拆分成几个文件来转变成模块。我会展示一个浏览器端或服务端（或两者）可以工作的一个模块形式。</p>
+<p>接下来一个叫做<code>formuploader.js</code>的新文件包含了之前的两个函数。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports.submit = formSubmit</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">formSubmit</span> <span class="params">(submitEvent)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> name = <span class="built_in">document</span>.querySelector(<span class="string">'input'</span>).value</span><br><span class="line">  request(&#123;</span><br><span class="line">    uri: <span class="string">"http://example.com/upload"</span>,</span><br><span class="line">    body: name,</span><br><span class="line">    method: <span class="string">"POST"</span></span><br><span class="line">  &#125;, postResponse)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">postResponse</span> <span class="params">(err, response, body)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> statusMessage = <span class="built_in">document</span>.querySelector(<span class="string">'.status'</span>)</span><br><span class="line">  <span class="keyword">if</span> (err) <span class="keyword">return</span> statusMessage.value = err</span><br><span class="line">  statusMessage.value = body</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>module.exports</code>是一个工作在node，electron。和使用了browserify的浏览器端的nodejs模块系统的一个例子。</p>
+<p>现在我们有了<code>formuploader.js</code>，这个文件在被编译之后作为一个script标签被引入页面中。我们只需要去依赖这个文件然后使用它。写下来的范例就是我们的应用如何使用这个文件，</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">var</span> formUploader = <span class="function"><span class="title">require</span><span class="params">(<span class="string">'formuploader'</span>)</span></span></span><br><span class="line">document.<span class="function"><span class="title">querySelector</span><span class="params">(<span class="string">'form'</span>)</span></span><span class="class">.onsubmit</span> = formUploader.submit</span><br></pre></td></tr></table></figure>
+<p>现在我们的程序只有两行，这有一下好处：</p>
+<ul>
+<li>对于新人来说是易于理解的 — 他们不需要去理解<code>formuploader</code>函数的具体内容。</li>
+<li><code>formuploader</code>不需要被拷贝就可以在其他地方使用也可以很方便的在github或npm中共享。</li>
+</ul>
+<h4 id="3-处理每个error">3.处理每个error</h4><p>有不同种类的错误：syntax errors 由程序员自己造成（通常是在启动程序时被捕获到），runtime errors 由程序员造成（代码中有个bug导致的出错），platform errors 由一些不合法的文件造成，硬盘失败，网络连接错误等等。这个章节主要为了讲述这几个类型的错误。</p>
+<p>前两个规则主要关于如何使你的代码可读性高，但这个规则是关于让你的代码更可靠。当我们在处理一些分发下来、默默进行的任务定义的回调时，回调又会在不经意间成功完成或者失败退出。任何一个有经验的开发者都会告诉你你永远都不会知道错误在哪里时候发生，所以你最好企划好错误一直在发生。</p>
+<p>对于回调而言处理errors最流行的方法就是nodejs风格，第一个参数永远都是为了error准备的。</p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="reserved">var</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>)</span><br><span class="line"></span><br><span class="line"> fs.readFile(<span class="string">'/Does/not/exist'</span>, handleFile)</span><br><span class="line"></span><br><span class="line"> <span class="reserved">function</span> handleFile (error, file) &#123;</span><br><span class="line">   <span class="keyword">if</span> (error) <span class="keyword">return</span> <span class="built_in">console</span>.error(<span class="string">'Uhoh, there was an error'</span>, error)</span><br><span class="line">   <span class="regexp">//</span> otherwise, <span class="keyword">continue</span> <span class="literal">on</span> <span class="keyword">and</span> use `<span class="javascript">file</span>` <span class="keyword">in</span> your code</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<p>第一个参数设置为error是个普遍的约定为了鼓励你记得去处理error。如何error是第二个参数你可能就会像<code>function handle (file){}</code>这样写代码而忘记了处理error。</p>
+<p>代码风格检查器也能配置帮助你记住处理回调的错误信息。</p>
+<h4 id="总结">总结</h4><ol>
+<li>不要嵌套函数。给匿名函数命名并移动到程序的上层。</li>
+<li>使用<a href="https://gist.github.com/maxogden/4bed247d9852de93c94c" target="_blank" rel="external">变量提升</a> 去调用下层的函数。</li>
+<li>处理回调中的每个错误处理，使用类似于<code>standard</code>这样的代码检查工具帮助你记住去处理回调中的错误处理。</li>
+<li>创建可重复使用的函数并放到模块中减少理解你的代码的认知难度。将你的代码拆分成一些小的模块以帮助你处理错误信息。编写测试用例，强制自己创建可靠的并带有文档的公共API的代码。这也能帮助你重构。</li>
+</ol>
+<p>避免回调地狱的最重要的一个方面就是将函数从嵌套中移出来，这样代码的流程将更容易读懂，新手也不用啃过所有回调函数的具体内容来理解整个程序是怎么工作的了。</p>
+<p>对于创建模块有几个规则：</p>
+<ul>
+<li>首先从将重复使用的代码装入函数中</li>
+<li>当你的函数（或者是跟某一主题相近的一组函数）到达一定大小后，将他们移到另一个文件然后通过<code>module.exports</code>去引用。你可以通过相对路劲去引用。</li>
+<li>如果你有一段代码是可以在很多项目中通用的，给这段代码加上readme，测试用例，<code>package.json</code>然后发布到github和npm上去。对于这个举动有列不完的好处！</li>
+<li>一个好的模块是小体量的但是针对一个问题。</li>
+<li>模块中的单独的一个文件不应该超过150行。</li>
+<li>一个模块不应该有超过一个嵌套的包含js文件的文件夹，如果发生了，可能是你赋予这个模块做了太多的事情。</li>
+<li>咨询更多有经验的程序员向你展示好模块的例子直到你对其有一定概念，如果这需要花费很多时间，只能证明这可能不是一个好模块。</li>
+</ul>
+<h4 id="更多阅读">更多阅读</h4><p>尝试阅读我的<a href="https://github.com/maxogden/art-of-node#callbacks" target="_blank" rel="external">更多</a> 或者尝试<a href="http://nodeschool.io/" target="_blank" rel="external">nodeschool</a>教程。</p>
+<p>同时也可以尝试<a href="https://github.com/substack/browserify-handbook" target="_blank" rel="external">browserify-handbook</a> ，里面有许多书写模块代码的例子。</p>
+<h3 id="promises/generators/ES6如何？"><code>promises/generators/ES6</code>如何？</h3><p>在寻找高级解决方案之前，记得回调是javascript的记基础（因为他们就是函数），你应该在目光转移到高级语法特性之前首先要学会读写回调。因为理解这些高级语法特性都是在理解回调的基础上进行的。如果你还不能写可维护性的回调代码，那么久继续加油吧~</p>
+<p>如果你真的想让你的异步代码是从上往下走的，这有一些你可以尝试的好用的方法。请注意这些可能会涉及性能问题或者是跨平台的问题，所以确保你做了功课。</p>
+<p>promise是一种看起来仿佛是从上往下执行的一种异步代码编写方式。由于<code>try/catch</code>风格的错误信息处理方式可以让promise处理多种错误信息。</p>
+<p>generators能让你「暂停」一个单独的函数而不影响整体程序的运行。理解起来有些困难但这种方式能让你的异步代码看起来是从上到下的风格。尝试一下<a href="https://github.com/mappum/watt" target="_blank" rel="external">watt</a></p>
+<p>async函数是ES7的一个新特性，这个特性把generator和promise包装成了更高级的语法，如果听起来感兴趣的话就尝试下吧。</p>
+<p>个人而言我写90%饿异步代码都是使用回调来写，当需求复杂了我会引入类似于<a href="https://github.com/feross/run-parallel" target="_blank" rel="external">run-parallel</a> <a href="https://github.com/feross/run-series" target="_blank" rel="external">run-series</a>这样的东西。我并不觉得callback、promise或其他概念对我而言有什么区别。最大的影响来自于保持代码的简单，不要嵌套，将代码拆分成小模块。</p>
+<p>不管你选择了什么方法，记得总是要处理每一个回调错误信息，并保持代码简单。</p>
+<p><strong>牢记， 只有你自己能防止回调地狱的产生，当然了，还有森林大火</strong></p>
+<p>你可以在<a href="http://github.com/maxogden/callback-hell" target="_blank" rel="external">github</a>上找到源码。</p>
+<p>翻译文章~欢迎转载~</p>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/callback/" rel="tag">#callback</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/01/28/viewport-and-flexibleJs/" rel="next" title="viewport-and-flexibleJs">
+                <i class="fa fa-chevron-left"></i> viewport-and-flexibleJs
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+        </div>
+
+        
+
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </div>
+
+      
+        
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            本站概覽
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="https://avatars3.githubusercontent.com/u/8492963?v=3&s=460" alt="Lyu Dada" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">Lyu Dada</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description"></p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">29</span>
+              <span class="site-state-item-name">文章</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">9</span>
+              <span class="site-state-item-name">分類</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">24</span>
+              <span class="site-state-item-name">標籤</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#callback_hell翻译"><span class="nav-number">1.</span> <span class="nav-text">callback hell翻译</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#回调地狱"><span class="nav-number">2.</span> <span class="nav-text">回调地狱</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是回调？"><span class="nav-number">2.1.</span> <span class="nav-text">什么是回调？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#我如何解决回调地狱？"><span class="nav-number">2.2.</span> <span class="nav-text">我如何解决回调地狱？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-保持你的代码是有易懂的"><span class="nav-number">2.2.1.</span> <span class="nav-text">1.保持你的代码是有易懂的</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-模块化"><span class="nav-number">2.2.2.</span> <span class="nav-text">2.模块化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-处理每个error"><span class="nav-number">2.2.3.</span> <span class="nav-text">3.处理每个error</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#总结"><span class="nav-number">2.2.4.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#更多阅读"><span class="nav-number">2.2.5.</span> <span class="nav-text">更多阅读</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#promises/generators/ES6如何？"><span class="nav-number">2.3.</span> <span class="nav-text">promises/generators/ES6如何？</span></a></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+      
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="icon-next-heart fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lyu Dada</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 強力驅動
+</div>
+
+<div class="theme-info">
+  主題 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+    
+    
+
+  
+
+
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.2"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.2"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+<script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+<script type="text/javascript" src="/js/motion.js?v=0.4.5.2" id="motion.global"></script>
+
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.2" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    motionMiddleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  <script type="text/javascript" src="/js/bootstrap.js"></script>
+
+  
+  
+
+  
+  
+
+</body>
+</html>
