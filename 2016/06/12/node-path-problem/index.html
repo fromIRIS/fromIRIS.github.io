@@ -1,0 +1,710 @@
+<!doctype html>
+<html class="theme-next   use-motion ">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="node," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Lyu Dada" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.2" />
+
+
+
+
+
+
+<meta name="description" content="nodejs路径引用问题
+gulp-babel的引用路径问题
+gulp src 文件流路径
+require(‘xx’) 路径问题
+
+
+本文主要讲述了编写外部构建工具中gulp-babel中依赖es2015插件失败问题、gulp.src路径问题以及require(‘xx’)的路径问题。
+
+gulp的src作用是引入所需要的流，且其使用了node-glob模块实现了文件匹配，
+1gulp.src(gl">
+<meta property="og:type" content="article">
+<meta property="og:title" content="node-path-problem">
+<meta property="og:url" content="http://yoursite.com/2016/06/12/node-path-problem/index.html">
+<meta property="og:site_name" content="Lyu Dada">
+<meta property="og:description" content="nodejs路径引用问题
+gulp-babel的引用路径问题
+gulp src 文件流路径
+require(‘xx’) 路径问题
+
+
+本文主要讲述了编写外部构建工具中gulp-babel中依赖es2015插件失败问题、gulp.src路径问题以及require(‘xx’)的路径问题。
+
+gulp的src作用是引入所需要的流，且其使用了node-glob模块实现了文件匹配，
+1gulp.src(gl">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="node-path-problem">
+<meta name="twitter:description" content="nodejs路径引用问题
+gulp-babel的引用路径问题
+gulp src 文件流路径
+require(‘xx’) 路径问题
+
+
+本文主要讲述了编写外部构建工具中gulp-babel中依赖es2015插件失败问题、gulp.src路径问题以及require(‘xx’)的路径问题。
+
+gulp的src作用是引入所需要的流，且其使用了node-glob模块实现了文件匹配，
+1gulp.src(gl">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: '',
+    sidebar: 'post',
+    motion: true
+  };
+</script>
+
+  <title> node-path-problem | Lyu Dada </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-hk">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+
+
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Lyu Dada</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">to love and get love</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            歸檔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            標籤
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                node-path-problem
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            發表於
+            <time itemprop="dateCreated" datetime="2016-06-12T17:15:47+08:00" content="2016-06-12">
+              2016-06-12
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><h2 id="nodejs路径引用问题">nodejs路径引用问题</h2><ol>
+<li>gulp-babel的引用路径问题</li>
+<li>gulp src 文件流路径</li>
+<li>require(‘xx’) 路径问题</li>
+</ol>
+<blockquote>
+<p>本文主要讲述了编写外部构建工具中gulp-babel中依赖es2015插件失败问题、gulp.src路径问题以及require(‘xx’)的路径问题。</p>
+</blockquote>
+<p>gulp的src作用是引入所需要的流，且其使用了node-glob模块实现了文件匹配，</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gulp.<span class="function"><span class="title">src</span><span class="params">(globs[, options])</span></span></span><br></pre></td></tr></table></figure>
+<p>其中options对象中的属性除了node-glob可以使用的除外，还额外增加了<code>options.buffer</code> ,<code>options.read</code>, <code>options.base</code>,关于这三个额外的属性作用可以查看 <a href="http://www.gulpjs.com.cn/docs/api/" target="_blank" rel="external">gulp api</a>。</p>
+<p>这里主要介绍<code>node-glob</code>中的<code>cwd</code>属性</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">options<span class="class">.cwd</span></span><br><span class="line">Default is process.<span class="function"><span class="title">cwd</span><span class="params">()</span></span></span><br></pre></td></tr></table></figure>
+<p>不知道大家之前有无疑惑，我们把gulpfile文件放在独立于项目文件的目录中，类似</p>
+<p><code>~/Desktop/GIT/dada/lib/dada-task/gulpfile.js</code></p>
+<p>在这个文件中分别定义了项目构建相关的task</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">gulp</span><span class="class">.task</span>(<span class="string">"less"</span>, <span class="function">function</span>() &#123;</span><br><span class="line">    <span class="tag">gulp</span><span class="class">.src</span>(<span class="string">'./src/less/*.less'</span>, &#123;</span><br><span class="line">      <span class="attribute">cwd</span>: __dirname</span><br><span class="line">    &#125;)</span><br><span class="line">      <span class="class">.pipe</span>(<span class="function">less</span>())</span><br><span class="line">      <span class="class">.pipe</span>(gulp.<span class="function">dest</span>(srcPath.CSS)) <span class="comment">//无视路径</span></span><br><span class="line">      <span class="class">.pipe</span>(browserSync.<span class="function">stream</span>()); <span class="comment">//无视路径</span></span><br><span class="line">  &#125;)</span><br></pre></td></tr></table></figure>
+<p>接着我们在项目目录中调用构建命令</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//项目目录cwd</span></span><br><span class="line"><span class="regexp">/Users/</span>lvdada<span class="regexp">/Desktop/</span>WorkGit/<span class="number">05</span>-marketing</span><br><span class="line"></span><br><span class="line"><span class="comment">//调用</span></span><br><span class="line">node <span class="regexp">~/Desktop/</span>GIT<span class="regexp">/dada/</span>lib<span class="regexp">/dada-task/</span>gulpfile.js</span><br></pre></td></tr></table></figure>
+<p>结果成功了，<code>gulp.src(&#39;./src/less/*.less&#39;)</code> 取的是相对路径，照理说应该是相对于<code>gulpfile.js</code>文件才对，结果取到的文件流是项目文件中的，这就要归功于<code>node-glob</code>中的<code>cwd</code>属性了，默认情况下，<code>gulp.src</code>取到的文件都是相对process.cwd()的，也就是在命令工具中调用shell命令时的路径。在项目目录中调用命令的时候就相当于项目目录。</p>
+<p>但是这样有个问题</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.pipe</span>(<span class="function">babel</span>(&#123;</span><br><span class="line">      <span class="attribute">presets</span>: [<span class="string">'es2015'</span>]</span><br><span class="line">    &#125;))</span><br><span class="line">    <span class="class">.pipe</span>(gulp.<span class="function">dest</span>(<span class="string">'./src/js'</span>))</span><br></pre></td></tr></table></figure>
+<p>此段task片段是对<code>gulp-babel</code>对es6的编译，需要<code>es2015</code>这个babel插件，此时babel的默认取文件流路径是相对于process.cwd()的，<br>这就导致了会在项目目录中寻找<code>es2015</code>babel插件，肯定的是是找不到的。</p>
+<p>经过google发现了解决办法，</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.pipe</span>(<span class="function">babel</span>(&#123;</span><br><span class="line">      <span class="attribute">presets</span>: [<span class="string">'babel-preset-es2015'</span>].<span class="function">map</span>(require.resolve)</span><br><span class="line">    &#125;))</span><br><span class="line">    <span class="class">.pipe</span>(gulp.<span class="function">dest</span>(<span class="string">'./src/js'</span>))</span><br></pre></td></tr></table></figure>
+<p>对presets数组进行遍历并执行require.resolve方法<br><a href="http://stackoverflow.com/questions/34574403/how-to-set-resolve-for-babel-loader-presets/34574630#34574630" target="_blank" rel="external">hack来源</a></p>
+<p>至于require.resolve的作用，需要了解一下node模块<code>require()</code>工作原理。<a href="http://stackoverflow.com/questions/34574403/how-to-set-resolve-for-babel-loader-presets/34574630#34574630" target="_blank" rel="external">参考阮一峰</a></p>
+<p>代码中执行require(X)时，会按照下面的顺序处理引用,分成两种类型：</p>
+<p>（一）第一种是带相对路径的引用，比如<code>./bar.js ../bar</code></p>
+<p>其中又分两种情况，</p>
+<ul>
+<li><p>当做具体文件进行引用</p>
+<p>有具体文件后缀的直接引用(类似bar.js)，没有后缀标识的会一次查找下面文件后缀类型，只要存在就返回。</p>
+<figure class="highlight haml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-<span class="ruby"> bar</span><br><span class="line"></span>-<span class="ruby"> bar.js</span><br><span class="line"></span>-<span class="ruby"> bar.json</span><br><span class="line"></span>-<span class="ruby"> bar.node</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p>当做具体目录进行引用</p>
+<p>此时加载器会将bar当做一个目录，并<em>依次</em>查找bar目录下的文件，只要找到其中之一就返回该文件。</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">bar/package.<span class="function"><span class="title">json</span><span class="params">(main字段)</span><span class="params">(main字段中有引用的文件地址)</span></span></span><br><span class="line">bar/index<span class="class">.js</span></span><br><span class="line">bar/index<span class="class">.json</span></span><br><span class="line">bar/index.node</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>（二）第二种是不带相对路径的引用，比如<code>require(&#39;fs&#39;) require(&#39;gulp-if&#39;)</code></p>
+<ul>
+<li>引用是内置模块时，比如fs，直接加载fs模块。</li>
+<li><p>引用不是内置模块，比如<code>gulp-if</code>，</p>
+<p>则在当前路径的父目录逐级向上寻找node_modules文件夹，然后把gulp-if先当做<em>具体文件</em>按照上面的方法查找文件，若找不到，再将gulp-if当做<em>具体目录</em>进行查找。具体的向上查找路径集合可以通过<code>module.path</code>查询。<br>假设一个文件<code>test.js</code></p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">'module.paths: '</span>, <span class="built_in">module</span>.paths);</span><br></pre></td></tr></table></figure>
+<p>在当前目录执行<code>node test.js</code>,会输出：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">module<span class="class">.paths</span>:  [ <span class="string">'/Users/lvdada/Desktop/GIT/test/dada-test/src/js/node_modules'</span>,</span><br><span class="line"> <span class="string">'/Users/lvdada/Desktop/GIT/test/dada-test/src/node_modules'</span>,</span><br><span class="line"> <span class="string">'/Users/lvdada/Desktop/GIT/test/dada-test/node_modules'</span>,</span><br><span class="line"> <span class="string">'/Users/lvdada/Desktop/GIT/test/node_modules'</span>,</span><br><span class="line"> <span class="string">'/Users/lvdada/Desktop/GIT/node_modules'</span>,</span><br><span class="line"> <span class="string">'/Users/lvdada/Desktop/node_modules'</span>,</span><br><span class="line"> <span class="string">'/Users/lvdada/node_modules'</span>,</span><br><span class="line"> <span class="string">'/Users/node_modules'</span>,</span><br><span class="line"> <span class="string">'/node_modules'</span> ]</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p> 若在文件系统中查询不到require的模块，则会在全局模块路径中查找。</p>
+ <figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// npm root -g</span></span><br><span class="line"></span><br><span class="line"><span class="regexp">/usr/</span>local<span class="regexp">/lib/</span>node_modules</span><br></pre></td></tr></table></figure>
+<p>上面介绍的文件查询方法是基于相对路劲的，当模块加载器要加载模块需要确定模块的绝对地址。</p>
+<figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Module</span>._resolveFilename() <span class="comment">// 得到模块的绝对地址，并由此地址加载模块</span></span><br></pre></td></tr></table></figure>
+<p>最后node暴露出来的一个属性和一个方法可以得到模块的绝对地址：</p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.filename ;</span><br><span class="line"><span class="reserved">var</span> filename = request.resolve(<span class="string">'./bar.js'</span>);</span><br></pre></td></tr></table></figure>
+<p>回到之前的问题，在gulp-babel中指定的babel插件无法有效加载。</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.pipe</span>(<span class="function">babel</span>(&#123;</span><br><span class="line">      <span class="attribute">presets</span>: [<span class="string">'babel-preset-es2015'</span>].<span class="function">map</span>(require.resolve)</span><br><span class="line">    &#125;))</span><br><span class="line">    <span class="class">.pipe</span>(gulp.<span class="function">dest</span>(<span class="string">'./src/js'</span>))</span><br></pre></td></tr></table></figure>
+<p>使用require.resolve进行路径的查找匹配，最后得出正确的绝对路径。</p>
+<p>原创文章！欢迎转载</p>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/node/" rel="tag">#node</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/04/28/promise/" rel="next" title="promise">
+                <i class="fa fa-chevron-left"></i> promise
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+        </div>
+
+        
+
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </div>
+
+      
+        
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            本站概覽
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="https://avatars3.githubusercontent.com/u/8492963?v=3&s=460" alt="Lyu Dada" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">Lyu Dada</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description"></p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">32</span>
+              <span class="site-state-item-name">文章</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">9</span>
+              <span class="site-state-item-name">分類</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">27</span>
+              <span class="site-state-item-name">標籤</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#nodejs路径引用问题"><span class="nav-number">1.</span> <span class="nav-text">nodejs路径引用问题</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+      
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="icon-next-heart fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lyu Dada</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 強力驅動
+</div>
+
+<div class="theme-info">
+  主題 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+    
+    
+
+  
+
+
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.2"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.2"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+<script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+<script type="text/javascript" src="/js/motion.js?v=0.4.5.2" id="motion.global"></script>
+
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.2" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    motionMiddleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  <script type="text/javascript" src="/js/bootstrap.js"></script>
+
+  
+  
+
+  
+  
+
+</body>
+</html>

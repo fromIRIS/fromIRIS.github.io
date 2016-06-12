@@ -179,15 +179,103 @@
 
     
     
+
+    
       
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/06/12/node-path-problem/" itemprop="url">
+                  node-path-problem
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            發表於
+            <time itemprop="dateCreated" datetime="2016-06-12T17:15:47+08:00" content="2016-06-12">
+              2016-06-12
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
       
-        
-        
-        
       
 
       
-    
+        
+          <span itemprop="articleBody">
+            
+            nodejs路径引用问题
+gulp-babel的引用路径问题
+gulp src 文件流路径
+require(‘xx’) 路径问题
+
+
+本文主要讲述了编写外部构建工具中gulp-babel中依赖es2015插件失败问题、gulp.src路径问题以及require(‘xx’)的路径问题。
+
+gulp的src作用是引入所需要的流，且其使用了node-glob模块实现了文件匹配，
+1gulp.src(globs[, options])
+其中options对象中的属性除了node-glob可以使用的除外，还额外增加了options.buffer ,options.read, options.base,关于这三个额外的属性作用可以查看 gulp api。
+这里主要介绍node-glob中的cwd属性
+1
+            ...
+          </span>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/06/12/node-path-problem/#more" rel="contents">
+              閱讀全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
 
     
       
@@ -1041,109 +1129,6 @@ dalay方
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/12/22/高性能动画/" itemprop="url">
-                  高性能动画
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            發表於
-            <time itemprop="dateCreated" datetime="2015-12-22T11:22:42+08:00" content="2015-12-22">
-              2015-12-22
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp; 分類於
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/js/" itemprop="url" rel="index">
-                    <span itemprop="name">js</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-            高性能动画
-参考资料http://melonh.com/sharing/slides.html?file=high_performance_animation#/奇舞团黄薇 
-
-一、简介&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;先按照浏览器渲染页面的顺序介绍下浏览器是如何渲染一个页面的。结合chrome开发工具中的timeline。1、解析HTML—对应chrome中的Parse HTML2、根据解析后的Dom节点和CSS构成了render-tree — 对应timeline中的Recalculate Style3、再由render-tree进行第一次渲染，将css中的布局属性（宽高大小定位）结合dom渲染 — Layout4、第二次渲染
-            ...
-          </span>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/12/22/高性能动画/#more" rel="contents">
-              閱讀全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
@@ -1190,7 +1175,7 @@ dalay方
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">31</span>
+              <span class="site-state-item-count">32</span>
               <span class="site-state-item-name">文章</span>
             </a>
           </div>
@@ -1204,7 +1189,7 @@ dalay方
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">26</span>
+              <span class="site-state-item-count">27</span>
               <span class="site-state-item-name">標籤</span>
               </a>
           </div>
