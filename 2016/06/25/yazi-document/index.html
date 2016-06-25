@@ -35,7 +35,7 @@
 <link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="BFC," />
+  <meta name="keywords" content="yazi," />
 
 
 
@@ -53,20 +53,39 @@
 
 
 
-<meta name="description" content="关于BFC的一些事儿：阅读：穆乙 http://www.cnblogs.com/pigtail/http://www.iyunlu.com/view/css-xhtml/55.html
-什么是BFCBFC（Block Formatting Context），中文为块状格式化上下文。按我的理解，就是触发BFC环境的元素在文档流中各自独立，谁也不碍着谁，这个元素的子元素还是按照普通的文档流进行排列。触">
+<meta name="description" content="前端自动化工程
+
+Installation1sudo npm install -g yazi
+Getting To Know yazi初始化前端脚手架 init
+yazi mb init 
+yazi pc init
+
+生成前端项目脚手架，脚手架目录：
+1234567891011[test-613]  | -- package.json  | -- [src]  |     | -- [images">
 <meta property="og:type" content="article">
-<meta property="og:title" content="关于BFC的一些事儿">
-<meta property="og:url" content="http://yoursite.com/2015/06/08/关于BFC的一些事儿/index.html">
+<meta property="og:title" content="yazi document">
+<meta property="og:url" content="http://yoursite.com/2016/06/25/yazi-document/index.html">
 <meta property="og:site_name" content="Lyu Dada">
-<meta property="og:description" content="关于BFC的一些事儿：阅读：穆乙 http://www.cnblogs.com/pigtail/http://www.iyunlu.com/view/css-xhtml/55.html
-什么是BFCBFC（Block Formatting Context），中文为块状格式化上下文。按我的理解，就是触发BFC环境的元素在文档流中各自独立，谁也不碍着谁，这个元素的子元素还是按照普通的文档流进行排列。触">
-<meta property="og:image" content="http://7xpcne.com1.z0.glb.clouddn.com/BFC1433772289741.png">
-<meta property="og:image" content="http://7xpcne.com1.z0.glb.clouddn.com/BFC1433775283824.png">
+<meta property="og:description" content="前端自动化工程
+
+Installation1sudo npm install -g yazi
+Getting To Know yazi初始化前端脚手架 init
+yazi mb init 
+yazi pc init
+
+生成前端项目脚手架，脚手架目录：
+1234567891011[test-613]  | -- package.json  | -- [src]  |     | -- [images">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="关于BFC的一些事儿">
-<meta name="twitter:description" content="关于BFC的一些事儿：阅读：穆乙 http://www.cnblogs.com/pigtail/http://www.iyunlu.com/view/css-xhtml/55.html
-什么是BFCBFC（Block Formatting Context），中文为块状格式化上下文。按我的理解，就是触发BFC环境的元素在文档流中各自独立，谁也不碍着谁，这个元素的子元素还是按照普通的文档流进行排列。触">
+<meta name="twitter:title" content="yazi document">
+<meta name="twitter:description" content="前端自动化工程
+
+Installation1sudo npm install -g yazi
+Getting To Know yazi初始化前端脚手架 init
+yazi mb init 
+yazi pc init
+
+生成前端项目脚手架，脚手架目录：
+1234567891011[test-613]  | -- package.json  | -- [src]  |     | -- [images">
 
 
 
@@ -78,7 +97,7 @@
   };
 </script>
 
-  <title> 关于BFC的一些事儿 | Lyu Dada </title>
+  <title> yazi document | Lyu Dada </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-hk">
@@ -198,7 +217,7 @@
             
             
               
-                关于BFC的一些事儿
+                yazi document
               
             
           </h1>
@@ -207,26 +226,11 @@
         <div class="post-meta">
           <span class="post-time">
             發表於
-            <time itemprop="dateCreated" datetime="2015-06-08T22:58:17+08:00" content="2015-06-08">
-              2015-06-08
+            <time itemprop="dateCreated" datetime="2016-06-25T13:56:14+08:00" content="2016-06-25">
+              2016-06-25
             </time>
           </span>
 
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp; 分類於
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/css/" itemprop="url" rel="index">
-                    <span itemprop="name">css</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
           
 
           
@@ -246,18 +250,55 @@
       
 
       
-        <span itemprop="articleBody"><h2 id="关于BFC的一些事儿："><strong>关于BFC的一些事儿</strong>：</h2><p>阅读：穆乙 <a href="http://www.cnblogs.com/pigtail/" target="_blank" rel="external">http://www.cnblogs.com/pigtail/</a><br><a href="http://www.iyunlu.com/view/css-xhtml/55.html" target="_blank" rel="external">http://www.iyunlu.com/view/css-xhtml/55.html</a></p>
-<p><code>什么是BFC</code><br>BFC（Block Formatting Context），中文为块状格式化上下文。<br>按我的理解，就是触发BFC环境的元素在文档流中各自独立，谁也不碍着谁，这个元素的子元素还是按照普通的文档流进行排列。<br><strong>触发BFC常见的有几种方式</strong>：overflow不为visible，float不为none， display的值为table-cell, table-caption, inline-block中的任何一个， position为absolute<br>在IE中，个人理解BFC是hasLayout，而触发hasLayout的简便方法就是zoom: 1;</p>
-<p><strong>触发BFC的好处主要在两方面，第一点是清除浮动，第二点在于处理上下margin的塌陷。</strong></p>
-<p><code>BFC与清除浮动</code><br>在需要清除浮动的时候<br><code>1</code>overflow: hidden<br><img src="http://7xpcne.com1.z0.glb.clouddn.com/BFC1433772289741.png" alt="Alt text"><br><strong>解释如下：</strong><br>根据 CSS2.1 规范第 10.6.3 部分的高度计算规则，在进行普通流中的块级非替换元素的高度计算时，浮动子元素不参与计算。</p>
-<p>同时 CSS2.1 规范第10.6.7部分的高度计算规则，在计算生成了 block formatting context 的元素的高度时，其浮动子元素应该参与计算。</p>
-<p>所以，触发外部容器BFC，高度将重新计算。比如给outer加上属性overflow:hidden触发其BFC。</p>
-<p><code>2</code>触发BFC的元素与浮动元素不会重叠<br>若两个Div排列，第一个div浮动，此时两个div会重叠，但将第二个div触发BFC，则此两个div分开（横向）</p>
-<p><code>BFC与margin上下塌陷</code><br>在普通流中的两个元素，不管是在同级还是包含关系中，margin-top和margin-bottom接触就会塌陷只留下较大方。<br><strong>即使父元素触发BFC，里面的正常流中的子元素之间还是会发生塌陷。</strong><br>因为触发BFC的两个元素相对独立，所以解决了塌陷，这个比较好理解。<br>对于嵌套元素之间的塌陷，即下图：<br><img src="http://7xpcne.com1.z0.glb.clouddn.com/BFC1433775283824.png" alt="Alt text"></p>
-<p><strong>合理解释为：</strong><br>根据 CSS 2.1 8.3.1 Collapsing margins 第三条，生成 block formatting context 的元素不会和在流中的子元素发生空白边折叠。<br>所以在父元素上触发BFC即可。</p>
-<h4 id="清除浮动的两种方法："><strong>清除浮动的两种方法</strong>：</h4><p><code>1</code><br><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.container</span><span class="pseudo">:before</span>,</span><br><span class="line"><span class="class">.container</span><span class="pseudo">:after</span> &#123;</span><br><span class="line">  <span class="attribute">content</span>:<span class="string">""</span>;</span><br><span class="line">  <span class="attribute">display</span>:table;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class">.container</span><span class="pseudo">:after</span> &#123;</span><br><span class="line">  <span class="attribute">clear</span>:both;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class">.container</span> &#123;</span><br><span class="line">  <span class="attribute">zoom</span>:<span class="number">1</span>; <span class="comment">/* For IE 6/7 (trigger hasLayout) */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p><code>2</code><br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.container</span> <span class="rules">&#123;</span><br><span class="line">    <span class="rule"><span class="attribute">overflow</span>:<span class="value"> hidden</span></span>; <span class="comment">/* Clearfix! */</span></span><br><span class="line">    <span class="rule"><span class="attribute">zoom</span>:<span class="value"> <span class="number">1</span></span></span>;  <span class="comment">/* Triggering "hasLayout" in IE */</span></span><br><span class="line">    <span class="rule"><span class="attribute">display</span>:<span class="value"> block</span></span>; <span class="comment">/* Element must be a block to wrap around contents. Unnecessary if only using block-level elements. */</span></span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure></p>
-<p>原创文章，转载请注明出处！</p>
+        <span itemprop="articleBody"><blockquote>
+<p>前端自动化工程</p>
+</blockquote>
+<h2 id="Installation">Installation</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo npm install -g yazi</span><br></pre></td></tr></table></figure>
+<h2 id="Getting_To_Know_yazi">Getting To Know yazi</h2><h2 id="初始化前端脚手架_init">初始化前端脚手架 init</h2><ol>
+<li>yazi mb init </li>
+<li>yazi pc init</li>
+</ol>
+<p>生成前端项目脚手架，脚手架目录：</p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[test-<span class="number">613</span>]</span><br><span class="line">  <span class="string">| -- package.json</span></span><br><span class="line">  <span class="string">| -- [src]</span></span><br><span class="line">  <span class="string">|     | -- [images]</span></span><br><span class="line">  <span class="string">|     |     | -- [slice]</span></span><br><span class="line">  <span class="string">|     | -- index.html</span></span><br><span class="line">  <span class="string">|     | -- [js]</span></span><br><span class="line">  <span class="string">|     |     | -- index.js</span></span><br><span class="line">  <span class="string">|     | -- [less]</span></span><br><span class="line">  <span class="string">|     |     | -- style.less</span></span><br><span class="line">  <span class="string">|     | -- [lib]</span></span><br></pre></td></tr></table></figure>
+<p>当前yazi版本生成的脚手架只常规的符合commonjs规范。并没有支持vue，react等。</p>
+<p>根据<code>mb/pc</code>不同生成的脚手架具体内容不同，比如html头信息不同。</p>
+<h2 id="browser-sync实时调试_dev">browser-sync实时调试 dev</h2><ol>
+<li>yazi dev</li>
+</ol>
+<p>调试模式下打开默认打开<code>localhost:8000</code>页面。<br>在调试过程中支持</p>
+<ul>
+<li>es6编译</li>
+<li>less编译</li>
+<li>书写js的commonJS规范（require）</li>
+</ul>
+<p>可以在项目中进行<code>npm install xxx --save</code></p>
+<h2 id="项目构建_build">项目构建 build</h2><ol>
+<li>yazi build -s 1</li>
+<li>yazi build -s 2</li>
+<li>yazi build</li>
+</ol>
+<p><strong>yazi build</strong></p>
+<p>将src文件夹内的项目文件构建并生成build文件夹。</p>
+<p>其中包含：</p>
+<ul>
+<li>es6编译混淆压缩</li>
+<li>less编译</li>
+<li>图片压缩</li>
+</ul>
+<p><strong>注意事项：</strong></p>
+<p>需要进行雪碧图转换的图片需要放在<code>images/slice</code>文件下内，并且在css中需要使用<code>background-image</code>属性引用图片。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.test1</span> <span class="rules">&#123;</span><br><span class="line">	<span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">30px</span></span></span>;</span><br><span class="line">	<span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">30px</span></span></span>;</span><br><span class="line">	<span class="rule"><span class="attribute">background-image</span>:<span class="value"> <span class="function">url</span>(<span class="string">'../images/slice/img1.png'</span>)</span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+<p><strong>yazi build -s 1</strong></p>
+<p>将src文件夹内的项目文件构建并生成build文件夹，并将图片转换为雪碧图，修改对应css。</p>
+<p>此处的 <code>-s 1</code>表示<code>sprite</code>雪碧图设置，并且在普通屏幕上使用（pc和非retina屏）</p>
+<p><strong>yazi build -s 2</strong></p>
+<p>将src文件夹内的项目文件构建并生成build文件夹，并将图片转换为雪碧图，修改对应css。</p>
+<p>此处的 <code>-s 2</code>表示<code>sprite</code>雪碧图设置，并且在retina屏使用。</p>
+<h2 id="TODO">TODO</h2><ul>
+<li>[  ]  添加一些处理css的gulp插件</li>
+<li>[  ]  build时图片进行七牛空间自动上传。</li>
+</ul>
+<h2 id="License">License</h2><p>MIT © <a href="lvdada.org">南洋</a><br><a href="https://github.com/fromIRIS/dada" target="_blank" rel="external">github</a></p>
 </span>
       
     </div>
@@ -266,7 +307,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/BFC/" rel="tag">#BFC</a>
+            <a href="/tags/yazi/" rel="tag">#yazi</a>
           
         </div>
       
@@ -275,17 +316,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/05/20/原型及原型链/" rel="next" title="原型及原型链">
-                <i class="fa fa-chevron-left"></i> 原型及原型链
+              <a href="/2016/06/12/node-path-problem/" rel="next" title="node-path-problem">
+                <i class="fa fa-chevron-left"></i> node-path-problem
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2015/06/10/函数调用的四种方式/" rel="prev" title="函数调用的四种方式与this的关系">
-                函数调用的四种方式与this的关系 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -406,7 +443,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#关于BFC的一些事儿："><span class="nav-number">1.</span> <span class="nav-text">关于BFC的一些事儿：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#清除浮动的两种方法："><span class="nav-number">1.0.1.</span> <span class="nav-text">清除浮动的两种方法：</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Installation"><span class="nav-number">1.</span> <span class="nav-text">Installation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Getting_To_Know_yazi"><span class="nav-number">2.</span> <span class="nav-text">Getting To Know yazi</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#初始化前端脚手架_init"><span class="nav-number">3.</span> <span class="nav-text">初始化前端脚手架 init</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#browser-sync实时调试_dev"><span class="nav-number">4.</span> <span class="nav-text">browser-sync实时调试 dev</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#项目构建_build"><span class="nav-number">5.</span> <span class="nav-text">项目构建 build</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TODO"><span class="nav-number">6.</span> <span class="nav-text">TODO</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#License"><span class="nav-number">7.</span> <span class="nav-text">License</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
