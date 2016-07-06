@@ -35,7 +35,7 @@
 <link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="property&attribute," />
+  <meta name="keywords" content="wechat," />
 
 
 
@@ -53,24 +53,32 @@
 
 
 
-<meta name="description" content="Dom节点Attribute与Property
-前段时间在尚妆请假OA系统中接触到了大量checkbox/select/input等表单元素，在使用jq的attr遇到了一些问题，所以了解了一下这几者的关系，顺便理了理dom的一些基础。
+<meta name="description" content="微信环境下input[type=text]点击软键盘闪现问题— 记一次神奇的bug
 
-1、在IE&amp;lt;9中,浏览器会把所有的property和attribute强制映射，即property = attributetip：通过getAttribut">
+在项目测试阶段，在页面刚加载完毕的时候（上方进度条消失）点击输入框，弹出软键盘。但是在大约1秒的时候后软键盘就会自动消失，输入框的焦点消失。
+这种现在只会出现在ios下的微信浏览器内，safari不会出现这个问题。
+这会造成了很不舒适的用户体验，用户需要点击两次输入框才能真正输入内容。
+对于这种全局性质的模糊bu">
 <meta property="og:type" content="article">
-<meta property="og:title" content="attribute与property">
-<meta property="og:url" content="http://yoursite.com/2015/10/12/attribute与property/index.html">
+<meta property="og:title" content="wechat-iframe-input-bug">
+<meta property="og:url" content="http://yoursite.com/2016/07/06/wechat-iframe-input-bug/index.html">
 <meta property="og:site_name" content="Lyu Dada">
-<meta property="og:description" content="Dom节点Attribute与Property
-前段时间在尚妆请假OA系统中接触到了大量checkbox/select/input等表单元素，在使用jq的attr遇到了一些问题，所以了解了一下这几者的关系，顺便理了理dom的一些基础。
+<meta property="og:description" content="微信环境下input[type=text]点击软键盘闪现问题— 记一次神奇的bug
 
-1、在IE&amp;lt;9中,浏览器会把所有的property和attribute强制映射，即property = attributetip：通过getAttribut">
+在项目测试阶段，在页面刚加载完毕的时候（上方进度条消失）点击输入框，弹出软键盘。但是在大约1秒的时候后软键盘就会自动消失，输入框的焦点消失。
+这种现在只会出现在ios下的微信浏览器内，safari不会出现这个问题。
+这会造成了很不舒适的用户体验，用户需要点击两次输入框才能真正输入内容。
+对于这种全局性质的模糊bu">
+<meta property="og:image" content="http://7xpcne.com1.z0.glb.clouddn.com/1.pic.jpg">
+<meta property="og:image" content="http://7xpcne.com1.z0.glb.clouddn.com/iframe-bug-wechat.gif">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="attribute与property">
-<meta name="twitter:description" content="Dom节点Attribute与Property
-前段时间在尚妆请假OA系统中接触到了大量checkbox/select/input等表单元素，在使用jq的attr遇到了一些问题，所以了解了一下这几者的关系，顺便理了理dom的一些基础。
+<meta name="twitter:title" content="wechat-iframe-input-bug">
+<meta name="twitter:description" content="微信环境下input[type=text]点击软键盘闪现问题— 记一次神奇的bug
 
-1、在IE&amp;lt;9中,浏览器会把所有的property和attribute强制映射，即property = attributetip：通过getAttribut">
+在项目测试阶段，在页面刚加载完毕的时候（上方进度条消失）点击输入框，弹出软键盘。但是在大约1秒的时候后软键盘就会自动消失，输入框的焦点消失。
+这种现在只会出现在ios下的微信浏览器内，safari不会出现这个问题。
+这会造成了很不舒适的用户体验，用户需要点击两次输入框才能真正输入内容。
+对于这种全局性质的模糊bu">
 
 
 
@@ -82,7 +90,7 @@
   };
 </script>
 
-  <title> attribute与property | Lyu Dada </title>
+  <title> wechat-iframe-input-bug | Lyu Dada </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-hk">
@@ -202,7 +210,7 @@
             
             
               
-                attribute与property
+                wechat-iframe-input-bug
               
             
           </h1>
@@ -211,26 +219,11 @@
         <div class="post-meta">
           <span class="post-time">
             發表於
-            <time itemprop="dateCreated" datetime="2015-10-12T22:42:58+08:00" content="2015-10-12">
-              2015-10-12
+            <time itemprop="dateCreated" datetime="2016-07-06T17:30:56+08:00" content="2016-07-06">
+              2016-07-06
             </time>
           </span>
 
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp; 分類於
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/js/" itemprop="url" rel="index">
-                    <span itemprop="name">js</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
           
 
           
@@ -250,34 +243,58 @@
       
 
       
-        <span itemprop="articleBody"><h2 id="Dom节点Attribute与Property">Dom节点Attribute与Property</h2><blockquote>
-<p>前段时间在尚妆请假OA系统中接触到了大量<code>checkbox/select/input</code>等表单元素，在使用jq的attr遇到了一些问题，所以了解了一下这几者的关系，顺便理了理dom的一些基础。</p>
-</blockquote>
-<p>1、在IE&lt;9中,浏览器会把所有的property和attribute强制映射，即property = attribute<br>tip：通过getAttribute获取到的值都是字符串，<br>但通过property获取的值可以是任何类型。</p>
-<p>2、每个dom节点都是一个对象，既然是js对象，就跟对象一样式是有属性和方法的。而且原则上这些属性方法都是在js中出现供js调用的。但是不同的节点总会有几个默认的常见的属性出现在html上（不是页面上,是指在查看控制台中的element），比如a标签的<code>href</code>，img标签的<code>src</code>，以及多数标签的<code>id</code>。<br>当然方法也是可以出现在html上的，比如<code>onclick onblur等</code><br><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> <span class="keyword">list</span> = [];</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> key <span class="keyword">in</span> document.body) &#123;</span><br><span class="line">	<span class="keyword">list</span>.push(key)</span><br><span class="line">&#125;</span><br><span class="line">console.<span class="literal">log</span>(<span class="keyword">list</span>.join('\<span class="keyword">n</span>'))</span><br><span class="line"><span class="comment">//这个方法可以在控制台查看某个dom对象的所有属性跟方法。</span></span><br></pre></td></tr></table></figure></p>
-<p>3、而出现在html中的属性在dom中（不是对象）就不叫<code>property</code>了，而叫<code>attribute</code>。<br><code>property</code>和<code>attribute</code>存在<strong>某种程度上</strong>的映射关系，即改变其中之一，相对应的也会改变。</p>
-<p>4、property跟attribute的读写方式不同，<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="built_in">document</span>.getElementById(<span class="string">'test'</span>);</span><br><span class="line"><span class="comment">//property</span></span><br><span class="line">》<span class="literal">get</span> a.id;</span><br><span class="line">》<span class="literal">set</span> a.id = <span class="string">'es'</span>;</span><br><span class="line"><span class="comment">//attribute</span></span><br><span class="line">》<span class="literal">get</span> a.getAttribute(<span class="string">'id'</span>)</span><br><span class="line">》<span class="literal">set</span> a.setAttribute(<span class="string">'id'</span>, <span class="string">'es'</span>);</span><br></pre></td></tr></table></figure></p>
-<p>5、既然第四点内容里对于两种属性都有读写，那改变了其中一个（例如property），另一个属性会不会也改呢？接下来就来解释一下，这里面有一些特殊的点，记住就好。</p>
-<p>property属性非常多，而attribute并不多，常用的有<code>name, id, scr, href, value, checked等</code></p>
+        <span itemprop="articleBody"><h2 id="微信环境下input[type=text]点击软键盘闪现问题">微信环境下input[type=text]点击软键盘闪现问题</h2><p>— 记一次神奇的bug</p>
+<p><img src="http://7xpcne.com1.z0.glb.clouddn.com/1.pic.jpg" alt=""></p>
+<p>在项目测试阶段，在页面刚加载完毕的时候（上方进度条消失）点击输入框，弹出软键盘。但是在大约1秒的时候后软键盘就会自动消失，输入框的焦点消失。</p>
+<p>这种现在只会出现在ios下的微信浏览器内，safari不会出现这个问题。</p>
+<p>这会造成了很不舒适的用户体验，用户需要点击两次输入框才能真正输入内容。</p>
+<p>对于这种全局性质的模糊bug，最好就是采用排除法去定位。在本地服务器内对当前页面的依赖逐步的排除，最后发现是第三方统计脚本引起了这个bug。</p>
+<p>以下是肇事代码（省略）</p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="built_in">window</span>).<span class="literal">on</span>(<span class="string">'load'</span>,<span class="reserved">function</span>()&#123;</span><br><span class="line">  <span class="reserved">var</span> a = <span class="built_in">document</span>;</span><br><span class="line">  __showjoyDSP.script = a.createElement(<span class="string">'script'</span>);</span><br><span class="line">  __showjoyDSP.script.type = <span class="string">'text/javascript'</span>;</span><br><span class="line">  __showjoyDSP.script.async = <span class="literal">true</span>;</span><br><span class="line">  __showjoyDSP.script.src = <span class="string">"http://market.m.showjoy.com/it-is-cover-by-article.js;</span><br><span class="line">  var s = a.getElementsByTagName('script')[0];</span><br><span class="line">  s.parentNode.insertBefore(__showjoyDSP.script, s);</span><br><span class="line">&#125;);</span></span><br></pre></td></tr></table></figure>
+<p>这段脚本在<code>load</code>事件触发的时候执行，执行时间符合bug复现的时间，不由<em>猜测1</em>：</p>
 <ul>
-<li>对于这些attribute属性，通过setAttribute改变值时，都能同步到property上（即改变了attribute，htmldom直接显示改了， 然后去dom节点对象里查看property也变了）</li>
-<li>而通过第4点中的property<code>a.id</code>写方法，对于<code>value、checked</code>属性来说，并不改变相对应的attribute的值。这也意味着改了property，但html中的value值却不变。</li>
-<li><strong>但是</strong>： 对于input中的value和checked这两个属性来讲，property获取的是页面的显示，而attribute获取的是html中的属性值。</li>
-<li>所以用户在输入框中输入，我们在js中要获取到就要使用property。</li>
-<li>特别说明checkbox的property属性是checked = true，checkbox = false。而在html中写attribute时若要初始勾选就</li>
+<li>动态的创建script标签会触发dom tree的构建，会不会因此引起页面重新布局或者重新绘制，导致光标焦点消失和软键盘的消失？</li>
 </ul>
-<figure class="highlight fsharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input <span class="class"><span class="keyword">type</span></span>=<span class="string">"checkbox"</span> id=<span class="string">"checkbox"</span> checked&gt;</span><br></pre></td></tr></table></figure>
-<p>6、还有个select表单元素的value属性，对于select元素而言，一般没有value的attribute属性，而property获取到的就是选中的下拉框option的value属性。<br>而对于option元素，其value的attribute和property属性都只指向html中的value值，不会涉及到<strong>s或a</strong>这些显示在页面上的值，这点不要跟input的输入框混淆了。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">select</span> <span class="attribute">id</span>=<span class="value">"select"</span>&gt;</span></span><br><span class="line"> 	<span class="tag">&lt;<span class="title">option</span> <span class="attribute">value</span>=<span class="value">"22"</span>&gt;</span>s<span class="tag">&lt;/<span class="title">option</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="title">option</span> <span class="attribute">value</span>=<span class="value">"1"</span>&gt;</span>a<span class="tag">&lt;/<span class="title">option</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">select</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p><strong>综上所述</strong>：除了input中的type=text的value和type=checkbox的checked属性外，其他属性用property和attribute差别不大。但是对于value和checked还是使用property比较方便，因为我们大多数都是想获取到用户输入了什么。对应到jq中就是使用其prop()方法。</p>
-<p>还有二个特殊的属性，在映射中名字不一样。</p>
-<blockquote>
-<p>attribute   &lt;==&gt; property</p>
-</blockquote>
+<p>为了构建渲染树，浏览器做了如下工作：<br>从dom树的根节点开始，遍历每个可见的点，但是某些点不会进入渲染树中：<a href="https://developers.google.com/web/fundamentals/performance/critical-rendering-path/render-tree-construction?hl=zh-cn" target="_blank" rel="external">来源</a></p>
 <ol>
-<li>class  &lt;==&gt;  className</li>
-<li>data-x  &lt;==&gt;  dataset.x</li>
+<li>不可见的点：比如<strong>script meta标签</strong></li>
+<li>隐藏的点： display:none</li>
 </ol>
-<p>这两个属性都是互通的。</p>
+<p>本例中的第三方统计脚本动态创建的是script标签，并不会引起render tree的绘制等操作。</p>
+<p>事实证明我将动态创建的<code>script</code>标签的<code>src</code>进行更换，</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">__showjoyDSP<span class="class">.script</span><span class="class">.src</span> = <span class="string">"change-a-url.js"</span></span><br></pre></td></tr></table></figure>
+<p>上述的bug也就不会复现了，另外我在本地也试验动态的创建dom元素，强制浏览器进行重绘重布局操作，软键盘也不会消失。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="built_in">window</span>).on(<span class="string">'load'</span>, <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">go</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> L = <span class="built_in">document</span>;</span><br><span class="line">    v = L.createElement(<span class="string">"div"</span>);</span><br><span class="line">    v.innerHTML = <span class="string">'&lt;span&gt;hello world!&lt;/span&gt;'</span></span><br><span class="line">    L.body.insertBefore(v.firstChild, L.body.firstChild);</span><br><span class="line">  &#125;</span><br><span class="line">  setTimeout(go, <span class="number">5000</span>);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>页面在软键盘存在的情况下，5秒过后动态创建dom，软键盘不消失。</p>
+<p>本着刨根的精神，来看看原统计脚本返回的js都有哪些内容，</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">__showjoyDSP<span class="class">.script</span><span class="class">.src</span> = <span class="string">"http://market.m.showjoy.com/it-is-cover-by-article.js;</span></span><br></pre></td></tr></table></figure>
+<p><em>猜测2</em></p>
+<ul>
+<li>返回的js脚本中有什么事件触发软键盘的消失？</li>
+</ul>
+<p>首先一番google后，并没有找到可以触发软键盘打开消失的事件，只能依靠用户点击了输入框这一操作。</p>
+<p>查看了返回的js内容，也是几段独立的函数，作用都是动态创建<code>script</code>标签。利用<code>chalars代理</code>将脚本代理到本地，就可以随意的修改js内容了。采用<em>排除法</em>很快就定位到了一段函数。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-<span class="function"><span class="keyword">function</span><span class="params">(d)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> s = d.createElement(<span class="string">'script'</span>),</span><br><span class="line">	e = d.body.getElementsByTagName(<span class="string">'script'</span>)[<span class="number">0</span>]; e.parentNode.insertBefore(s, e),</span><br><span class="line">	f = <span class="string">'https:'</span> == location.protocol;</span><br><span class="line">	s.src = (f ? <span class="string">'https'</span> : <span class="string">'http'</span>) + <span class="string">'://'</span>+(f?<span class="string">'fm.ipinyou.com'</span>:<span class="string">'fm.p0y.cn'</span>)+<span class="string">'/j/adv.js'</span>;</span><br><span class="line">&#125;(<span class="built_in">document</span>);</span><br></pre></td></tr></table></figure>
+<p><em>猜想3</em></p>
+<ul>
+<li>没有见过函数体前加<code>-</code>，是不是函数前面的<code>-</code>引起的异常导致出现的bug？</li>
+</ul>
+<p>查阅资料显示对于自执行函数，函数表达式后添加<code>()</code>会将函数立即执行，而函数声明后添加<code>()</code>并不会生效。而在函数声明前添加<code>+ - ()</code>等运算符，解析器会将声明看成是表达式，使<code>()</code>自执行生效。<a href="http://dengo.org/archives/1004" target="_blank" rel="external">来源</a></p>
+<p>再继续追踪<code>fm.p0y.cn</code>域下的脚本，在脚本中发现了一个动态创建<code>iframe</code>的操作。</p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">setTimeout<span class="list">(<span class="keyword">function</span><span class="list">()</span> &#123;</span><br><span class="line">	var f=document<span class="comment">;</span></span><br><span class="line">	e = f.createElement<span class="list">(<span class="quoted">'iframe</span>')</span><span class="comment">;</span></span><br><span class="line">	e.src='<span class="string">" + ("</span>http:<span class="string">" != location.protocol ? "</span>https<span class="keyword">://cm</span>.ipinyou.com/cmas.html?a=<span class="string">" + _py.getLast("</span>a<span class="string">") : "</span>http<span class="keyword">://fm</span>.p0y.cn/cm/cma.html?a=<span class="string">" + _py.getLast("</span>a<span class="string">")) + "</span>'<span class="comment">;</span></span><br><span class="line">	f.body.insertBefore<span class="list">(<span class="keyword">e</span>,f.body.firstChild)</span><span class="comment">;</span></span><br><span class="line">	e.style.display=<span class="quoted">'none</span>'<span class="comment">;</span></span><br><span class="line">	&#125;, <span class="number">1000</span>)</span></span><br></pre></td></tr></table></figure>
+<p>继续使用<code>charles</code>代理到本地修改异步执行的时间为5000毫秒，测试：</p>
+<ul>
+<li>load事件触发</li>
+<li>立即点击输入框弹出软键盘</li>
+<li>5秒。。。。</li>
+<li>软键盘消失</li>
+</ul>
+<p>到这里已经找到了bug的源头，在ios的微信内置浏览器内，动态创建<code>iframe</code>并且其<code>src</code>值存在。会导致页面造成页面切换的效果，即页面的焦点跑到了新的iframe中的页面中去。从而导致原页面的输入框焦点丢失。</p>
+<p>利用<code>weinre</code>调试页面的时候更加清晰的看出：</p>
+<p><img src="http://7xpcne.com1.z0.glb.clouddn.com/iframe-bug-wechat.gif" alt=""></p>
+<p>当刷新页面的时候本应该user.m.showjoy.com页面，但是1秒过后又自动跳到了fm.pOy.cn页面，这个页面就是动态创建出来的iframe。</p>
+<p>这个bug只出自ios机型微信内置浏览器的，但是ios微信浏览器用的是ios内置safari，而safari又没有这个问题。所以bug应该还是出自微信。</p>
+<p>原创文章！转载需谨慎</p>
 </span>
       
     </div>
@@ -286,7 +303,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/property-attribute/" rel="tag">#property&attribute</a>
+            <a href="/tags/wechat/" rel="tag">#wechat</a>
           
         </div>
       
@@ -295,17 +312,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/09/28/lazyload-js源码学习/" rel="next" title="lazyload.js源码学习">
-                <i class="fa fa-chevron-left"></i> lazyload.js源码学习
+              <a href="/2016/06/25/yazi-document/" rel="next" title="yazi document">
+                <i class="fa fa-chevron-left"></i> yazi document
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2015/11/12/破译关键渲染路径（翻译）/" rel="prev" title="破译关键渲染路径（翻译）">
-                破译关键渲染路径（翻译） <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -426,7 +439,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Dom节点Attribute与Property"><span class="nav-number">1.</span> <span class="nav-text">Dom节点Attribute与Property</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#微信环境下input[type=text]点击软键盘闪现问题"><span class="nav-number">1.</span> <span class="nav-text">微信环境下input[type=text]点击软键盘闪现问题</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
