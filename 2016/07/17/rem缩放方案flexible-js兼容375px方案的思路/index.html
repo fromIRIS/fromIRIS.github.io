@@ -1,0 +1,705 @@
+<!doctype html>
+<html class="theme-next   use-motion ">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="flexible," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Lyu Dada" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.2" />
+
+
+
+
+
+
+<meta name="description" content="移动端H5页面rem缩放方案flexible.js兼容375px方案的思路参考：
+移动端高清、多屏适配方案 
+viewport-and-flexible.js
+flexible.js github
+
+一个新的项目复用了一些老页面，老页面是使用375px方案进行移动端适配的，meta[viewport]使用的是&amp;lt;meta name=&amp;quot;viewport&amp;quot; content=&amp;q">
+<meta property="og:type" content="article">
+<meta property="og:title" content="rem缩放方案flexible.js兼容375px方案的思路">
+<meta property="og:url" content="http://yoursite.com/2016/07/17/rem缩放方案flexible-js兼容375px方案的思路/index.html">
+<meta property="og:site_name" content="Lyu Dada">
+<meta property="og:description" content="移动端H5页面rem缩放方案flexible.js兼容375px方案的思路参考：
+移动端高清、多屏适配方案 
+viewport-and-flexible.js
+flexible.js github
+
+一个新的项目复用了一些老页面，老页面是使用375px方案进行移动端适配的，meta[viewport]使用的是&amp;lt;meta name=&amp;quot;viewport&amp;quot; content=&amp;q">
+<meta property="og:image" content="http://7xpcne.com1.z0.glb.clouddn.com/viewport-%E5%AE%89%E5%8D%93%E5%B7%A6%E5%8F%B3%E6%BB%91%E5%8A%A8.gif">
+<meta property="og:image" content="http://7xpcne.com1.z0.glb.clouddn.com/iewport1.jpg">
+<meta property="og:image" content="http://7xpcne.com1.z0.glb.clouddn.com/iewport2.jpg">
+<meta property="og:image" content="http://7xpcne.com1.z0.glb.clouddn.com/26D7C3B3-AFC6-4AA3-AE99-0ACF49415211.jpeg">
+<meta property="og:image" content="http://7xpcne.com1.z0.glb.clouddn.com/01DCE243-96A5-41C5-B93D-C77C2CF9CCE3.jpeg">
+<meta property="og:image" content="http://7xpcne.com1.z0.glb.clouddn.com/A879CDC7-085A-40B1-A862-ECF480417909.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="rem缩放方案flexible.js兼容375px方案的思路">
+<meta name="twitter:description" content="移动端H5页面rem缩放方案flexible.js兼容375px方案的思路参考：
+移动端高清、多屏适配方案 
+viewport-and-flexible.js
+flexible.js github
+
+一个新的项目复用了一些老页面，老页面是使用375px方案进行移动端适配的，meta[viewport]使用的是&amp;lt;meta name=&amp;quot;viewport&amp;quot; content=&amp;q">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: '',
+    sidebar: 'post',
+    motion: true
+  };
+</script>
+
+  <title> rem缩放方案flexible.js兼容375px方案的思路 | Lyu Dada </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-hk">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+
+
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Lyu Dada</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">to love and get love</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            歸檔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            標籤
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                rem缩放方案flexible.js兼容375px方案的思路
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            發表於
+            <time itemprop="dateCreated" datetime="2016-07-17T17:20:14+08:00" content="2016-07-17">
+              2016-07-17
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><h2 id="移动端H5页面rem缩放方案flexible-js兼容375px方案的思路">移动端H5页面rem缩放方案flexible.js兼容375px方案的思路</h2><p>参考：</p>
+<p><a href="http://www.html-js.com/article/Mobile-terminal-H5-mobile-terminal-HD-multi-screen-adaptation-scheme%203041" target="_blank" rel="external">移动端高清、多屏适配方案</a> </p>
+<p><a href="http://lvdada.org/2016/01/28/viewport-and-flexibleJs/" target="_blank" rel="external">viewport-and-flexible.js</a></p>
+<p><a href="https://github.com/amfe/lib-flexible/blob/master/src/flexible.js" target="_blank" rel="external">flexible.js github</a></p>
+<blockquote>
+<p>一个新的项目复用了一些老页面，老页面是使用375px方案进行移动端适配的，meta[viewport]使用的是<code>&lt;meta name=&quot;viewport&quot; content=&quot;width=375, user-scalabe=no&quot;&gt;</code>，而新页面使用的是flexible.js伸缩方案，动态生成meta[viewport]<code>&lt;meta name=&quot;viewport&quot; content=&quot;initial-scale=[num], user-scalabe=no&quot;&gt;</code><br>如何在老页面使用px布局的前提下，新页面使用rem布局，组件也使用rem布局，并且组件可以兼容老页面和新页面是本文的结果。<br>首先会介绍375px方案和rem方案的实现原理。</p>
+</blockquote>
+<h3 id="375px方案">375px方案</h3><figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta <span class="variable">name=</span><span class="string">"viewport"</span> <span class="variable">content=</span><span class="string">"width=375, user-scalabe=no"</span>&gt;</span><br></pre></td></tr></table></figure>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;375px方案的页面开发过程对新人非常的友好，利用页面的布局视口（layout viewport）为固定值375px，和移动端浏览器窗口的自动缩放功能（视觉视口==布局视口），可以很好的在大部分移动设备上展示375px宽度的内容。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;具体的开发前提是设计师给到一份750px宽的设计稿，前端同学根据ps量的像素的50%进行css书写。若一个banner宽度量的为750px，在css中编写为<code>width: 375px</code>。至于为什么是2倍的设计稿，可以参考<a href="http://www.html-js.com/article/Mobile-terminal-H5-mobile-terminal-HD-multi-screen-adaptation-scheme%203041" target="_blank" rel="external">移动端高清、多屏适配方案</a>这篇文章，可以找到答案。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;375px方案相对于把meta[viewport]中的width属性设置成<code>device-width</code>,然后通过媒体查询写几套css规则来说已经是非常方便了。把所有不同屏幕尺寸的手机的布局视口（layout viewport）设置成一个固定的值375px，无需考虑其他屏幕尺寸的情况。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;但375px方案的实现原理在某些安卓原生浏览器上有兼容问题，会产生一个重要bug —- 在某些安卓原生浏览器或webview中会出现视觉视口小于布局视口的情况。直观的显示就是页面会出现左右滑动。如下图：</p>
+<p><img src="http://7xpcne.com1.z0.glb.clouddn.com/viewport-%E5%AE%89%E5%8D%93%E5%B7%A6%E5%8F%B3%E6%BB%91%E5%8A%A8.gif" alt="375bug"></p>
+<p>而在上文也提到了375px方案得以实现就是依靠浏览器的原生能力 —- 迫使视觉视口等于布局视口。我们将这种情况下的<code>document.documentElement.clientWidth(布局视口)</code>与<code>window.innerWidth(视觉视口)</code>打印看看。</p>
+<p><img src="http://7xpcne.com1.z0.glb.clouddn.com/iewport1.jpg" alt=""><br><img src="http://7xpcne.com1.z0.glb.clouddn.com/iewport2.jpg" alt=""></p>
+<p>浏览器的缩放效果没有实现，至于为什么，先看两条关于缩放的总结公式/经验。</p>
+<p>一、meta标签内没有设置initial-scale的情况</p>
+<figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">浏览器计算出的缩放值 = layout viewport <span class="variable">width</span>（布局视口） / ideal viewport <span class="variable">width</span>（理想视口）</span><br><span class="line"></span><br><span class="line">visual viewport <span class="variable">width</span>（视觉视口） = 浏览器计算出的缩放值 * ideal viewport <span class="variable">width</span> （理想视口）</span><br><span class="line">===》</span><br><span class="line">layout viewport <span class="variable">width</span> === visual viewport <span class="variable">width</span> <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<p>经过上述计算会将视觉视口会等于布局视口，布局上的所有内容都会出现在手机屏幕上。出现之前提到的bug的问题出在计算视觉视口上，<strong>浏览器会将所有计算出的缩放值都默认等于1</strong>，所以不管我们将布局视口设置能375还是其他任意值，视觉视口永远会是<code>1 * ideal viewport width （理想视口）</code>。ps：此款安卓机型的理想视口等于360.</p>
+<p>二、meta标签内设置了initial-scale的值的情况</p>
+<figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">visual viewport <span class="variable">width</span>（视觉视口） = initial-<span class="built_in">scale</span>（meta 标签内设置的初始缩放值） * ideal viewport <span class="variable">width</span>（理想视口又称设备独立像素）</span><br><span class="line"></span><br><span class="line">layout viewport <span class="variable">width</span> = visual viewport <span class="variable">width</span></span><br></pre></td></tr></table></figure>
+<p>解释：第二条总结经验正是rem伸缩方案flexiblejs的核心思想，设置了initial-scale后浏览器会计算出视觉视口，继而将布局视口的值自动设置成视觉视口的值。达到在屏幕上完整呈现布局上的内容。</p>
+<p>但是在同样的安卓原生浏览器上，不管我们将initial-scale设置成多少，浏览器都默认值为1。所以视觉视口和布局视口永远都等于<code>1 * ideal viewport width</code>这个问题的hack办法在flexible.js里也有所体现。</p>
+<p>375px方案就解释到这里，至于为何是375而不是其他的值比如360、320等，可以参考<a href="http://www.html-js.com/article/Mobile-terminal-H5-mobile-terminal-HD-multi-screen-adaptation-scheme%203041" target="_blank" rel="external">移动端高清、多屏适配方案</a>以及<a href="http://lvdada.org/2016/01/28/viewport-and-flexibleJs/" target="_blank" rel="external">viewport-and-flexible.js</a>， 在后篇文章中也有介绍3种视口的一些概念。</p>
+<h3 id="rem方案">rem方案</h3><p>rem方案的目标也是用一套相同的度量标准适配所有屏幕大小的移动设备，在不同屏下进行正确的缩放。假设<code>10rem</code>宽在iphone5上是屏幕宽的一半，那么<code>10rem</code>在iphone6、iphone6plus、三星note等等机型上都显示为屏幕宽的一半。</p>
+<p>我们知道rem所对应的px值是基于html标签上的<code>font-size</code>值进行换算的。若</p>
+<figure class="highlight dos"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">html &#123;</span><br><span class="line">  font-size: <span class="number">20</span>px;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="number">10</span><span class="comment">rem === 200px //true</span></span><br></pre></td></tr></table></figure>
+<p>为了适配缩放所有设备，就要写个脚本动态设置html的fontSize值。同时要对页面的布局视口（layout viewport）和设计稿做一个划分约定，这里就约定这个值为10。（理论上可以任何值）</p>
+<p><img src="http://7xpcne.com1.z0.glb.clouddn.com/26D7C3B3-AFC6-4AA3-AE99-0ACF49415211.jpeg" alt=""></p>
+<p><img src="http://7xpcne.com1.z0.glb.clouddn.com/01DCE243-96A5-41C5-B93D-C77C2CF9CCE3.jpeg" alt=""></p>
+<p>由以上两幅图可以知道，设计稿的一个区块对应1rem，布局视口的一个区块也对应1rem。而每个机型的布局视口该如何确定，flexible.js利用了上面提到的公式：</p>
+<figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">visual viewport <span class="variable">width</span>（视觉视口） = initial-<span class="built_in">scale</span>（meta 标签内设置的初始缩放值） * ideal viewport <span class="variable">width</span>（理想视口又称设备独立像素）</span><br><span class="line"></span><br><span class="line">浏览器自动将 layout viewport <span class="variable">width</span> = visual viewport <span class="variable">width</span></span><br></pre></td></tr></table></figure>
+<p>之前也提到了<code>initial-scale</code>不为1的情况下部分安卓机型有bug，所以这里可以将initial-scale规定设置成1。</p>
+<p>拿iphone6为例：理想视口为375px，经计算布局视口和视觉视口都等于375，html的fontSize等于37.5px。若设计稿量的是10个区块大小，那么在编写css时就写10rem，对应的width等于<code>37。5 * 10 = 375px</code>正好布满整个布局视口。</p>
+<p>在flexible.js中对iphone设备的initial-scale值进行动态设置。</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> isAndroid = <span class="keyword">win</span>.navigator.appVersion.<span class="literal">match</span>(/android/gi);</span><br><span class="line"><span class="keyword">var</span> isIPhone = <span class="keyword">win</span>.navigator.appVersion.<span class="literal">match</span>(/iphone/gi);</span><br><span class="line"><span class="keyword">var</span> devicePixelRatio = <span class="keyword">win</span>.devicePixelRatio;</span><br><span class="line"><span class="keyword">if</span> (isIPhone) &#123;</span><br><span class="line">    <span class="comment">// iOS下，对于2和3的屏，用2倍的方案，其余的用1倍方案</span></span><br><span class="line">    <span class="keyword">if</span> (devicePixelRatio &gt;= 3 &amp;&amp; (!dpr || dpr &gt;= 3)) &#123;                </span><br><span class="line">        dpr = 3;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (devicePixelRatio &gt;= 2 &amp;&amp; (!dpr || dpr &gt;= 2))&#123;</span><br><span class="line">        dpr = 2;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        dpr = 1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// 其他设备下，仍旧使用1倍的方案</span></span><br><span class="line">    dpr = 1;</span><br><span class="line">&#125;</span><br><span class="line">scale = 1 / dpr; <span class="comment">// initial-scale</span></span><br></pre></td></tr></table></figure>
+<p>此处将initial-scale根据dpr动态设置是为了解决retina屏下border: 1px问题。而将安卓设备的dpr全部设置成1就是hack了之前提到的initial-scale在部分安卓机子上只能为1的bug。</p>
+<p>回到<code>border: 1px</code>问题，有些设计师在750px的设计稿中设计了一条1px的边框线，而这个1px的边框线在各机型上最好的效果实际是占设备物理像素的1px。</p>
+<p>拿iphone5和初代iphone为例：若设置<code>initial-scale=1</code>，那么布局视口为320px，但是iphone5的物理像素宽为640px，那就代表了1个css像素包含了4个物理像素（2x2）。而初代iphone的布局视口和物理像素都为320px如图：</p>
+<p><img src="http://7xpcne.com1.z0.glb.clouddn.com/A879CDC7-085A-40B1-A862-ECF480417909.png" alt=""></p>
+<p>在两者手机上显示的效果1px是一模一样的，但是iphone5包含着4倍的物理像素，就取上下高度而言，在iphone5上只用编写<code>border: 0.5px</code>就可以了。</p>
+<p>但是部分机型对于0.5是不识别的，会直接赋值0。而我们想要做的就是令border的宽等于1个物理像素。我们可以这样做，根据window.devicePixelRatio属性动态缩放layout viewport，使之与屏幕的物理像素相同。这样我们只用在css里编写<code>border: 1px</code>，对应的就是物理像素的1px，border：1问题完美解决。</p>
+<h3 id="两种方案如何兼容">两种方案如何兼容</h3><p>首先要考虑到组件也用rem进行布局，并且组件要在px布局和rem布局中都能兼容。那么就要全局head引入flexible.js的js脚本。</p>
+<p>在375px布局方案里meta[viewport]已经设置，那么在flexible脚本中就要进行判断，已经设置viewport的就沿用，不动态创建meta[viewport]。</p>
+<p>组件的rem布局要依赖html标签的font-size值，在新页面rem布局中已经实现。而在375px布局中，flexiblejs根据固定layout viewport值— 375进行计算，那么所有屏幕尺寸下的页面html标签font-size值都为<code>37.5px</code>。</p>
+<p>还有一个问题，在375px布局中，全局css环境中设置了</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">html</span>, <span class="tag">body</span> &#123;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">100%</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>而所有的浏览器实现默认字体大小为<code>16px</code>，所以在老页面中有些字没有设置大小，默认是16px，引入了flexible后html上的font-size为37.5px,body标签上的字体大小就会变成<code>37.5 * 100% = 37.5px</code>,而没有设置字体大小的字体就会变成37.5px，需要在flexible.js中设置针对这种情况。</p>
+<pre><code><span class="keyword">if</span> (doc.readyState === <span class="string">'complete'</span>) {
+        doc.body.style.fontSize = <span class="number">16</span> + <span class="string">'px'</span>;
+    } <span class="keyword">else</span> {
+        doc.addEventListener(<span class="string">'DOMContentLoaded'</span>, <span class="function"><span class="keyword">function</span><span class="params">(e)</span> </span>{
+            doc.body.style.fontSize = <span class="number">16</span> + <span class="string">'px'</span>;
+        }, <span class="literal">false</span>);
+    }
+</code></pre><p>最后的结果就是：</p>
+<ul>
+<li>全局引入flexible.js文件。</li>
+<li>375px布局的老页面上html标签的font-size固定为37.5px。body上的font-size固定为16px。</li>
+<li>rem布局的新页面上html标签的font-size随不同机型而不同。</li>
+<li>组件编写一律按照rem布局，设计稿为750px，兼容新老页面。</li>
+</ul>
+<p>原创文章，转载需谨慎 ~~</p>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/flexible/" rel="tag">#flexible</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/07/06/wechat-iframe-input-bug/" rel="next" title="wechat-iframe-input-bug">
+                <i class="fa fa-chevron-left"></i> wechat-iframe-input-bug
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+        </div>
+
+        
+
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </div>
+
+      
+        
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            本站概覽
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="https://avatars3.githubusercontent.com/u/8492963?v=3&s=460" alt="Lyu Dada" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">Lyu Dada</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description"></p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">35</span>
+              <span class="site-state-item-name">文章</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">9</span>
+              <span class="site-state-item-name">分類</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">30</span>
+              <span class="site-state-item-name">標籤</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#移动端H5页面rem缩放方案flexible-js兼容375px方案的思路"><span class="nav-number">1.</span> <span class="nav-text">移动端H5页面rem缩放方案flexible.js兼容375px方案的思路</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#375px方案"><span class="nav-number">1.1.</span> <span class="nav-text">375px方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rem方案"><span class="nav-number">1.2.</span> <span class="nav-text">rem方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#两种方案如何兼容"><span class="nav-number">1.3.</span> <span class="nav-text">两种方案如何兼容</span></a></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+      
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="icon-next-heart fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lyu Dada</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 強力驅動
+</div>
+
+<div class="theme-info">
+  主題 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+    
+    
+
+  
+
+
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.2"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.2"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+<script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+<script type="text/javascript" src="/js/motion.js?v=0.4.5.2" id="motion.global"></script>
+
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.2" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    motionMiddleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  <script type="text/javascript" src="/js/bootstrap.js"></script>
+
+  
+  
+
+  
+  
+
+</body>
+</html>
