@@ -35,7 +35,7 @@
 <link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="函数调用," />
+  <meta name="keywords" content="书籍阅读," />
 
 
 
@@ -53,36 +53,27 @@
 
 
 
-<meta name="description" content="笔记思想来自javascript语言精粹一书
-函数调用有4种方式，且不同方式对this的处理有差异。
-方法调用模式
-函数调用模式
-构造器调用模式
-apply调用模式
-
-方法调用模式把函数保存为对象的一个属性，且被调用时，称为方法调用，此时的this指向自己所属的对象。1234567var obj = &amp;#123;	name: &quot;dada&quot;,	getName: function () &amp;#123;">
+<meta name="description" content="浏览器1.手机上有四种浏览器类型：内置浏览器、可下载浏览器、代理浏览器、webview。
+大多数内置浏览器都被紧密集成到底层的操作系统中，，无法单独升级浏览器。
+webview是留给原生应用的一个操作系统浏览接口。（webview是属于操作系统的）
+苹果不允许在ios设备上安装其他渲染引擎，所以其他浏览器想要在ios上安装就必须使用苹果的webview。
+总体来说webview是独立的程序，用了内">
 <meta property="og:type" content="article">
-<meta property="og:title" content="函数调用的四种方式与this的关系">
-<meta property="og:url" content="http://yoursite.com/2015/06/10/函数调用的四种方式/index.html">
+<meta property="og:title" content="the-mobile-web-handbook">
+<meta property="og:url" content="http://yoursite.com/2016/07/24/the-mobile-web-handbook/index.html">
 <meta property="og:site_name" content="Lyu Dada">
-<meta property="og:description" content="笔记思想来自javascript语言精粹一书
-函数调用有4种方式，且不同方式对this的处理有差异。
-方法调用模式
-函数调用模式
-构造器调用模式
-apply调用模式
-
-方法调用模式把函数保存为对象的一个属性，且被调用时，称为方法调用，此时的this指向自己所属的对象。1234567var obj = &amp;#123;	name: &quot;dada&quot;,	getName: function () &amp;#123;">
+<meta property="og:description" content="浏览器1.手机上有四种浏览器类型：内置浏览器、可下载浏览器、代理浏览器、webview。
+大多数内置浏览器都被紧密集成到底层的操作系统中，，无法单独升级浏览器。
+webview是留给原生应用的一个操作系统浏览接口。（webview是属于操作系统的）
+苹果不允许在ios设备上安装其他渲染引擎，所以其他浏览器想要在ios上安装就必须使用苹果的webview。
+总体来说webview是独立的程序，用了内">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="函数调用的四种方式与this的关系">
-<meta name="twitter:description" content="笔记思想来自javascript语言精粹一书
-函数调用有4种方式，且不同方式对this的处理有差异。
-方法调用模式
-函数调用模式
-构造器调用模式
-apply调用模式
-
-方法调用模式把函数保存为对象的一个属性，且被调用时，称为方法调用，此时的this指向自己所属的对象。1234567var obj = &amp;#123;	name: &quot;dada&quot;,	getName: function () &amp;#123;">
+<meta name="twitter:title" content="the-mobile-web-handbook">
+<meta name="twitter:description" content="浏览器1.手机上有四种浏览器类型：内置浏览器、可下载浏览器、代理浏览器、webview。
+大多数内置浏览器都被紧密集成到底层的操作系统中，，无法单独升级浏览器。
+webview是留给原生应用的一个操作系统浏览接口。（webview是属于操作系统的）
+苹果不允许在ios设备上安装其他渲染引擎，所以其他浏览器想要在ios上安装就必须使用苹果的webview。
+总体来说webview是独立的程序，用了内">
 
 
 
@@ -94,7 +85,7 @@ apply调用模式
   };
 </script>
 
-  <title> 函数调用的四种方式与this的关系 | Lyu Dada </title>
+  <title> the-mobile-web-handbook | Lyu Dada </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-hk">
@@ -214,7 +205,7 @@ apply调用模式
             
             
               
-                函数调用的四种方式与this的关系
+                the-mobile-web-handbook
               
             
           </h1>
@@ -223,26 +214,11 @@ apply调用模式
         <div class="post-meta">
           <span class="post-time">
             發表於
-            <time itemprop="dateCreated" datetime="2015-06-10T13:16:11+08:00" content="2015-06-10">
-              2015-06-10
+            <time itemprop="dateCreated" datetime="2016-07-24T21:47:05+08:00" content="2016-07-24">
+              2016-07-24
             </time>
           </span>
 
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp; 分類於
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/js/" itemprop="url" rel="index">
-                    <span itemprop="name">js</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
           
 
           
@@ -262,19 +238,87 @@ apply调用模式
       
 
       
-        <span itemprop="articleBody"><p><code>笔记思想来自javascript语言精粹一书</code></p>
-<h3 id="函数调用有4种方式，且不同方式对this的处理有差异。">函数调用有4种方式，且不同方式对this的处理有差异。</h3><ul>
-<li>方法调用模式</li>
-<li>函数调用模式</li>
-<li>构造器调用模式</li>
-<li>apply调用模式</li>
+        <span itemprop="articleBody"><h3 id="浏览器">浏览器</h3><p>1.手机上有四种浏览器类型：内置浏览器、可下载浏览器、代理浏览器、webview。</p>
+<p>大多数内置浏览器都被紧密集成到底层的操作系统中，，无法单独升级浏览器。</p>
+<p>webview是留给原生应用的一个操作系统浏览接口。（webview是属于操作系统的）</p>
+<p>苹果不允许在ios设备上安装其他渲染引擎，所以其他浏览器想要在ios上安装就必须使用苹果的webview。</p>
+<p>总体来说webview是独立的程序，用了内置浏览器很多底层组件（比如渲染引擎）。</p>
+<p>2.代理浏览器</p>
+<p>用户在代理浏览器上访问一个地址，http请求会被代理浏览器接受，但是不会进行常规的http请求，而是将请求发送到代理服务器上，有代理服务器再请进行常规的http请求，请求得到html、css、javascript。代理服务器上有渲染引擎，会将请求到的资源进行渲染绘制，最后压缩成类似一张pdf，并带有链接锚点，和简单的javascript事件，代理服务器将这张图片再返回到代理浏览器上。</p>
+<p>通过这种方式代理浏览器得到一张完整的页面只用一个http请求。节省了大量的带宽，提升的速度。</p>
+<p>3.渲染引擎</p>
+<p>手机上4个重要的渲染引擎：</p>
+<ul>
+<li>Gecko</li>
+<li>Trident</li>
+<li>Webkit</li>
+<li>Blink</li>
 </ul>
-<h4 id="方法调用模式">方法调用模式</h4><p>把函数保存为对象的一个属性，且被调用时，称为方法调用，此时的<code>this</code>指向自己所属的对象。<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">	name: <span class="string">"dada"</span>,</span><br><span class="line">	getName: <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">this</span>.name;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">obj.getName()<span class="comment">//dada</span></span><br></pre></td></tr></table></figure></p>
-<h4 id="函数调用模式">函数调用模式</h4><p>这种模式即为最普遍的函数调用，但此时的<code>this</code>有混淆的地方。<br>以此模式调用函数的时候，<code>this</code>指向全局对象，<strong>并不会指向外层函数的this</strong>。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.name = <span class="string">"nanyang"</span>;</span><br><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">	name: <span class="string">"dada"</span>,</span><br><span class="line">	getName: <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="comment">//that = this; 解决办法</span></span><br><span class="line">		<span class="keyword">var</span> helper = <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">			<span class="keyword">this</span>.name = <span class="string">'xx!'</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		helper();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">obj.name()<span class="comment">//dada</span></span><br><span class="line"><span class="built_in">window</span>.name<span class="comment">//xx!</span></span><br></pre></td></tr></table></figure></p>
-<h4 id="构造器调用模式">构造器调用模式</h4><p>这个模式跟方法调用类似，this指向所属的新对象。<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Abc = <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">this</span>.name = <span class="string">'xxx'</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> Abc();</span><br><span class="line">a.name<span class="comment">//<span class="label">xxx</span></span></span><br></pre></td></tr></table></figure></p>
-<h4 id="apply调用模式">apply调用模式</h4><p><code>apply</code>允许我们自己选择this，感觉精粹里的说法很直白<code>apply接受两个参数，第一个是要绑定给this的值，第二个是参数的数组</code>。<br>我的解释是，我们可以调用任意的方法，然后将方法中的this指向的对象换成我们在<code>apply</code>中加进去的第一个参数。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> some_obj = &#123;</span><br><span class="line">	name: ‘ldd’;</span><br><span class="line">	say: <span class="function"><span class="keyword">function</span> <span class="params">(who)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> ‘hi’ + who + ‘I am’ + <span class="keyword">this</span>.name;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">Some_obj.say(<span class="string">"xyn"</span>) <span class="comment">//hi xyn, I am ldd;</span></span><br><span class="line">Var my_obj = &#123; name: <span class="string">"xxx"</span>&#125;;</span><br><span class="line">Some_obj.say.apply(my_obj, [<span class="string">'xyn'</span>])</span><br><span class="line"><span class="comment">//hi xyn, I am <span class="label">xxx</span></span></span><br><span class="line">原本say方法中的<span class="string">`this`</span>指向<span class="string">`some_obj`</span>对象，利用apply就可以将<span class="keyword">this</span>指向my_obj</span><br></pre></td></tr></table></figure></p>
-<p><strong>当然call跟apply的用法几乎一样，就是在第二个参数上的形式有一些变化</strong></p>
-<p>原创文章！转载请注明出处</p>
+<p>Blink是从WebKit中分离出来的。</p>
+<p>除了ios，大部分浏览器使用webkit作为渲染引擎。但是</p>
+<ul>
+<li>IE Mobile使用<code>Trident</code></li>
+<li>Chrome 使用<code>Blink</code></li>
+<li>Firefox Mobile 和Firefox OS使用<code>Gecko</code></li>
+</ul>
+<p>重点说明webkit是一个渲染引擎，不是浏览器，会提供一个渲染完成的页面，但不包含真正把渲染的页面显示在手机屏幕上的模块。一个浏览器使用webkit作为渲染引擎并不意味着它跟任何其他基于webkit的浏览器一样。</p>
+<h3 id="安卓">安卓</h3><p>谷歌提供免费的安卓操作系统给多个手机设备厂商，设备厂商为了差异化，对内置浏览器做了修改。所以相同版本的内置浏览器还是会有区别。</p>
+<p>原始的安卓提供了他自己基于webkit的浏览器，没有名字，可以成为安卓webkit，我们也可以称呼它会安卓内置浏览器。</p>
+<p>在最开始的时候，所有安卓设备都将安卓webkit作为内置浏览器，只有安卓系统更新时才会更新它。最新的安卓内置浏览器的版本是4.3。</p>
+<p>blink是为html和css设计的渲染引擎，通常与v8 javascript引擎配合。blink与人人都可下载修改的谷歌开源浏览器chromium紧密的结合在一起。chrome是谷歌自己对chromium的一个实现。</p>
+<p>如何确认安卓设备的内置浏览器？若navigation.userAgent中包含chrome可能是chrome或者是改自chromium的chrome。否则就是安卓webkit。</p>
+<h3 id="视口">视口</h3><p><strong>像素</strong></p>
+<p>一个像素就是计算机屏幕能显示一种特定颜色的最小区域。</p>
+<p><strong>设备像素</strong></p>
+<p>设备屏幕的物理像素，任何设备的物理像素的数量都是固定的。</p>
+<p><strong>css像素</strong></p>
+<p>为web开发者创建的，在css（javascript）中使用的一个抽象的层。    </p>
+<p><strong>三大视口：</strong></p>
+<p>布局视口、视觉视口、理想视口</p>
+<p>理想视口是对特定设备上的特定浏览器的布局视口的一个理想尺寸。</p>
+<p><strong>分辨率</strong></p>
+<p>设备每英寸内点的个数。</p>
+<p><strong>设备像素比</strong></p>
+<p>设备x轴像素个数和理想视口的宽的比值。</p>
+<h3 id="css">css</h3><p><strong>overflow-scrolling</strong></p>
+<p>在Safari和某些浏览器上，没有实现平滑的滚动效果，这是因为受到处理器的限制，节省电量。但是手动设置了<code>-webkit-overflow-scrolling: auto</code> 会使设置了可滚动的块级元素实现平滑的滚动效果。</p>
+<h3 id="触摸和指针事件">触摸和指针事件</h3><p>touchstart、touchmove、touchend和pointerdown、pointermove、pointerup事件在同一时刻触发。</p>
+<p>鼠标指针总是指着某一个像素，而手指触控会覆盖很多像素点。通常系统会从这些像素点计算出一个中心点作为触摸事件的坐标。</p>
+<p><strong>触摸事件级联</strong></p>
+<p>用户触摸动作触发的一系列事件。</p>
+<p>下列事件在用户轻触某个元素时触发：</p>
+<figure class="highlight haml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">-<span class="ruby"> touchstart/pointerdown</span><br><span class="line"></span>-<span class="ruby"> touchend/pointerup</span><br><span class="line"></span>-<span class="ruby"> mouseover</span><br><span class="line"></span>-<span class="ruby"> mousemove</span><br><span class="line"></span>-<span class="ruby"> mousedown</span><br><span class="line"></span>-<span class="ruby"> mouseup</span><br><span class="line"></span>-<span class="ruby"> click</span><br><span class="line"></span>-<span class="ruby"> <span class="symbol">:hover</span></span></span><br></pre></td></tr></table></figure>
+<p>具体的顺序因浏览器而异。大体上讲就是当手指头轻触屏幕时，给以上事件写了事件绑定函数的都会触发事件。</p>
+<p>触摸事件级联中最重要的当属click事件了，以下操作都会触发click事件：</p>
+<figure class="highlight haml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-<span class="ruby"> 按下鼠标按钮</span><br><span class="line"></span>-<span class="ruby"> 轻触屏幕</span><br><span class="line"></span>-<span class="ruby"> 点击按钮提交表单、</span><br><span class="line"></span>-<span class="ruby"> 点击链接</span></span><br></pre></td></tr></table></figure>
+<p>在桌面浏览器上，click事件只有当mousedown和mouseup在同一个像素触发后才会触发click事件。</p>
+<p><strong>剖析触摸事件</strong></p>
+<p>触摸事件对象有三种touchList数组属性：</p>
+<ol>
+<li>touches 当前触摸屏幕的触摸点数组，即使触摸点不在绑定事件的元素内，是屏幕内的当前所有触摸点形成的数组。</li>
+<li>changedTouches 导致触摸事件触发的触摸点数组。</li>
+<li>targetTouches 事件目标元素上的触摸点数组。</li>
+</ol>
+<p><strong>touchmove离开元素</strong></p>
+<p>如果在某个元素上绑定了touchmove事件，手指从元素移到了元素外，touchmove还是会持续触发，touchend不会触发。</p>
+<p><strong>阻止默认行为</strong></p>
+<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line"></span><br><span class="line"><span class="literal">e</span>.preventDefault()</span><br></pre></td></tr></table></figure>
+<p><strong>click</strong></p>
+<ol>
+<li>a链接不跳转</li>
+<li>表单不提交</li>
+</ol>
+<p><strong>touchstart</strong></p>
+<ol>
+<li>a链接</li>
+<li>滑动阻止了滚动条滚动</li>
+<li>双触不会缩放</li>
+<li>click、鼠标的事件级联</li>
+</ol>
+<p><strong>touchmove</strong></p>
+<ol>
+<li>阻止scroll</li>
+</ol>
 </span>
       
     </div>
@@ -283,7 +327,7 @@ apply调用模式
       
         <div class="post-tags">
           
-            <a href="/tags/函数调用/" rel="tag">#函数调用</a>
+            <a href="/tags/书籍阅读/" rel="tag">#书籍阅读</a>
           
         </div>
       
@@ -292,17 +336,13 @@ apply调用模式
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/06/08/关于BFC的一些事儿/" rel="next" title="关于BFC的一些事儿">
-                <i class="fa fa-chevron-left"></i> 关于BFC的一些事儿
+              <a href="/2016/07/17/rem缩放方案flexible-js兼容375px方案的思路/" rel="next" title="rem缩放方案flexible.js兼容375px方案的思路">
+                <i class="fa fa-chevron-left"></i> rem缩放方案flexible.js兼容375px方案的思路
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2015/06/10/regexp/" rel="prev" title="js中的正则表达式">
-                js中的正则表达式 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -423,7 +463,7 @@ apply调用模式
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#函数调用有4种方式，且不同方式对this的处理有差异。"><span class="nav-number">1.</span> <span class="nav-text">函数调用有4种方式，且不同方式对this的处理有差异。</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#方法调用模式"><span class="nav-number">1.1.</span> <span class="nav-text">方法调用模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#函数调用模式"><span class="nav-number">1.2.</span> <span class="nav-text">函数调用模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#构造器调用模式"><span class="nav-number">1.3.</span> <span class="nav-text">构造器调用模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#apply调用模式"><span class="nav-number">1.4.</span> <span class="nav-text">apply调用模式</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#浏览器"><span class="nav-number">1.</span> <span class="nav-text">浏览器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安卓"><span class="nav-number">2.</span> <span class="nav-text">安卓</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#视口"><span class="nav-number">3.</span> <span class="nav-text">视口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#css"><span class="nav-number">4.</span> <span class="nav-text">css</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#触摸和指针事件"><span class="nav-number">5.</span> <span class="nav-text">触摸和指针事件</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
