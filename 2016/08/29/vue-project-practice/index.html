@@ -1,0 +1,697 @@
+<!doctype html>
+<html class="theme-next   use-motion ">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="vue," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Lyu Dada" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.2" />
+
+
+
+
+
+
+<meta name="description" content="初次接触vue，刷完了堪称经典的vue官网文档+vue-router文档+vuex文档+vue-cli文档，然后就开始刷项目了。这篇文章总结了项目实践的一些思路。
+
+首先看下项目的总览图（mockplus制作）
+
+这个项目我负责的部分是一个控制台的需求，用户可以在这个模块进行佣金、订单等项目的修改设置，可以看到第1张图相当于控制台首页，页面上有1、2、3、4、5个入口，其中1-4入口进入的页面对应">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue-project-practice">
+<meta property="og:url" content="http://yoursite.com/2016/08/29/vue-project-practice/index.html">
+<meta property="og:site_name" content="Lyu Dada">
+<meta property="og:description" content="初次接触vue，刷完了堪称经典的vue官网文档+vue-router文档+vuex文档+vue-cli文档，然后就开始刷项目了。这篇文章总结了项目实践的一些思路。
+
+首先看下项目的总览图（mockplus制作）
+
+这个项目我负责的部分是一个控制台的需求，用户可以在这个模块进行佣金、订单等项目的修改设置，可以看到第1张图相当于控制台首页，页面上有1、2、3、4、5个入口，其中1-4入口进入的页面对应">
+<meta property="og:image" content="http://cdn1.showjoy.com/images/de/de3ea721262145b8ac653247c9d47ae1.png">
+<meta property="og:image" content="http://cdn1.showjoy.com/images/55/55bed91a789346e89e6f6c7702bfdfe7.png">
+<meta property="og:image" content="http://cdn1.showjoy.com/images/74/740805b4c82241b5867fa626a52593f4.png">
+<meta property="og:image" content="http://cdn1.showjoy.com/images/39/39d779612fbc4090ad9a96899df4543d.png.300x490.jpg">
+<meta property="og:image" content="http://cdn1.showjoy.com/images/f3/f3ad0edb2375417a8cd1c8fddea24865.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="vue-project-practice">
+<meta name="twitter:description" content="初次接触vue，刷完了堪称经典的vue官网文档+vue-router文档+vuex文档+vue-cli文档，然后就开始刷项目了。这篇文章总结了项目实践的一些思路。
+
+首先看下项目的总览图（mockplus制作）
+
+这个项目我负责的部分是一个控制台的需求，用户可以在这个模块进行佣金、订单等项目的修改设置，可以看到第1张图相当于控制台首页，页面上有1、2、3、4、5个入口，其中1-4入口进入的页面对应">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: '',
+    sidebar: 'post',
+    motion: true
+  };
+</script>
+
+  <title> vue-project-practice | Lyu Dada </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-hk">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+
+
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Lyu Dada</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">to love and get love</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            歸檔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            標籤
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                vue-project-practice
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            發表於
+            <time itemprop="dateCreated" datetime="2016-08-29T16:11:42+08:00" content="2016-08-29">
+              2016-08-29
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><blockquote>
+<p>初次接触vue，刷完了堪称经典的vue官网文档+vue-router文档+vuex文档+vue-cli文档，然后就开始刷项目了。这篇文章总结了项目实践的一些思路。</p>
+</blockquote>
+<p>首先看下项目的总览图（mockplus制作）</p>
+<p><img src="http://cdn1.showjoy.com/images/de/de3ea721262145b8ac653247c9d47ae1.png" alt=""></p>
+<p>这个项目我负责的部分是一个控制台的需求，用户可以在这个模块进行佣金、订单等项目的修改设置，可以看到第1张图相当于控制台首页，页面上有1、2、3、4、5个入口，其中1-4入口进入的页面对应4个页面，但是4个页面主要结构相同，中间商品列表样式信息不同，为了简略4图归为第二张图。入口5对应第三张图。</p>
+<p>这几个页面需求并不复杂，大项目本身也是是基于zepto的，单单把这个模块拿出来抽离成单页形式主要为了两点考虑：</p>
+<ol>
+<li>控制台毕竟涉及操作dom的需求会很多，为了兼容未来产品迭代的复杂需求。</li>
+<li>控制台从产品最终的形态上更像是一个独立的应用，且用户进入控制台首页后所有的操作就在当前单页内进行操作，无需a链接跳转，在体验上也是很贴合用户的。</li>
+</ol>
+<p>基于以上两点使用vue以及vue大礼包编写了这个单页模块。</p>
+<h2 id="vue-router路由控制">vue-router路由控制</h2><p>由入口而知一共有6个页面（包含控制台首页），虽然是单页模块，也是必须要符合通过url地址直接进入对应分页的需求。在切换的过程中，留下url路由信息也方便用户进行后退操作。</p>
+<p>首先是顶级路由的配置，六个页面（组件）分别设置六个顶级路由。</p>
+<figure class="highlight nimrod"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// 在<span class="type">App</span>.vue文件中设置&lt;router-view&gt;</span><br><span class="line">&lt;<span class="keyword">template</span>&gt;</span><br><span class="line">  &lt;<span class="keyword">div</span> id=<span class="string">"app"</span>&gt;</span><br><span class="line">    &lt;router-view  keep-alive :style=<span class="string">"&#123;'padding-bottom': paddingBottom + 'rem'&#125;"</span>&gt;&lt;/router-view&gt;</span><br><span class="line">  &lt;/<span class="keyword">div</span>&gt;</span><br><span class="line">&lt;/<span class="keyword">template</span>&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在main.js中配置路由</span></span><br><span class="line"></span><br><span class="line">router<span class="built_in">.</span><span class="built_in">map</span>(&#123;</span><br><span class="line">  <span class="string">'/'</span>: &#123;</span><br><span class="line">    component: Index,</span><br><span class="line">    name: <span class="string">'index'</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">'/commission'</span>: &#123;</span><br><span class="line">    name: <span class="string">'commission'</span>,</span><br><span class="line">    component: Commission</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">'/order'</span>: &#123;</span><br><span class="line">    name: <span class="string">'order'</span>,</span><br><span class="line">    component: <span class="keyword">Order</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">'/inventory'</span>: &#123;</span><br><span class="line">    name: <span class="string">'inventory'</span>,</span><br><span class="line">    component: Inventory</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">'/shop'</span>: &#123;</span><br><span class="line">    name: <span class="string">'shopList'</span>,</span><br><span class="line">    component: ShopList</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">'/qcode'</span>: &#123;</span><br><span class="line">    name: <span class="string">'qcode'</span>,</span><br><span class="line">    component: Qcode</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h3 id="路由查询参数">路由查询参数</h3><p><img src="http://cdn1.showjoy.com/images/55/55bed91a789346e89e6f6c7702bfdfe7.png" alt=""></p>
+<p>由上图具体的佣金页面（组件）可以看到，这个页面有两个主要操作，一：搜索，根据搜索结果展示商品条目；二：翻页，根据页数展示商品条目。</p>
+<p>原始的思路是搜索与翻页都在当前页面（组件）操作，将异步获取的数据替换当前页面的items数组。Vue会将变化的数据与view绑定，同步刷新view页面。</p>
+<p>这样做有个缺陷，任何操作（搜索、翻页）都不会留下可追溯的路径，假设有个场景：</p>
+<blockquote>
+<p>用户翻n页，发现了一款商品点击进入详情页（外链，属于大项目中的页面），用户返回佣金设置页面时发现又从第一页开始浏览了。</p>
+</blockquote>
+<p>基于此类场景结合vue-router的路由查询参数功能可以换一种实现方式。</p>
+<p>点击搜索不再在当前页面（组件）异步请求数据，而是通过$route对象进行路由跳转。</p>
+<figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">this<span class="built_in">.</span><span class="variable">$route.router.go</span>(&#123;</span><br><span class="line">  name: <span class="string">'index'</span>,</span><br><span class="line">  query: &#123;</span><br><span class="line">    <span class="built_in">keyWord</span>: <span class="string">'searchWorld'</span>,</span><br><span class="line">    page: <span class="number">1</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p><img src="http://cdn1.showjoy.com/images/74/740805b4c82241b5867fa626a52593f4.png" alt=""></p>
+<p>根据上图，搜索n次，或者是点击翻页n次，都会改变当前的url的查询参数。实际上改变路由查询参数，就相当于重新进入一次当前页面（组件），Vue会识别计算是否重用当前组件，这种情况<router-view>并不会产生切换效果，因为即使查询参数变化，当前页面组件始终都是<code>component: Commission</code>同一个组件。</router-view></p>
+<p>这样设计就留下了一系列的路径，可供历史回退。</p>
+<p>那么数据该如何获取呢？</p>
+<p><code>vue-router</code>有一个「<a href="http://router.vuejs.org/zh-cn/pipeline/index.html" target="_blank" rel="external">切换控制流水线</a>」的概念，即在不同路由切换的过程中会有不同的钩子函数可以调用。</p>
+<p>其中<code>data</code>钩子函数不管组件是否可以重用，在每次路由切换的时候都会触发。</p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">route</span>: &#123;</span><br><span class="line">  data (transition) &#123;</span><br><span class="line">    <span class="keyword">this</span>.$http.get(<span class="string">'/api/test/test'</span>, &#123;</span><br><span class="line">      <span class="attribute">params</span>: &#123;</span><br><span class="line">        <span class="attribute">keyword</span>: <span class="keyword">this</span>.keyWord,</span><br><span class="line">        <span class="attribute">page</span>: <span class="keyword">this</span>.currentPage,</span><br><span class="line">        <span class="attribute">pageSize</span>: <span class="keyword">this</span>.numberPerPage</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;).<span class="keyword">then</span>(<span class="function"><span class="params">(response)</span> =&gt;</span> &#123;</span><br><span class="line">      transition.next(&#123;</span><br><span class="line">        <span class="attribute">items</span>: response.json().data.item.items,</span><br><span class="line">        <span class="attribute">listNumber</span>: response.json().data.item.totalNum</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;, <span class="function"><span class="params">(response)</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="regexp">//</span> error</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<p>这样实现了数据的获取，参数部分依靠当前组件的<code>$route</code>对象获取。</p>
+<h2 id="vue_组件">vue 组件</h2><p>上文已经提到的6大分页其实就是6个组件，但是为了在开发环境下区分资源，将这6个组件放在了views文件下内。</p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">|</span></span><br><span class="line"><span class="string">|-src</span></span><br><span class="line"><span class="string">|  |</span></span><br><span class="line"><span class="string">|  |-components</span></span><br><span class="line"><span class="string">|  |-views</span></span><br><span class="line"><span class="string">|  |  |-Index.vue</span></span><br><span class="line"><span class="string">|  |  |-Commission.vue</span></span><br><span class="line"><span class="string">|  |  |-Order.vue</span></span><br><span class="line"><span class="string">|  |  |-...</span></span><br></pre></td></tr></table></figure>
+<h3 id="common_components（通用业务组件）">common components（通用业务组件）</h3><p><img src="http://cdn1.showjoy.com/images/39/39d779612fbc4090ad9a96899df4543d.png.300x490.jpg" alt=""></p>
+<p>由上图可知可以将1.title 2.搜索栏 3.confirm 4.toast 5.分页器 6.loading等待封装成全局组件。在<code>main.js</code>中进行注册。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Toast <span class="keyword">from</span> <span class="string">'./components/common/Toast'</span></span><br><span class="line"></span><br><span class="line">Vue.component(<span class="string">'c-toast'</span>, Toast);</span><br><span class="line"></span><br><span class="line">... </span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>商品列表也可以抽离成组件，但是在每个分页里的商品列表是不同的，所以每个分页里的商品列表都独立抽离成组件，并注册在对应的分页组件里。</p>
+<figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> ListCommission <span class="keyword">from</span> <span class="string">'../components/ListCommission'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="attribute">name</span>: <span class="string">'commission'</span>,</span><br><span class="line">  <span class="attribute">components</span>: &#123;</span><br><span class="line">    ListCommission</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="vuex_状态管理">vuex 状态管理</h2><p>控制台这个模块状态并不复杂，多数状态的传递都只发生在父组件和子组件这种上下层级的关系之间。</p>
+<p>比如Commission组件（佣金分页）中的ListCommission组件（佣金页的商品列表组件）之间的状态传递就只发生在这两级之间。</p>
+<figure class="highlight nimrod"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// <span class="type">Commission</span>.vue</span><br><span class="line"></span><br><span class="line">&lt;<span class="keyword">template</span>&gt;</span><br><span class="line">&lt;list-commission :visible=<span class="string">"listNumber &gt; 0"</span> v-<span class="keyword">if</span>=<span class="string">"!$loadingRouteData"</span> :items=<span class="string">"items"</span>&gt;&lt;/list-commission&gt;</span><br><span class="line">&lt;/<span class="keyword">template</span>&gt;</span><br></pre></td></tr></table></figure>
+<p>其中<code>items</code>状态属于父组件，会传递到<code>ListCommission</code>组件内供其view展示。这种状态称为「组件本地状态」，组件本身管理自己的状态。</p>
+<p>但是现在有这么一个功能点，生成二维码模块需要使用一个完整url路径，这个路径需要根据测试、线上环境的不同对应<code>.net/.com</code>。这个状态也许还有许多不同层级的组件需要使用，那么这样的状态就适合用vuex去管理。</p>
+<p>1.首先在store中定义状态初始值</p>
+<figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">const <span class="keyword">state</span> = &#123;</span><br><span class="line">  suffix: '.net'</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>2.在根组件App.vue中触发action</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> suffix = <span class="built_in">window</span>.location.hostname.indexOf(<span class="string">'showjoy.net'</span>) &gt; -<span class="number">1</span> ? <span class="string">'.net'</span> : <span class="string">'.com'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> setGlobalSuffix = <span class="function"><span class="keyword">function</span> <span class="params">(&#123;dispatch&#125;, suffix)</span> </span>&#123;</span><br><span class="line">  dispatch(<span class="string">'SET_GLOBAL_SUFFIX'</span>, suffix);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">this</span>.setGlobalSuffix(suffix);</span><br></pre></td></tr></table></figure>
+<p>3.触发dispatch</p>
+<figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SET_GLOBAL_SUFFIX (<span class="keyword">state</span>, suffix) &#123;</span><br><span class="line">    <span class="keyword">state</span>.suffix = suffix;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>4.get状态</p>
+<figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export function getSuffix (<span class="keyword">state</span>) &#123;</span><br><span class="line">  return <span class="keyword">state</span>.suffix;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>只要在相应组件中定义了getSuffix的getters，就可以在相应的组件中调用这个函数，获取suffix状态。此时suffix状态可称为「应用层级状态」。应用层级状态不属于任何特定的组件，但每个组件都可以监视其变化并响应式的更新DOM。</p>
+<p><img src="http://cdn1.showjoy.com/images/f3/f3ad0edb2375417a8cd1c8fddea24865.png" alt=""></p>
+<p><code>suffix</code>状态只是一个简单的例子，像上图所示，当同级组件之间或者是不同直系关系的父子组件之间需要进行状态的变更，依赖「组件本地状态」将难以维护。</p>
+<p>比如<code>Commission组件</code>需要改变<code>Order组件</code>的一个状态，如果不借助vuex，那么需要显示的编写事件将状态分发到上层组件App，Order组件需要监听这个事件。状态变更一多，那维护将是噩梦。</p>
+<p>原创文章 转载随意</p>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/vue/" rel="tag">#vue</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/21/learn-es6/" rel="next" title="learn-es6">
+                <i class="fa fa-chevron-left"></i> learn-es6
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+        </div>
+
+        
+
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </div>
+
+      
+        
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            本站概覽
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="https://avatars3.githubusercontent.com/u/8492963?v=3&s=460" alt="Lyu Dada" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">Lyu Dada</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description"></p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">39</span>
+              <span class="site-state-item-name">文章</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">9</span>
+              <span class="site-state-item-name">分類</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">33</span>
+              <span class="site-state-item-name">標籤</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#vue-router路由控制"><span class="nav-number">1.</span> <span class="nav-text">vue-router路由控制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#路由查询参数"><span class="nav-number">1.1.</span> <span class="nav-text">路由查询参数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vue_组件"><span class="nav-number">2.</span> <span class="nav-text">vue 组件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#common_components（通用业务组件）"><span class="nav-number">2.1.</span> <span class="nav-text">common components（通用业务组件）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vuex_状态管理"><span class="nav-number">3.</span> <span class="nav-text">vuex 状态管理</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+      
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="icon-next-heart fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lyu Dada</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 強力驅動
+</div>
+
+<div class="theme-info">
+  主題 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+    
+    
+
+  
+
+
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.2"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.2"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+<script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+<script type="text/javascript" src="/js/motion.js?v=0.4.5.2" id="motion.global"></script>
+
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.2" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    motionMiddleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  <script type="text/javascript" src="/js/bootstrap.js"></script>
+
+  
+  
+
+  
+  
+
+</body>
+</html>
