@@ -1,0 +1,723 @@
+<!doctype html>
+<html class="theme-next   use-motion ">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="webp," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Lyu Dada" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.2" />
+
+
+
+
+
+
+<meta name="description" content="图片流量优化刷新一个页面消耗的流量除了脚本样式文件以外，大头其实在下载的图片。一张图片动辄几十kb，想尽办法优化样式、脚本文件所优化的图片流量其实还不如一张图片大。
+本文从两个角度介绍如何对图片流量进行优化。本文进行图片流量优化的前提都是对于移动端而言。
+webp首先从图片格式方面着手，webp（google官方网址）是谷歌推出的一种图片格式，优点在于同等画面质量下，体积比jpg、png少了25%">
+<meta property="og:type" content="article">
+<meta property="og:title" content="images-liuliang-youhua">
+<meta property="og:url" content="http://yoursite.com/2016/09/12/images-liuliang-youhua/index.html">
+<meta property="og:site_name" content="Lyu Dada">
+<meta property="og:description" content="图片流量优化刷新一个页面消耗的流量除了脚本样式文件以外，大头其实在下载的图片。一张图片动辄几十kb，想尽办法优化样式、脚本文件所优化的图片流量其实还不如一张图片大。
+本文从两个角度介绍如何对图片流量进行优化。本文进行图片流量优化的前提都是对于移动端而言。
+webp首先从图片格式方面着手，webp（google官方网址）是谷歌推出的一种图片格式，优点在于同等画面质量下，体积比jpg、png少了25%">
+<meta property="og:image" content="http://cdn1.showjoy.com/images/64/64fbeebcb1314d0a8e6c66b03296a1b0.png">
+<meta property="og:image" content="http://cdn1.showjoy.com/images/4c/4c5091b88aea498f9131d2bffb62d923.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="images-liuliang-youhua">
+<meta name="twitter:description" content="图片流量优化刷新一个页面消耗的流量除了脚本样式文件以外，大头其实在下载的图片。一张图片动辄几十kb，想尽办法优化样式、脚本文件所优化的图片流量其实还不如一张图片大。
+本文从两个角度介绍如何对图片流量进行优化。本文进行图片流量优化的前提都是对于移动端而言。
+webp首先从图片格式方面着手，webp（google官方网址）是谷歌推出的一种图片格式，优点在于同等画面质量下，体积比jpg、png少了25%">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: '',
+    sidebar: 'post',
+    motion: true
+  };
+</script>
+
+  <title> images-liuliang-youhua | Lyu Dada </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-hk">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+
+
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Lyu Dada</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">to love and get love</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            歸檔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            標籤
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                images-liuliang-youhua
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            發表於
+            <time itemprop="dateCreated" datetime="2016-09-12T16:29:17+08:00" content="2016-09-12">
+              2016-09-12
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><h1 id="图片流量优化">图片流量优化</h1><p>刷新一个页面消耗的流量除了脚本样式文件以外，大头其实在下载的图片。一张图片动辄几十kb，想尽办法优化样式、脚本文件所优化的图片流量其实还不如一张图片大。</p>
+<p>本文从两个角度介绍如何对图片流量进行优化。本文进行图片流量优化的前提都是对于<strong>移动端</strong>而言。</p>
+<h2 id="webp">webp</h2><p>首先从图片格式方面着手，webp（<a href="https://developers.google.com/speed/webp/" target="_blank" rel="external">google官方网址</a>）是谷歌推出的一种图片格式，优点在于同等画面质量下，体积比jpg、png少了25%以上。以两张jpg、png图片为例：</p>
+<ol>
+<li><p>JPG <a href="http://cdn1.showjoy.com/images/c9/c9c2221942774550ad53342da23774de.jpg" target="_blank" rel="external">http://cdn1.showjoy.com/images/c9/c9c2221942774550ad53342da23774de.jpg</a></p>
+</li>
+<li><p>PNG <a href="http://cdn1.showjoy.com/images/bb/bb1c8b0d275e4ba2903dc822a03add50.png" target="_blank" rel="external">http://cdn1.showjoy.com/images/bb/bb1c8b0d275e4ba2903dc822a03add50.png</a></p>
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">size</th>
+<th style="text-align:center">JPG</th>
+<th style="text-align:center">PNG</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">无压缩</td>
+<td style="text-align:center">165kb</td>
+<td style="text-align:center">55kb</td>
+</tr>
+<tr>
+<td style="text-align:center">tinypng压缩</td>
+<td style="text-align:center">75kb</td>
+<td style="text-align:center">20kb</td>
+</tr>
+<tr>
+<td style="text-align:center">webp转换</td>
+<td style="text-align:center">54kb</td>
+<td style="text-align:center">6.1kb</td>
+</tr>
+</tbody>
+</table>
+<p>由表格的罗列可知，将图片转换为webp格式，图片的体积比tinypng压缩完后的体积还要小，且图片质量甚至还要高于tinypng压缩。</p>
+<p>虽然webp格式的图片相对于png和jpg体积小质量高，但是目前的兼容性在全球范围只达到了70%左右。（<a href="http://caniuse.com/#feat=webp" target="_blank" rel="external">caniuse</a>截止20160911）</p>
+<p><img src="http://cdn1.showjoy.com/images/64/64fbeebcb1314d0a8e6c66b03296a1b0.png" alt=""></p>
+<p>根据caniuse，目前在移动端安卓机型4.4以上全部支持，但是ios全军覆灭。我司用户ios、安卓55分成，支持了webp至少能为一半用户提供更小体积的图片体验。而且据说ios10系统将支持webp，这样一来我司产品的webp支持度将会更高。<a href="https://twitter.com/html5test/status/752434454061322240" target="_blank" rel="external">ios10有望支持webp</a></p>
+<h3 id="图片服务器支持webp转换">图片服务器支持webp转换</h3><p>我司原本就有基于<code>nginx+lua+graphicsmagick</code>的图片缩略图功能，具体使用方法类似</p>
+<p><code>http://cdn1.shwojoy.com/images/34/xxxxx.png</code></p>
+<p><code>http://cdn1.shwojoy.com/images/34/xxxxx.png.300x300.png</code></p>
+<p>为了支持webp转换需要修改原先的lua脚本，添加对<code>.webp</code>后缀的识别。使之能对类似<code>xxxxx.png.300x300.png.webp</code>或者<code>xxxxx.png.webp</code>这样的域名进行识别并转换。</p>
+<p><code>nginx+lua+graphicsmagick</code>这套方案其实做的事情就是<code>nginx</code>对域名进行拦截，<code>lua</code>脚本进行域名后缀规则的匹配，比如说<code>300x300.png</code>/<code>.webp</code>类似的后缀，匹配完成后再在lua里调用<code>graphicsmagick</code>的命令，进行一些图片转换、裁剪等工作。</p>
+<p>lua脚本片段</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> <span class="built_in">table</span>.isLegal(size_list) <span class="keyword">and</span> extend == <span class="string">"webp"</span> <span class="keyword">then</span></span><br><span class="line">        command = <span class="string">[[/usr/local/GraphicsMagick-1.3.25/bin/gm convert -quality 75 -density 72 +profile "*"  ]]</span> .. ngx.var.image_root ..  originalUri  .. <span class="string">" -geometry "</span> .. area .. <span class="string">" "</span> .. ngx.var.file;</span><br><span class="line">        <span class="built_in">os</span>.execute(command);</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<p><strong>值得注意的是graphicsmagick版本在1.3.20及以上才支持webp</strong> <a href="https://sourceforge.net/projects/graphicsmagick/files/" target="_blank" rel="external">download</a></p>
+<p>graphicsmagick能做到转换webp还需要下载编译libwebp。<a href="http://andremouche.github.io/graphicsmagick/graphicsmagick-webp.html" target="_blank" rel="external">graphicsmagick支持webp教程</a></p>
+<p>图片服务器支持webp转换后，就能实时转化webp格式的图片了，为接下来的webp兼容方案提供了技术支持。</p>
+<ul>
+<li><a href="http://cdn1.showjoy.com/images/c9/c9c2221942774550ad53342da23774de.jpg" target="_blank" rel="external">http://cdn1.showjoy.com/images/c9/c9c2221942774550ad53342da23774de.jpg</a></li>
+<li><a href="http://cdn1.showjoy.com/images/c9/c9c2221942774550ad53342da23774de.jpg.webp" target="_blank" rel="external">http://cdn1.showjoy.com/images/c9/c9c2221942774550ad53342da23774de.jpg.webp</a></li>
+</ul>
+<h3 id="webp兼容方案">webp兼容方案</h3><p>目前在浏览器端判断是否支持webp最好的方法就是特性检测法。根据检测结果将是否支持webp的值存入cookie，供之后需要判断webp兼容性的地方使用。</p>
+<p>特性检测脚本：(<a href="http://mp.weixin.qq.com/s?__biz=MjM5MTA1MjAxMQ==&amp;mid=2651222808&amp;idx=1&amp;sn=f8da6937eafd0e1764daf95fec1ec564&amp;scene=2&amp;srcid=0829WCBFpHNOFrBxYfwjw5T6&amp;from=timeline&amp;isappinstalled=0&amp;s_q_s_h_a_r_e_1=NExZb2ZFJjJHcG5Baw==" target="_blank" rel="external">参考</a>)</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">;(<span class="function"><span class="keyword">function</span><span class="params">(doc)</span> </span>&#123;</span><br><span class="line">  </span><br><span class="line">        <span class="comment">// 给html根节点加上webps类名</span></span><br><span class="line">        <span class="function"><span class="keyword">function</span> <span class="title">addRootTag</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            doc.documentElement.className += <span class="string">" webpa"</span>;</span><br><span class="line">        &#125;</span><br><span class="line">  </span><br><span class="line">        <span class="comment">// 判断是否有webp_showjoy=available这个cookie</span></span><br><span class="line">        <span class="keyword">if</span> (!<span class="regexp">/webp_showjoy=available/</span>.test(<span class="built_in">document</span>.cookie)) &#123;</span><br><span class="line">            <span class="keyword">var</span> image = <span class="keyword">new</span> Image();</span><br><span class="line">  </span><br><span class="line">            <span class="comment">// 图片加载完成时候的操作</span></span><br><span class="line">            image.onload = <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  </span><br><span class="line">                <span class="comment">// 图片加载成功且宽度为1，那么就代表支持webp了，因为这张base64图是webp格式。如果不支持会触发image.error方法</span></span><br><span class="line">                <span class="keyword">if</span> (image.width == <span class="number">1</span>) &#123;</span><br><span class="line">  </span><br><span class="line">                    <span class="comment">// html根节点添加class，并且埋入cookie</span></span><br><span class="line">                    addRootTag();</span><br><span class="line">                    <span class="built_in">document</span>.cookie = <span class="string">"webp_showjoy=available; max-age=31536000; domain="</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;;</span><br><span class="line">  </span><br><span class="line">            <span class="comment">// 一张支持alpha透明度的webp的图片，使用base64编码</span></span><br><span class="line">            image.src = <span class="string">'data:image/webp;base64,UklGRkoAAABXRUJQVlA4WAoAAAAQAAAAAAAAAAAAQUxQSAwAAAARBxAR/Q9ERP8DAABWUDggGAAAABQBAJ0BKgEAAQAAAP4AAA3AAP7mtQAAAA=='</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            addRootTag();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;(<span class="built_in">document</span>));</span><br></pre></td></tr></table></figure>
+<p>如果浏览器支持webp格式的图片则在cookie中设置标志，并且在html标签上设置<code>webpa</code>className，这个classname的作用是在less文件中兼容webp图片。</p>
+<h4 id="less文件中的webp兼容">less文件中的webp兼容</h4><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.webpbg</span>(<span class="variable">@url</span>) &#123;</span><br><span class="line">  <span class="attribute">background-image</span>: <span class="function">url</span>(<span class="string">@url</span>);</span><br><span class="line">  <span class="class">.webpa</span> <span class="keyword">&amp;</span> &#123;</span><br><span class="line">    <span class="tag">background-image</span>: <span class="tag">url</span>(<span class="string">'@&#123;url&#125;.webp'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这段less取代了原先在less文件中描述背景图片的代码。</p>
+<p>比如原先定义背景图片</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">div</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">background-image</span>:<span class="value"> <span class="function">url</span>(xx)</span></span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>现在使用兼容方案则为：</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">div</span> &#123;</span><br><span class="line">  webpbg(xxx);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="html文件中的webp图片兼容">html文件中的webp图片兼容</h4><p>我司目前html部分通过java的velocity编写，对于同步传递到页面上的图片webp将通过如下方式兼容。</p>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img <span class="class"><span class="keyword">class</span>="<span class="title">slider</span>-<span class="title">img</span>" <span class="title">src</span>="$!</span>&#123;banner.recordMap.<span class="keyword">get</span>(<span class="string">'图片地址'</span>).value&#125;.<span class="number">750</span>x448.jpg$!&#123;isWebp&#125;<span class="string">"&gt;</span></span><br></pre></td></tr></table></figure>
+<p>$!{isWebp} 变量是后台通过判断浏览器请求的cookie中是否有之前定义的<code>webp_showjoy=available</code>，有则返回<code>.webp</code>后缀，无则返回空。</p>
+<p>这样有个问题是用户第一次浏览产品页面时后台判断cookie永远是false，所以用户第一次浏览是不可能返回<code>.webp</code>后缀的图片的。</p>
+<p>还有一种情况是图片大量使用的时候我们会使用懒加载进行图片的延迟加载。这时就可以修改懒加载插件，在插件里动态兼容webp图片了。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 根据cookie返回图片是否webp的地址 */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getwebpsrc</span> <span class="params">(imgsrc)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> needwebp = <span class="literal">false</span>,</span><br><span class="line">        src = <span class="string">''</span>;</span><br><span class="line">    <span class="keyword">if</span> (<span class="regexp">/webp_showjoy=available/</span>.test(<span class="built_in">document</span>.cookie)) &#123;</span><br><span class="line">        needwebp = <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    src = needwebp ? imgsrc + <span class="string">'.webp'</span> : imgsrc;</span><br><span class="line">    <span class="keyword">return</span> src;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>到此就完成了移动端对webp格式图片的支持。这也是图片流量优化其中之一方案。</p>
+<h2 id="retina兼容图片流量优化">retina兼容图片流量优化</h2><p>前端应该都了解在retina屏下应该使用@2x或者@3x等倍率的图片，才能保证图片的清晰度。但是为了切图方便，部分公司都会统一在切图阶段切出@2x的图片，不管浏览设备是retina屏还是普通屏，一律都使用@2x的图片。这样做有两个坏处，一是@2x的图片在非retina屏下会出现downsampled现象，虽然不会影响清晰度，但是会缺少一些锐利度。二是@2x的图片相比较@1x的图片，前者体积大于后者，这也就造成了流量的浪费以及影响页面打开性能。</p>
+<p>所以正确处理方法是针对retina屏的是否采用不同尺寸的图片。图片裁剪已经在图片服务器上实现。在考虑retina时也需要加上webp的兼容，两者一起作用会大大减少图片的尺寸。</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">@2x</span> <span class="attribute">http</span>:<span class="comment">//cdn1.showjoy.com/images/bb/bb1c8b0d275e4ba2903dc822a03add50.png.300x300.png.webp</span></span><br><span class="line"><span class="variable">@1x</span> <span class="attribute">http</span>:<span class="comment">//cdn1.showjoy.com/images/bb/bb1c8b0d275e4ba2903dc822a03add50.png.150x150.png.webp</span></span><br></pre></td></tr></table></figure>
+<h3 id="less文件兼容retina">less文件兼容retina</h3><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.retinabg</span>(<span class="variable">@file-2x</span>; <span class="variable">@reg-2x</span>; <span class="variable">@reg-1x</span>; <span class="variable">@type</span>) <span class="keyword">when</span> (<span class="function">isstring</span>(<span class="variable">@reg-2x</span>)) &#123;</span><br><span class="line"></span><br><span class="line">  <span class="tag">background-image</span>: <span class="tag">url</span>(<span class="string">"@&#123;file-2x&#125;.@&#123;reg-1x&#125;.@&#123;type&#125;"</span>);</span><br><span class="line">  <span class="class">.webpa</span> <span class="keyword">&amp;</span> &#123;</span><br><span class="line">    <span class="tag">background-image</span>: <span class="tag">url</span>(<span class="string">'@&#123;file-2x&#125;.@&#123;reg-1x&#125;.@&#123;type&#125;.webp'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  @<span class="tag">media</span></span><br><span class="line">  <span class="tag">only</span> <span class="tag">screen</span> <span class="tag">and</span> (<span class="attribute">-webkit-min-device-pixel-ratio</span>: <span class="number">2</span>),</span><br><span class="line">  <span class="tag">only</span> <span class="tag">screen</span> <span class="tag">and</span> (   <span class="attribute">min--moz-device-pixel-ratio</span>: <span class="number">2</span>),</span><br><span class="line">  <span class="tag">only</span> <span class="tag">screen</span> <span class="tag">and</span> (     <span class="attribute">-o-min-device-pixel-ratio</span>: <span class="number">2</span>/<span class="number">1</span>),</span><br><span class="line">  <span class="tag">only</span> <span class="tag">screen</span> <span class="tag">and</span> (        <span class="attribute">min-device-pixel-ratio</span>: <span class="number">2</span>),</span><br><span class="line">  <span class="tag">only</span> <span class="tag">screen</span> <span class="tag">and</span> (                <span class="attribute">min-resolution</span>: <span class="number">192dpi</span>),</span><br><span class="line">  <span class="tag">only</span> <span class="tag">screen</span> <span class="tag">and</span> (                <span class="attribute">min-resolution</span>: <span class="number">2dppx</span>) &#123;</span><br><span class="line">    <span class="tag">background-image</span>: <span class="tag">url</span>(<span class="string">"@&#123;file-2x&#125;.@&#123;reg-2x&#125;.@&#123;type&#125;"</span>);</span><br><span class="line">    <span class="class">.webpa</span> <span class="keyword">&amp;</span> &#123;</span><br><span class="line">      <span class="tag">background-image</span>: <span class="tag">url</span>(<span class="string">'@&#123;file-2x&#125;.@&#123;reg-2x&#125;.@&#123;type&#125;.webp'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当要代替原先书写时的<code>background-image: url()</code>,可以写成如下方式：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.retinabg</span>(<span class="rule"><span class="attribute">http</span>:<span class="value">//cdn1.showjoy.com/images/bb/bb1c8b0d275e4ba2903dc822a03add50.png</span></span>; 300<span class="tag">x300</span>; 150<span class="tag">x150</span>; <span class="tag">png</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="html文件兼容retina">html文件兼容retina</h3><p>在html中本次方案准备使用html5特性<code>srcset</code>属性。</p>
+<p><code>secset</code>属性的目的在于允许开发者为某个图片的属性指定一系列的来源，其中这些图片的来源是要根据客户端显示屏的像素分辨率来设定的。</p>
+<p>比如在volecity模板中定义图片资源：</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img <span class="variable">class=</span><span class="string">"pic"</span> <span class="variable">src=</span><span class="string">"$!&#123;newProduct.image&#125;.300x300.png$!&#123;isWebp&#125;"</span> <span class="variable">srcset=</span><span class="string">"$!&#123;newProduct.image&#125;.150x150.png$!&#123;isWebp&#125; 1x, $!&#123;newProduct.image&#125;.300x300.png$!&#123;isWebp&#125; 2x"</span>&gt;</span><br></pre></td></tr></table></figure>
+<p>这段图片定义说明了在retina（2x）屏幕下使用300x300的图片来源，而在飞retina屏下（1x）下使用150x150的图。</p>
+<h4 id="html中懒加载的图片">html中懒加载的图片</h4><p>由于懒加载的图片在插件中就会进行src赋值的操作，所以直接在懒加载插件中根据<code>window.devicePixelRatio</code>进行判断修改图片url。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 根据cookie返回图片是否webp的地址 */</span></span><br><span class="line"><span class="comment">/* 根据dpr返回不同尺寸的图片 */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getwebpsrc</span> <span class="params">(imgsrc)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> areaInfo = <span class="string">''</span>;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">window</span>.devicePixelRatio &amp;&amp; <span class="built_in">window</span>.devicePixelRatio &lt;= <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> area = imgsrc.match(<span class="regexp">/[0-9]+x[0-9]+/</span>);</span><br><span class="line">        <span class="keyword">if</span> (area) &#123;</span><br><span class="line">            <span class="keyword">var</span> areaSplit = area[<span class="number">0</span>].split(<span class="string">'x'</span>);</span><br><span class="line">            areaInfo = areaSplit[<span class="number">0</span>] /<span class="number">2</span> + <span class="string">'x'</span> + areaSplit[<span class="number">1</span>] /<span class="number">2</span>;</span><br><span class="line">            imgsrc = imgsrc.replace(<span class="regexp">/[0-9]+x[0-9]+/</span>, areaInfo)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> needwebp = <span class="literal">false</span>,</span><br><span class="line">        src = <span class="string">''</span>;</span><br><span class="line">    <span class="keyword">if</span> (<span class="regexp">/webp_showjoy=available/</span>.test(<span class="built_in">document</span>.cookie)) &#123;</span><br><span class="line">        needwebp = <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    src = needwebp ? imgsrc + <span class="string">'.webp'</span> : imgsrc;</span><br><span class="line">    <span class="keyword">return</span> src;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在这个方案下所有图片的编写都必须要带上尺寸后缀（_num_x_num_）,在我司图片服务器支持下还有一个特别的好处：图片服务器会对带有尺寸后缀的图片进行尺寸裁剪的同时进行图片压缩，遇到不支持webp格式的浏览器上就会顺带对图片进行压缩，尽力地减小图片体积。</p>
+<p><img src="http://cdn1.showjoy.com/images/4c/4c5091b88aea498f9131d2bffb62d923.png" alt=""></p>
+<p><code>srcset</code>属性目前在移动端的兼容性十分不错，安卓4.x版本不支持。</p>
+<h2 id="总结">总结</h2><p>一共两点图片流量优化方案，一是针对webp图片格式，二是针对retina。最后总结下来的编写图片代码的情景就为3种：</p>
+<p>1.html同步图片编写</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img <span class="variable">class=</span><span class="string">"pic"</span> <span class="variable">src=</span><span class="string">"$!&#123;newProduct.image&#125;.300x300.png$!&#123;isWebp&#125;"</span> <span class="variable">srcset=</span><span class="string">"$!&#123;newProduct.image&#125;.150x150.png$!&#123;isWebp&#125; 1x, $!&#123;newProduct.image&#125;.300x300.png$!&#123;isWebp&#125; 2x"</span>&gt;</span><br></pre></td></tr></table></figure>
+<p>2.懒加载图片编写</p>
+<figure class="highlight handlebars"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"><span class="tag">&lt;<span class="title">img</span> <span class="attribute">class</span>=<span class="value">"goods-pic j_Lazyload"</span> <span class="attribute">data-original</span>=<span class="value">"</span></span></span><span class="expression">&#123;&#123;$<span class="variable">value.image</span>&#125;&#125;</span><span class="xml"><span class="tag"><span class="value">.300x300.png"</span> <span class="attribute">src</span>=<span class="value">"http://cdn1.showjoy.com/images/a5/a560e106324d4670acd11b69aee0f11f.png"</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+<p>3.less</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class">.retinabg</span>(<span class="rule"><span class="attribute">http</span>:<span class="value">//cdn1.showjoy.com/images/bb/bb1c8b0d275e4ba2903dc822a03add50.png</span></span>; 300<span class="tag">x300</span>; 150<span class="tag">x150</span>; <span class="tag">png</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="tag">webpbg</span>(<span class="rule"><span class="attribute">http</span>:<span class="value">//cdn1.showjoy.com/images/bb/bb1c8b0d275e4ba2903dc822a03add50.png)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>对我以上的理解有疑问和意见的欢迎找我私聊~<a href="http://weibo.com/2115840795/profile?topnav=1&amp;wvr=6&amp;is_all=1" target="_blank" rel="external">微博-写前端的暹罗</a></p>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/webp/" rel="tag">#webp</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/29/vue-project-practice/" rel="next" title="vue-project-practice">
+                <i class="fa fa-chevron-left"></i> vue-project-practice
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+        </div>
+
+        
+
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </div>
+
+      
+        
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            本站概覽
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="https://avatars3.githubusercontent.com/u/8492963?v=3&s=460" alt="Lyu Dada" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">Lyu Dada</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description"></p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">40</span>
+              <span class="site-state-item-name">文章</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">9</span>
+              <span class="site-state-item-name">分類</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">34</span>
+              <span class="site-state-item-name">標籤</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#图片流量优化"><span class="nav-number">1.</span> <span class="nav-text">图片流量优化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#webp"><span class="nav-number">1.1.</span> <span class="nav-text">webp</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#图片服务器支持webp转换"><span class="nav-number">1.1.1.</span> <span class="nav-text">图片服务器支持webp转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#webp兼容方案"><span class="nav-number">1.1.2.</span> <span class="nav-text">webp兼容方案</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#less文件中的webp兼容"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">less文件中的webp兼容</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#html文件中的webp图片兼容"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">html文件中的webp图片兼容</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#retina兼容图片流量优化"><span class="nav-number">1.2.</span> <span class="nav-text">retina兼容图片流量优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#less文件兼容retina"><span class="nav-number">1.2.1.</span> <span class="nav-text">less文件兼容retina</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#html文件兼容retina"><span class="nav-number">1.2.2.</span> <span class="nav-text">html文件兼容retina</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#html中懒加载的图片"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">html中懒加载的图片</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">1.3.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+      
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="icon-next-heart fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lyu Dada</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 強力驅動
+</div>
+
+<div class="theme-info">
+  主題 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+    
+    
+
+  
+
+
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.2"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.2"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+<script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+<script type="text/javascript" src="/js/motion.js?v=0.4.5.2" id="motion.global"></script>
+
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.2" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    motionMiddleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  <script type="text/javascript" src="/js/bootstrap.js"></script>
+
+  
+  
+
+  
+  
+
+</body>
+</html>
