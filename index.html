@@ -202,6 +202,93 @@
             
               
                 
+                <a class="post-title-link" href="/2016/12/30/it-s-not-webpack-step-by-step/" itemprop="url">
+                  it's-not-webpack-step-by-step
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            發表於
+            <time itemprop="dateCreated" datetime="2016-12-30T17:32:40+08:00" content="2016-12-30">
+              2016-12-30
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+            分割webpack配置文件的多种方法（一） 将你的配置信息写到多个分散的文件中去，然后在执行webpack的时候利用--config参数指定要加载的配置文件，配置文件利用moduleimports导出。你可以在webpack/react-starter 看到是使用这种发方法的。
+123456// webpack 配置文件|-- webpack-dev-server.config.js|-- webpack-hot-dev-server.config.js|-- webpack-production.config.js|-- webpack.config.js
+12345678// npm 命令"scripts": &#123;    "test": "echo \"Error: no tes
+            ...
+          </span>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/12/30/it-s-not-webpack-step-by-step/#more" rel="contents">
+              閱讀全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/12/19/weex-practice/" itemprop="url">
                   weex-practice
                 </a>
@@ -1003,103 +1090,6 @@ yazi pc init
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/06/12/node-path-problem/" itemprop="url">
-                  node-path-problem
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            發表於
-            <time itemprop="dateCreated" datetime="2016-06-12T17:15:47+08:00" content="2016-06-12">
-              2016-06-12
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-            nodejs路径引用问题
-gulp-babel的引用路径问题
-gulp src 文件流路径
-require(‘xx’) 路径问题
-
-
-本文主要讲述了编写外部构建工具中gulp-babel中依赖es2015插件失败问题、gulp.src路径问题以及require(‘xx’)的路径问题。
-
-gulp的src作用是引入所需要的流，且其使用了node-glob模块实现了文件匹配，
-1gulp.src(globs[, options])
-其中options对象中的属性除了node-glob可以使用的除外，还额外增加了options.buffer ,options.read, options.base,关于这三个额外的属性作用可以查看 gulp api。
-这里主要介绍node-glob中的cwd属性
-1
-            ...
-          </span>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/06/12/node-path-problem/#more" rel="contents">
-              閱讀全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
@@ -1146,7 +1136,7 @@ gulp的src作用是引入所需要的流，且其使用了node-glob模块实现�
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">41</span>
+              <span class="site-state-item-count">42</span>
               <span class="site-state-item-name">文章</span>
             </a>
           </div>
@@ -1160,7 +1150,7 @@ gulp的src作用是引入所需要的流，且其使用了node-glob模块实现�
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">35</span>
+              <span class="site-state-item-count">36</span>
               <span class="site-state-item-name">標籤</span>
               </a>
           </div>
