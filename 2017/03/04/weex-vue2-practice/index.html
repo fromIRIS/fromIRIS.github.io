@@ -1,0 +1,708 @@
+<!doctype html>
+<html class="theme-next   use-motion ">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="weex," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Lyu Dada" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.2" />
+
+
+
+
+
+
+<meta name="description" content="基于vue2.0的weex实践（前端视角）
+前提：这段时间将公司的几个用we写的weex页面用vue2.0进行了重构，客户端的weexsdk也更新到了0.10.0版本。这篇文章将会在前端视角写到一些新老版本之间有差异的地方。we老版本的实践文章
+weex-vue-render v 0.10.0
+ios weexSDK 0.10.0
+android weexSDK 0.10.0
+
+编译vue文件在w">
+<meta property="og:type" content="article">
+<meta property="og:title" content="weex-vue2-practice">
+<meta property="og:url" content="http://yoursite.com/2017/03/04/weex-vue2-practice/index.html">
+<meta property="og:site_name" content="Lyu Dada">
+<meta property="og:description" content="基于vue2.0的weex实践（前端视角）
+前提：这段时间将公司的几个用we写的weex页面用vue2.0进行了重构，客户端的weexsdk也更新到了0.10.0版本。这篇文章将会在前端视角写到一些新老版本之间有差异的地方。we老版本的实践文章
+weex-vue-render v 0.10.0
+ios weexSDK 0.10.0
+android weexSDK 0.10.0
+
+编译vue文件在w">
+<meta property="og:image" content="http://cdn1.showjoy.com/images/d9/d9e8f152e71a4edeb308cbb62159ecb1.jpg">
+<meta property="og:image" content="http://cdn1.showjoy.com/images/fa/fa63a4f78f2d49c1ba91624991516cf4.jpg.908x420.jpg">
+<meta property="og:image" content="http://cdn1.showjoy.com/images/01/0121589de253446a8a346dde971367f8.jpg.x.jpg">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="weex-vue2-practice">
+<meta name="twitter:description" content="基于vue2.0的weex实践（前端视角）
+前提：这段时间将公司的几个用we写的weex页面用vue2.0进行了重构，客户端的weexsdk也更新到了0.10.0版本。这篇文章将会在前端视角写到一些新老版本之间有差异的地方。we老版本的实践文章
+weex-vue-render v 0.10.0
+ios weexSDK 0.10.0
+android weexSDK 0.10.0
+
+编译vue文件在w">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: '',
+    sidebar: 'post',
+    motion: true
+  };
+</script>
+
+  <title> weex-vue2-practice | Lyu Dada </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-hk">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+
+
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Lyu Dada</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">to love and get love</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            歸檔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            標籤
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                weex-vue2-practice
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            發表於
+            <time itemprop="dateCreated" datetime="2017-03-04T19:29:20+08:00" content="2017-03-04">
+              2017-03-04
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><h1 id="基于vue2-0的weex实践（前端视角）">基于vue2.0的weex实践（前端视角）</h1><blockquote>
+<p>前提：这段时间将公司的几个用we写的weex页面用vue2.0进行了重构，客户端的weexsdk也更新到了<code>0.10.0</code>版本。这篇文章将会在前端视角写到一些新老版本之间有差异的地方。<a href="https://segmentfault.com/a/1190000007844330" target="_blank" rel="external">we老版本的实践文章</a></p>
+<p>weex-vue-render v 0.10.0</p>
+<p>ios weexSDK 0.10.0</p>
+<p>android weexSDK 0.10.0</p>
+</blockquote>
+<h2 id="编译vue文件">编译vue文件</h2><p>在we时代，对于业务代码<code>text.we</code>文件我们借助<code>weex-loader</code>以及webpack可以轻易的进行编译，得到最后需要的js。但是在vue时代，我们需要两个loader，<code>weex-loader</code>和<code>vue-loader</code>，对于公司接入来说我们不太会使用官方提供的脚手架工具，一般都是自己实现。这里容易产生混淆的是还有一个loader叫做<code>weex-vue-loader</code>，这个loader一般情况下对于开发者而言不需要手动调用。</p>
+<p>在build阶段或者在dev阶段，我们会使用<code>weex-loader</code>和<code>vue-loader</code>两个loader。</p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">//</span> <span class="reserved">native</span>端使用的js</span><br><span class="line"></span><br><span class="line">weexWebpackConfig.<span class="built_in">module</span>.loaders.push(&#123;</span><br><span class="line">  <span class="attribute">test</span>: <span class="regexp">/\.vue(\?[^?]+)?$/</span>,</span><br><span class="line">  <span class="attribute">loader</span>: <span class="built_in">require</span>.resolve(<span class="string">'weex-loader'</span>)</span><br><span class="line">&#125;)</span><br><span class="line">weexWebpackConfig.output.filename = <span class="string">'[name].weex.min.js'</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">//</span> h5端使用的js</span><br><span class="line"></span><br><span class="line">vueWebpackConfig.<span class="built_in">module</span>.loaders.push(&#123;</span><br><span class="line">  <span class="attribute">test</span>: <span class="regexp">/\.vue(\?[^?]+)?$/</span>,</span><br><span class="line">  <span class="attribute">loader</span>: <span class="built_in">require</span>.resolve(<span class="string">'vue-loader'</span>)</span><br><span class="line">&#125;)</span><br><span class="line">vueWebpackConfig.output.filename = <span class="string">'[name].min.js'</span></span><br></pre></td></tr></table></figure>
+<p>对于native端我们使用weex-loader进行编译vue文件，在weex-loader内部如果检测到该文件是vue则调用<code>weex-vue-loader</code>。对于H5端我们则使用vue官方提供的vue-loader进行vue的编译，同时我们对编译完成的文件名做区别，方便识别。</p>
+<p>对于大家自己实现脚手架很容易造成问题的一点是我们需要加入一段注释，让weexsdk识别这是vue。</p>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> bannerPlugin = <span class="keyword">new</span> webpackG.BannerPlugin(</span><br><span class="line">    <span class="string">'// &#123; "framework": "Vue" &#125;\n'</span>,</span><br><span class="line">    &#123; raw: <span class="literal">true</span> &#125;</span><br><span class="line">  )</span><br><span class="line">webpackConfig.plugins.push(bannerPlugin);</span><br></pre></td></tr></table></figure>
+<p><img src="http://cdn1.showjoy.com/images/d9/d9e8f152e71a4edeb308cbb62159ecb1.jpg" alt=""></p>
+<p><a href="https://weex-project.io/cn/references/advanced/extend-jsfm.html" target="_blank" rel="external">来源：官方文档</a></p>
+<h2 id="源码依赖管理">源码依赖管理</h2><p>我们的业务是多页形式的，所以接入weex也非常方便。在每个页面引入该页面的由vue编译完后js文件。<code>vue</code>和<code>weex-vue-render</code>作为公共资源我们统一引入，因为我们需要结合native方定制一些错误收集等module，所以我们选择将vue、weex-vue-render以及定制化的module、component共同作为源码管理，统一打包成一个公共的文件在H5端引用。</p>
+<p>we时代我们也是这么做的，<a href="https://segmentfault.com/a/1190000007844330" target="_blank" rel="external">详见</a>。vue时代在大体方向不变，在入口文件处做了微小的调整。</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">import Vue from <span class="string">'vue'</span></span><br><span class="line">window<span class="class">.Vue</span> = Vue</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * 注册component</span><br><span class="line"> * </span><br><span class="line"> */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// import TestComponent from './components/test/test.vue'</span></span><br><span class="line"><span class="comment">// Vue.component('test-component', TestComponent)</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * 注册module</span><br><span class="line"> * </span><br><span class="line"> */</span></span><br><span class="line"><span class="function"><span class="title">require</span><span class="params">(<span class="string">'weex-vue-render'</span>)</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// shopBase</span></span><br><span class="line">import shopBase from <span class="string">'./modules/shop-base'</span></span><br><span class="line">window<span class="class">.weex</span><span class="class">.registerModule</span>(<span class="string">'shopBase'</span>, shopBase)</span><br><span class="line"></span><br><span class="line"><span class="comment">// shopModal</span></span><br><span class="line">import shopModal from <span class="string">'./modules/shop-modal'</span></span><br><span class="line">window<span class="class">.weex</span><span class="class">.registerModule</span>(<span class="string">'shopModal'</span>, shopModal)</span><br></pre></td></tr></table></figure>
+<p>我们可以看到相比以前component和module都由weex进行注册，而现在vue时代，我们的component将由Vue进行注册，需要注意的是这里我将Vue挂载到了<code>window</code>对象下，因为在各自页面的业务代码中，我们的入口js中需要实例化Vue，需要用到Vue对象。</p>
+<p>以及在注册module的时候我们的weex也是取自window对象下，<code>require(&#39;weex-vue-render&#39;)</code>这个步骤中会将weex挂载在window之下。</p>
+<p>具体的component编写现在已经完成变成了vue文件的编写，有vue经验的同学1秒上手。</p>
+<p>具体的module编写相比较以前也简化了很多，export一个包含module方法的对象，再调用<code>weex.registerModule</code>进行注册即可。<strong>值得注意的是在新官方文档上对html5的拓展部分没有讲到如何书写回调，回调的规则跟旧版还是一样的，下面的代码片段就是例子</strong></p>
+<figure class="highlight nimrod"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> shopBase = &#123;</span><br><span class="line">  isOnline: function (callbackId) &#123;</span><br><span class="line">    <span class="keyword">const</span> sender = this.sender;</span><br><span class="line">    <span class="keyword">let</span> hostname = window.location.hostname;</span><br><span class="line">    <span class="keyword">let</span> <span class="literal">result</span> = <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">if</span> (hostname.indexOf('showjoy.com') !== -<span class="number">1</span>) &#123;</span><br><span class="line">      <span class="literal">result</span> = <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    sender.performCallback(callbackId, &#123;</span><br><span class="line">      data: <span class="literal">result</span></span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> default shopBase</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// another js</span><br><span class="line"></span><br><span class="line">window.weex.registerModule('shopBase', shopBase)</span><br></pre></td></tr></table></figure>
+<h2 id="viewport的转变">viewport的转变</h2><blockquote>
+<p>这部分内容原理解释的有些绕，对viewport适配不了解的同学可以先看些我之前的文章<a href="http://lvdada.org/2016/01/28/viewport-and-flexibleJs/" target="_blank" rel="external">viewport-and-flexibleJs</a></p>
+</blockquote>
+<p>开发过we页面的同学应该了解，在之前的<code>weex-hmtl5</code>版本的weex中应该是没有对多屏幕视口适配做处理的，框架把视口适配的工作交给了手淘的<code>flexible.js</code>进行基于rem的视口适配。我们在H5端写页面的时候需要引入一段<code>flexible.js</code>脚本。</p>
+<p>基于vue2.0版本的weex舍弃了<code>flexible.js</code>rem适配方案，改成了<code>750px</code>固定视口的方案。我们会看到不管在什么尺寸的手机屏幕上，<code>layout viewport</code>的值都为750px，所以我编写css代码的时候是无异的，都是以750为满屏宽进行代码的编写，区别仅在于现在要写度量单位<code>px</code>，而we时代是不需要的。</p>
+<p>我在重构we页面的时候经历了<code>weex-vue-render</code>两个版本的迭代，一个是<code>v-0.2.0</code>还有一个就是<code>v-0.10.0</code>。</p>
+<p>这两个版本对<code>viewport</code>的处理也做了修改，我们在编写业务代码的时候也受到了一些由版本迭代带来的影响。</p>
+<p>在<code>weex-vue-render v-0.2.0</code>版本以及<code>weex-html5老weex</code>版本时我们在html文件中是可以不需要写<code>meta[name=viewport]</code>的，框架会自动帮我们计算得到页面需要的<code>viewport</code>信息。</p>
+<p><code>weex-html5</code>配合使用flexible适配多屏幕，这无需多言了。</p>
+<p><code>weex-vue-render v-0.2.0</code>的适配方式如下代码所示：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 本文作者注释</span></span><br><span class="line"><span class="comment">// 此处默认值是750，由build时注入</span></span><br><span class="line"><span class="keyword">const</span> DEFAULT_VIEWPORT_WIDTH = process.env.VIEWPORT_WIDTH</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">parseViewportWidth</span> <span class="params">(config)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> width = DEFAULT_VIEWPORT_WIDTH</span><br><span class="line">  <span class="keyword">if</span> (config &amp;&amp; config.width) &#123;</span><br><span class="line">    width = <span class="built_in">Number</span>(config.width) || config.width</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> width</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">setViewport</span> <span class="params">(config = &#123;&#125;)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> doc = <span class="built_in">window</span>.document</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (doc) &#123;</span><br><span class="line">    <span class="keyword">const</span> viewportWidth = parseViewportWidth(config)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// set root font-size</span></span><br><span class="line">    doc.documentElement.style.fontSize = viewportWidth / <span class="number">10</span> + <span class="string">'px'</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 本文作者注释 </span></span><br><span class="line">  <span class="comment">// 重点语句 得到当前手机屏幕的宽度</span></span><br><span class="line">    <span class="keyword">const</span> screenWidth = <span class="built_in">window</span>.screen.width </span><br><span class="line">    <span class="keyword">const</span> scale = screenWidth / viewportWidth</span><br><span class="line">    <span class="keyword">const</span> contents = [</span><br><span class="line">      <span class="string">`width=<span class="subst">$&#123;viewportWidth&#125;</span>`</span>,</span><br><span class="line">      <span class="string">`initial-scale=<span class="subst">$&#123;scale&#125;</span>`</span>,</span><br><span class="line">      <span class="string">`maximum-scale=<span class="subst">$&#123;scale&#125;</span>`</span>,</span><br><span class="line">      <span class="string">`minimum-scale=<span class="subst">$&#123;scale&#125;</span>`</span>,</span><br><span class="line">      <span class="string">`user-scalable=no`</span></span><br><span class="line">    ]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> meta = doc.querySelector(<span class="string">'meta[name="viewport"]'</span>)</span><br><span class="line">    <span class="keyword">if</span> (!meta) &#123;</span><br><span class="line">      meta = doc.createElement(<span class="string">'meta'</span>)</span><br><span class="line">      meta.setAttribute(<span class="string">'name'</span>, <span class="string">'viewport'</span>)</span><br><span class="line">      <span class="built_in">document</span>.querySelector(<span class="string">'head'</span>).appendChild(meta)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    meta.setAttribute(<span class="string">'content'</span>, contents.join(<span class="string">','</span>))</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const screenWidth = window<span class="class">.screen</span><span class="class">.width</span></span><br></pre></td></tr></table></figure>
+<p>这条语句是这个适配脚本的重点之一，本意是为了拿到当前手机屏幕的<code>ideal viewport</code>理想视口，多数情况下<code>window.screen.width</code>是可以拿到屏幕的<code>ideal viewport</code>的，但是少部分安卓原生浏览器取到的值是有问题的。在正常情况iphone6下，这段脚本得到的值为：</p>
+<figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="escape">`w</span>idth=<span class="number">750</span><span class="escape">`,</span></span><br><span class="line"><span class="escape">`i</span>nitial-scale=<span class="number">0.5</span><span class="escape">`,</span></span><br><span class="line"><span class="escape">`m</span>aximum-scale=<span class="number">0.5</span><span class="escape">`,</span></span><br><span class="line"><span class="escape">`m</span>inimum-scale=<span class="number">0.5</span><span class="escape">`,</span></span><br><span class="line"><span class="escape">`u</span>ser-scalable=no`</span><br></pre></td></tr></table></figure>
+<p>但是在部分安卓手机下的浏览器会得到错误screenWidth从而得到错误的initial-scale，那么屏幕显示会出现问题。所以<code>weex-vue-render v-0.10.0</code>版本修改了这个脚本的实现，但是代价是我们必须要在html文件中添加一段<code>meta[name=viewport]</code>标签。</p>
+<p>标签的形式是：<code>&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1, user-scalable=no&quot;&gt;</code></p>
+<p>需要添加这个标签没有在更新日志中体现，只在官网的<code>example</code>中修改了demo的实现，被这个坑绊到了。。。</p>
+<p>现在我们看一下在<code>weex-vue-render v-0.10.0</code>中是如何获取到设备的<code>ideal viewport</code>的，这也就解释了为何要在html中添加这个标签了。</p>
+<p><img src="http://cdn1.showjoy.com/images/fa/fa63a4f78f2d49c1ba91624991516cf4.jpg.908x420.jpg" alt=""></p>
+<p>我们直接看源码修改的部分，这里将<code>window.screen.width</code>修改成了<code>document.documentElement.getBoundingClientRect().width</code></p>
+<p>直白话讲就是取得当前屏幕的html的宽度，而html的宽度则是由<code>&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1, user-scalable=no&quot;&gt;</code>标签的<code>width=device-width</code>决定的，结合起来讲就是这个标签将html的宽度设置成了device-width宽，而这个宽就是设备的<code>ideal viewport</code>的宽。而且这个值是永远正确的。这种方式计算得到的<code>viewport</code>在各种设备上都会以750px宽度呈现。</p>
+<p>另外如果我们是以源码依赖的方式而不是以<code>script</code>方式管理<code>weex-vue-render</code>的，0.10.0版本会有一个bug导致我们得到的viewport的值是undefined。</p>
+<p><img src="http://cdn1.showjoy.com/images/01/0121589de253446a8a346dde971367f8.jpg.x.jpg" alt=""></p>
+<p>原因在于<code>weex-vue-render</code>npm包中package.json的<code>main</code>字段指向了<code>&quot;main&quot;: &quot;src/render/vue/index.js&quot;,</code>源码，而源码中的viewport相关代码中含有<code>let viewportWidth = process.env.VIEWPORT_WIDTH</code>环境变量，并没有文档说明我们在源码依赖<code>weex-vue-render</code>进行编译的时候需要给环境变量<code>process.env.VIEWPORT_WIDTH</code>设置750的值。所以编译出来的viewportWidth变量的值肯定是undefined。</p>
+<p>大家可以<code>npm i weex-vue-render@0.10.0</code>查看一下。</p>
+<p>解决办法一则将<code>main</code>入口指向weex-vue-render编译好的文件。方法二可以在我们自己管理源码的时候添加这个环境变量。</p>
+<h2 id="0-10-0sdk支持相对地址并自动补全">0.10.0sdk支持相对地址并自动补全</h2><p>在<code>0.4.0</code>版本的sdk中是不支持相对地址自动补全的，而我们前端同学在写业务逻辑时都是以相对地址的方式编写跳转路由或者api接口。</p>
+<p>比如一个api请求</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">stream.fetch(<span class="cell">&#123;</span><br><span class="line">    method: <span class="string">'GET'</span>,</span><br><span class="line">    url: "/api/shop,</span><br><span class="line">    type: <span class="string">'json'</span></span><br><span class="line">  &#125;</span>, <span class="function"><span class="keyword">function</span> <span class="params">(response)</span> &#123;&#125;)</span></span><br></pre></td></tr></table></figure>
+<p>h5端浏览器会自动拼接上当前域名的host，而native端拿到的只是这个相对地址请求。我司native方的做法是在网络请求之前手动拼接上需要的host域名，完成网络请求。</p>
+<p>但是native端的weexsdk从0.9.4版本开始支持不全相对地址。</p>
+<blockquote>
+<p>Support relative URL, which will resolve real URL by bundle’s URL.</p>
+</blockquote>
+<p>但是比较坑的是与我们的业务场景不符合。因为sdk自动补全的host是根据js bundle的url进行的。</p>
+<p>比如我们的js bundle地址是<code>cdn1.xxx.com/js/weex.js</code>，但是业务里需要请求的接口的地址是<code>shop.m.xxx.com/api/getContent</code></p>
+<p>问题就是我们在<code>.vue</code>页面里写接口都是相对地址<code>/api/getContent</code>，这样的话weexSDK会根据bundle的host进行转换相对地址，变成了<code>cdn1.xxx.com/api/getContent</code>，导致接口请求404。</p>
+<p>所以这个时候需要native那边去写各自的handler和adapter，重写各自的网络请求，再在weexSDK中进行注册，这意味着需要在sdk进行不全之前native就先把url进行补全了，不把机会留给sdk进行处理。</p>
+<p><a href="https://github.com/alibaba/weex/issues/2795#issuecomment-284127044" target="_blank" rel="external">这个问题的issue</a></p>
+<h2 id="小结">小结</h2><p>这还只是初步迁移到vue时代的尝试，但是基础已经打好，更多的业务已经可以接入进来了。未来还有许多在H5中考虑的内容需要重新在weex的视角下再进行考虑。</p>
+<blockquote>
+<p>本文来自尚妆前端团队<a href="http://weibo.com/u/2115840795" target="_blank" rel="external">南洋</a>，有什么需要讨论的欢迎找我，尤其是viewport相关的内容。</p>
+</blockquote>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/weex/" rel="tag">#weex</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/12/30/it-s-not-webpack-step-by-step/" rel="next" title="it's-not-webpack-step-by-step">
+                <i class="fa fa-chevron-left"></i> it's-not-webpack-step-by-step
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+        </div>
+
+        
+
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </div>
+
+      
+        
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            本站概覽
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="https://avatars3.githubusercontent.com/u/8492963?v=3&s=460" alt="Lyu Dada" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">Lyu Dada</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description"></p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">43</span>
+              <span class="site-state-item-name">文章</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">9</span>
+              <span class="site-state-item-name">分類</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">36</span>
+              <span class="site-state-item-name">標籤</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基于vue2-0的weex实践（前端视角）"><span class="nav-number">1.</span> <span class="nav-text">基于vue2.0的weex实践（前端视角）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#编译vue文件"><span class="nav-number">1.1.</span> <span class="nav-text">编译vue文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#源码依赖管理"><span class="nav-number">1.2.</span> <span class="nav-text">源码依赖管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#viewport的转变"><span class="nav-number">1.3.</span> <span class="nav-text">viewport的转变</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0-10-0sdk支持相对地址并自动补全"><span class="nav-number">1.4.</span> <span class="nav-text">0.10.0sdk支持相对地址并自动补全</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#小结"><span class="nav-number">1.5.</span> <span class="nav-text">小结</span></a></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+      
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="icon-next-heart fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lyu Dada</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 強力驅動
+</div>
+
+<div class="theme-info">
+  主題 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+    
+    
+
+  
+
+
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.2"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.2"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+<script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+<script type="text/javascript" src="/js/motion.js?v=0.4.5.2" id="motion.global"></script>
+
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.2" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    motionMiddleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  <script type="text/javascript" src="/js/bootstrap.js"></script>
+
+  
+  
+
+  
+  
+
+</body>
+</html>
