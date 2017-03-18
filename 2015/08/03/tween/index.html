@@ -1,0 +1,662 @@
+<!doctype html>
+<html class="theme-next   use-motion ">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="tween," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Lyu Dada" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.2" />
+
+
+
+
+
+
+<meta name="description" content="tweenMax基础api的逐条随意翻译1tween没有内置的选择器引擎，在没有载入jquery等类库的情况下只能通过getElementById进行选择。2.ticker12345TweenMax.ticker.addEventListener(&amp;quot;tick&amp;quot;, myFunction);function myFunction(event) &amp;#123;//executes on">
+<meta property="og:type" content="article">
+<meta property="og:title" content="tweenMax基础api的逐条随意翻译">
+<meta property="og:url" content="http://yoursite.com/2015/08/03/tween/index.html">
+<meta property="og:site_name" content="Lyu Dada">
+<meta property="og:description" content="tweenMax基础api的逐条随意翻译1tween没有内置的选择器引擎，在没有载入jquery等类库的情况下只能通过getElementById进行选择。2.ticker12345TweenMax.ticker.addEventListener(&amp;quot;tick&amp;quot;, myFunction);function myFunction(event) &amp;#123;//executes on">
+<meta property="og:updated_time" content="2015-12-22T03:56:21.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="tweenMax基础api的逐条随意翻译">
+<meta name="twitter:description" content="tweenMax基础api的逐条随意翻译1tween没有内置的选择器引擎，在没有载入jquery等类库的情况下只能通过getElementById进行选择。2.ticker12345TweenMax.ticker.addEventListener(&amp;quot;tick&amp;quot;, myFunction);function myFunction(event) &amp;#123;//executes on">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: '',
+    sidebar: 'post',
+    motion: true
+  };
+</script>
+
+  <title> tweenMax基础api的逐条随意翻译 | Lyu Dada </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-hk">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+
+
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Lyu Dada</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">to love and get love</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            歸檔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            標籤
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                tweenMax基础api的逐条随意翻译
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            發表於
+            <time itemprop="dateCreated" datetime="2015-08-03T00:29:00+08:00" content="2015-08-03">
+              2015-08-03
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分類於
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/动画库/" itemprop="url" rel="index">
+                    <span itemprop="name">动画库</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><h3 id="tweenMax基础api的逐条随意翻译">tweenMax基础api的逐条随意翻译</h3><p><code>1</code>tween没有内置的选择器引擎，在没有载入jquery等类库的情况下只能通过<code>getElementById</code>进行选择。<br><code>2.ticker</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">TweenMax.ticker.addEventListener(&quot;tick&quot;, myFunction);</div><div class="line"></div><div class="line">function myFunction(event) &#123;</div><div class="line">//executes on every tick after the core engine updates</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><code>3.delay()</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var currentDelay = myAnimation.delay(); //gets current delay</div><div class="line">myAnimation.delay(2); //sets delay</div></pre></td></tr></table></figure></p>
+<p>dalay方法可以设置或者获取某一个实例的延迟。<br>数值是以秒为单位的。<br>在设置了延迟的tween中，一切开始的动画都在delay之后开始，除了from()方法，from方法是不管延迟的，直接开始，除非设置了immediateRender:false参数在vars对象里。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">TweenMax ( target:Object, duration:Number, vars:Object ) ;</div><div class="line">//就是设置运动参数的vars对象。</div></pre></td></tr></table></figure></p>
+<p><code>4.TweenMax.delayedCall()</code><br>定义一个实例，这个实例表示延迟了多少秒后调用一个函数，而且回调函数可以传参数，<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">//calls myFunction after 1 second and passes 2 parameters:</div><div class="line">TweenMax.delayedCall(1, myFunction, [&quot;param1&quot;, &quot;param2&quot;]);</div><div class="line"></div><div class="line">function myFunction(param1, param2) &#123;</div><div class="line">    //do stuff</div><div class="line">&#125;</div><div class="line">//即如果这个方法写在文档加载后，即代表文档加载后过1秒执行myFunction函数，并且可以传一个数组的参数进去</div></pre></td></tr></table></figure></p>
+<p><code>5.duration(time)</code><br>获取tween实例的动画时长或者设置其动画时长<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var currentDuration = myAnimation.duration(); //gets current duration</div><div class="line">myAnimation.duration(2); //sets duration</div></pre></td></tr></table></figure></p>
+<p><code>6.endTime()</code><br>只返回tween实例结束动画的时间<br><code>7.eventCallback( type:String, callback:Function, params:Array, scope:* )</code><br>作用跟在tween的vars对象里直接写上事件是一样的，区别是这样做可以解除这个事件的绑定。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">//the following two lines produce IDENTICAL results:</div><div class="line">var myAnimation = new TweenLite(mc, 1, &#123;x:100, onComplete:myFunction, onCompleteParams:[&quot;param1&quot;,&quot;param2&quot;]&#125;);</div><div class="line">myAnimation.eventCallback(&quot;onComplete&quot;, myFunction, [&quot;param1&quot;,&quot;param2&quot;]);</div></pre></td></tr></table></figure></p>
+<p>如果要给一个tween实例绑定不同的多个事件，则可以<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">myAnimation.eventCallback(&quot;onComplete&quot;, completeHandler).eventCallback(&quot;onUpdate&quot;, updateHandler, [&quot;param1&quot;,&quot;&#123;self&#125;&quot;])</div><div class="line">//链式调用</div></pre></td></tr></table></figure></p>
+<p>如何解除绑定<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">//deletes the onUpdate</div><div class="line">myAnimation.eventCallback(&quot;onUpdate&quot;, null);</div></pre></td></tr></table></figure></p>
+<p><strong>需要注意的是一个事件只能有一个callback，如果写多个callback那将会覆盖</strong><br><code>8、TweenMax.fromTo( target:Object, duration:Number, fromVars:Object, toVars:Object )</code><br>需要注意的是一般的vars的属性写在fromVars里，而特殊的类似onComplete等方法需要写在toVars对象里。<br><code>9、TweenMax.getAllTweens( includeTimelines:Boolean ) : Array</code><br>返回一个数组，包含所以的tween实例，参数可以选择是否返回timeline实例，如果想要实现对所有的实例同意操作，比如暂停，开始等，可以考虑使用<code>TimelineLite.exportRoot()</code><br><code>10、TweenMax.getTweensOf( target:Object, onlyActive:Boolean );</code><br>在当前寻找到操作元素对象是Object的tween，并返回。也可能返回多个tween的数组.若onlyActive为true则只返回正在运行的tween。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">TweenMax.to(myObject1, 1, &#123;x:100&#125;);</div><div class="line">TweenMax.to(myObject2, 1, &#123;x:100&#125;);</div><div class="line">TweenMax.to([myObject1, myObject2], 1, &#123;opacity:0&#125;);</div><div class="line"></div><div class="line">var a1 = TweenMax.getTweensOf(myObject1); //finds 2 tweens</div><div class="line">var a2 = TweenMax.getTweensOf([myObject1, myObject2]); //finds 3 tweens</div></pre></td></tr></table></figure></p>
+<p><code>11、TweenMax.globalTimeScale( value:Number );</code><br>设置全部tween的速度，大于1则表示速度越大。<br><code>12、.invalidate()</code>不懂<br><code>13、.isActive( ) : Boolean</code><br>可以查看这个tween是否是在运动中，没开始，结束，暂停都不算在运动中。<br><code>14、TweenMax.isTweening(target: object)</code><br>Reports whether or not a particular object is actively tweening. If a tween is paused, is completed, or hasn’t started yet, it isn’t considered active.<br><code>15、.kill()</code><br>看下方官方给出的示例代码就能清楚的知道.kill()方法的用途<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">// kill the entire animation:</div><div class="line">myAnimation.kill();</div><div class="line"> </div><div class="line">//kill only the &quot;x&quot; and &quot;y&quot; properties of the animation (all targets):</div><div class="line">myAnimation.kill(&#123;x:true, y:true&#125;);</div><div class="line"> </div><div class="line">//kill all parts of the animation related to the target &quot;myObject&quot; (if the tween has multiple targets, the others will not be affected):</div><div class="line">myAnimation.kill(null, myObject);</div><div class="line"> </div><div class="line">//kill only the &quot;x&quot; and &quot;y&quot; properties of animations of the target &quot;myObject&quot;:</div><div class="line">myAnimation.kill(&#123;x:true, y:true&#125;, myObject);</div><div class="line">  </div><div class="line">//kill only the &quot;opacity&quot; properties of animations of the targets &quot;myObject1&quot; and &quot;myObject2&quot;:</div><div class="line">myAnimation.kill(&#123;opacity:true&#125;, [myObject1, myObject2]);</div></pre></td></tr></table></figure></p>
+<p><code>16、TweenMax.killAll( complete:Boolean, tweens:Boolean, delayedCalls:Boolean, timelines:Boolean );</code><br><code>17、TweenMax.killChildTweensOf( parent:Object, complete:Boolean );</code><br>去除父元素下的所有tween，可选的complete若为true则先完成动画 再kill。<br><code>18、TweenMax.lagSmoothing()</code>不懂<br><code>19、.pause( atTime:*, suppressEvents:Boolean ) : *</code><br>如果括号内有秒计数的数字，则表示运动到atTime秒后在暂停<br><code>20、TweenMax.pauseAll( tweens:Boolean, delayedCalls:Boolean, timelines:Boolean );</code><br>括号内可选的属性的默认值都是true 表示默认暂停这些所有<br><code>21、paused(boolean)</code><br>getter or setter 判断当前tween实例是否处于停止状态。<br>下方代码的toggles比较有用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var paused = myAnimation.paused(); //gets current paused state</div><div class="line">myAnimation.paused( true ); //sets paused state to true (just like pause())</div><div class="line">myAnimation.paused( !myAnimation.paused() ); //toggles the paused state</div></pre></td></tr></table></figure></p>
+<p><code>22、play(from:num, suppressEvents:Boolean)</code><br>from值默认情况下是在元素当前的位置开始动。设置的数值代表直接从第几分钟开始运动<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">//begins playing from wherever the playhead currently is:</div><div class="line">myAnimation.play();</div><div class="line">//begins playing from exactly 2-seconds into the animation:</div><div class="line">myAnimation.play(2);</div><div class="line">//begins playing from exactly 2-seconds into the animation but doesn&apos;t suppress events during the initial move:</div><div class="line">myAnimation.play(2, false);</div></pre></td></tr></table></figure></p>
+<p><code>23、.progress( value:Number, suppressEvents:Boolean )</code><br>指示tween跳转到进程的某一个阶段（0-1），比如0.5就代表跳到进程的一半。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var progress = myTween.progress(); //gets current progress</div><div class="line">myTween.progress( 0.25 ); //sets progress to one quarter finished</div></pre></td></tr></table></figure></p>
+<p><code>24、.repeat( value:Number )</code><br>可以写在vars对象里<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var repeat = myTween.repeat(); //gets current repeat value&lt;br /&gt;</div><div class="line">myTween.repeat(2); //sets repeat to 2</div></pre></td></tr></table></figure></p>
+<p><code>25、.repeatDelay( value:Number )</code><br>延迟几秒再重复<br>可以写在vars对象里<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">TweenMax.to(mc, 1, &#123;x:100, repeat:2, repeatDelay:1&#125;);</div></pre></td></tr></table></figure></p>
+<p>也可以当方法写<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var repeatDelay = myTween.repeatDelay(); //gets current repeatDelay value</div><div class="line">myTween.repeatDelay(2); //sets repeatDelay to 2</div></pre></td></tr></table></figure></p>
+<p><code>26、.restart( includeDelay:Boolean, suppressEvents:Boolean )</code><br>第一个参数表示是否包含上一次的延迟效果，如果为true，则表示重复的时候还有继承上一次的延迟，即触发的时候会延迟几秒再开始动作。<br><code>27、.reverse( from:*, suppressEvents:Boolean )</code><br>往相反的方向运动，如果将值设置为0，则从先前运动的最后时刻开始往反方向运动。如果是-1，则跳到距离终点还有1秒的时刻开始掉头运动。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">//reverses playback from wherever the playhead currently is:</div><div class="line"> myAnimation.reverse();</div><div class="line"> </div><div class="line"> //reverses playback from exactly 2 seconds into the animation:</div><div class="line"> myAnimation.reverse(2);</div><div class="line"> </div><div class="line"> //reverses playback from exactly 2 seconds into the animation but doesn&apos;t suppress events during the initial move:</div><div class="line">myAnimation.reverse(2, false);</div><div class="line"> </div><div class="line">//reverses playback from the very END of the animation:</div><div class="line">myAnimation.reverse(0);</div><div class="line">  </div><div class="line">//reverses playback starting from exactly 1 second before the end of the animation:</div><div class="line">myAnimation.reverse(-1);</div><div class="line"> </div><div class="line">//flips the orientation (if it&apos;s forward, it will go backward, if it is backward, it will go forward):</div><div class="line">if (myAnimation.reversed()) &#123;</div><div class="line">    myAnimation.play();</div><div class="line">&#125; else &#123;</div><div class="line">    myAnimation.reverse();</div><div class="line">&#125;</div><div class="line"> </div><div class="line">//flips the orientation using the reversed() method instead (shorter version of the code above):</div><div class="line">myAnimation.reversed( !myAnimation.reversed() );</div></pre></td></tr></table></figure></p>
+<p><code>28、.reversed( value:Boolean )</code><br>判断是否在相反的方向，用法跟pasued()一样<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var rev = myAnimation.reversed(); //gets current orientation</div><div class="line">myAnimation.reversed( true ); //sets the orientation to reversed</div><div class="line">myAnimation.reversed( !myAnimation.reversed() ); //toggles the orientation</div></pre></td></tr></table></figure></p>
+<p><code>29、TweenMax.set( target:Object, vars:Object )</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">TweenMax.set(myObject, &#123;x:100, y:50, opacity:0&#125;);</div><div class="line">//</div><div class="line">TweenMax.to(myObject, 0, &#123;x:100, y:50, opacity:0&#125;);</div></pre></td></tr></table></figure></p>
+<p><code>30、.time()</code><br>获取或设置tween的当前运动的时间点<br><code>30、.timeScale()</code><br>获取或设置当前tween的速度缩放数值</p>
+<p>原整理文章，转载请注明出处！</p>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/tween/" rel="tag">#tween</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/07/12/viewport/" rel="next" title="viewport中的width、inital-scale简介">
+                <i class="fa fa-chevron-left"></i> viewport中的width、inital-scale简介
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/08/03/zepto-fullpage源码注释理解/" rel="prev" title="zepto.fullpage源码注释理解">
+                zepto.fullpage源码注释理解 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+        </div>
+
+        
+
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </div>
+
+      
+        
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            本站概覽
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="https://avatars3.githubusercontent.com/u/8492963?v=3&s=460" alt="Lyu Dada" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">Lyu Dada</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description"></p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">44</span>
+              <span class="site-state-item-name">文章</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">9</span>
+              <span class="site-state-item-name">分類</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">37</span>
+              <span class="site-state-item-name">標籤</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#tweenMax基础api的逐条随意翻译"><span class="nav-number">1.</span> <span class="nav-text">tweenMax基础api的逐条随意翻译</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+      
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="icon-next-heart fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lyu Dada</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 強力驅動
+</div>
+
+<div class="theme-info">
+  主題 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+    
+    
+
+  
+
+
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.2"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.2"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+<script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+<script type="text/javascript" src="/js/motion.js?v=0.4.5.2" id="motion.global"></script>
+
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.2" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    motionMiddleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  <script type="text/javascript" src="/js/bootstrap.js"></script>
+
+  
+  
+
+  
+  
+
+</body>
+</html>

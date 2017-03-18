@@ -59,13 +59,15 @@
 <meta property="og:url" content="http://yoursite.com/2015/09/28/github学习/index.html">
 <meta property="og:site_name" content="Lyu Dada">
 <meta property="og:description" content="git 及github使用学习总结点：&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;分支合并后在git中操作git branch查看所有分支时分支还是会显示。并没有删除分支。&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;merge操作时务必到主干上操作。&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp">
-<meta property="og:image" content="./1443275342434.png">
-<meta property="og:image" content="./1443275543433.png">
-<meta property="og:image" content="./1443278089709.png">
-<meta property="og:image" content="./1443278184749.png">
+<meta property="og:image" content="http://yoursite.com/./1443275342434.png">
+<meta property="og:image" content="http://yoursite.com/./1443275543433.png">
+<meta property="og:image" content="http://yoursite.com/./1443278089709.png">
+<meta property="og:image" content="http://yoursite.com/./1443278184749.png">
+<meta property="og:updated_time" content="2015-12-22T03:54:07.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="github学习">
 <meta name="twitter:description" content="git 及github使用学习总结点：&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;分支合并后在git中操作git branch查看所有分支时分支还是会显示。并没有删除分支。&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;merge操作时务必到主干上操作。&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp">
+<meta name="twitter:image" content="http://yoursite.com/./1443275342434.png">
 
 
 
@@ -259,14 +261,14 @@
 </blockquote>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;假如只是在工作区操作文件，并不会在被计入git仓库的版本管理对象中。用status查看状态时只会出现在Untracked files里，而git add操作后，文件就进入了暂存区即仓库。</p>
 <blockquote>
-<p>4、git commit 保存仓库的历史记录<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git <span class="operator"><span class="keyword">commit</span> <span class="comment">--amend</span></span><br><span class="line">//修改上一次提交的信息</span><br><span class="line">git <span class="keyword">commit</span> -am <span class="string">"message"</span></span><br><span class="line">//<span class="keyword">add</span> <span class="keyword">commit</span> &amp; 提交信息</span></span><br></pre></td></tr></table></figure></p>
+<p>4、git commit 保存仓库的历史记录<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">git commit --amend</div><div class="line">//修改上一次提交的信息</div><div class="line">git commit -am &quot;message&quot;</div><div class="line">//add commit &amp; 提交信息</div></pre></td></tr></table></figure></p>
 </blockquote>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;将当前暂存区的的文件实际保存到仓库的历史记录。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;通过这些记录我们就可以在工作区内复原文件。</p>
 <blockquote>
-<p>5、git log 查看提交的记录，也是保存过的仓库的记录。<br><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">log</span> <span class="comment">--pretty=short</span><span class="comment"></span><br><span class="line">//不显示日期</span></span><br><span class="line">git <span class="built_in">log</span> -p README.md<span class="comment"></span><br><span class="line">//读取READMD.md文件提交记录，-p代表了前后差异</span></span><br><span class="line">git <span class="built_in">log</span> README.md <span class="comment"></span><br><span class="line">//读取特定文件的提交记录</span></span><br><span class="line">git <span class="built_in">log</span> graph<span class="comment"></span><br><span class="line">//以图表形式查看分支</span></span><br></pre></td></tr></table></figure></p>
+<p>5、git log 查看提交的记录，也是保存过的仓库的记录。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">git log --pretty=short</div><div class="line">//不显示日期</div><div class="line">git log -p README.md</div><div class="line">//读取READMD.md文件提交记录，-p代表了前后差异</div><div class="line">git log README.md </div><div class="line">//读取特定文件的提交记录</div><div class="line">git log graph</div><div class="line">//以图表形式查看分支</div></pre></td></tr></table></figure></p>
 <p>6、git diff 查看更改前后的差别</p>
 </blockquote>
-<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git diff HEAD</span><br><span class="line"><span class="comment">//比较工作树和最新提交之间的差别。</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git diff HEAD</div><div class="line">//比较工作树和最新提交之间的差别。</div></pre></td></tr></table></figure>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;git diff 可以查看工作树、暂存区、最新提交之间的差异。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;默认情况下<code>git diff</code>比较的是工作树和暂存区的区别，如果此分支在<code>git add</code>之后工作树跟暂存区区别是没有的，所以在add之后commit之前需要使用<code>git diff HEAD</code>比较工作树和最新提交之间的差别。</p>
 <blockquote>
 <p>7、git branch 显示分支一览表</p>
@@ -279,7 +281,7 @@
 <blockquote>
 <p>9、git merge 合并分支</p>
 </blockquote>
-<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">merge</span> <span class="comment">--no-ff 分支</span><span class="comment"></span><br><span class="line">//在记录中记录本此合并</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git merge --no-ff 分支</div><div class="line">//在记录中记录本此合并</div></pre></td></tr></table></figure>
 <blockquote>
 <p>10、git reset —hard xxx让仓库的HEAD、暂存区、和当前工作树回溯到指定版本</p>
 </blockquote>
@@ -287,7 +289,7 @@
 <blockquote>
 <p>11、git rebase -i HEAD~2（num）</p>
 </blockquote>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果觉得两次提交的内容和信息台贴近无需分成两次，就可以使用这个命令两xx条最近的HEAD合并成一条提交。<br>执行后回出现编辑框<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">pick <span class="number">7</span>aadfd <span class="string">"add feature"</span></span><br><span class="line">pick <span class="number">4</span>tw436 <span class="string">"dsxxxx"</span></span><br><span class="line"><span class="prompt">&gt;&gt;</span>&gt;&gt;&gt;&gt;修改成</span><br><span class="line">pick <span class="number">7</span>aadfd <span class="string">"add feature"</span></span><br><span class="line">fixup <span class="number">4</span>tw436 <span class="string">"dsxxxx"</span></span><br><span class="line">/<span class="regexp">/意味着将第二条修改加到第一条去</span></span><br></pre></td></tr></table></figure></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;如果觉得两次提交的内容和信息台贴近无需分成两次，就可以使用这个命令两xx条最近的HEAD合并成一条提交。<br>执行后回出现编辑框<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">pick 7aadfd &quot;add feature&quot;</div><div class="line">pick 4tw436 &quot;dsxxxx&quot;</div><div class="line">&gt;&gt;&gt;&gt;&gt;&gt;修改成</div><div class="line">pick 7aadfd &quot;add feature&quot;</div><div class="line">fixup 4tw436 &quot;dsxxxx&quot;</div><div class="line">//意味着将第二条修改加到第一条去</div></pre></td></tr></table></figure></p>
 <h2 id="第三方开发者协作"><strong>第三方开发者协作</strong></h2><blockquote>
 <p>12、git remote add origin git@github.com:fromiris/git-test.git<br>将远程仓库链接到本地仓库，并且讲远程仓库名字设置成origin</p>
 <p>13、git push -u origin master<br>-u origin master 参数 表示将origin的master分支设置成本地master分支的upstream，这样以后pull时可以直接获取</p>
@@ -296,7 +298,7 @@
 <blockquote>
 <p>1、git clone git@github.com:fromiris/git-test.git<br>clone操作默认克隆远程仓库的master分支，并不包含其他分支。</p>
 </blockquote>
-<figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git branch -<span class="literal">a</span></span><br><span class="line">//这个命令查看当前分支的相关信息，添加<span class="escape">`-</span><span class="literal">a</span><span class="escape">`参</span>数可以同时显示本地仓库和远程仓库的分支情况。</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git branch -a</div><div class="line">//这个命令查看当前分支的相关信息，添加`-a`参数可以同时显示本地仓库和远程仓库的分支情况。</div></pre></td></tr></table></figure>
 <blockquote>
 <p>2、checkout -b feature-D origin/feature-D</p>
 </blockquote>
@@ -423,7 +425,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">43</span>
+              <span class="site-state-item-count">44</span>
               <span class="site-state-item-name">文章</span>
             </a>
           </div>
@@ -437,7 +439,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">36</span>
+              <span class="site-state-item-count">37</span>
               <span class="site-state-item-name">標籤</span>
               </a>
           </div>

@@ -53,15 +53,12 @@
 
 
 
-<meta name="description">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Lyu Dada">
 <meta property="og:url" content="http://yoursite.com/page/4/index.html">
 <meta property="og:site_name" content="Lyu Dada">
-<meta property="og:description">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Lyu Dada">
-<meta name="twitter:description">
 
 
 
@@ -95,7 +92,7 @@
 
 
   <div class="container one-column 
-   page-home 
+  
 ">
     <div class="headband"></div>
 
@@ -362,7 +359,7 @@ by 南洋 2015 11 14
           <span itemprop="articleBody">
             
             破译关键渲染路径（翻译）英文来源：http://calendar.perfplanet.com/2012/deciphering-the-critical-rendering-path/参考：https://developers.google.com/web/fundamentals/performance/critical-rendering-path/analyzing-crptranslated by 南洋
-前言 By 南洋最近在研究页面性能监控的事情，得知HTML5的 Navigation Timing API可以获取到一系列加载的关键时间节点。1234567'use strict'console.log(`performance.timing.domInteractive: $&#
+前言 By 南洋最近在研究页面性能监控的事情，得知HTML5的 Navigation Timing API可以获取到一系列加载的关键时间节点。1234567&apos;use strict&apos;console.log(`performance.timing.domIntera
             ...
           </span>
           <div class="post-more-link text-center">
@@ -916,6 +913,107 @@ by 南洋 2015 11 14
             
               
                 
+                <a class="post-title-link" href="/2015/08/03/tween/" itemprop="url">
+                  tweenMax基础api的逐条随意翻译
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            發表於
+            <time itemprop="dateCreated" datetime="2015-08-03T00:29:00+08:00" content="2015-08-03">
+              2015-08-03
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分類於
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/动画库/" itemprop="url" rel="index">
+                    <span itemprop="name">动画库</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+            tweenMax基础api的逐条随意翻译1tween没有内置的选择器引擎，在没有载入jquery等类库的情况下只能通过getElementById进行选择。2.ticker12345TweenMax.ticker.addEventListener(&quot;tick&quot;, myFunction);function myFunction(event) &#123;//executes on every tick after the core engine updates&#125;
+3.delay()12var currentDelay = myAnimation.delay(); //gets current delaymyAnimation.delay(2); //sets de
+            ...
+          </span>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/08/03/tween/#more" rel="contents">
+              閱讀全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2015/07/12/viewport/" itemprop="url">
                   viewport中的width、inital-scale简介
                 </a>
@@ -1073,119 +1171,11 @@ by 南洋 2015 11 14
         
           <span itemprop="articleBody">
             
-            正则表达式代码摘自javascript语言精粹123456789var parse_url = /^(?:([A-Za-z]+):)?(\/&#123;0,3&#125;)([0-9.\-A-Za-z]+)(?::(\d+))?(?:\/([^?#]*))?(?:\?([^#]*))?(?:#(.*))?$/;            var url = 'http://www.ora.com:80/goodparts?q#fragment';            var result = parse_url.exec(url);            var names = ['url', 'scheme', 'slash', 'host', 'port', 'path', 'query'
+            正则表达式代码摘自javascript语言精粹123456789var parse_url = /^(?:([A-Za-z]+):)?(\/&#123;0,3&#125;)([0-9.\-A-Za-z]+)(?::(\d+))?(?:\/([^?#]*))?(?:\?([^#]*))?(?:#(.*))?$/;            var url = &apos;http://www.ora.com:80/goodparts?q#fragment&apos;;            var result = parse_url.exec(url);            var names = [&apos;url&apos;, &apos;scheme&apos;, &apos;slas
             ...
           </span>
           <div class="post-more-link text-center">
             <a class="btn" href="/2015/06/10/regexp/#more" rel="contents">
-              閱讀全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/06/10/函数调用的四种方式/" itemprop="url">
-                  函数调用的四种方式与this的关系
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            發表於
-            <time itemprop="dateCreated" datetime="2015-06-10T13:16:11+08:00" content="2015-06-10">
-              2015-06-10
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp; 分類於
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/js/" itemprop="url" rel="index">
-                    <span itemprop="name">js</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-            笔记思想来自javascript语言精粹一书
-函数调用有4种方式，且不同方式对this的处理有差异。
-方法调用模式
-函数调用模式
-构造器调用模式
-apply调用模式
-
-方法调用模式把函数保存为对象的一个属性，且被调用时，称为方法调用，此时的this指向自己所属的对象。1234567var obj = &#123;	name: "dada",	getName: function () &#123;		return this.name;	&#125;&#125;obj.getName()//dada
-函数调用模式这种模式即为最普遍的函数调用，但此时的this有混淆的地方。以此模式调用函数的时候，this指向全局对象，并不会指向外层函数的this。12345678910111213window.n
-            ...
-          </span>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/06/10/函数调用的四种方式/#more" rel="contents">
               閱讀全文 &raquo;
             </a>
           </div>
@@ -1253,7 +1243,7 @@ apply调用模式
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">43</span>
+              <span class="site-state-item-count">44</span>
               <span class="site-state-item-name">文章</span>
             </a>
           </div>
@@ -1267,7 +1257,7 @@ apply调用模式
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">36</span>
+              <span class="site-state-item-count">37</span>
               <span class="site-state-item-name">標籤</span>
               </a>
           </div>

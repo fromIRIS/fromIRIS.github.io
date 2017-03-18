@@ -61,6 +61,7 @@ pc端1、screen.width&amp;amp;screen.height这是显示器的设备像">
 <meta property="og:site_name" content="Lyu Dada">
 <meta property="og:description" content="viewport详解（翻译+总结）来源：http://www.quirksmode.org/mobile/viewports.html首先需要了解的是css像素并不等于设备像素，因为存在一些情况比如300px的div却占了1000x1000的屏幕，这两者的像素并不相等。下文会经常出现css像素设备像素等名词。
 pc端1、screen.width&amp;amp;screen.height这是显示器的设备像">
+<meta property="og:updated_time" content="2015-12-22T03:56:31.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="viewport翻译总结">
 <meta name="twitter:description" content="viewport详解（翻译+总结）来源：http://www.quirksmode.org/mobile/viewports.html首先需要了解的是css像素并不等于设备像素，因为存在一些情况比如300px的div却占了1000x1000的屏幕，这两者的像素并不相等。下文会经常出现css像素设备像素等名词。
@@ -250,9 +251,9 @@ pc端1、screen.width&amp;amp;screen.height这是显示器的设备像">
 <p>把layout viewport想像成为一张不会变更大小或者形状的大图。现在想像你有一个小一些的框架，你通过它来看这张大图。（译者：可以理解为「管中窥豹」）这个小框架的周围被不透明的材料所环绕，这掩盖了你所有的视线，只留这张大图的一部分给你。你通过这个框架所能看到的大图的部分就是visual viewport。当你保持框架（缩小）来看整个图片的时候，你可以不用管大图，或者你可以靠近一些（放大）只看局部。你也可以改变框架的方向，但是大图（layout viewport）的大小和形状永远不会变。</p>
 <p>也看一下Chris给出的解释。</p>
 <p>visual viewport是页面当前显示在屏幕上的部分。用户可以通过滚动来改变他所看到的页面的部分，或者通过缩放来改变visual viewport的大小。<br>visual的值是不能大于layout的。<br>当缩放的时候，<code>visual viewport</code>会变化，因为视觉上能容纳的css像素在变化，但<code>layout viewport</code>保持不会。</p>
-<p><strong>9、移动端viewport的度量</strong><br>在移动端，用<code>clientWidth</code>度量<code>layout viewport</code>的宽度，用<code>innerWidth</code>度量<code>visual viewport</code>的宽度。在不设置viewport标签的时候，ios的<code>layout viewport</code>都为980px，而且浏览器都会默认将<code>visual viewport</code>放大到跟<code>layout viewport</code>一样大，所以默认情况下手机屏幕能看到整个网页的内容（缩小版）。<br>很明显的当zoomin或zoomout时候，<code>visual viewport</code>会时刻改变，因为容纳的css像素是不同的。<br><strong>10、screen.width</strong><br>在pc端这个属性基本没用，但在移动端，这个值代表了手机的屏幕的设备像素大小。这个尺寸大小在chrome的模拟器里对各个机型都有标识。而且这个值跟ideal viewport是一样的。<br><strong>11、window.pageXOffset &amp; window.pageYOffset</strong><br>visual 相对于 layout的位置，这个解释起来其实跟pc端的是一样的，因为这个滚动的值是根据css像素取度量的，不管怎么缩放，css像素值是不会变的。<br><strong>12、document.documentElement.offsetHeight</strong>整个html元素的高度。同pc端的用法<br><strong>13、meta viewport</strong><br><figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta <span class="variable">name=</span><span class="string">"viewport"</span> <span class="variable">content=</span><span class="string">"width=320"</span>&gt;</span><br></pre></td></tr></table></figure></p>
+<p><strong>9、移动端viewport的度量</strong><br>在移动端，用<code>clientWidth</code>度量<code>layout viewport</code>的宽度，用<code>innerWidth</code>度量<code>visual viewport</code>的宽度。在不设置viewport标签的时候，ios的<code>layout viewport</code>都为980px，而且浏览器都会默认将<code>visual viewport</code>放大到跟<code>layout viewport</code>一样大，所以默认情况下手机屏幕能看到整个网页的内容（缩小版）。<br>很明显的当zoomin或zoomout时候，<code>visual viewport</code>会时刻改变，因为容纳的css像素是不同的。<br><strong>10、screen.width</strong><br>在pc端这个属性基本没用，但在移动端，这个值代表了手机的屏幕的设备像素大小。这个尺寸大小在chrome的模拟器里对各个机型都有标识。而且这个值跟ideal viewport是一样的。<br><strong>11、window.pageXOffset &amp; window.pageYOffset</strong><br>visual 相对于 layout的位置，这个解释起来其实跟pc端的是一样的，因为这个滚动的值是根据css像素取度量的，不管怎么缩放，css像素值是不会变的。<br><strong>12、document.documentElement.offsetHeight</strong>整个html元素的高度。同pc端的用法<br><strong>13、meta viewport</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;meta name=&quot;viewport&quot; content=&quot;width=320&quot;&gt;</div></pre></td></tr></table></figure></p>
 <p>这里的width的作用就是重置layout viewport的值。<br><code>initial-scale</code>设置初始页面的缩放和layout viewport的宽度。<br><code>device-width</code>这个值可以设置layout viewport，取得是idea viewport的值。<br> <code>Android WebKit’s</code>的最小的layout viewport是320px，所以当设置viewport的width为320px以下时，浏览器将会自动设置width为ideal的宽度。</p>
-<p><strong>14、ideal viewport</strong><br>有两点是ideal最重要的：<br>1、layout viewport 可以被设置成idael 的值，<code>width=divice-width &amp; initial-scale=1</code><br>这两者有兼容性问题，所以要设置成ideal需要将两者都写上。<br>2、最大最小缩放值都是根据ideal viewport的值确定的。 所以 maximum-scale=3 意味着最大的缩放值是 300% of the ideal viewport.。<br><strong>15、缩放ZOOM</strong><br>我们不能直接在js中取得缩放的值。<br>下面有两条计算公式<br><figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">visual viewport <span class="variable">width</span> = ideal viewport <span class="variable">width</span> / zoom factor</span><br><span class="line">zoom factor = ideal viewport <span class="variable">width</span> / visual viewport <span class="variable">width</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>14、ideal viewport</strong><br>有两点是ideal最重要的：<br>1、layout viewport 可以被设置成idael 的值，<code>width=divice-width &amp; initial-scale=1</code><br>这两者有兼容性问题，所以要设置成ideal需要将两者都写上。<br>2、最大最小缩放值都是根据ideal viewport的值确定的。 所以 maximum-scale=3 意味着最大的缩放值是 300% of the ideal viewport.。<br><strong>15、缩放ZOOM</strong><br>我们不能直接在js中取得缩放的值。<br>下面有两条计算公式<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">visual viewport width = ideal viewport width / zoom factor</div><div class="line">zoom factor = ideal viewport width / visual viewport width</div></pre></td></tr></table></figure></p>
 <p>layout viewport不参与这个计算<br><strong>16、initial-scale</strong><br>设置这个命令实际上做了两件事：<br>1、设置了初始缩放值zoom，根据上面的公式，再计算出visual viewport的宽度。<br>2、根据算出来的visual值就等于layout viewport的值。<br>所以当在viewport里只设置了initial-scale，计算出来的visual跟layout是一样的。</p>
 <p><strong>注意</strong>initial-scale的设置在安卓原生浏览器上是没用的，在安卓原生上只能=1是有效的，并且不能设置width<br>,但这个情况也只存在部分安卓原生浏览器上，很奇怪。</p>
 <p>翻译文章！</p>
@@ -351,7 +352,7 @@ pc端1、screen.width&amp;amp;screen.height这是显示器的设备像">
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">43</span>
+              <span class="site-state-item-count">44</span>
               <span class="site-state-item-name">文章</span>
             </a>
           </div>
@@ -365,7 +366,7 @@ pc端1、screen.width&amp;amp;screen.height这是显示器的设备像">
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">36</span>
+              <span class="site-state-item-count">37</span>
               <span class="site-state-item-name">標籤</span>
               </a>
           </div>

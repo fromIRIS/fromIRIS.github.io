@@ -61,9 +61,11 @@
 <meta property="og:description" content="原型、原型链原型：对象。先理一理constructor、prototype、__proto__、Function、Object等之间的关系。123456function A() &amp;#123;&amp;#125;;A.prototype == A.constructor.prototype //fasle ------1A.prototype == A.__proto__  //false ------2A">
 <meta property="og:image" content="http://7xpcne.com1.z0.glb.clouddn.com/prototype1430457225689.png">
 <meta property="og:image" content="http://7xpcne.com1.z0.glb.clouddn.com/prototype1430457189873.png">
+<meta property="og:updated_time" content="2015-12-22T03:51:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="原型及原型链">
 <meta name="twitter:description" content="原型、原型链原型：对象。先理一理constructor、prototype、__proto__、Function、Object等之间的关系。123456function A() &amp;#123;&amp;#125;;A.prototype == A.constructor.prototype //fasle ------1A.prototype == A.__proto__  //false ------2A">
+<meta name="twitter:image" content="http://7xpcne.com1.z0.glb.clouddn.com/prototype1430457225689.png">
 
 
 
@@ -243,15 +245,15 @@
       
 
       
-        <span itemprop="articleBody"><h3 id="原型、原型链">原型、原型链</h3><p>原型：对象。<br>先理一理<code>constructor、prototype、__proto__、Function、Object</code>等之间的关系。<br><figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function <span class="literal">A</span>() &#123;&#125;<span class="comment">;</span></span><br><span class="line"><span class="literal">A</span>.prototype == <span class="literal">A</span>.constructor.prototype //fasle ------<span class="number">1</span></span><br><span class="line"><span class="literal">A</span>.prototype == <span class="literal">A</span>.__proto__  </span><br><span class="line">//<span class="literal">false</span> ------<span class="number">2</span></span><br><span class="line"><span class="literal">A</span>.__proto__ == <span class="literal">A</span>.constructor.prototype </span><br><span class="line">//<span class="literal">true</span> -------<span class="number">3</span></span><br></pre></td></tr></table></figure></p>
+        <span itemprop="articleBody"><h3 id="原型、原型链">原型、原型链</h3><p>原型：对象。<br>先理一理<code>constructor、prototype、__proto__、Function、Object</code>等之间的关系。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">function A() &#123;&#125;;</div><div class="line">A.prototype == A.constructor.prototype //fasle ------1</div><div class="line">A.prototype == A.__proto__  </div><div class="line">//false ------2</div><div class="line">A.__proto__ == A.constructor.prototype </div><div class="line">//true -------3</div></pre></td></tr></table></figure></p>
 <p>解释：此时A是一个构造函数，也是一个函数，而函数是<code>Function</code>的实例。<br>所以A.constructor // Function ,回到第一条，构造函数的原型不等于Function的原型。<br>再来通俗解释<code>__proto__</code>：属性<code>__proto__</code>引用了创建这个对象的函数（构造函数）的prototype。<br>根据这个定义，第二条<code>A.__proto__</code>//Function.prototype<br><strong><strong>proto</strong>是某个实体对象的属性（所以A.prototype也有这个属性，且指向Object.prototype，因为A.prototype初始化是个空对象（Object的实例）），prototype则是构造器函数的属性</strong>。</p>
 <p>根据以上的理解，再配合一幅图来理解。<br><img src="http://7xpcne.com1.z0.glb.clouddn.com/prototype1430457225689.png" alt="Alt text"><br><img src="http://7xpcne.com1.z0.glb.clouddn.com/prototype1430457189873.png" alt="Alt text"></p>
 <p>图里的<code>__proto__</code>链就是传说中的原型链！，而原型链的作用跟作用域链相似，都是为了查找标识符（在我看来）。</p>
 <p>通过原型链实现继承时，不能使用对象字面量的方法创建原型方法<br><code>即</code>这样做原型先继承了实例，接着又重写了原型（对象字面量方法），导致继承失败。</p>
-<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">A</span><span class="params">()</span> </span>&#123;&#125;;</span><br><span class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> A();</span><br><span class="line">a.__proto__ == A.prototype <span class="comment">//true</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">A</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">B</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line">B.prototype = <span class="keyword">new</span> A();</span><br><span class="line">B.prototype.constructor = B;</span><br><span class="line"><span class="comment">//需要手动将constructor调整回到B</span></span><br><span class="line">b = <span class="keyword">new</span> B();</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">function A() &#123;&#125;;</div><div class="line">var a = new A();</div><div class="line">a.__proto__ == A.prototype //true</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">function A() &#123;&#125;</div><div class="line">function B() &#123;&#125;</div><div class="line">B.prototype = new A();</div><div class="line">B.prototype.constructor = B;</div><div class="line">//需要手动将constructor调整回到B</div><div class="line">b = new B();</div></pre></td></tr></table></figure>
 <p>因为<code>B.prototype = new A()</code> 继承后，<code>B.prototype的__proto__</code>指向了<code>A.prototype</code>,而<code>A.prototype</code>有个<code>constructor属性</code>指向A所以<code>B.prototype.constructor</code>变成了A<br>如果不手动调整constructor的话<code>b.constructor</code> 会成A</p>
-<p><strong>constructor</strong>属性<br>这个属性引用的是一个构造函数。<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">A</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">&#125; </span><br><span class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> A();</span><br><span class="line"><span class="comment">//a.constructor →function A() &#123;&#125;</span></span><br><span class="line"><span class="keyword">var</span> b = <span class="keyword">new</span> a.constructor();</span><br></pre></td></tr></table></figure></p>
+<p><strong>constructor</strong>属性<br>这个属性引用的是一个构造函数。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">function A() &#123;</div><div class="line">	</div><div class="line">&#125; </div><div class="line">var a = new A();</div><div class="line">//a.constructor →function A() &#123;&#125;</div><div class="line">var b = new a.constructor();</div></pre></td></tr></table></figure></p>
 <p>原创文章，转载请注明出处！</p>
 </span>
       
@@ -348,7 +350,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">43</span>
+              <span class="site-state-item-count">44</span>
               <span class="site-state-item-name">文章</span>
             </a>
           </div>
@@ -362,7 +364,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">36</span>
+              <span class="site-state-item-count">37</span>
               <span class="site-state-item-name">標籤</span>
               </a>
           </div>

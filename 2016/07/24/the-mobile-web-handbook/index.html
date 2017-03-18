@@ -67,6 +67,7 @@ webview是留给原生应用的一个操作系统浏览接口。（webview是属
 webview是留给原生应用的一个操作系统浏览接口。（webview是属于操作系统的）
 苹果不允许在ios设备上安装其他渲染引擎，所以其他浏览器想要在ios上安装就必须使用苹果的webview。
 总体来说webview是独立的程序，用了内">
+<meta property="og:updated_time" content="2016-07-24T13:48:48.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="the-mobile-web-handbook">
 <meta name="twitter:description" content="浏览器1.手机上有四种浏览器类型：内置浏览器、可下载浏览器、代理浏览器、webview。
@@ -287,10 +288,10 @@ webview是留给原生应用的一个操作系统浏览接口。（webview是属
 <p><strong>触摸事件级联</strong></p>
 <p>用户触摸动作触发的一系列事件。</p>
 <p>下列事件在用户轻触某个元素时触发：</p>
-<figure class="highlight haml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">-<span class="ruby"> touchstart/pointerdown</span><br><span class="line"></span>-<span class="ruby"> touchend/pointerup</span><br><span class="line"></span>-<span class="ruby"> mouseover</span><br><span class="line"></span>-<span class="ruby"> mousemove</span><br><span class="line"></span>-<span class="ruby"> mousedown</span><br><span class="line"></span>-<span class="ruby"> mouseup</span><br><span class="line"></span>-<span class="ruby"> click</span><br><span class="line"></span>-<span class="ruby"> <span class="symbol">:hover</span></span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">- touchstart/pointerdown</div><div class="line">- touchend/pointerup</div><div class="line">- mouseover</div><div class="line">- mousemove</div><div class="line">- mousedown</div><div class="line">- mouseup</div><div class="line">- click</div><div class="line">- :hover</div></pre></td></tr></table></figure>
 <p>具体的顺序因浏览器而异。大体上讲就是当手指头轻触屏幕时，给以上事件写了事件绑定函数的都会触发事件。</p>
 <p>触摸事件级联中最重要的当属click事件了，以下操作都会触发click事件：</p>
-<figure class="highlight haml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-<span class="ruby"> 按下鼠标按钮</span><br><span class="line"></span>-<span class="ruby"> 轻触屏幕</span><br><span class="line"></span>-<span class="ruby"> 点击按钮提交表单、</span><br><span class="line"></span>-<span class="ruby"> 点击链接</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">- 按下鼠标按钮</div><div class="line">- 轻触屏幕</div><div class="line">- 点击按钮提交表单、</div><div class="line">- 点击链接</div></pre></td></tr></table></figure>
 <p>在桌面浏览器上，click事件只有当mousedown和mouseup在同一个像素触发后才会触发click事件。</p>
 <p><strong>剖析触摸事件</strong></p>
 <p>触摸事件对象有三种touchList数组属性：</p>
@@ -302,7 +303,7 @@ webview是留给原生应用的一个操作系统浏览接口。（webview是属
 <p><strong>touchmove离开元素</strong></p>
 <p>如果在某个元素上绑定了touchmove事件，手指从元素移到了元素外，touchmove还是会持续触发，touchend不会触发。</p>
 <p><strong>阻止默认行为</strong></p>
-<figure class="highlight julia"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line"></span><br><span class="line"><span class="literal">e</span>.preventDefault()</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">return false</div><div class="line"></div><div class="line">e.preventDefault()</div></pre></td></tr></table></figure>
 <p><strong>click</strong></p>
 <ol>
 <li>a链接不跳转</li>
@@ -414,7 +415,7 @@ webview是留给原生应用的一个操作系统浏览接口。（webview是属
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">43</span>
+              <span class="site-state-item-count">44</span>
               <span class="site-state-item-name">文章</span>
             </a>
           </div>
@@ -428,7 +429,7 @@ webview是留给原生应用的一个操作系统浏览接口。（webview是属
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">36</span>
+              <span class="site-state-item-count">37</span>
               <span class="site-state-item-name">標籤</span>
               </a>
           </div>

@@ -35,7 +35,7 @@
 <link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="yazi," />
+  <meta name="keywords" content="js," />
 
 
 
@@ -53,40 +53,28 @@
 
 
 
-<meta name="description" content="前端自动化工程
+<meta name="description" content="js数值精度
+近期在项目中有出现大数值的订单号9148368244236619在调用接口时自动变成9148368244236620的情况，导致请求失误。本文特意总结了出现这种情况的原因，以及js精度相关的情况。
 
-Installation1sudo npm install -g yazi
-Getting To Know yazi初始化前端脚手架 init
-yazi mb init 
-yazi pc init
-
-生成前端项目脚手架，脚手架目录：
-1234567891011[test-613]  | -- package.json  | -- [src]  |     | -- [image">
+jquery[.data()]方法在本次案例中，订单号是后端同步渲染到页面上的，
+1&amp;lt;div class=&amp;quot;j_OrderNumber&amp;quot; data-ordern">
 <meta property="og:type" content="article">
-<meta property="og:title" content="yazi document">
-<meta property="og:url" content="http://yoursite.com/2016/06/25/yazi-document/index.html">
+<meta property="og:title" content="js-number-precision">
+<meta property="og:url" content="http://yoursite.com/2017/03/18/js-number-precision/index.html">
 <meta property="og:site_name" content="Lyu Dada">
-<meta property="og:description" content="前端自动化工程
+<meta property="og:description" content="js数值精度
+近期在项目中有出现大数值的订单号9148368244236619在调用接口时自动变成9148368244236620的情况，导致请求失误。本文特意总结了出现这种情况的原因，以及js精度相关的情况。
 
-Installation1sudo npm install -g yazi
-Getting To Know yazi初始化前端脚手架 init
-yazi mb init 
-yazi pc init
-
-生成前端项目脚手架，脚手架目录：
-1234567891011[test-613]  | -- package.json  | -- [src]  |     | -- [image">
-<meta property="og:updated_time" content="2016-06-25T05:57:26.000Z">
+jquery[.data()]方法在本次案例中，订单号是后端同步渲染到页面上的，
+1&amp;lt;div class=&amp;quot;j_OrderNumber&amp;quot; data-ordern">
+<meta property="og:updated_time" content="2017-03-18T09:58:06.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="yazi document">
-<meta name="twitter:description" content="前端自动化工程
+<meta name="twitter:title" content="js-number-precision">
+<meta name="twitter:description" content="js数值精度
+近期在项目中有出现大数值的订单号9148368244236619在调用接口时自动变成9148368244236620的情况，导致请求失误。本文特意总结了出现这种情况的原因，以及js精度相关的情况。
 
-Installation1sudo npm install -g yazi
-Getting To Know yazi初始化前端脚手架 init
-yazi mb init 
-yazi pc init
-
-生成前端项目脚手架，脚手架目录：
-1234567891011[test-613]  | -- package.json  | -- [src]  |     | -- [image">
+jquery[.data()]方法在本次案例中，订单号是后端同步渲染到页面上的，
+1&amp;lt;div class=&amp;quot;j_OrderNumber&amp;quot; data-ordern">
 
 
 
@@ -98,7 +86,7 @@ yazi pc init
   };
 </script>
 
-  <title> yazi document | Lyu Dada </title>
+  <title> js-number-precision | Lyu Dada </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-hk">
@@ -218,7 +206,7 @@ yazi pc init
             
             
               
-                yazi document
+                js-number-precision
               
             
           </h1>
@@ -227,8 +215,8 @@ yazi pc init
         <div class="post-meta">
           <span class="post-time">
             發表於
-            <time itemprop="dateCreated" datetime="2016-06-25T13:56:14+08:00" content="2016-06-25">
-              2016-06-25
+            <time itemprop="dateCreated" datetime="2017-03-18T17:57:23+08:00" content="2017-03-18">
+              2017-03-18
             </time>
           </span>
 
@@ -251,55 +239,42 @@ yazi pc init
       
 
       
-        <span itemprop="articleBody"><blockquote>
-<p>前端自动化工程</p>
+        <span itemprop="articleBody"><h1 id="js数值精度">js数值精度</h1><blockquote>
+<p>近期在项目中有出现大数值的订单号<code>9148368244236619</code>在调用接口时自动变成<code>9148368244236620</code>的情况，导致请求失误。本文特意总结了出现这种情况的原因，以及js精度相关的情况。</p>
 </blockquote>
-<h2 id="Installation">Installation</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo npm install -g yazi</div></pre></td></tr></table></figure>
-<h2 id="Getting_To_Know_yazi">Getting To Know yazi</h2><h2 id="初始化前端脚手架_init">初始化前端脚手架 init</h2><ol>
-<li>yazi mb init </li>
-<li>yazi pc init</li>
-</ol>
-<p>生成前端项目脚手架，脚手架目录：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">[test-613]</div><div class="line">  | -- package.json</div><div class="line">  | -- [src]</div><div class="line">  |     | -- [images]</div><div class="line">  |     |     | -- [slice]</div><div class="line">  |     | -- index.html</div><div class="line">  |     | -- [js]</div><div class="line">  |     |     | -- index.js</div><div class="line">  |     | -- [less]</div><div class="line">  |     |     | -- style.less</div><div class="line">  |     | -- [lib]</div></pre></td></tr></table></figure>
-<p>当前yazi版本生成的脚手架只常规的符合commonjs规范。并没有支持vue，react等。</p>
-<p>根据<code>mb/pc</code>不同生成的脚手架具体内容不同，比如html头信息不同。</p>
-<h2 id="browser-sync实时调试_dev">browser-sync实时调试 dev</h2><ol>
-<li>yazi dev</li>
-</ol>
-<p>调试模式下打开默认打开<code>localhost:8000</code>页面。<br>在调试过程中支持</p>
-<ul>
-<li>es6编译</li>
-<li>less编译</li>
-<li>书写js的commonJS规范（require）</li>
-</ul>
-<p>可以在项目中进行<code>npm install xxx --save</code></p>
-<h2 id="项目构建_build">项目构建 build</h2><ol>
-<li>yazi build -s 1</li>
-<li>yazi build -s 2</li>
-<li>yazi build</li>
-</ol>
-<p><strong>yazi build</strong></p>
-<p>将src文件夹内的项目文件构建并生成build文件夹。</p>
-<p>其中包含：</p>
-<ul>
-<li>es6编译混淆压缩</li>
-<li>less编译</li>
-<li>图片压缩</li>
-</ul>
-<p><strong>注意事项：</strong></p>
-<p>需要进行雪碧图转换的图片需要放在<code>images/slice</code>文件下内，并且在css中需要使用<code>background-image</code>属性引用图片。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">.test1 &#123;</div><div class="line">	width: 30px;</div><div class="line">	height: 30px;</div><div class="line">	background-image: url(&apos;../images/slice/img1.png&apos;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p><strong>yazi build -s 1</strong></p>
-<p>将src文件夹内的项目文件构建并生成build文件夹，并将图片转换为雪碧图，修改对应css。</p>
-<p>此处的 <code>-s 1</code>表示<code>sprite</code>雪碧图设置，并且在普通屏幕上使用（pc和非retina屏）</p>
-<p><strong>yazi build -s 2</strong></p>
-<p>将src文件夹内的项目文件构建并生成build文件夹，并将图片转换为雪碧图，修改对应css。</p>
-<p>此处的 <code>-s 2</code>表示<code>sprite</code>雪碧图设置，并且在retina屏使用。</p>
-<h2 id="TODO">TODO</h2><ul>
-<li>[  ]  添加一些处理css的gulp插件</li>
-<li>[  ]  build时图片进行七牛空间自动上传。</li>
-</ul>
-<h2 id="License">License</h2><p>MIT © <a href="lvdada.org">南洋</a><br><a href="https://github.com/fromIRIS/dada" target="_blank" rel="external">github</a></p>
+<h2 id="jquery[-data()]方法">jquery[.data()]方法</h2><p>在本次案例中，订单号是后端同步渲染到页面上的，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;div class=&quot;j_OrderNumber&quot; data-ordernumber=&quot;9148368244236619&quot;&gt;&lt;/div&gt;</div></pre></td></tr></table></figure>
+<p>呈现在页面上的订单号数值没有问题<code>9148368244236619</code>，前端此时想获取到这个订单号：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var orderNumber = $(&apos;.j_OrderNumber).data(&apos;ordernumber&apos;); // 9148368244236620</div><div class="line"></div><div class="line">typeof(orderNumber) === &apos;number&apos; // true</div></pre></td></tr></table></figure>
+<p>在这个取值赋值的过程中，超过安全值的大数值发生了变化，从<code>9148368244236619</code>变成了<code>91483682442366120</code>，这里的问题主要出现在<code>jquery</code>的<code>data</code>方法。</p>
+<p><strong>超过安全值<code>Math.pow(2, 53)-1 -- 9007199254740991</code> 的number类型在赋值的过程中会发生精度丢失，而我们在使用jquery的data方法取得的自定义html属性<code>data-ordernumber</code>值会强制转换成number类型，导致精度丢失。</strong></p>
+<p>而使用js原生的方法取dom节点的属性时，获取到的值都是string类型，这样就不会出现number类型精度丢失的问题。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var orderNumber = $(&apos;.j_OrderNumber&apos;)[0].dataset.ordernumber // &apos;9148368244236619&apos;</div><div class="line"></div><div class="line">typeof(orderNumber) === &apos;string&apos; // true</div></pre></td></tr></table></figure>
+<p>所以我们在通过自定义属性取值number类型时，并且预期这些值会是类似订单号这种会超过安全阈值的数值时，不要使用jquery的data方法。</p>
+<h2 id="大数值的精度问题">大数值的精度问题</h2><p>能够被“安全”呈现的最大整数是<code>Math.pow(2, 53) - 1</code>，即<code>9007199254740992</code>。在ES6中被定义为<code>Number.MAX_SAFE_INTEGER</code>。</p>
+<p>在开发环境，根据程序的特殊性，在有可能出现这种情况时我们应该杜绝掉超出安全阈值的大整数，并给出友好提示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">function isSafeInteger(num) &#123;</div><div class="line">  return typeof(num) === &apos;number&apos; &amp;&amp; num % 1 == 0 &amp;&amp; Math.abs(num) &lt;= Math.pow(2, 53) -1;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在一般电商业务中比较常见出现大数值的场景也就是订单号了，这类场景后端传值给我们的时候都强制包装成string类型就会解决大多数的精度丢失问题了。</p>
+<p>至于为什么会只有2的53次方-1的整数是安全的，可以看阮神的关于数值的文章有<a href="http://javascript.ruanyifeng.com/grammar/number.html#toc2" target="_blank" rel="external">详细介绍</a></p>
+<h2 id="小数的精度问题">小数的精度问题</h2><blockquote>
+<p>经典的 0.1 + 0.2 === 0.3 // false 问题</p>
+<p>0.1 + 0.2 === 0.30000000000000004</p>
+</blockquote>
+<h3 id="小数比较">小数比较</h3><p>对于这类数值比较问题，如果我们已经知道了目标比较值，即如果我们已经明确要与<code>0.3</code>进行比较，我们也可以不需要得到0.1+0.2的真实期望结果值（0.3），因为如果我们要得到0.3，还需要对0.1和0.2进行操作。常规解法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(0.1 * 10 + 0.2 * 10) / 10 = 0.3</div></pre></td></tr></table></figure>
+<p>在「你不知道的javascript」一书中有提到一种判断方法，设置一个误差范围值，通常也称为“机器精度”，对于javascript来说，这个值通常为<code>Math.pow(2, -53)</code>。</p>
+<p>我们可以将需要比较的两个值进行相减，再与这个机器精度进行比较，如果在误差范围内，我们也视为两个值是相等的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">function numbersCloseEnoughToEqual(num1, num2) &#123;</div><div class="line">  return Math.abs(num1 - num2) &lt; Math.pow(2, -53);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="小数展示">小数展示</h3><p>对于电商业务来讲，小数经过四则运算后可能会出现失去精度的问题，但是作为展示来说我们都会调用<code>toFixed()</code>进行小数后几位的约定，调用了这个方法后小数失去精度的问题也就迎刃而解了，不可能出现<code>0.30000000000000004</code>这样的数值。</p>
+<p>所以在业务中有需要进行小数四则运算并会展示在页面中，调用<code>toFixed()</code>方法！</p>
+<p>但是<code>toFixed()</code>也有失去精度的时候！</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">1.335.toFixed(2)</div><div class="line">// &quot;1.33&quot;</div></pre></td></tr></table></figure>
+<p><a href="http://www.cnblogs.com/snandy/p/4886131.html" target="_blank" rel="external">解决办法</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">function toFixed(num, s) &#123;</div><div class="line">    var times = Math.pow(10, s)</div><div class="line">    var des = num * times + 0.5</div><div class="line">    des = parseInt(des, 10) / times</div><div class="line">    return des + &apos;&apos;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="小数的四则运算">小数的四则运算</h3><p><a href="http://www.cnblogs.com/snandy/p/4943138.html" target="_blank" rel="external">参考</a></p>
+<blockquote>
+<p>本文来自<a href="http://weibo.com/u/2115840795" target="_blank" rel="external">二口南洋</a>，有什么需要讨论的欢迎找我。</p>
+</blockquote>
 </span>
       
     </div>
@@ -308,7 +283,7 @@ yazi pc init
       
         <div class="post-tags">
           
-            <a href="/tags/yazi/" rel="tag">#yazi</a>
+            <a href="/tags/js/" rel="tag">#js</a>
           
         </div>
       
@@ -317,17 +292,13 @@ yazi pc init
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/06/12/node-path-problem/" rel="next" title="node-path-problem">
-                <i class="fa fa-chevron-left"></i> node-path-problem
+              <a href="/2017/03/04/weex-vue2-practice/" rel="next" title="weex-vue2-practice">
+                <i class="fa fa-chevron-left"></i> weex-vue2-practice
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/07/06/wechat-iframe-input-bug/" rel="prev" title="wechat-iframe-input-bug">
-                wechat-iframe-input-bug <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -448,7 +419,7 @@ yazi pc init
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Installation"><span class="nav-number">1.</span> <span class="nav-text">Installation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Getting_To_Know_yazi"><span class="nav-number">2.</span> <span class="nav-text">Getting To Know yazi</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#初始化前端脚手架_init"><span class="nav-number">3.</span> <span class="nav-text">初始化前端脚手架 init</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#browser-sync实时调试_dev"><span class="nav-number">4.</span> <span class="nav-text">browser-sync实时调试 dev</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#项目构建_build"><span class="nav-number">5.</span> <span class="nav-text">项目构建 build</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TODO"><span class="nav-number">6.</span> <span class="nav-text">TODO</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#License"><span class="nav-number">7.</span> <span class="nav-text">License</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#js数值精度"><span class="nav-number">1.</span> <span class="nav-text">js数值精度</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#jquery[-data()]方法"><span class="nav-number">1.1.</span> <span class="nav-text">jquery[.data()]方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#大数值的精度问题"><span class="nav-number">1.2.</span> <span class="nav-text">大数值的精度问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#小数的精度问题"><span class="nav-number">1.3.</span> <span class="nav-text">小数的精度问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#小数比较"><span class="nav-number">1.3.1.</span> <span class="nav-text">小数比较</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小数展示"><span class="nav-number">1.3.2.</span> <span class="nav-text">小数展示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小数的四则运算"><span class="nav-number">1.3.3.</span> <span class="nav-text">小数的四则运算</span></a></li></ol></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">

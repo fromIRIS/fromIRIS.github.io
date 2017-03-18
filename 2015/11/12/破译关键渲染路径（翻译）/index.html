@@ -62,9 +62,11 @@
 <meta property="og:image" content="http://chuantu.biz/t2/22/1450664869x1822611278.png">
 <meta property="og:image" content="http://chuantu.biz/t2/22/1450665095x-954498918.png">
 <meta property="og:image" content="http://7xpcne.com1.z0.glb.clouddn.com/3%20(2).png">
+<meta property="og:updated_time" content="2015-12-22T03:51:46.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="破译关键渲染路径（翻译）">
 <meta name="twitter:description" content="破译关键渲染路径（翻译）英文来源：http://calendar.perfplanet.com/2012/deciphering-the-critical-rendering-path/参考：https://developers.google.com/web/fundamentals/performance/critical-rendering-path/analyzing-crptranslat">
+<meta name="twitter:image" content="http://chuantu.biz/t2/22/1450664869x1822611278.png">
 
 
 
@@ -245,7 +247,7 @@
 
       
         <span itemprop="articleBody"><h2 id="破译关键渲染路径（翻译）">破译关键渲染路径（翻译）</h2><p>英文来源：<a href="http://calendar.perfplanet.com/2012/deciphering-the-critical-rendering-path/" target="_blank" rel="external">http://calendar.perfplanet.com/2012/deciphering-the-critical-rendering-path/</a><br>参考：<a href="https://developers.google.com/web/fundamentals/performance/critical-rendering-path/analyzing-crp" target="_blank" rel="external">https://developers.google.com/web/fundamentals/performance/critical-rendering-path/analyzing-crp</a><br><strong>translated by 南洋</strong></p>
-<h3 id="前言_By_南洋">前言 By 南洋</h3><p>最近在研究页面性能监控的事情，得知HTML5的 <code>Navigation Timing API</code>可以获取到一系列加载的关键时间节点。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="pi">'use strict'</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">`performance.timing.domInteractive: <span class="subst">$&#123;performance.timing.domInteractive&#125;</span>`</span>)</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">`performance.timing.domContentLoadedEventStart: <span class="subst">$&#123;performance.timing.domContentLoadedEventStart&#125;</span>`</span>)</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">`performance.timing.domContentLoadedEventEnd: <span class="subst">$&#123;performance.timing.domContentLoadedEventEnd&#125;</span>`</span>)</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">`performance.timing.domComplete: <span class="subst">$&#123;performance.timing.domComplete&#125;</span>`</span>)</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">`performance.timing.loadEventStart: <span class="subst">$&#123;performance.timing.loadEventStart&#125;</span>`</span>)</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">`performance.timing.loadEventEnd: <span class="subst">$&#123;performance.timing.loadEventEnd&#125;</span>`</span>)</span><br></pre></td></tr></table></figure></p>
+<h3 id="前言_By_南洋">前言 By 南洋</h3><p>最近在研究页面性能监控的事情，得知HTML5的 <code>Navigation Timing API</code>可以获取到一系列加载的关键时间节点。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&apos;use strict&apos;</div><div class="line">console.log(`performance.timing.domInteractive: $&#123;performance.timing.domInteractive&#125;`)</div><div class="line">console.log(`performance.timing.domContentLoadedEventStart: $&#123;performance.timing.domContentLoadedEventStart&#125;`)</div><div class="line">console.log(`performance.timing.domContentLoadedEventEnd: $&#123;performance.timing.domContentLoadedEventEnd&#125;`)</div><div class="line">console.log(`performance.timing.domComplete: $&#123;performance.timing.domComplete&#125;`)</div><div class="line">console.log(`performance.timing.loadEventStart: $&#123;performance.timing.loadEventStart&#125;`)</div><div class="line">console.log(`performance.timing.loadEventEnd: $&#123;performance.timing.loadEventEnd&#125;`)</div></pre></td></tr></table></figure></p>
 <p>将这些代码拷贝到console中，就可以看到加载过程中的部分数据，或直接查看<code>performance.timing</code> 我暂时为监控安排的数据为</p>
 <ul>
 <li>白屏时间</li>
@@ -377,7 +379,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">43</span>
+              <span class="site-state-item-count">44</span>
               <span class="site-state-item-name">文章</span>
             </a>
           </div>
@@ -391,7 +393,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">36</span>
+              <span class="site-state-item-count">37</span>
               <span class="site-state-item-name">標籤</span>
               </a>
           </div>

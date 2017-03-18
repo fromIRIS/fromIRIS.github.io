@@ -59,6 +59,7 @@
 <meta property="og:url" content="http://yoursite.com/2015/12/22/click300延迟与点击穿透/index.html">
 <meta property="og:site_name" content="Lyu Dada">
 <meta property="og:description" content="click300延迟与点击穿透由来：ios safari双击放大页面，由于浏览器大都具备这种特性，所以浏览器都约定在300毫秒的间隔来判断是否是双击还是单击，超过300毫秒还没第二次点击浏览器才判断此次点击是单击。点击穿透事件介绍：并不是说绑定了click事件然后产生了穿透，而是一系列因果集合而产生了穿透这个不需要的现象。产生穿透事件的条件：1、两个dom在屏幕的垂直方向是重叠的，并且z-inde">
+<meta property="og:updated_time" content="2015-12-22T03:53:57.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="click300延迟与点击穿透">
 <meta name="twitter:description" content="click300延迟与点击穿透由来：ios safari双击放大页面，由于浏览器大都具备这种特性，所以浏览器都约定在300毫秒的间隔来判断是否是双击还是单击，超过300毫秒还没第二次点击浏览器才判断此次点击是单击。点击穿透事件介绍：并不是说绑定了click事件然后产生了穿透，而是一系列因果集合而产生了穿透这个不需要的现象。产生穿透事件的条件：1、两个dom在屏幕的垂直方向是重叠的，并且z-inde">
@@ -241,7 +242,7 @@
       
 
       
-        <span itemprop="articleBody"><h1 id="click300延迟与点击穿透">click300延迟与点击穿透</h1><p><strong>由来：</strong>ios safari双击放大页面，由于浏览器大都具备这种特性，所以浏览器都约定在300毫秒的间隔来判断是否是双击还是单击，超过300毫秒还没第二次点击浏览器才判断此次点击是单击。<br>点击穿透事件介绍：并不是说绑定了click事件然后产生了穿透，而是一系列因果集合而产生了穿透这个不需要的现象。<br><strong>产生穿透事件的条件：</strong><br>1、两个dom在屏幕的垂直方向是重叠的，并且z-index不同。<br>2、采用touch系列的点击事件去点击朝外的dom，并且这个dom隐藏或者移开。<br>3、在下方的dom绑定了click或者默认的点击事件（a标签，buttom等）<br>只有满足上述条件才会触发穿透事件，就是点击外dom，外dom消失，但下边的dom也会触发click事件（比如跳转链接）<br><strong>产生此现象的原因：</strong><br>因为click的300延迟，导致用户体验不佳，所以很多人都会采用touch系列代替click。<br>在点击事件中，点击的顺序是这样的：<br><code>touchstart &gt; touchmove &gt; touchend &gt; click</code><br>而轮到click事件的时候还在再延迟了300毫秒，所以touchstart的触发速度是远大于click的，回到上述的产生穿透的条件中去<br>1、touchstart事件触发，外层dom消失，<strong>可是点击屏幕后会有个浏览器默认的click产生，首先就作用于当时click触发时点击的屏幕最外层的dom，即在重叠的条件下，zindex最大的dom，然后顺着dom树往上爬</strong><br>2、因为有300毫秒的延迟，所以在第一步的touchstart后，外层dom就消失了，等300毫秒后click触发了，等着他的dom却是在下面那层的dom（因为此时这个dom已经在最上层了），所以原本在下面的这个dom就触发了click事件。<br>所以说外层dom会消失是很重要的条件，如果外层dom没有消失，那延迟的click触发时还是作用在外层的dom上，而外层dom没绑定click事件。<br><strong>这就是穿透的原理。</strong><br><strong>如何解决穿透：</strong><br>1、顺着这个思路，既然每次单击是都会有个浏览器的click默认事件触发，既然我们不需要，那就把这个默认事件取消掉就好了，所以在js中加上这句话<br><figure class="highlight ocaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (ev.<span class="keyword">type</span> == <span class="symbol">'touchend'</span>) &#123;</span><br><span class="line">	ev.preventDefault<span class="literal">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+        <span itemprop="articleBody"><h1 id="click300延迟与点击穿透">click300延迟与点击穿透</h1><p><strong>由来：</strong>ios safari双击放大页面，由于浏览器大都具备这种特性，所以浏览器都约定在300毫秒的间隔来判断是否是双击还是单击，超过300毫秒还没第二次点击浏览器才判断此次点击是单击。<br>点击穿透事件介绍：并不是说绑定了click事件然后产生了穿透，而是一系列因果集合而产生了穿透这个不需要的现象。<br><strong>产生穿透事件的条件：</strong><br>1、两个dom在屏幕的垂直方向是重叠的，并且z-index不同。<br>2、采用touch系列的点击事件去点击朝外的dom，并且这个dom隐藏或者移开。<br>3、在下方的dom绑定了click或者默认的点击事件（a标签，buttom等）<br>只有满足上述条件才会触发穿透事件，就是点击外dom，外dom消失，但下边的dom也会触发click事件（比如跳转链接）<br><strong>产生此现象的原因：</strong><br>因为click的300延迟，导致用户体验不佳，所以很多人都会采用touch系列代替click。<br>在点击事件中，点击的顺序是这样的：<br><code>touchstart &gt; touchmove &gt; touchend &gt; click</code><br>而轮到click事件的时候还在再延迟了300毫秒，所以touchstart的触发速度是远大于click的，回到上述的产生穿透的条件中去<br>1、touchstart事件触发，外层dom消失，<strong>可是点击屏幕后会有个浏览器默认的click产生，首先就作用于当时click触发时点击的屏幕最外层的dom，即在重叠的条件下，zindex最大的dom，然后顺着dom树往上爬</strong><br>2、因为有300毫秒的延迟，所以在第一步的touchstart后，外层dom就消失了，等300毫秒后click触发了，等着他的dom却是在下面那层的dom（因为此时这个dom已经在最上层了），所以原本在下面的这个dom就触发了click事件。<br>所以说外层dom会消失是很重要的条件，如果外层dom没有消失，那延迟的click触发时还是作用在外层的dom上，而外层dom没绑定click事件。<br><strong>这就是穿透的原理。</strong><br><strong>如何解决穿透：</strong><br>1、顺着这个思路，既然每次单击是都会有个浏览器的click默认事件触发，既然我们不需要，那就把这个默认事件取消掉就好了，所以在js中加上这句话<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">if (ev.type == &apos;touchend&apos;) &#123;</div><div class="line">	ev.preventDefault();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>2、或者干脆给外层的dom绑定click事件，全部解决了。。对于关闭弹框啥的，300毫秒的延迟关闭还是可以接受的。<br>3、引入fastClick.js<br>公司里用的就是这个插件库，用了这个插件库，绑定touchstart不用担心引发迟来的click，直接绑定click也不会有300毫秒的延迟了，也就是很完美的解决了问题。</p>
 </span>
       
@@ -268,8 +269,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/12/22/tween/" rel="prev" title="tweenMax基础api的逐条随意翻译">
-                tweenMax基础api的逐条随意翻译 <i class="fa fa-chevron-right"></i>
+              <a href="/2016/01/17/youDon-tKnowJs/" rel="prev" title="youDon'tKnowJs">
+                youDon'tKnowJs <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -338,7 +339,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">43</span>
+              <span class="site-state-item-count">44</span>
               <span class="site-state-item-name">文章</span>
             </a>
           </div>
@@ -352,7 +353,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">36</span>
+              <span class="site-state-item-count">37</span>
               <span class="site-state-item-name">標籤</span>
               </a>
           </div>

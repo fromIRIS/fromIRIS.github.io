@@ -53,15 +53,16 @@
 
 
 
-<meta name="description" content="正则表达式代码摘自javascript语言精粹123456789var parse_url = /^(?:([A-Za-z]+):)?(\/&amp;#123;0,3&amp;#125;)([0-9.\-A-Za-z]+)(?::(\d+))?(?:\/([^?#]*))?(?:\?([^#]*))?(?:#(.*))?$/;            var url = &apos;http://www.ora.com:80">
+<meta name="description" content="正则表达式代码摘自javascript语言精粹123456789var parse_url = /^(?:([A-Za-z]+):)?(\/&amp;#123;0,3&amp;#125;)([0-9.\-A-Za-z]+)(?::(\d+))?(?:\/([^?#]*))?(?:\?([^#]*))?(?:#(.*))?$/;            var url = &amp;apos;http://www.ora.c">
 <meta property="og:type" content="article">
 <meta property="og:title" content="js中的正则表达式">
 <meta property="og:url" content="http://yoursite.com/2015/06/10/regexp/index.html">
 <meta property="og:site_name" content="Lyu Dada">
-<meta property="og:description" content="正则表达式代码摘自javascript语言精粹123456789var parse_url = /^(?:([A-Za-z]+):)?(\/&amp;#123;0,3&amp;#125;)([0-9.\-A-Za-z]+)(?::(\d+))?(?:\/([^?#]*))?(?:\?([^#]*))?(?:#(.*))?$/;            var url = &apos;http://www.ora.com:80">
+<meta property="og:description" content="正则表达式代码摘自javascript语言精粹123456789var parse_url = /^(?:([A-Za-z]+):)?(\/&amp;#123;0,3&amp;#125;)([0-9.\-A-Za-z]+)(?::(\d+))?(?:\/([^?#]*))?(?:\?([^#]*))?(?:#(.*))?$/;            var url = &amp;apos;http://www.ora.c">
+<meta property="og:updated_time" content="2015-12-22T03:55:51.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="js中的正则表达式">
-<meta name="twitter:description" content="正则表达式代码摘自javascript语言精粹123456789var parse_url = /^(?:([A-Za-z]+):)?(\/&amp;#123;0,3&amp;#125;)([0-9.\-A-Za-z]+)(?::(\d+))?(?:\/([^?#]*))?(?:\?([^#]*))?(?:#(.*))?$/;            var url = &apos;http://www.ora.com:80">
+<meta name="twitter:description" content="正则表达式代码摘自javascript语言精粹123456789var parse_url = /^(?:([A-Za-z]+):)?(\/&amp;#123;0,3&amp;#125;)([0-9.\-A-Za-z]+)(?::(\d+))?(?:\/([^?#]*))?(?:\?([^#]*))?(?:#(.*))?$/;            var url = &amp;apos;http://www.ora.c">
 
 
 
@@ -241,7 +242,7 @@
       
 
       
-        <span itemprop="articleBody"><h3 id="正则表达式">正则表达式</h3><p><code>代码摘自javascript语言精粹</code><br><figure class="highlight nimrod"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> parse_url = /^(?:([A-<span class="type">Za</span>-z]+):)?(\/&#123;<span class="number">0</span>,<span class="number">3</span>&#125;)([<span class="number">0</span>-<span class="number">9</span>.\-A-<span class="type">Za</span>-z]+)(?::(\d+))?(?:\/([^?<span class="comment">#]*))?(?:\?([^#]*))?(?:#(.*))?$/;</span></span><br><span class="line">            <span class="keyword">var</span> url = 'http://www.ora.com:<span class="number">80</span>/goodparts?q<span class="comment">#fragment';</span></span><br><span class="line">            <span class="keyword">var</span> <span class="literal">result</span> = parse_url.exec(url);</span><br><span class="line">            <span class="keyword">var</span> names = ['url', 'scheme', 'slash', 'host', 'port', 'path', 'query', 'hash'];</span><br><span class="line">            <span class="keyword">var</span> blanks = '      ';</span><br><span class="line">            <span class="keyword">var</span> i ;</span><br><span class="line">            <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; names.length; i++) &#123;</span><br><span class="line">                document.writeln(names[i] + ':' +blanks.substring(names[i].length), <span class="literal">result</span>[i])</span><br><span class="line">            &#125;</span><br></pre></td></tr></table></figure></p>
+        <span itemprop="articleBody"><h3 id="正则表达式">正则表达式</h3><p><code>代码摘自javascript语言精粹</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">var parse_url = /^(?:([A-Za-z]+):)?(\/&#123;0,3&#125;)([0-9.\-A-Za-z]+)(?::(\d+))?(?:\/([^?#]*))?(?:\?([^#]*))?(?:#(.*))?$/;</div><div class="line">            var url = &apos;http://www.ora.com:80/goodparts?q#fragment&apos;;</div><div class="line">            var result = parse_url.exec(url);</div><div class="line">            var names = [&apos;url&apos;, &apos;scheme&apos;, &apos;slash&apos;, &apos;host&apos;, &apos;port&apos;, &apos;path&apos;, &apos;query&apos;, &apos;hash&apos;];</div><div class="line">            var blanks = &apos;      &apos;;</div><div class="line">            var i ;</div><div class="line">            for (i = 0; i &lt; names.length; i++) &#123;</div><div class="line">                document.writeln(names[i] + &apos;:&apos; +blanks.substring(names[i].length), result[i])</div><div class="line">            &#125;</div></pre></td></tr></table></figure></p>
 <h4 id="正则中的分组">正则中的分组</h4><ul>
 <li>捕获型<br>(   ….     )<br>被包围在圆括号中的正则表达式分支，任何匹配这个分组的字符都会被捕获并<strong>指定一个数字，序号从1开始。</strong></li>
 <li>非捕获型<br>(?:    …..   )有一个<code>?:</code>的前缀。仅作简单的匹配，并不会捕获所匹配的文本。</li>
@@ -358,7 +359,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">43</span>
+              <span class="site-state-item-count">44</span>
               <span class="site-state-item-name">文章</span>
             </a>
           </div>
@@ -372,7 +373,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">36</span>
+              <span class="site-state-item-count">37</span>
               <span class="site-state-item-name">標籤</span>
               </a>
           </div>

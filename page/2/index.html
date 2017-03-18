@@ -53,15 +53,12 @@
 
 
 
-<meta name="description">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Lyu Dada">
 <meta property="og:url" content="http://yoursite.com/page/2/index.html">
 <meta property="og:site_name" content="Lyu Dada">
-<meta property="og:description">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Lyu Dada">
-<meta name="twitter:description">
 
 
 
@@ -95,7 +92,7 @@
 
 
   <div class="container one-column 
-   page-home 
+  
 ">
     <div class="headband"></div>
 
@@ -179,6 +176,98 @@
 
     
     
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/07/06/wechat-iframe-input-bug/" itemprop="url">
+                  wechat-iframe-input-bug
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            發表於
+            <time itemprop="dateCreated" datetime="2016-07-06T17:30:56+08:00" content="2016-07-06">
+              2016-07-06
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+            微信环境下input[type=text]点击软键盘闪现问题— 记一次神奇的bug
+
+在项目测试阶段，在页面刚加载完毕的时候（上方进度条消失）点击输入框，弹出软键盘。但是在大约1秒的时候后软键盘就会自动消失，输入框的焦点消失。
+这种现在只会出现在ios下的微信浏览器内，safari不会出现这个问题。
+这会造成了很不舒适的用户体验，用户需要点击两次输入框才能真正输入内容。
+对于这种全局性质的模糊bug，最好就是采用排除法去定位。在本地服务器内对当前页面的依赖逐步的排除，最后发现是第三方统计脚本引起了这个bug。
+以下是肇事代码（省略）
+123456789$(window).on(&apos;load&apos;,function()&#123;  var a = document;  __sh
+            ...
+          </span>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/07/06/wechat-iframe-input-bug/#more" rel="contents">
+              閱讀全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
 
     
       
@@ -525,7 +614,7 @@ javascript异步编程3种方法。javascript语言的执行环境是单线程�
 http live streaming（hls）适用移动端HTTP Live Streaming（HLS）是苹果公司实现的基于HTTP的流媒体传输协议，可实现流媒体的直播和点播。原理上是将视频流分片成一系列HTTP下载文件。
 由于大多数移动设备的H5页面的HTML5新的video标签都支持HLS协议，所以在移动端非常适合使用HLS协议进行直播。
 上图所示的m3u8格式就是支持HLS协议的流媒体格式。
-使用方法也非常简单，直接在html中嵌入一个video标签及可。123&lt;video class="video" controls="controls"  wid
+使用方法也非常简单，直接在html中嵌入一个video标签及可。123&lt;video class=&quot;video&quot; controls=&quot
             ...
           </span>
           <div class="post-more-link text-center">
@@ -615,7 +704,7 @@ http live streaming（hls）适用移动端HTTP Live Streaming（HLS）是苹果
 
 回调地狱一篇如何进行javascript异步编程的指导文章。
 什么是“回调地狱”？javascript异步编程，或者说使用回调进行javascript编程，是很难凭直觉得到想要的返回值的。很多代码长的像下面一样：
-123456789101112131415161718192021222324fs.readdir(source, function (err, files) &#123;  if (err) &#123;    console.log('Error finding files: ' + err)  &#125; else &#123;    files.forEach(function 
+123456789101112131415161718192021222324fs.readdir(source, function (err, files) &#123;  if (err) &#123;    console.log(&apos;Error finding files: &apos; + err)  &#125; else &#123;    files.forEach
             ...
           </span>
           <div class="post-more-link text-center">
@@ -1021,108 +1110,6 @@ javascript作用域
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/12/22/tween/" itemprop="url">
-                  tweenMax基础api的逐条随意翻译
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            發表於
-            <time itemprop="dateCreated" datetime="2015-12-22T11:56:21+08:00" content="2015-12-22">
-              2015-12-22
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp; 分類於
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/动画库/" itemprop="url" rel="index">
-                    <span itemprop="name">动画库</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-            tweenMax基础api的逐条随意翻译1tween没有内置的选择器引擎，在没有载入jquery等类库的情况下只能通过getElementById进行选择。2.ticker12345TweenMax.ticker.addEventListener("tick", myFunction);function myFunction(event) &#123;//executes on every tick after the core engine updates&#125;
-3.delay()12var currentDelay = myAnimation.delay(); //gets current delaymyAnimation.delay(2); //sets delay
-dalay方
-            ...
-          </span>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/12/22/tween/#more" rel="contents">
-              閱讀全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
@@ -1169,7 +1156,7 @@ dalay方
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">43</span>
+              <span class="site-state-item-count">44</span>
               <span class="site-state-item-name">文章</span>
             </a>
           </div>
@@ -1183,7 +1170,7 @@ dalay方
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">36</span>
+              <span class="site-state-item-count">37</span>
               <span class="site-state-item-name">標籤</span>
               </a>
           </div>

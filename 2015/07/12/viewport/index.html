@@ -59,10 +59,12 @@
 <meta property="og:url" content="http://yoursite.com/2015/07/12/viewport/index.html">
 <meta property="og:site_name" content="Lyu Dada">
 <meta property="og:description" content="web移动端开发viewport1、css的一个像素只是一个抽象的单位，在不同的设备中代表的设备物理像素是不同的。2、devicePixelRatio一个css像素代表多少个设备像素3、浏览器默认的viewport 称为layout viewport ,且为比屏幕要宽的viewport，一般都为980px，可以通过以下代码获取1document.documentElement.clientWidt">
-<meta property="og:image" content="./1436681520937.png">
+<meta property="og:image" content="http://yoursite.com/./1436681520937.png">
+<meta property="og:updated_time" content="2015-12-22T03:56:55.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="viewport中的width、inital-scale简介">
 <meta name="twitter:description" content="web移动端开发viewport1、css的一个像素只是一个抽象的单位，在不同的设备中代表的设备物理像素是不同的。2、devicePixelRatio一个css像素代表多少个设备像素3、浏览器默认的viewport 称为layout viewport ,且为比屏幕要宽的viewport，一般都为980px，可以通过以下代码获取1document.documentElement.clientWidt">
+<meta name="twitter:image" content="http://yoursite.com/./1436681520937.png">
 
 
 
@@ -242,16 +244,16 @@
       
 
       
-        <span itemprop="articleBody"><h2 id="web移动端开发">web移动端开发</h2><h3 id="viewport">viewport</h3><p>1、css的一个像素只是一个抽象的单位，在不同的设备中代表的设备物理像素是不同的。<br>2、<code>devicePixelRatio</code>一个css像素代表多少个设备像素<br>3、<br><strong>浏览器默认的viewport</strong> 称为<code>layout viewport</code> ,且为比屏幕要宽的viewport，一般都为980px，可以通过以下代码获取<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">document<span class="class">.documentElement</span><span class="class">.clientWidth</span></span><br></pre></td></tr></table></figure></p>
-<p><strong>浏览器可视区域的宽度</strong>：<code>visual viewport</code>可以通过以下代码获取<br><figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.innerWidth</span><br></pre></td></tr></table></figure></p>
+        <span itemprop="articleBody"><h2 id="web移动端开发">web移动端开发</h2><h3 id="viewport">viewport</h3><p>1、css的一个像素只是一个抽象的单位，在不同的设备中代表的设备物理像素是不同的。<br>2、<code>devicePixelRatio</code>一个css像素代表多少个设备像素<br>3、<br><strong>浏览器默认的viewport</strong> 称为<code>layout viewport</code> ,且为比屏幕要宽的viewport，一般都为980px，可以通过以下代码获取<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">document.documentElement.clientWidth</div></pre></td></tr></table></figure></p>
+<p><strong>浏览器可视区域的宽度</strong>：<code>visual viewport</code>可以通过以下代码获取<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">window.innerWidth</div></pre></td></tr></table></figure></p>
 <p><strong>浏览器理想宽度</strong>：<code>idea viewport</code></p>
 <ul>
 <li>不同的设备有不同的idea viewport，所有的iphone的idea都是320px（iphone6以前）。查看最新<code>各设备idea viewport</code>网址<a href="http://viewportsizes.com/" target="_blank" rel="external">http://viewportsizes.com/</a></li>
 <li><code>idea viewport</code> 的宽度就是移动设备的屏幕宽度，在css中设置某元素的宽度为<code>idea viewport</code>的宽度（单位px），那么这个元素在屏幕中就是现实100%</li>
 </ul>
-<p>4、<img src="./1436681520937.png" alt="Alt text"><br><strong>target-densititydpi</strong>已经被安卓废除，避免使用<br>5、<code>initial-scale</code>这个缩放初始值是相对于设备的<code>idea viewport</code>的值进行缩放的，也就是说<br><figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta <span class="variable">name=</span><span class="string">"viewport"</span> <span class="variable">content=</span><span class="string">"initial-scale=1"</span>&gt; </span><br><span class="line">//等效于</span><br><span class="line">&lt;meta <span class="variable">name=</span><span class="string">"viewport"</span> <span class="variable">content=</span><span class="string">"width=devive-width"</span></span><br><span class="line">//</span><br></pre></td></tr></table></figure></p>
-<p><strong>两者各有一个bug，所以生产时最好将两个一起写上</strong><br>但如果同时出现<code>width</code>和<code>initial-scale</code><br><figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta <span class="variable">name=</span><span class="string">"viewport"</span> <span class="variable">content=</span><span class="string">"width=500, initial-scale=1"</span>&gt;</span><br></pre></td></tr></table></figure></p>
-<p>并不是根据先后顺序比较，而是通过谁大取谁，比如设备是iphone5，<code>idea viewport</code>是320px，则此时<code>initial-scale=1</code>(320px)，所以此时viewport取<code>width=500</code><br>6、<strong>关于initial-scale缩放的默认值以及其理论</strong><br><code>visual viewport宽度 = idea viewport宽度 / 当前设置的缩放值</code><br><code>当前缩放值 = idea viewport宽度 / visual viewport宽度</code><br><strong>注</strong>这个理论不适合安卓原生浏览器<br><strong>关于默认值：（iphone及ipad下）</strong><br>在安卓浏览器下的<code>initial-scale</code>并不能默认设置自己的值，但ios下<code>initial-scale</code>会自动根据情况设置初始值（不写<code>initial-scale</code>）。<br>例：<br><figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta <span class="variable">name=</span><span class="string">"viewport"</span> <span class="variable">content=</span><span class="string">"width=375"</span>&gt;</span><br></pre></td></tr></table></figure></p>
+<p>4、<img src="./1436681520937.png" alt="Alt text"><br><strong>target-densititydpi</strong>已经被安卓废除，避免使用<br>5、<code>initial-scale</code>这个缩放初始值是相对于设备的<code>idea viewport</code>的值进行缩放的，也就是说<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;meta name=&quot;viewport&quot; content=&quot;initial-scale=1&quot;&gt; </div><div class="line">//等效于</div><div class="line">&lt;meta name=&quot;viewport&quot; content=&quot;width=devive-width&quot;</div><div class="line">//</div></pre></td></tr></table></figure></p>
+<p><strong>两者各有一个bug，所以生产时最好将两个一起写上</strong><br>但如果同时出现<code>width</code>和<code>initial-scale</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;meta name=&quot;viewport&quot; content=&quot;width=500, initial-scale=1&quot;&gt;</div></pre></td></tr></table></figure></p>
+<p>并不是根据先后顺序比较，而是通过谁大取谁，比如设备是iphone5，<code>idea viewport</code>是320px，则此时<code>initial-scale=1</code>(320px)，所以此时viewport取<code>width=500</code><br>6、<strong>关于initial-scale缩放的默认值以及其理论</strong><br><code>visual viewport宽度 = idea viewport宽度 / 当前设置的缩放值</code><br><code>当前缩放值 = idea viewport宽度 / visual viewport宽度</code><br><strong>注</strong>这个理论不适合安卓原生浏览器<br><strong>关于默认值：（iphone及ipad下）</strong><br>在安卓浏览器下的<code>initial-scale</code>并不能默认设置自己的值，但ios下<code>initial-scale</code>会自动根据情况设置初始值（不写<code>initial-scale</code>）。<br>例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;meta name=&quot;viewport&quot; content=&quot;width=375&quot;&gt;</div></pre></td></tr></table></figure></p>
 <p>此标签只写了<code>width=375</code>属性，表明了<code>visual viewport=375</code>而且<code>375</code>是iphone6的<code>idea viewport</code>，所以此时css设置样式<code>width: 375px</code>在6就是完全填充。但如何设备是苹果5，其<code>idea viewport</code>是<code>320</code>，根据理论，得出<code>initial-scale</code>的默认值为<code>320/375</code>。页面会自动缩放这样不会出现滚动条，这样就可以在<code>320</code>的视角下无障碍浏览375的内容。</p>
 <h3 id="viewport总结">viewport总结</h3><p>目前移动开发中关于页面布局有三种方式</p>
 <ul>
@@ -285,8 +287,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/08/03/zepto-fullpage源码注释理解/" rel="prev" title="zepto.fullpage源码注释理解">
-                zepto.fullpage源码注释理解 <i class="fa fa-chevron-right"></i>
+              <a href="/2015/08/03/tween/" rel="prev" title="tweenMax基础api的逐条随意翻译">
+                tweenMax基础api的逐条随意翻译 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -355,7 +357,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">43</span>
+              <span class="site-state-item-count">44</span>
               <span class="site-state-item-name">文章</span>
             </a>
           </div>
@@ -369,7 +371,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">36</span>
+              <span class="site-state-item-count">37</span>
               <span class="site-state-item-name">標籤</span>
               </a>
           </div>

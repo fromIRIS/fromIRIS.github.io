@@ -53,15 +53,12 @@
 
 
 
-<meta name="description">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Lyu Dada">
 <meta property="og:url" content="http://yoursite.com/page/5/index.html">
 <meta property="og:site_name" content="Lyu Dada">
-<meta property="og:description">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Lyu Dada">
-<meta name="twitter:description">
 
 
 
@@ -95,7 +92,7 @@
 
 
   <div class="container one-column 
-   page-home 
+  
 ">
     <div class="headband"></div>
 
@@ -179,6 +176,114 @@
 
     
     
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/06/10/函数调用的四种方式/" itemprop="url">
+                  函数调用的四种方式与this的关系
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            發表於
+            <time itemprop="dateCreated" datetime="2015-06-10T13:16:11+08:00" content="2015-06-10">
+              2015-06-10
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分類於
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/js/" itemprop="url" rel="index">
+                    <span itemprop="name">js</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+            笔记思想来自javascript语言精粹一书
+函数调用有4种方式，且不同方式对this的处理有差异。
+方法调用模式
+函数调用模式
+构造器调用模式
+apply调用模式
+
+方法调用模式把函数保存为对象的一个属性，且被调用时，称为方法调用，此时的this指向自己所属的对象。1234567var obj = &#123;	name: &quot;dada&quot;,	getName: function () &#123;		return this.name;	&#125;&#125;obj.getName()//dada
+函数调用模式这种模式即为最普遍的函数调用，但此时的this有混淆的地方。以此模式调用函数的时候，this指向全局对象，并不会指向外层函数的this。123456789101112
+            ...
+          </span>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/06/10/函数调用的四种方式/#more" rel="contents">
+              閱讀全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
 
     
       
@@ -458,11 +563,10 @@
           <span itemprop="articleBody">
             
             作用域
-首先从简单的方面去理解变量提升现象。在执行环境中，变量和函数声明(函数表达式不会)自动提升到最顶部，但变量赋值undefined，函数声明不会赋值undefined。123456var a = "outer";function funOne() &#123;    console.log(a);//undefined    var a = "inner"&#125;funOne();
+首先从简单的方面去理解变量提升现象。在执行环境中，变量和函数声明(函数表达式不会)自动提升到最顶部，但变量赋值undefined，函数声明不会赋值undefined。123456var a = &quot;outer&quot;;function funOne() &#123;    console.log(a);//undefined    var a = &quot;inner&quot;&#125;funOne();
 
 
-这个例子就能证明变量提升现象，此段代码相当于1234567var a = "outer";function funOne() &#123;	var a;    console.log(a);//undefined    a = "inner"&#125;funOne();
-至于为什么不是输出oute
+这个例子就能证明变量提升现象，此段代码相当于1234567var a = &quot;outer&quot;;function funOne() &#123;	var a;    console.log(a);//undefined    a = &quot;
             ...
           </span>
           <div class="post-more-link text-center">
@@ -534,7 +638,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">43</span>
+              <span class="site-state-item-count">44</span>
               <span class="site-state-item-name">文章</span>
             </a>
           </div>
@@ -548,7 +652,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">36</span>
+              <span class="site-state-item-count">37</span>
               <span class="site-state-item-name">標籤</span>
               </a>
           </div>

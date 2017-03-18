@@ -60,7 +60,7 @@
 构造器调用模式
 apply调用模式
 
-方法调用模式把函数保存为对象的一个属性，且被调用时，称为方法调用，此时的this指向自己所属的对象。1234567var obj = &amp;#123;	name: &quot;dada&quot;,	getName: function () &amp;#123;">
+方法调用模式把函数保存为对象的一个属性，且被调用时，称为方法调用，此时的this指向自己所属的对象。1234567var obj = &amp;#123;	name: &amp;quot;dada&amp;quot;,	getName: function">
 <meta property="og:type" content="article">
 <meta property="og:title" content="函数调用的四种方式与this的关系">
 <meta property="og:url" content="http://yoursite.com/2015/06/10/函数调用的四种方式/index.html">
@@ -72,7 +72,8 @@ apply调用模式
 构造器调用模式
 apply调用模式
 
-方法调用模式把函数保存为对象的一个属性，且被调用时，称为方法调用，此时的this指向自己所属的对象。1234567var obj = &amp;#123;	name: &quot;dada&quot;,	getName: function () &amp;#123;">
+方法调用模式把函数保存为对象的一个属性，且被调用时，称为方法调用，此时的this指向自己所属的对象。1234567var obj = &amp;#123;	name: &amp;quot;dada&amp;quot;,	getName: function">
+<meta property="og:updated_time" content="2015-12-22T03:50:33.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="函数调用的四种方式与this的关系">
 <meta name="twitter:description" content="笔记思想来自javascript语言精粹一书
@@ -82,7 +83,7 @@ apply调用模式
 构造器调用模式
 apply调用模式
 
-方法调用模式把函数保存为对象的一个属性，且被调用时，称为方法调用，此时的this指向自己所属的对象。1234567var obj = &amp;#123;	name: &quot;dada&quot;,	getName: function () &amp;#123;">
+方法调用模式把函数保存为对象的一个属性，且被调用时，称为方法调用，此时的this指向自己所属的对象。1234567var obj = &amp;#123;	name: &amp;quot;dada&amp;quot;,	getName: function">
 
 
 
@@ -269,10 +270,10 @@ apply调用模式
 <li>构造器调用模式</li>
 <li>apply调用模式</li>
 </ul>
-<h4 id="方法调用模式">方法调用模式</h4><p>把函数保存为对象的一个属性，且被调用时，称为方法调用，此时的<code>this</code>指向自己所属的对象。<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">	name: <span class="string">"dada"</span>,</span><br><span class="line">	getName: <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">this</span>.name;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">obj.getName()<span class="comment">//dada</span></span><br></pre></td></tr></table></figure></p>
-<h4 id="函数调用模式">函数调用模式</h4><p>这种模式即为最普遍的函数调用，但此时的<code>this</code>有混淆的地方。<br>以此模式调用函数的时候，<code>this</code>指向全局对象，<strong>并不会指向外层函数的this</strong>。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.name = <span class="string">"nanyang"</span>;</span><br><span class="line"><span class="keyword">var</span> obj = &#123;</span><br><span class="line">	name: <span class="string">"dada"</span>,</span><br><span class="line">	getName: <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="comment">//that = this; 解决办法</span></span><br><span class="line">		<span class="keyword">var</span> helper = <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">			<span class="keyword">this</span>.name = <span class="string">'xx!'</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		helper();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">obj.name()<span class="comment">//dada</span></span><br><span class="line"><span class="built_in">window</span>.name<span class="comment">//xx!</span></span><br></pre></td></tr></table></figure></p>
-<h4 id="构造器调用模式">构造器调用模式</h4><p>这个模式跟方法调用类似，this指向所属的新对象。<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Abc = <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">this</span>.name = <span class="string">'xxx'</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> Abc();</span><br><span class="line">a.name<span class="comment">//<span class="label">xxx</span></span></span><br></pre></td></tr></table></figure></p>
-<h4 id="apply调用模式">apply调用模式</h4><p><code>apply</code>允许我们自己选择this，感觉精粹里的说法很直白<code>apply接受两个参数，第一个是要绑定给this的值，第二个是参数的数组</code>。<br>我的解释是，我们可以调用任意的方法，然后将方法中的this指向的对象换成我们在<code>apply</code>中加进去的第一个参数。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> some_obj = &#123;</span><br><span class="line">	name: ‘ldd’;</span><br><span class="line">	say: <span class="function"><span class="keyword">function</span> <span class="params">(who)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> ‘hi’ + who + ‘I am’ + <span class="keyword">this</span>.name;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">Some_obj.say(<span class="string">"xyn"</span>) <span class="comment">//hi xyn, I am ldd;</span></span><br><span class="line">Var my_obj = &#123; name: <span class="string">"xxx"</span>&#125;;</span><br><span class="line">Some_obj.say.apply(my_obj, [<span class="string">'xyn'</span>])</span><br><span class="line"><span class="comment">//hi xyn, I am <span class="label">xxx</span></span></span><br><span class="line">原本say方法中的<span class="string">`this`</span>指向<span class="string">`some_obj`</span>对象，利用apply就可以将<span class="keyword">this</span>指向my_obj</span><br></pre></td></tr></table></figure></p>
+<h4 id="方法调用模式">方法调用模式</h4><p>把函数保存为对象的一个属性，且被调用时，称为方法调用，此时的<code>this</code>指向自己所属的对象。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">var obj = &#123;</div><div class="line">	name: &quot;dada&quot;,</div><div class="line">	getName: function () &#123;</div><div class="line">		return this.name;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line">obj.getName()//dada</div></pre></td></tr></table></figure></p>
+<h4 id="函数调用模式">函数调用模式</h4><p>这种模式即为最普遍的函数调用，但此时的<code>this</code>有混淆的地方。<br>以此模式调用函数的时候，<code>this</code>指向全局对象，<strong>并不会指向外层函数的this</strong>。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">window.name = &quot;nanyang&quot;;</div><div class="line">var obj = &#123;</div><div class="line">	name: &quot;dada&quot;,</div><div class="line">	getName: function () &#123;</div><div class="line">	//that = this; 解决办法</div><div class="line">		var helper = function () &#123;</div><div class="line">			this.name = &apos;xx!&apos;;</div><div class="line">		&#125;</div><div class="line">		helper();</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line">obj.name()//dada</div><div class="line">window.name//xx!</div></pre></td></tr></table></figure></p>
+<h4 id="构造器调用模式">构造器调用模式</h4><p>这个模式跟方法调用类似，this指向所属的新对象。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">var Abc = function () &#123;</div><div class="line">	this.name = &apos;xxx&apos;;</div><div class="line">&#125;</div><div class="line">var a = new Abc();</div><div class="line">a.name//xxx</div></pre></td></tr></table></figure></p>
+<h4 id="apply调用模式">apply调用模式</h4><p><code>apply</code>允许我们自己选择this，感觉精粹里的说法很直白<code>apply接受两个参数，第一个是要绑定给this的值，第二个是参数的数组</code>。<br>我的解释是，我们可以调用任意的方法，然后将方法中的this指向的对象换成我们在<code>apply</code>中加进去的第一个参数。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">var some_obj = &#123;</div><div class="line">	name: ‘ldd’;</div><div class="line">	say: function (who) &#123;</div><div class="line">		return ‘hi’ + who + ‘I am’ + this.name;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line">Some_obj.say(&quot;xyn&quot;) //hi xyn, I am ldd;</div><div class="line">Var my_obj = &#123; name: &quot;xxx&quot;&#125;;</div><div class="line">Some_obj.say.apply(my_obj, [&apos;xyn&apos;])</div><div class="line">//hi xyn, I am xxx</div><div class="line">原本say方法中的`this`指向`some_obj`对象，利用apply就可以将this指向my_obj</div></pre></td></tr></table></figure></p>
 <p><strong>当然call跟apply的用法几乎一样，就是在第二个参数上的形式有一些变化</strong></p>
 <p>原创文章！转载请注明出处</p>
 </span>
@@ -370,7 +371,7 @@ apply调用模式
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">43</span>
+              <span class="site-state-item-count">44</span>
               <span class="site-state-item-name">文章</span>
             </a>
           </div>
@@ -384,7 +385,7 @@ apply调用模式
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">36</span>
+              <span class="site-state-item-count">37</span>
               <span class="site-state-item-name">標籤</span>
               </a>
           </div>

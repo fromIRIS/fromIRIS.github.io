@@ -64,11 +64,13 @@ ideal viewport结果表明存在第三种viewport，我">
 第三种viewport多年前 我提到了移动端的浏览器有两种viewport：visual viewport很layout viewport。如果有必要可以重读这几篇文章。文章我假设这两个viewport的知识大家已经掌握了。
 ideal viewport结果表明存在第三种viewport，我">
 <meta property="og:image" content="http://7xpcne.com1.z0.glb.clouddn.com/viewport-1453693967543.png">
+<meta property="og:updated_time" content="2016-01-27T12:20:33.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="the-3th-viewport-translate">
 <meta name="twitter:description" content="原文：http://www.quirksmode.org/mobile/metaviewport/#t10
 第三种viewport多年前 我提到了移动端的浏览器有两种viewport：visual viewport很layout viewport。如果有必要可以重读这几篇文章。文章我假设这两个viewport的知识大家已经掌握了。
 ideal viewport结果表明存在第三种viewport，我">
+<meta name="twitter:image" content="http://7xpcne.com1.z0.glb.clouddn.com/viewport-1453693967543.png">
 
 
 
@@ -243,7 +245,7 @@ ideal viewport结果表明存在第三种viewport，我">
 <li>layout viewport能被设置成ideal viewport。<code>width=device-width和initial-scale=1</code>指令可以做到。</li>
 <li>所有的<code>scale</code>指令都是相对于ideal viewport的。无视layout viewport设置了多少，所以<code>maximum-scale=3</code>意味着最大的缩放值是ideal viewport的300%</li>
 </ol>
-<h4 id="寻找ideal_viewport">寻找ideal viewport</h4><p>读取到ideal viewport的值在某些情况下是有用的。<br>是的，你可以读取到。给页面设置一个如下显示的meta标签，然后使用<code>document.documentElement.clientWidth</code>读取到当前设备的ideal viewport。<br><figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta <span class="variable">name=</span><span class="string">"viewport"</span> <span class="variable">content=</span><span class="string">"width=device-width,initial-scale=1"</span>&gt;</span><br></pre></td></tr></table></figure></p>
+<h4 id="寻找ideal_viewport">寻找ideal viewport</h4><p>读取到ideal viewport的值在某些情况下是有用的。<br>是的，你可以读取到。给页面设置一个如下显示的meta标签，然后使用<code>document.documentElement.clientWidth</code>读取到当前设备的ideal viewport。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1&quot;&gt;</div></pre></td></tr></table></figure></p>
 <p>如果上面这个方法你不能选择而导致你不能读取到ideal viewport的值，我希望<code>screen.width</code>可以帮助到你，但是只有BlackBerry能给出正确的信息。其他浏览器会得出不同的无用的信息。</p>
 <p>开放的问题：<code>screen.width</code>应该取得ideal viewport的值吗<br>赞成：这个属性至少应该取得有用的信息<br>反对：ideal viewport 跟物理像素一样无用</p>
 <p><img src="http://7xpcne.com1.z0.glb.clouddn.com/viewport-1453693967543.png" alt="Alt text"></p>
@@ -261,7 +263,7 @@ ideal viewport结果表明存在第三种viewport，我">
 </ol>
 <p>然后就是关于名字的讨论，用Apple的语言来讲，zoom就是scale，类似meta viewport的指令<code>initial-scale, minimum-scale, and maximum-scale</code>，其他浏览器厂商被迫遵从为了保持对已经兼容了iphone的页面的兼容性。</p>
 <p>这三个指令预示着缩放因素，initial-scale=2意味着缩放到200%的ideal viewport的宽度。</p>
-<h4 id="公式">公式</h4><p>首先让我们定义公式：<br><figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">visual viewport <span class="variable">width</span> = ideal viewport <span class="variable">width</span> / zoom factor</span><br><span class="line">zoom factor = ideal viewport <span class="variable">width</span> / visual viewport <span class="variable">width</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="公式">公式</h4><p>首先让我们定义公式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">visual viewport width = ideal viewport width / zoom factor</div><div class="line">zoom factor = ideal viewport width / visual viewport width</div></pre></td></tr></table></figure></p>
 <p>因此，ideal viewport为320px设置了缩放值2我们会得到160px的的visual viewport。layout viewport的宽度不参与计算。</p>
 <h4 id="最小、最大的缩放因素">最小、最大的缩放因素</h4><p>浏览器支持的最小和最大的缩放因素是多少呢？</p>
 <p>首先会有一个限制，visual viewport永远不会比layout viewport要宽，所以大多数情况下最下的缩放因素为<code>ideal viewport width / layout viewport width</code></p>
@@ -275,7 +277,7 @@ ideal viewport结果表明存在第三种viewport，我">
 <p>但是这没什么意义，如果要问我的意见我可能会说：完全没有任何意义。然而，毫无疑问的是浏览器的行为就是这样的。</p>
 <h4 id="浏览器bugs">浏览器bugs</h4><p>对于安卓，明显的，安卓允许在其值等于1的情况下，<code>initial-scale</code>去设置layout viewport的宽。并且不能设置<code>width</code>的值。所以只有在没有其他指令的情况下<code>initial-scale=1</code>的设置会启到作用。</p>
 <p>对于IE，他提供了错误的ideal viewport（320x320和不是320x480），而且IE假装所有initial-scale的值都为1，所有对于IE来讲设置initial-scale的值是无用的。</p>
-<h4 id="指令的混淆">指令的混淆</h4><p> 因为<code>initial-scale</code>能设置layout viewport的宽，你现在可以创建一个有争议的指令<br> <figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta <span class="variable">name=</span><span class="string">"viewport"</span> <span class="variable">coontent=</span><span class="string">"initial-scale=1, width=400"</span>&gt;</span><br></pre></td></tr></table></figure></p>
+<h4 id="指令的混淆">指令的混淆</h4><p> 因为<code>initial-scale</code>能设置layout viewport的宽，你现在可以创建一个有争议的指令<br> <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;meta name=&quot;viewport&quot; coontent=&quot;initial-scale=1, width=400&quot;&gt;</div></pre></td></tr></table></figure></p>
 <p> 现在会发生什么？浏览器得到混淆的指令，我们再回到4s上，</p>
 <ol>
 <li><code>initial-scale=1</code>告诉浏览器设置layout viewport的宽为320px</li>
@@ -377,7 +379,7 @@ ideal viewport结果表明存在第三种viewport，我">
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">43</span>
+              <span class="site-state-item-count">44</span>
               <span class="site-state-item-name">文章</span>
             </a>
           </div>
@@ -391,7 +393,7 @@ ideal viewport结果表明存在第三种viewport，我">
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">36</span>
+              <span class="site-state-item-count">37</span>
               <span class="site-state-item-name">標籤</span>
               </a>
           </div>

@@ -66,12 +66,14 @@ http live streaming（hls）适用移动端HTTP Live Streaming（HLS）是苹果
 http live streaming（hls）适用移动端HTTP Live Streaming（HLS）是苹果公司实现的基于HTTP的流媒体传输协议，可实现流媒体的直播和点播。原理上是将视频流分片成一系列HTTP下载文件。
 由于大多数移动设备的H5页面的HTML5新的">
 <meta property="og:image" content="http://cdn1.showjoy.com/images/07/07de6777e2f94a739cc0cd5da4604c06.png">
+<meta property="og:updated_time" content="2016-04-05T11:19:49.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="video-live">
 <meta name="twitter:description" content="视频直播前端方案@(南洋)
 流媒体本质上是：现实的图像，经过编码器压缩，持久化为点播文件或者直播流，经过传输，在终端解码和展示。
 http live streaming（hls）适用移动端HTTP Live Streaming（HLS）是苹果公司实现的基于HTTP的流媒体传输协议，可实现流媒体的直播和点播。原理上是将视频流分片成一系列HTTP下载文件。
 由于大多数移动设备的H5页面的HTML5新的">
+<meta name="twitter:image" content="http://cdn1.showjoy.com/images/07/07de6777e2f94a739cc0cd5da4604c06.png">
 
 
 
@@ -241,7 +243,7 @@ http live streaming（hls）适用移动端HTTP Live Streaming（HLS）是苹果
 <h4 id="http_live_streaming（hls）">http live streaming（hls）</h4><p>适用移动端<br>HTTP Live Streaming（HLS）是苹果公司实现的基于HTTP的流媒体传输协议，可实现流媒体的直播和点播。原理上是将视频流分片成一系列HTTP下载文件。<br><img src="http://cdn1.showjoy.com/images/07/07de6777e2f94a739cc0cd5da4604c06.png" alt="Alt text"></p>
 <p>由于大多数移动设备的H5页面的HTML5新的video标签都支持HLS协议，所以在移动端非常适合使用HLS协议进行直播。</p>
 <p>上图所示的<code>m3u8</code>格式就是支持HLS协议的流媒体格式。</p>
-<p>使用方法也非常简单，直接在html中嵌入一个video标签及可。<br><figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;video <span class="variable">class=</span><span class="string">"video"</span> <span class="variable">controls=</span><span class="string">"controls"</span>  <span class="variable">width=</span><span class="string">"375"</span> <span class="variable">height=</span><span class="string">"300"</span> <span class="variable">id=</span><span class="string">"player1"</span> webkit-playsinline&gt;</span><br><span class="line">   &lt;source <span class="variable">src=</span><span class="string">"../index.m3u8"</span>&gt;</span><br><span class="line">&lt;/video&gt;</span><br></pre></td></tr></table></figure></p>
+<p>使用方法也非常简单，直接在html中嵌入一个video标签及可。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;video class=&quot;video&quot; controls=&quot;controls&quot;  width=&quot;375&quot; height=&quot;300&quot; id=&quot;player1&quot; webkit-playsinline&gt;</div><div class="line">   &lt;source src=&quot;../index.m3u8&quot;&gt;</div><div class="line">&lt;/video&gt;</div></pre></td></tr></table></figure></p>
 <p>值得注意的是<code>hls</code>在pc端仅仅支持safari浏览器（因为就是苹果实现的hls技术），所以在类似chrome浏览器上是无法看到视频的。即使在chrome的调试器中模拟移动端还是无法播放视频。</p>
 <p>这里推荐一个播放<code>m3u8</code>格式文件的网站，只要将视频地址扔到这个网站，就能播放。<a href="http://osmfhls.kutu.ru/" target="_blank" rel="external">http://osmfhls.kutu.ru/</a> </p>
 <p>video标签拥有很多属性、事件以及方法。<a href="http://www.w3school.com.cn/tags/html_ref_audio_video_dom.asp" target="_blank" rel="external">http://www.w3school.com.cn/tags/html_ref_audio_video_dom.asp</a><br>包含<code>play() pause()</code>等等，这些原生事件方法就能脱离原生video样式，打造独一的风格。</p>
@@ -252,7 +254,7 @@ http live streaming（hls）适用移动端HTTP Live Streaming（HLS）是苹果
 <p>虽然无法再ios的H5页面播放，但是对于ios原生应用是可以自己写解码去解析的。而且rtmp延迟低，我们公司就采用了rtmp协议。</p>
 <p>在pc浏览器端，<code>HTML5video</code>标签无法播放rtmp协议的视频，所以还是需要借用flash去播放。</p>
 <p>之前提到的几个video库都可以实现这样的效果，这里就<code>video.js</code>为例。</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="title">video</span> <span class="attribute">class</span>=<span class="value">"video-js vjs-default-skin"</span> <span class="attribute">controls</span>=<span class="value">"controls"</span>  <span class="attribute">width</span>=<span class="value">"375"</span> <span class="attribute">height</span>=<span class="value">"300"</span> <span class="attribute">id</span>=<span class="value">"player1"</span> <span class="attribute">webkit-playsinline</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="title">source</span> <span class="attribute">src</span>=<span class="value">"rtmp://wsrtmp.yizhibo.tv:1935/live/0p4kf8k3Aubp"</span> <span class="attribute">type</span>=<span class="value">'rtmp/mp4'</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="title">video</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span> <span class="attribute">src</span>=<span class="value">"lib/video.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">script</span>&gt;</span><span class="gradle"></span><br><span class="line">    videojs.<span class="keyword">options</span>.flash.swf = <span class="string">"lib/video-js.swf"</span>;</span><br><span class="line"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span>&gt;</span><span class="javascript"></span><br><span class="line">	<span class="keyword">var</span> player = videojs(<span class="string">'player1'</span>, &#123;&#125;, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	  <span class="built_in">console</span>.log(<span class="string">'Good to go!'</span>);</span><br><span class="line">	  <span class="keyword">this</span>.play(); </span><br><span class="line">	  <span class="keyword">this</span>.on(<span class="string">'ended'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	    <span class="built_in">console</span>.log(<span class="string">'awww...over so soon?'</span>);</span><br><span class="line">	  &#125;);</span><br><span class="line">	&#125;);</span><br><span class="line"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">&lt;body&gt;</div><div class="line">    &lt;video class=&quot;video-js vjs-default-skin&quot; controls=&quot;controls&quot;  width=&quot;375&quot; height=&quot;300&quot; id=&quot;player1&quot; webkit-playsinline&gt;</div><div class="line">        &lt;source src=&quot;rtmp://wsrtmp.yizhibo.tv:1935/live/0p4kf8k3Aubp&quot; type=&apos;rtmp/mp4&apos;&gt;</div><div class="line">    &lt;/video&gt;</div><div class="line">&lt;script type=&quot;text/javascript&quot; src=&quot;lib/video.min.js&quot;&gt;&lt;/script&gt;</div><div class="line">&lt;script&gt;</div><div class="line">    videojs.options.flash.swf = &quot;lib/video-js.swf&quot;;</div><div class="line">&lt;/script&gt;</div><div class="line">&lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line">	var player = videojs(&apos;player1&apos;, &#123;&#125;, function() &#123;</div><div class="line">	  console.log(&apos;Good to go!&apos;);</div><div class="line">	  this.play(); </div><div class="line">	  this.on(&apos;ended&apos;, function() &#123;</div><div class="line">	    console.log(&apos;awww...over so soon?&apos;);</div><div class="line">	  &#125;);</div><div class="line">	&#125;);</div><div class="line">&lt;/script&gt;</div><div class="line">&lt;/body&gt;</div></pre></td></tr></table></figure>
 <h4 id="youtube_pc端html5实现方法">youtube pc端html5实现方法</h4><p>待</p>
 <h3 id="借鉴">借鉴</h3><p><a href="https://imququ.com/post/html5-live-player-1.html" target="_blank" rel="external">https://imququ.com/post/html5-live-player-1.html</a></p>
 </span>
@@ -350,7 +352,7 @@ http live streaming（hls）适用移动端HTTP Live Streaming（HLS）是苹果
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">43</span>
+              <span class="site-state-item-count">44</span>
               <span class="site-state-item-name">文章</span>
             </a>
           </div>
@@ -364,7 +366,7 @@ http live streaming（hls）适用移动端HTTP Live Streaming（HLS）是苹果
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">36</span>
+              <span class="site-state-item-count">37</span>
               <span class="site-state-item-name">標籤</span>
               </a>
           </div>

@@ -71,6 +71,7 @@
 对于这种全局性质的模糊bu">
 <meta property="og:image" content="http://7xpcne.com1.z0.glb.clouddn.com/1.pic.jpg">
 <meta property="og:image" content="http://7xpcne.com1.z0.glb.clouddn.com/iframe-bug-wechat.gif">
+<meta property="og:updated_time" content="2016-07-06T09:31:18.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="wechat-iframe-input-bug">
 <meta name="twitter:description" content="微信环境下input[type=text]点击软键盘闪现问题— 记一次神奇的bug
@@ -79,6 +80,7 @@
 这种现在只会出现在ios下的微信浏览器内，safari不会出现这个问题。
 这会造成了很不舒适的用户体验，用户需要点击两次输入框才能真正输入内容。
 对于这种全局性质的模糊bu">
+<meta name="twitter:image" content="http://7xpcne.com1.z0.glb.clouddn.com/1.pic.jpg">
 
 
 
@@ -250,7 +252,7 @@
 <p>这会造成了很不舒适的用户体验，用户需要点击两次输入框才能真正输入内容。</p>
 <p>对于这种全局性质的模糊bug，最好就是采用排除法去定位。在本地服务器内对当前页面的依赖逐步的排除，最后发现是第三方统计脚本引起了这个bug。</p>
 <p>以下是肇事代码（省略）</p>
-<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="built_in">window</span>).<span class="literal">on</span>(<span class="string">'load'</span>,<span class="reserved">function</span>()&#123;</span><br><span class="line">  <span class="reserved">var</span> a = <span class="built_in">document</span>;</span><br><span class="line">  __showjoyDSP.script = a.createElement(<span class="string">'script'</span>);</span><br><span class="line">  __showjoyDSP.script.type = <span class="string">'text/javascript'</span>;</span><br><span class="line">  __showjoyDSP.script.async = <span class="literal">true</span>;</span><br><span class="line">  __showjoyDSP.script.src = <span class="string">"http://market.m.showjoy.com/it-is-cover-by-article.js;</span><br><span class="line">  var s = a.getElementsByTagName('script')[0];</span><br><span class="line">  s.parentNode.insertBefore(__showjoyDSP.script, s);</span><br><span class="line">&#125;);</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">$(window).on(&apos;load&apos;,function()&#123;</div><div class="line">  var a = document;</div><div class="line">  __showjoyDSP.script = a.createElement(&apos;script&apos;);</div><div class="line">  __showjoyDSP.script.type = &apos;text/javascript&apos;;</div><div class="line">  __showjoyDSP.script.async = true;</div><div class="line">  __showjoyDSP.script.src = &quot;http://market.m.showjoy.com/it-is-cover-by-article.js;</div><div class="line">  var s = a.getElementsByTagName(&apos;script&apos;)[0];</div><div class="line">  s.parentNode.insertBefore(__showjoyDSP.script, s);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
 <p>这段脚本在<code>load</code>事件触发的时候执行，执行时间符合bug复现的时间，不由<em>猜测1</em>：</p>
 <ul>
 <li>动态的创建script标签会触发dom tree的构建，会不会因此引起页面重新布局或者重新绘制，导致光标焦点消失和软键盘的消失？</li>
@@ -262,26 +264,26 @@
 </ol>
 <p>本例中的第三方统计脚本动态创建的是script标签，并不会引起render tree的绘制等操作。</p>
 <p>事实证明我将动态创建的<code>script</code>标签的<code>src</code>进行更换，</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">__showjoyDSP<span class="class">.script</span><span class="class">.src</span> = <span class="string">"change-a-url.js"</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">__showjoyDSP.script.src = &quot;change-a-url.js&quot;</div></pre></td></tr></table></figure>
 <p>上述的bug也就不会复现了，另外我在本地也试验动态的创建dom元素，强制浏览器进行重绘重布局操作，软键盘也不会消失。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="built_in">window</span>).on(<span class="string">'load'</span>, <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">go</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> L = <span class="built_in">document</span>;</span><br><span class="line">    v = L.createElement(<span class="string">"div"</span>);</span><br><span class="line">    v.innerHTML = <span class="string">'&lt;span&gt;hello world!&lt;/span&gt;'</span></span><br><span class="line">    L.body.insertBefore(v.firstChild, L.body.firstChild);</span><br><span class="line">  &#125;</span><br><span class="line">  setTimeout(go, <span class="number">5000</span>);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">$(window).on(&apos;load&apos;, function () &#123;</div><div class="line">  function go () &#123;</div><div class="line">    var L = document;</div><div class="line">    v = L.createElement(&quot;div&quot;);</div><div class="line">    v.innerHTML = &apos;&lt;span&gt;hello world!&lt;/span&gt;&apos;</div><div class="line">    L.body.insertBefore(v.firstChild, L.body.firstChild);</div><div class="line">  &#125;</div><div class="line">  setTimeout(go, 5000);</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
 <p>页面在软键盘存在的情况下，5秒过后动态创建dom，软键盘不消失。</p>
 <p>本着刨根的精神，来看看原统计脚本返回的js都有哪些内容，</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">__showjoyDSP<span class="class">.script</span><span class="class">.src</span> = <span class="string">"http://market.m.showjoy.com/it-is-cover-by-article.js;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">__showjoyDSP.script.src = &quot;http://market.m.showjoy.com/it-is-cover-by-article.js;</div></pre></td></tr></table></figure>
 <p><em>猜测2</em></p>
 <ul>
 <li>返回的js脚本中有什么事件触发软键盘的消失？</li>
 </ul>
 <p>首先一番google后，并没有找到可以触发软键盘打开消失的事件，只能依靠用户点击了输入框这一操作。</p>
 <p>查看了返回的js内容，也是几段独立的函数，作用都是动态创建<code>script</code>标签。利用<code>chalars代理</code>将脚本代理到本地，就可以随意的修改js内容了。采用<em>排除法</em>很快就定位到了一段函数。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-<span class="function"><span class="keyword">function</span><span class="params">(d)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> s = d.createElement(<span class="string">'script'</span>),</span><br><span class="line">	e = d.body.getElementsByTagName(<span class="string">'script'</span>)[<span class="number">0</span>]; e.parentNode.insertBefore(s, e),</span><br><span class="line">	f = <span class="string">'https:'</span> == location.protocol;</span><br><span class="line">	s.src = (f ? <span class="string">'https'</span> : <span class="string">'http'</span>) + <span class="string">'://'</span>+(f?<span class="string">'fm.ipinyou.com'</span>:<span class="string">'fm.p0y.cn'</span>)+<span class="string">'/j/adv.js'</span>;</span><br><span class="line">&#125;(<span class="built_in">document</span>);</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">-function(d) &#123;</div><div class="line">	var s = d.createElement(&apos;script&apos;),</div><div class="line">	e = d.body.getElementsByTagName(&apos;script&apos;)[0]; e.parentNode.insertBefore(s, e),</div><div class="line">	f = &apos;https:&apos; == location.protocol;</div><div class="line">	s.src = (f ? &apos;https&apos; : &apos;http&apos;) + &apos;://&apos;+(f?&apos;fm.ipinyou.com&apos;:&apos;fm.p0y.cn&apos;)+&apos;/j/adv.js&apos;;</div><div class="line">&#125;(document);</div></pre></td></tr></table></figure>
 <p><em>猜想3</em></p>
 <ul>
 <li>没有见过函数体前加<code>-</code>，是不是函数前面的<code>-</code>引起的异常导致出现的bug？</li>
 </ul>
 <p>查阅资料显示对于自执行函数，函数表达式后添加<code>()</code>会将函数立即执行，而函数声明后添加<code>()</code>并不会生效。而在函数声明前添加<code>+ - ()</code>等运算符，解析器会将声明看成是表达式，使<code>()</code>自执行生效。<a href="http://dengo.org/archives/1004" target="_blank" rel="external">来源</a></p>
 <p>再继续追踪<code>fm.p0y.cn</code>域下的脚本，在脚本中发现了一个动态创建<code>iframe</code>的操作。</p>
-<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">setTimeout<span class="list">(<span class="keyword">function</span><span class="list">()</span> &#123;</span><br><span class="line">	var f=document<span class="comment">;</span></span><br><span class="line">	e = f.createElement<span class="list">(<span class="quoted">'iframe</span>')</span><span class="comment">;</span></span><br><span class="line">	e.src='<span class="string">" + ("</span>http:<span class="string">" != location.protocol ? "</span>https<span class="keyword">://cm</span>.ipinyou.com/cmas.html?a=<span class="string">" + _py.getLast("</span>a<span class="string">") : "</span>http<span class="keyword">://fm</span>.p0y.cn/cm/cma.html?a=<span class="string">" + _py.getLast("</span>a<span class="string">")) + "</span>'<span class="comment">;</span></span><br><span class="line">	f.body.insertBefore<span class="list">(<span class="keyword">e</span>,f.body.firstChild)</span><span class="comment">;</span></span><br><span class="line">	e.style.display=<span class="quoted">'none</span>'<span class="comment">;</span></span><br><span class="line">	&#125;, <span class="number">1000</span>)</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">setTimeout(function() &#123;</div><div class="line">	var f=document;</div><div class="line">	e = f.createElement(&apos;iframe&apos;);</div><div class="line">	e.src=&apos;&quot; + (&quot;http:&quot; != location.protocol ? &quot;https://cm.ipinyou.com/cmas.html?a=&quot; + _py.getLast(&quot;a&quot;) : &quot;http://fm.p0y.cn/cm/cma.html?a=&quot; + _py.getLast(&quot;a&quot;)) + &quot;&apos;;</div><div class="line">	f.body.insertBefore(e,f.body.firstChild);</div><div class="line">	e.style.display=&apos;none&apos;;</div><div class="line">	&#125;, 1000)</div></pre></td></tr></table></figure>
 <p>继续使用<code>charles</code>代理到本地修改异步执行的时间为5000毫秒，测试：</p>
 <ul>
 <li>load事件触发</li>
@@ -390,7 +392,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">43</span>
+              <span class="site-state-item-count">44</span>
               <span class="site-state-item-name">文章</span>
             </a>
           </div>
@@ -404,7 +406,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">36</span>
+              <span class="site-state-item-count">37</span>
               <span class="site-state-item-name">標籤</span>
               </a>
           </div>

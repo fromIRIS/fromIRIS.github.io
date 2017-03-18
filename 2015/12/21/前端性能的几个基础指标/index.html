@@ -89,6 +89,7 @@
 <meta property="og:image" content="http://7xpcne.com1.z0.glb.clouddn.com/perf12.png">
 <meta property="og:image" content="http://7xpcne.com1.z0.glb.clouddn.com/perf13.png">
 <meta property="og:image" content="http://7xpcne.com1.z0.glb.clouddn.com/perf14.png">
+<meta property="og:updated_time" content="2015-12-22T03:50:52.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="前端性能的几个基础指标">
 <meta name="twitter:description" content="前端性能的几个基础指标先开门见山的罗列前端性能相关的几个基础指标名词。
@@ -100,6 +101,7 @@
 
 为何会选择这几个时间节点以及各自的含义可以参考这篇文章 七天打造前端性能监控系统另外本文搜集性能相关数据是用了高级浏览器的Performance Api,大家可以参考这篇文章先行了解初探erformancep
 正文&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp">
+<meta name="twitter:image" content="http://7xpcne.com1.z0.glb.clouddn.com/perf1.gif">
 
 
 
@@ -308,11 +310,11 @@
 <p>然后我们看一下官方文档<br><img src="http://7xpcne.com1.z0.glb.clouddn.com/perf11.png" alt="Alt text"></p>
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这里解释了document到达<code>interactive</code>状态所代表的含义，我先将其中一块信息隐藏。根据这个说明，当文档解析完成但是，一些例如图片这些资源还没有加载完成的情况下，document到达<code>interactive</code>状态，并且触发<code>DOMContentLoaded</code>事件触发。下面来看一个实例。<br><img src="http://7xpcne.com1.z0.glb.clouddn.com/perf12.png" alt="Alt text"><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;结合上面的深剖，CSSOM构建阻塞了js的执行，所以在这幅图中js早已加载完，还是要等到css的下载完成才能执行，而js的被阻塞，又导致了html文档的解析DOM树的构建。再根据官方的说明，dom树的构建完成才意味着<code>interactive</code>到达，意味着蓝线的出现。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;但我们再看下官方说明的原话。<br><img src="http://7xpcne.com1.z0.glb.clouddn.com/perf13.png" alt="Alt text"><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;是的，刚刚被我遮盖掉的是<code>stylesheets</code>样式表。这里又明确提到了不等<code>stylesheets</code>样式表下载完成，一旦html解析dom树构建完document就立马到达<code>interactive</code>状态。这不是跟我们刚刚的例子相反了吗？<br>再看个例子<br><img src="http://7xpcne.com1.z0.glb.clouddn.com/perf14.png" alt="Alt text"><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;这个例子蓝线停在了css文件下载完成之前，说明也验证了后一种说法。那到底是哪个对？<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;答案当然是都对，我们在最之前就说明了，在没有js参与的情况下，html的解析DOM树的构建和CSSOM的构建是平行的，谁也不碍着谁，<code>interactive</code>状态的变更直接取决于html的解析完成度，所以在这种情况下，不等css加载完，html一旦解析完成，document状态立马变更为<code>interactive</code>。第二个例子是没有js引入的。</p>
 <h4 id="深剖小结">深剖小结</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;上述的引入的js只是同步的。也就是不带defer 或 async的script标签。一旦引入了带defer或async的script标签，js、css的依赖关系又变了。这里就不详谈了，可以看一篇外文<a href="http://calendar.perfplanet.com/2012/deciphering-the-critical-rendering-path/" target="_blank" rel="external">Deciphering the Critical Rendering Path</a><br>或者我的翻译版本<a href="http://fromiris.github.io/2015/11/12/%E7%A0%B4%E8%AF%91%E5%85%B3%E9%94%AE%E6%B8%B2%E6%9F%93%E8%B7%AF%E5%BE%84%EF%BC%88%E7%BF%BB%E8%AF%91%EF%BC%89/" target="_blank" rel="external">我的翻译</a></p>
-<h3 id="总结">总结</h3><p>现在我们再来看一下<code>domContentLoaded</code>和<code>load</code>事件。现在应该能清楚为何<code>domContentLoaded</code>事件触发代表了用户可交互事件，以及<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<h3 id="总结">总结</h3><p>现在我们再来看一下<code>domContentLoaded</code>和<code>load</code>事件。现在应该能清楚为何<code>domContentLoaded</code>事件触发代表了用户可交互事件，以及<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$(function () &#123;</div><div class="line"></div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
 <p>jquery中的这个写法就是基于这个事件。</p>
 <p>最后，我们回头看下开头指出的衡量页面性能的四个基础指标，以及各自的求法。</p>
 <ul>
-<li>白屏时间：除了可以使用现成的<code>performance api</code>，我们还可以在head之间头尾插入两个script计算时间差<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="title">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">script</span>&gt;</span><span class="javascript"></span><br><span class="line"><span class="keyword">var</span> t = <span class="keyword">new</span> <span class="built_in">Date</span>().getTime();</span><br><span class="line"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">link</span> <span class="attribute">src</span>=<span class="value">""</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">link</span> <span class="attribute">src</span>=<span class="value">""</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="title">link</span> <span class="attribute">src</span>=<span class="value">""</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="title">script</span>&gt;</span><span class="ocaml"></span><br><span class="line">tNow = <span class="keyword">new</span> <span class="type">Date</span><span class="literal">()</span>.getTime<span class="literal">()</span> - t;</span><br><span class="line"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="title">head</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<li>白屏时间：除了可以使用现成的<code>performance api</code>，我们还可以在head之间头尾插入两个script计算时间差<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&lt;head&gt;</div><div class="line">&lt;script&gt;</div><div class="line">var t = new Date().getTime();</div><div class="line">&lt;/script&gt;</div><div class="line">&lt;link src=&quot;&quot;&gt;</div><div class="line">&lt;link src=&quot;&quot;&gt;</div><div class="line">&lt;link src=&quot;&quot;&gt;</div><div class="line"></div><div class="line">&lt;script&gt;</div><div class="line">tNow = new Date().getTime() - t;</div><div class="line">&lt;/script&gt;</div><div class="line">&lt;/head&gt;</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <p>这样做可行的原理：第一个script不受css阻塞，最后的script受css阻塞，会等到样式都下载完才执行，执行完后便是<code>body</code>的解析，之后是dom tree构建，布局，绘制然后呈现在屏幕上。</p>
@@ -416,7 +418,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">43</span>
+              <span class="site-state-item-count">44</span>
               <span class="site-state-item-name">文章</span>
             </a>
           </div>
@@ -430,7 +432,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">36</span>
+              <span class="site-state-item-count">37</span>
               <span class="site-state-item-name">標籤</span>
               </a>
           </div>
