@@ -35,7 +35,7 @@
 <link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="yazi," />
+  <meta name="keywords" content="js," />
 
 
 
@@ -53,40 +53,25 @@
 
 
 
-<meta name="description" content="前端自动化工程
+<meta name="description" content="[译]HTML attribute与DOM property之间的区别？
+原文：http://joji.me/en-us/blog/html-attribute-vs-dom-property
 
-Installation1sudo npm install -g yazi
-Getting To Know yazi初始化前端脚手架 init
-yazi mb init 
-yazi pc init
-
-生成前端项目脚手架，脚手架目录：
-1234567891011[test-613]  | -- package.json  | -- [src]  |     | -- [image">
+当我们通过js处理DOM对象时非常容易将attribute（特性）和property（属性）混淆。document.getElementById(&amp;#39;test&amp;#39;).getAttribute(">
 <meta property="og:type" content="article">
-<meta property="og:title" content="yazi document">
-<meta property="og:url" content="http://yoursite.com/2016/06/25/yazi-document/index.html">
+<meta property="og:title" content="attribute-property-difference">
+<meta property="og:url" content="http://yoursite.com/2017/03/18/attribute-property-difference/index.html">
 <meta property="og:site_name" content="Lyu Dada">
-<meta property="og:description" content="前端自动化工程
+<meta property="og:description" content="[译]HTML attribute与DOM property之间的区别？
+原文：http://joji.me/en-us/blog/html-attribute-vs-dom-property
 
-Installation1sudo npm install -g yazi
-Getting To Know yazi初始化前端脚手架 init
-yazi mb init 
-yazi pc init
-
-生成前端项目脚手架，脚手架目录：
-1234567891011[test-613]  | -- package.json  | -- [src]  |     | -- [image">
-<meta property="og:updated_time" content="2016-06-25T05:57:26.000Z">
+当我们通过js处理DOM对象时非常容易将attribute（特性）和property（属性）混淆。document.getElementById(&amp;#39;test&amp;#39;).getAttribute(">
+<meta property="og:updated_time" content="2017-03-18T10:44:39.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="yazi document">
-<meta name="twitter:description" content="前端自动化工程
+<meta name="twitter:title" content="attribute-property-difference">
+<meta name="twitter:description" content="[译]HTML attribute与DOM property之间的区别？
+原文：http://joji.me/en-us/blog/html-attribute-vs-dom-property
 
-Installation1sudo npm install -g yazi
-Getting To Know yazi初始化前端脚手架 init
-yazi mb init 
-yazi pc init
-
-生成前端项目脚手架，脚手架目录：
-1234567891011[test-613]  | -- package.json  | -- [src]  |     | -- [image">
+当我们通过js处理DOM对象时非常容易将attribute（特性）和property（属性）混淆。document.getElementById(&amp;#39;test&amp;#39;).getAttribute(">
 
 
 
@@ -98,7 +83,7 @@ yazi pc init
   };
 </script>
 
-  <title> yazi document | Lyu Dada </title>
+  <title> attribute-property-difference | Lyu Dada </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-hk">
@@ -218,7 +203,7 @@ yazi pc init
             
             
               
-                yazi document
+                attribute-property-difference
               
             
           </h1>
@@ -227,8 +212,8 @@ yazi pc init
         <div class="post-meta">
           <span class="post-time">
             發表於
-            <time itemprop="dateCreated" datetime="2016-06-25T13:56:14+08:00" content="2016-06-25">
-              2016-06-25
+            <time itemprop="dateCreated" datetime="2017-03-18T18:44:11+08:00" content="2017-03-18">
+              2017-03-18
             </time>
           </span>
 
@@ -251,55 +236,58 @@ yazi pc init
       
 
       
-        <span itemprop="articleBody"><blockquote>
-<p>前端自动化工程</p>
+        <span itemprop="articleBody"><h1 id="[译]HTML_attribute与DOM_property之间的区别？">[译]HTML attribute与DOM property之间的区别？</h1><blockquote>
+<p>原文：<a href="http://joji.me/en-us/blog/html-attribute-vs-dom-property" target="_blank" rel="external">http://joji.me/en-us/blog/html-attribute-vs-dom-property</a></p>
 </blockquote>
-<h2 id="Installation">Installation</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo npm install -g yazi</div></pre></td></tr></table></figure>
-<h2 id="Getting_To_Know_yazi">Getting To Know yazi</h2><h2 id="初始化前端脚手架_init">初始化前端脚手架 init</h2><ol>
-<li>yazi mb init </li>
-<li>yazi pc init</li>
+<p>当我们通过js处理DOM对象时非常容易将<strong>attribute（特性）</strong>和<strong>property（属性）</strong>混淆。<code>document.getElementById(&#39;test&#39;).getAttribute(&#39;id&#39;)</code>，<code>$(&#39;#test&#39;).attr(&#39;id&#39;), document.getElementById(&#39;test&#39;).id</code>还有<code>$(&#39;#test&#39;).prop(&#39;id&#39;)</code>三者都返回相同的id：“test”。这篇文章我将解释<strong>attribute</strong>和<strong>property</strong>的区别。</p>
+<h3 id="Attribute（特性）">Attribute（特性）</h3><ol>
+<li><p>attribute特性由HTML定义，所有出现在HTML标签内的描述节点都是attribute特性。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;div id=&quot;test&quot; class=&quot;button&quot; custom-attr=&quot;1&quot;&gt;&lt;/div&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">document.getElementById(&apos;test&apos;).attributes;</div><div class="line">// return: [custom-attr=&quot;hello&quot;, class=&quot;button&quot;,   id=&quot;test&quot;]</div></pre></td></tr></table></figure>
+</li>
+<li><p>attribute特性的类型总是字符串类型。拿上边的DIV为例，<code>document.getElementById(&#39;test&#39;).getAttribute(&#39;custom-attr&#39;)</code> 或者<code>$(&#39;#test&#39;).attr(&#39;custom-attr&#39;)</code>总是返回字符串类型的”1”。</p>
+</li>
 </ol>
-<p>生成前端项目脚手架，脚手架目录：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">[test-613]</div><div class="line">  | -- package.json</div><div class="line">  | -- [src]</div><div class="line">  |     | -- [images]</div><div class="line">  |     |     | -- [slice]</div><div class="line">  |     | -- index.html</div><div class="line">  |     | -- [js]</div><div class="line">  |     |     | -- index.js</div><div class="line">  |     | -- [less]</div><div class="line">  |     |     | -- style.less</div><div class="line">  |     | -- [lib]</div></pre></td></tr></table></figure>
-<p>当前yazi版本生成的脚手架只常规的符合commonjs规范。并没有支持vue，react等。</p>
-<p>根据<code>mb/pc</code>不同生成的脚手架具体内容不同，比如html头信息不同。</p>
-<h2 id="browser-sync实时调试_dev">browser-sync实时调试 dev</h2><ol>
-<li>yazi dev</li>
+<h3 id="Property（属性）">Property（属性）</h3><ol>
+<li><p>property属性属于DOM对象，DOM实质就是javascript中的对象。我们可以跟在js中操作普通对象一样获取、设置DOM对象的属性，并且property属性可以是任意类型。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"> document.getElementById(&apos;test&apos;).foo = 1; // 设置属性: foo 为 number类型: 1</div><div class="line">document.getElementById(&apos;test&apos;).foo; // 获取属性值, return number: 1</div><div class="line">$(&apos;#test&apos;).prop(&apos;foo&apos;); // 使用jquery获取属性值, return number: 1</div></pre></td></tr></table></figure>
+</li>
 </ol>
-<p>调试模式下打开默认打开<code>localhost:8000</code>页面。<br>在调试过程中支持</p>
-<ul>
-<li>es6编译</li>
-<li>less编译</li>
-<li>书写js的commonJS规范（require）</li>
-</ul>
-<p>可以在项目中进行<code>npm install xxx --save</code></p>
-<h2 id="项目构建_build">项目构建 build</h2><ol>
-<li>yazi build -s 1</li>
-<li>yazi build -s 2</li>
-<li>yazi build</li>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"> $(&apos;#test&apos;).prop(&apos;foo&apos;, &#123;</div><div class="line">    age: 23,</div><div class="line">    name: &apos;John&apos;</div><div class="line">&#125;); // 使用jquery设置一个名为foo的对象</div><div class="line">document.getElementById(&apos;test&apos;).foo.age; // return number类型: 23</div><div class="line">document.getElementById(&apos;test&apos;).foo.name; // return string类型: &quot;John&quot;</div></pre></td></tr></table></figure>
+<p> <strong>译者注：</strong>这里的property可以是任意类型指的是我们为DOM对象自定义添加的属性，对于DOM对象的原始属性，类似<code>name</code>属性，无论我们设置什么类型的值，最后返回的都是字符类型。</p>
+<p> 另外，我们获取HTML5定义的data属性时，获取的值也是字符串。<code>&lt;div data-id=&quot;33&quot;&gt;&lt;/div&gt;</code>,<code>ele.dataset.id // string 33</code></p>
+<ol>
+<li><p>非自定义的attribute特性与property有1:1的映射关系，比如：id，class，title等。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;div id=&quot;test&quot; class=&quot;button&quot; foo=&quot;1&quot;&gt;&lt;/div&gt;</div></pre></td></tr></table></figure>
+</li>
 </ol>
-<p><strong>yazi build</strong></p>
-<p>将src文件夹内的项目文件构建并生成build文件夹。</p>
-<p>其中包含：</p>
-<ul>
-<li>es6编译混淆压缩</li>
-<li>less编译</li>
-<li>图片压缩</li>
-</ul>
-<p><strong>注意事项：</strong></p>
-<p>需要进行雪碧图转换的图片需要放在<code>images/slice</code>文件下内，并且在css中需要使用<code>background-image</code>属性引用图片。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">.test1 &#123;</div><div class="line">	width: 30px;</div><div class="line">	height: 30px;</div><div class="line">	background-image: url(&apos;../images/slice/img1.png&apos;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p><strong>yazi build -s 1</strong></p>
-<p>将src文件夹内的项目文件构建并生成build文件夹，并将图片转换为雪碧图，修改对应css。</p>
-<p>此处的 <code>-s 1</code>表示<code>sprite</code>雪碧图设置，并且在普通屏幕上使用（pc和非retina屏）</p>
-<p><strong>yazi build -s 2</strong></p>
-<p>将src文件夹内的项目文件构建并生成build文件夹，并将图片转换为雪碧图，修改对应css。</p>
-<p>此处的 <code>-s 2</code>表示<code>sprite</code>雪碧图设置，并且在retina屏使用。</p>
-<h2 id="TODO">TODO</h2><ul>
-<li>[  ]  添加一些处理css的gulp插件</li>
-<li>[  ]  build时图片进行七牛空间自动上传。</li>
-</ul>
-<h2 id="License">License</h2><p>MIT © <a href="lvdada.org">南洋</a><br><a href="https://github.com/fromIRIS/dada" target="_blank" rel="external">github</a></p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"> document.getElementById(&apos;test&apos;).id; // return string: &quot;test&quot;</div><div class="line">document.getElementById(&apos;test&apos;).className; // return string: &quot;button&quot;</div><div class="line">document.getElementById(&apos;test&apos;).foo; // return undefined 因为foo是一个自定义的attr特性</div></pre></td></tr></table></figure>
+<p> 注意：当我们通过property属性进行设置或获取class时，我们需要使用<strong>“className”</strong>，因为在js中<code>class</code>是关键字。</p>
+<p> <strong>译者注：</strong>第二点的意思是说当我们在html中写非自定义的attribute特性时，DOM对象会自动映射对应的property</p>
+<ol>
+<li><p>非自定义的property（attribute）改变的时候，其对应的attribute（property）在多数情况下也会改变。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;div id=&quot;test&quot; class=&quot;button&quot;&gt;&lt;/div&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">var div = document.getElementById(&apos;test&apos;);</div><div class="line">div.className = &apos;red-input&apos;;</div><div class="line">div.getAttribute(&apos;class&apos;); // return string: &quot;red-input&quot;</div><div class="line">div.setAttribute(&apos;class&apos;,&apos;green-input&apos;);</div><div class="line">div.className; // return string: &quot;green-input&quot;</div></pre></td></tr></table></figure>
+</li>
+<li><p>当对应的property改变的时候，attribute特性value的值一直未默认值，并不会随之改变。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;input id=&quot;search&quot; value=&quot;foo&quot; /&gt;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var input = document.getElementById(&apos;search&apos;);</div><div class="line">input.value = &apos;foo2&apos;;</div><div class="line">input.getAttribute(&apos;value&apos;); // return string: &quot;foo&quot;</div></pre></td></tr></table></figure>
+<p> <strong>译者注：</strong>这条特性意味着我们平时在写业务的时候多数情况下使用property是正确的。当用户input输入更改的时候，attribute-value值不会变化，即使js更改value，也不会使attribute变化。这也验证了第三点的。</p>
+<ol>
+<li><p>最佳实践</p>
+<p>在javascript中我们推荐使用<strong>property属性</strong>因为这个属性相对<strong>attribute</strong>更快，更简便。尤其是有些类型本该是布尔类型的attribute特性。比如：”checked”, “disabled”, “selected”。浏览器会自动将这些值转变成布尔值传给property属性。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;input id=&quot;test&quot; class=&quot;blue&quot; type=&quot;radio&quot; /&gt;</div></pre></td></tr></table></figure>
+<p>好实践</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"> // get id</div><div class="line">document.getElementById(&apos;test&apos;).id;</div><div class="line">// set class</div><div class="line">document.getElementById(&apos;test&apos;).className = &apos;red&apos;;</div><div class="line">// get and set radio control status</div><div class="line">document.getElementById(&apos;test&apos;).checked; // boolean </div><div class="line">document.getElementById(&apos;test&apos;).checked = true;</div><div class="line">$(&apos;#test&apos;).prop(&apos;checked&apos;); // boolean</div><div class="line">$(&apos;#test&apos;).prop(&apos;checked&apos;, true);</div></pre></td></tr></table></figure>
+<p>坏实践</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"> // get id</div><div class="line">document.getElementById(&apos;test&apos;).getAttribute(&apos;id&apos;);</div><div class="line">// set class</div><div class="line">document.getElementById(&apos;test&apos;).setAttribute(&apos;class&apos;, &apos;red&apos;);</div><div class="line">document.getElementById(&apos;test&apos;).getAttribute(&apos;checked&apos;); //  返回字符串类型 &apos;checked&apos;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<blockquote>
+<p>本文来自<a href="http://weibo.com/u/2115840795" target="_blank" rel="external">二口南洋</a>，有什么需要讨论的欢迎找我。</p>
+</blockquote>
 </span>
       
     </div>
@@ -308,7 +296,7 @@ yazi pc init
       
         <div class="post-tags">
           
-            <a href="/tags/yazi/" rel="tag">#yazi</a>
+            <a href="/tags/js/" rel="tag">#js</a>
           
         </div>
       
@@ -317,17 +305,13 @@ yazi pc init
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/06/12/node-path-problem/" rel="next" title="node-path-problem">
-                <i class="fa fa-chevron-left"></i> node-path-problem
+              <a href="/2017/03/18/js-number-precision/" rel="next" title="js-number-precision">
+                <i class="fa fa-chevron-left"></i> js-number-precision
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/07/06/wechat-iframe-input-bug/" rel="prev" title="wechat-iframe-input-bug">
-                wechat-iframe-input-bug <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -448,7 +432,7 @@ yazi pc init
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Installation"><span class="nav-number">1.</span> <span class="nav-text">Installation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Getting_To_Know_yazi"><span class="nav-number">2.</span> <span class="nav-text">Getting To Know yazi</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#初始化前端脚手架_init"><span class="nav-number">3.</span> <span class="nav-text">初始化前端脚手架 init</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#browser-sync实时调试_dev"><span class="nav-number">4.</span> <span class="nav-text">browser-sync实时调试 dev</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#项目构建_build"><span class="nav-number">5.</span> <span class="nav-text">项目构建 build</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TODO"><span class="nav-number">6.</span> <span class="nav-text">TODO</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#License"><span class="nav-number">7.</span> <span class="nav-text">License</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#[译]HTML_attribute与DOM_property之间的区别？"><span class="nav-number">1.</span> <span class="nav-text">[译]HTML attribute与DOM property之间的区别？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Attribute（特性）"><span class="nav-number">1.0.1.</span> <span class="nav-text">Attribute（特性）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Property（属性）"><span class="nav-number">1.0.2.</span> <span class="nav-text">Property（属性）</span></a></li></ol></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
