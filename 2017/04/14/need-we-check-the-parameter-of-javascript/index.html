@@ -1,0 +1,753 @@
+<!doctype html>
+<html class="theme-next   use-motion ">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="javascript," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Lyu Dada" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.2" />
+
+
+
+
+
+
+<meta name="description" content="javascript作为一门动态类型语言，具有很高的动态灵活性，当定义函数时，传入的参数可以是任意类型。但我们在实际编写函数逻辑时默认是对参数有一定要求的。这也容易导致预期参数与实际参数不符的情况，从而导致bug的出现。本文在这个层面探讨javascript检查参数的必要性。
+
+为什么要进行类型检查？从两点常见的场景来看这个问题：
+
+程序中期望得到的值与实际得到的值类型不相符，在对值进行操作的时">
+<meta property="og:type" content="article">
+<meta property="og:title" content="need we check the parameter of javascript">
+<meta property="og:url" content="http://yoursite.com/2017/04/14/need-we-check-the-parameter-of-javascript/index.html">
+<meta property="og:site_name" content="Lyu Dada">
+<meta property="og:description" content="javascript作为一门动态类型语言，具有很高的动态灵活性，当定义函数时，传入的参数可以是任意类型。但我们在实际编写函数逻辑时默认是对参数有一定要求的。这也容易导致预期参数与实际参数不符的情况，从而导致bug的出现。本文在这个层面探讨javascript检查参数的必要性。
+
+为什么要进行类型检查？从两点常见的场景来看这个问题：
+
+程序中期望得到的值与实际得到的值类型不相符，在对值进行操作的时">
+<meta property="og:updated_time" content="2017-04-14T03:34:05.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="need we check the parameter of javascript">
+<meta name="twitter:description" content="javascript作为一门动态类型语言，具有很高的动态灵活性，当定义函数时，传入的参数可以是任意类型。但我们在实际编写函数逻辑时默认是对参数有一定要求的。这也容易导致预期参数与实际参数不符的情况，从而导致bug的出现。本文在这个层面探讨javascript检查参数的必要性。
+
+为什么要进行类型检查？从两点常见的场景来看这个问题：
+
+程序中期望得到的值与实际得到的值类型不相符，在对值进行操作的时">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: '',
+    sidebar: 'post',
+    motion: true
+  };
+</script>
+
+  <title> need we check the parameter of javascript | Lyu Dada </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-hk">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+
+
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Lyu Dada</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">to love and get love</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            歸檔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            標籤
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                need we check the parameter of javascript
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            發表於
+            <time itemprop="dateCreated" datetime="2017-04-14T11:33:23+08:00" content="2017-04-14">
+              2017-04-14
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><blockquote>
+<p>javascript作为一门动态类型语言，具有很高的动态灵活性，当定义函数时，传入的参数可以是任意类型。但我们在实际编写函数逻辑时默认是对参数有一定要求的。这也容易导致预期参数与实际参数不符的情况，从而导致bug的出现。本文在这个层面探讨javascript检查参数的必要性。</p>
+</blockquote>
+<h2 id="为什么要进行类型检查？">为什么要进行类型检查？</h2><p>从两点常见的场景来看这个问题：</p>
+<ul>
+<li>程序中期望得到的值与实际得到的值类型不相符，在对值进行操作的时候程序报错，导致程序中断。</li>
+</ul>
+<p>举个我们最常见的调用服务端ajax请求取到返回值进行操作的例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">ajax(&apos;/getContent&apos;, function (json) &#123;</div><div class="line">  </div><div class="line">  // json的返回数据形式</div><div class="line">  // &#123;data: 18&#125;</div><div class="line">  var strPrice = (data.data).toFixed(2);</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p>如果服务端返回的数据形式以及返回的data一定是<code>number</code>类型，我们这样操作肯定没有问题。</p>
+<p>但是如果服务端返回的数据发生了变化，返回给我们的形式变成了：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  data: &apos;18.00&apos;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>而我们在js中并没有对变量做检测，就会导致程序报错。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&apos;18.00&apos;.toFixed(2) // Uncaught TypeError: &quot;18.00&quot;.toFixed is not a function</div></pre></td></tr></table></figure>
+<ul>
+<li>跟第一点相似也是期望得到的值与实际得到的值类型不相符，但是对值操作不会报错，js利用隐式类型转换得到了我们不希望得到的值，这种情况会加大我们对bug的追踪难度。</li>
+</ul>
+<p>举一个也是比较常见的例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">/**</div><div class="line">* input1 [number]</div><div class="line">* input2 [number]</div><div class="line">* return [number]</div><div class="line">**/</div><div class="line">function sumInput (input1, input2) &#123;</div><div class="line">  return input1 + input2;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><code>sumInput</code>方法的两个入参值可能来自外界用户输入，我们无法保证这是一个正确的<code>number</code>类型值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sumInput(1, &apos;&apos;); // return &apos;1&apos;</div></pre></td></tr></table></figure>
+<p><code>sumInput</code>方法本来期望得到<code>number</code>类型的值，但是现在却得到了<code>string</code>类型的<code>&#39;1&#39;</code> 。虽然值看起来没有变化，但是如果该值需要被其他函数调用，就会造成未知的问题。</p>
+<p>再举一个罕见的例子：</p>
+<p><code>parseInt()</code>方法要求第一个参数是<code>string</code>类型，若不是，则会隐式转换成<code>string</code>类型。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">parseInt(0.0000008) // 8</div></pre></td></tr></table></figure>
+<p>匪夷所思吧？我们预计这个方法的结果应该是<code>0</code>,但结果却是<code>8</code>。在程序中我们无法捕获这个错误，只能隐没在流程中，最终的计算结果我们也无法确保正确。</p>
+<p>原因是<code>parseInt(0.0000008)</code>会变成<code>parseInt(&quot;8e-7&quot;)</code>，结果输出<code>8</code></p>
+<h2 id="类型检查原则">类型检查原则</h2><p>由于js语言的动态性，以及本身就没有对类型做判断的机制，我们是否需要对所有变量值进行类型判断？这样做无疑增加了编码的冗余度，且无需对变量类型做检查也正是动态语言的一个优势。</p>
+<p>那为了避免一些由此问题带来的bugs，我们需要在一些关键点进行检查，而关键点更多的是由业务决定的，并没有一个统一的原则指导我们哪里必须进行类型判断。</p>
+<p>但大体趋势上可以参考以下我总结的几点意见。</p>
+<h3 id="一、「返回值」调用外部方法获取的值需要对类型做判断，因为我们对方法返回的值是有期望值类型，但是却不能保证这个接口返回的值一直是同一个类型。">一、「返回值」调用外部方法获取的值需要对类型做判断，因为我们对方法返回的值是有期望值类型，但是却不能保证这个接口返回的值一直是同一个类型。</h3><p>换个意思讲就是我们对我们不能保证的，来源于外部的值都要保持一颗敬畏之心。<strong>这个值可能来自第三方工具函数的返回值，或者来自服务端接口的返回值，也可能是另一位同事写的抽离公共方法。</strong></p>
+<h3 id="二、「入参」在书写一个函数并给外部使用的时候，需要对入参做较严格的类型判断。">二、「入参」在书写一个函数并给外部使用的时候，需要对入参做较严格的类型判断。</h3><p>这里强调的也是给外部使用的场景，我们在函数内部会对入参做很多逻辑上的处理，如果不对入参做判断，我们无法确保外部使用者传入的到底是什么类型的参数。</p>
+<h3 id="三、「自产自销」除了以上两类与外部交互的场景，更多需要考虑的是我们在编写业务代码时，“自产自销”的变量该如何处理。">三、「自产自销」除了以上两类与外部交互的场景，更多需要考虑的是我们在编写业务代码时，“自产自销”的变量该如何处理。</h3><p>解释一下“自产自销”的意思，在编写业务代码时，我们会根据业务场景定义很多函数，以及会调用函数取返回值。在这个过程中会有入参的情况，而这些参数完全是自己编写自己使用，在这种对代码相对了解的前提下无条件的进行变量类型判断无疑会增加编码的复杂度。</p>
+<p>在实际编码中我们更多的会使用强制类型转换<code>[Number String Boolean]</code>对参数进行操作，转换成我们期望的类型值。具体的方式会在下一章节阐述。</p>
+<h2 id="如何处理和反馈变量类型与期望不符的情况">如何处理和反馈变量类型与期望不符的情况</h2><p>首先谈谈如何判断变量类型，我们可以使用原生js或者es6的语法对类型进行准确判断，但更多的可以使用工具库，类似于<a href="https://lodash.com/docs/4.17.4#isArguments" target="_blank" rel="external">lodash</a>。包含了常用的<code>isXXX</code>方法。</p>
+<ul>
+<li>isNumber</li>
+<li>isNull</li>
+<li>isNaN</li>
+<li>…</li>
+</ul>
+<p><strong>对变量进行类型判断后，我们该如何进行处理及反馈？</strong></p>
+<ul>
+<li>「静默处理」只对符合类型预期的值进行处理，不符合预期的分支不做抛错处理。这样做可以防止程序报错，不阻塞其他与之无关的业务逻辑。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">if (isNumber(arg)) &#123;</div><div class="line">  xxx</div><div class="line">&#125; else &#123;</div><div class="line">  console.log(&apos;xxx 步骤 得到的参数不是number类型&apos;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>「抛错误」不符合预期的分支做抛错处理，阻止程序运行。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">if (isNumber(arg)) &#123;</div><div class="line">  xxx</div><div class="line">&#125; else &#123;</div><div class="line">  throw new TypeError(arg + &apos;不是number类型&apos;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>「强制转换」将不符合预期的值强制转换成期望的类型。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">if (isNumber(arg)) &#123;</div><div class="line">    (arg).toFixed(2);</div><div class="line">&#125; else &#123;</div><div class="line">    toNumber(arg).toFixed(2);</div><div class="line">&#125;</div><div class="line"></div><div class="line">//但是强制转换更多的在我们对变量类型教有掌控力的前提下使用，所以我们不会进行判断，直接在逻辑中进行强制转换。</div><div class="line">toNumber(arg).toFixed(2);</div></pre></td></tr></table></figure>
+<p>以上三种途径是我们在对变量进行类型判断后积极采取反馈的通用做法。那么结合上一章提到的<strong>3大类型检查原则</strong>，我们分别是采用哪种做法？</p>
+<h3 id="「返回值」调用外部函数、接口得到的参数该如何处理反馈？">「返回值」调用外部函数、接口得到的参数该如何处理反馈？</h3><p>对于由外部接口得到的值，我们没法确保这个类型是永恒的。所以进行类型判断很有必要，但是究竟是采用「静默处理」、「抛错误中断」还是「强制转换类型」呢？这里还是需要根据具体场景具体业务采用不同的方式，没有一个恒定的解决方案。</p>
+<p>看个例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">// 业务代码入口</div><div class="line">function main () &#123;</div><div class="line">  </div><div class="line">  // 监控代码 与业务无关</div><div class="line">  (function () &#123;</div><div class="line">    var shopList = getShopNameList(); // return undefined</div><div class="line">    Countly.push(shopList.join()); // Uncaught TypeError: Cannot read property &apos;join&apos; of undefined</div><div class="line">  &#125;)()</div><div class="line"></div><div class="line">  // 业务代码</div><div class="line">  todo....</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>上述例子中的我们调用了一个外部函数<code>getShopNameList</code>， 在对其返回值进行操作时与主要业务逻辑无关的代码块出错，会直接导致程序中断。而对<code>shopList</code>进行判断后静默处理，也不会影响到主要业务的运行，所以这种情况是适合「静默处理」的。静默处理的最大优势在于可以防止程序报错，但是使用的前提是这步操作不会影响其他相关联的业务逻辑。</p>
+<p>如果被静默处理的值与其他业务逻辑还有关联，那么整条逻辑的最终值都会受到影响，但是我们又静默掉了错误信息，反而会增加了寻找bug的难度。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">// 业务代码入口</div><div class="line">function main () &#123;</div><div class="line">  </div><div class="line">  // 监控代码 与业务无关</div><div class="line">  (function () &#123;</div><div class="line">    var shopList = getShopNameList(); // return undefined</div><div class="line">    if (isArray(shopList)) &#123;</div><div class="line">      Countly.push(shopList.join());</div><div class="line">    &#125;</div><div class="line">  &#125;)()</div><div class="line"></div><div class="line">  // 业务代码</div><div class="line">  todo....</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>当然除了「静默处理」外我们还可以选择「强制转换」，将返回值转换成我们需要的值类型，完成逻辑的延续。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">// 业务代码入口</div><div class="line">function main () &#123;</div><div class="line">  </div><div class="line">  // 监控代码 与业务无关</div><div class="line">  (function () &#123;</div><div class="line">    var shopList = getShopNameList(); // return undefined</div><div class="line">    Countly.push(isArray(shopList) ? shopList.join() : &apos;&apos;);</div><div class="line">  &#125;)()</div><div class="line"></div><div class="line">  // 业务代码</div><div class="line">  todo....</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="「入参」在书写一个函数并给外部使用的时候，对入参该如何处理反馈？">「入参」在书写一个函数并给外部使用的时候，对入参该如何处理反馈？</h3><p>当我们写一个函数方法提供给除自己之外的人使用，或者是在编写前端底层框架、UI组件，提供给外部人员使用，我们对入参（外部使用者输入）应该要尽可能的检查详细。因为是给外部使用，我们无法知道业务场景，所以使用「静默处理」是不合适的，我们无法知道静默处理的内容与其他业务逻辑有否有耦合，既然静默了最终还是会导致bugs出现，还不如直接「抛错误」提醒使用者。</p>
+<p>在第三方框架中，都会自定义一个类似于<code>warn</code>的方法用于抛出变量检查的不合法结果。而且为了防止检查代码的增加而导致的线上代码量的增加，通常检查过程都会区分本地开发环境和线上生产环境。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">// 代码取自vue源码</div><div class="line">  if (process.env.NODE_ENV !== &apos;production&apos; &amp;&amp; isObject(def)) &#123;</div><div class="line">    warn(</div><div class="line">      &apos;Invalid default value for prop &quot;&apos; + key + &apos;&quot;: &apos; +</div><div class="line">      &apos;Props with type Object/Array must use a factory function &apos; +</div><div class="line">      &apos;to return the default value.&apos;,</div><div class="line">      vm</div><div class="line">    )</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<p>这段判断脚本结合webpack构建生产环境的代码时就会被删除，不会增加生产环境的代码量。</p>
+<p><code>vue框架</code>的组件系统中对组件传参的行为vue在框架层面上就支持了检查机制。如果传入的数据不符合规格，vue会发出警告。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">Vue.component(&apos;example&apos;, &#123;</div><div class="line">  props: &#123;</div><div class="line">    // 基础类型检测 （`null` 意思是任何类型都可以）</div><div class="line">    propA: Number,</div><div class="line">    // 多种类型</div><div class="line">    propB: [String, Number],</div><div class="line">    // 必传且是字符串</div><div class="line">    propC: &#123;</div><div class="line">      type: String,</div><div class="line">      required: true</div><div class="line">    &#125;,</div><div class="line">    // 数字，有默认值</div><div class="line">    propD: &#123;</div><div class="line">      type: Number,</div><div class="line">      default: 100</div><div class="line">    &#125;,</div><div class="line">    // 数组／对象的默认值应当由一个工厂函数返回</div><div class="line">    propE: &#123;</div><div class="line">      type: Object,</div><div class="line">      default: function () &#123;</div><div class="line">        return &#123; message: &apos;hello&apos; &#125;</div><div class="line">      &#125;</div><div class="line">    &#125;,</div><div class="line">    // 自定义验证函数</div><div class="line">    propF: &#123;</div><div class="line">      validator: function (value) &#123;</div><div class="line">        return value &gt; 10</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p>因为我们编写vue组件也会提供给他人是使用，也属于与外部交互的场景。Vue在框架层面集成了检查功能，也方便了我们开发者再手动检查参数变量了。</p>
+<h3 id="「自产自销」除了以上两类与外部交互的场景，更多需要考虑的是我们在编写业务代码时，“自产自销”的变量该如何处理？">「自产自销」除了以上两类与外部交互的场景，更多需要考虑的是我们在编写业务代码时，“自产自销”的变量该如何处理？</h3><p>外部交互的场景，我们对入参以及返回值具有不可控性，但对于开发者开发业务时的场景，传参时，或者是函数返回值，都是我们自己定义的，相对具有很强的可控性。</p>
+<p>规定参数类型是string字符串时，我们大概率不会传入一个数组，而且变量的值也不会由外部环境的变化而变化（ajax返回的参数，外部接口返回的参数，类型可能会变）。</p>
+<p><strong>那么剩下的情况大部分会集中在js标量基础类型值。</strong></p>
+<ul>
+<li>规定传入<code>number 13</code>，我们传入了<code>string &#39;13&#39;</code></li>
+<li>规定传入<code>boolean true</code>，我们传入了<code>真值 &#39;123&#39;</code></li>
+<li>…</li>
+</ul>
+<p>针对这种情况，我们对入参的值具有一定的可预期性，预期类型可能不同，为了程序的健壮性，可读性更高，更容易使协作同学理解，我们一般采用「强制转换」将值转换成我们期望的类型。即使「强制转换」的过程中程序发生了报错从而中断，这也是在调试过程中产生程序中断问题，也能更好的提前暴露这个问题，避免在线上环境发生bugs。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">function add(num1, num2) &#123;</div><div class="line">  return (toNumber(num1) + toNumber(num2))</div><div class="line">&#125;</div><div class="line">add(&apos;123&apos;, &apos;234&apos;);</div></pre></td></tr></table></figure>
+<ul>
+<li>toInteger</li>
+<li>toNumber</li>
+<li>toString</li>
+<li>toSafeInteger</li>
+<li>!!(toBoolean)</li>
+</ul>
+<p><strong>隐式强制类型转换会踩到哪些坑？</strong></p>
+<p>因为js会默默的进行隐式类型转换，所以多数坑都是发生在对值的操作过程中发生了隐式类型转换。</p>
+<p>另外类型转换越清晰，可读性越高，更容易理解。</p>
+<ul>
+<li>string型数字调用<code>toFixed()</code>方法报错</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&apos;123&apos;.toFixed(2) // Uncaught TypeError: &quot;123&quot;.toFixed is not a function</div></pre></td></tr></table></figure>
+<ul>
+<li><code>+</code> 法中有字符串出现则操作变成字符串拼接</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">function add(num1, num2) &#123;</div><div class="line">  return num1 + num2</div><div class="line">&#125;</div><div class="line">add(123, &apos;&apos;); //  return string &apos;123&apos;</div></pre></td></tr></table></figure>
+<ul>
+<li>当我们使用<code>==</code>进行值相等判断的时候两边的值会进行隐式强制类型转换，而转换的结果往往不尽人意。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">function test(a) &#123;</div><div class="line">  if (a == true) &#123; // 不推荐</div><div class="line">    console.log(&apos;true&apos;)</div><div class="line">  &#125; else &#123;</div><div class="line">    console.log(&apos;false&apos;)    </div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line">test(&apos;22&apos;)  // &apos;false&apos;</div><div class="line"></div><div class="line">// 原因</div><div class="line">&apos;22&apos; == true</div><div class="line"></div><div class="line">两边都会发生隐式强制转换，&apos;22&apos; --&gt; 22 ， true --&gt; 1， </div><div class="line">因此 22 == 1  // false</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">function test(a) &#123;</div><div class="line">  if (a == &apos;&apos;) &#123;</div><div class="line">    console.log(&apos;true&apos;)</div><div class="line">  &#125; else &#123;</div><div class="line">    console.log(&apos;false&apos;)    </div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line">test(0)  // &apos;true&apos;</div><div class="line"></div><div class="line">// 原因</div><div class="line">0 == &apos;&apos;</div><div class="line"></div><div class="line">字符串会发生隐式类型转转 &apos;&apos; --&gt; 0</div><div class="line">因此 0 == 0 // true</div><div class="line"></div><div class="line">相同的场景还有</div><div class="line"></div><div class="line">[] == 0 // true</div><div class="line">[] == &apos;&apos; // true</div></pre></td></tr></table></figure>
+<p>所以当我们进行相等判断时涉及到<code>[], 0, &#39;&#39;, boolean</code>，不应该使用<code>==</code>，而应该采用<code>===</code>，杜绝发生隐式强制类型转换的操作。</p>
+<h2 id="全局环境如何做到变量的类型检查？">全局环境如何做到变量的类型检查？</h2><p>依靠开发者进行参数变量的类型检查，非常考验js开发者的js基础功，尤其在团队协作下很难做到完美的类型检查。vue2的源码开发使用了<code>flow</code>协助进行类型检查。</p>
+<blockquote>
+<p>Flow 是一个facebook出品静态类型检测工具；在现有项目中加上类型标注后，可以在代码阶段就检测出对变量的不恰当使用。Flow 弥补了 JavaScript 天生的类型系统缺陷。利用 Flow 进行类型检查，可以使你的项目代码更加健壮，确保项目的其他参与者也可以写出规范的代码；而 Flow 的使用更是方便渐进式的给项目加上严格的类型检测。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">// @flow</div><div class="line">function getStrLength(str: string): number&#123; </div><div class="line">    return str.length; </div><div class="line">&#125;</div><div class="line">getStrLength(&apos;Hello World&apos;);</div></pre></td></tr></table></figure>
+<p>另外还有微软出品的<code>TypeScript</code>，采用这门js超集编程语言也能开发具有静态类型的js应用。</p>
+<ul>
+<li>TypeScript 增加了代码的可读性和可维护性，可以在编译阶段就发现大部分错误，这总比在运行时候出错好。</li>
+<li>TypeScript 是 JavaScript 的超集，.js 文件可以直接重命名为 .ts 即可</li>
+<li>有一定的学习成本，需要理解接口（Interfaces）、泛型（Generics）、类（Classes）、枚举类型</li>
+</ul>
+<h2 id="总结">总结</h2><p>本文从3个类型检查原则「返回值」「入参」「自产自销」为出发点，分别阐述了这三种情况下的处理方法「静默处理」「抛错误」「强制转换」。本文阐述的是一种思路，这三种处理方法其实在各个原则中都会使用，最重要的还是取决于业务的需求和理解。但是尽量的对变量类型做检查是没有错的！</p>
+<blockquote>
+<p>本文来自<a href="http://weibo.com/u/2115840795" target="_blank" rel="external">二口南洋</a>，有什么需要讨论的欢迎找我。</p>
+</blockquote>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/javascript/" rel="tag">#javascript</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/18/attribute-property-difference/" rel="next" title="attribute-property-difference">
+                <i class="fa fa-chevron-left"></i> attribute-property-difference
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+        </div>
+
+        
+
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </div>
+
+      
+        
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            本站概覽
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="https://avatars3.githubusercontent.com/u/8492963?v=3&s=460" alt="Lyu Dada" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">Lyu Dada</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description"></p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">46</span>
+              <span class="site-state-item-name">文章</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">9</span>
+              <span class="site-state-item-name">分類</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">38</span>
+              <span class="site-state-item-name">標籤</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么要进行类型检查？"><span class="nav-number">1.</span> <span class="nav-text">为什么要进行类型检查？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类型检查原则"><span class="nav-number">2.</span> <span class="nav-text">类型检查原则</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、「返回值」调用外部方法获取的值需要对类型做判断，因为我们对方法返回的值是有期望值类型，但是却不能保证这个接口返回的值一直是同一个类型。"><span class="nav-number">2.1.</span> <span class="nav-text">一、「返回值」调用外部方法获取的值需要对类型做判断，因为我们对方法返回的值是有期望值类型，但是却不能保证这个接口返回的值一直是同一个类型。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、「入参」在书写一个函数并给外部使用的时候，需要对入参做较严格的类型判断。"><span class="nav-number">2.2.</span> <span class="nav-text">二、「入参」在书写一个函数并给外部使用的时候，需要对入参做较严格的类型判断。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、「自产自销」除了以上两类与外部交互的场景，更多需要考虑的是我们在编写业务代码时，“自产自销”的变量该如何处理。"><span class="nav-number">2.3.</span> <span class="nav-text">三、「自产自销」除了以上两类与外部交互的场景，更多需要考虑的是我们在编写业务代码时，“自产自销”的变量该如何处理。</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何处理和反馈变量类型与期望不符的情况"><span class="nav-number">3.</span> <span class="nav-text">如何处理和反馈变量类型与期望不符的情况</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#「返回值」调用外部函数、接口得到的参数该如何处理反馈？"><span class="nav-number">3.1.</span> <span class="nav-text">「返回值」调用外部函数、接口得到的参数该如何处理反馈？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#「入参」在书写一个函数并给外部使用的时候，对入参该如何处理反馈？"><span class="nav-number">3.2.</span> <span class="nav-text">「入参」在书写一个函数并给外部使用的时候，对入参该如何处理反馈？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#「自产自销」除了以上两类与外部交互的场景，更多需要考虑的是我们在编写业务代码时，“自产自销”的变量该如何处理？"><span class="nav-number">3.3.</span> <span class="nav-text">「自产自销」除了以上两类与外部交互的场景，更多需要考虑的是我们在编写业务代码时，“自产自销”的变量该如何处理？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#全局环境如何做到变量的类型检查？"><span class="nav-number">4.</span> <span class="nav-text">全局环境如何做到变量的类型检查？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+      
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="icon-next-heart fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lyu Dada</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 強力驅動
+</div>
+
+<div class="theme-info">
+  主題 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+    
+    
+
+  
+
+
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.2"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.2"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+<script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+<script type="text/javascript" src="/js/motion.js?v=0.4.5.2" id="motion.global"></script>
+
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.2" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    motionMiddleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  <script type="text/javascript" src="/js/bootstrap.js"></script>
+
+  
+  
+
+  
+  
+
+</body>
+</html>

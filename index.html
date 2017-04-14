@@ -199,6 +199,99 @@
             
               
                 
+                <a class="post-title-link" href="/2017/04/14/need-we-check-the-parameter-of-javascript/" itemprop="url">
+                  need we check the parameter of javascript
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            發表於
+            <time itemprop="dateCreated" datetime="2017-04-14T11:33:23+08:00" content="2017-04-14">
+              2017-04-14
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+            
+javascript作为一门动态类型语言，具有很高的动态灵活性，当定义函数时，传入的参数可以是任意类型。但我们在实际编写函数逻辑时默认是对参数有一定要求的。这也容易导致预期参数与实际参数不符的情况，从而导致bug的出现。本文在这个层面探讨javascript检查参数的必要性。
+
+为什么要进行类型检查？从两点常见的场景来看这个问题：
+
+程序中期望得到的值与实际得到的值类型不相符，在对值进行操作的时候程序报错，导致程序中断。
+
+举个我们最常见的调用服务端ajax请求取到返回值进行操作的例子：
+123456ajax(&apos;/getContent&apos;, function (json) &#123;    // json的返回数据形式  // &#123;data: 18&#125; 
+            ...
+          </span>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/04/14/need-we-check-the-parameter-of-javascript/#more" rel="contents">
+              閱讀全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2017/03/18/attribute-property-difference/" itemprop="url">
                   attribute-property-difference
                 </a>
@@ -990,97 +1083,6 @@ file文件已经在服务端进行gzip压缩，那为何在node中用request请�
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/07/24/the-mobile-web-handbook/" itemprop="url">
-                  the-mobile-web-handbook
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            發表於
-            <time itemprop="dateCreated" datetime="2016-07-24T21:47:05+08:00" content="2016-07-24">
-              2016-07-24
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-            浏览器1.手机上有四种浏览器类型：内置浏览器、可下载浏览器、代理浏览器、webview。
-大多数内置浏览器都被紧密集成到底层的操作系统中，，无法单独升级浏览器。
-webview是留给原生应用的一个操作系统浏览接口。（webview是属于操作系统的）
-苹果不允许在ios设备上安装其他渲染引擎，所以其他浏览器想要在ios上安装就必须使用苹果的webview。
-总体来说webview是独立的程序，用了内置浏览器很多底层组件（比如渲染引擎）。
-2.代理浏览器
-用户在代理浏览器上访问一个地址，http请求会被代理浏览器接受，但是不会进行常规的http请求，而是将请求发送到代理服务器上，有代理服务器再请进行常规的http请求，请求得到html、css、javascript。代理服务器上有渲染引擎，会将请
-            ...
-          </span>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/07/24/the-mobile-web-handbook/#more" rel="contents">
-              閱讀全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
@@ -1127,7 +1129,7 @@ webview是留给原生应用的一个操作系统浏览接口。（webview是属
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">45</span>
+              <span class="site-state-item-count">46</span>
               <span class="site-state-item-name">文章</span>
             </a>
           </div>
@@ -1141,7 +1143,7 @@ webview是留给原生应用的一个操作系统浏览接口。（webview是属
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">37</span>
+              <span class="site-state-item-count">38</span>
               <span class="site-state-item-name">標籤</span>
               </a>
           </div>
