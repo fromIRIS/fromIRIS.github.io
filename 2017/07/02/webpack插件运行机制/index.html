@@ -1,0 +1,704 @@
+<!doctype html>
+<html class="theme-next   use-motion ">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="webpack," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Lyu Dada" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.2" />
+
+
+
+
+
+
+<meta name="description" content="注：本文查看的源码是webpack1.x版本，2.x版本已经不存在这个问题，查看描述。
+webpack1.x时代讨论地比较热烈的一个话题，就是UglifyJsPlugin插件为什么会对其他loader造成影响。我这里有个曾经遇到的问题，可以查看我为此编写的一个demo，有兴趣可以clone试验一下这个问题。
+由postcss-loader、autoprefixer处理后的css如下，在开发环境一切">
+<meta property="og:type" content="article">
+<meta property="og:title" content="webpack插件运行机制">
+<meta property="og:url" content="http://yoursite.com/2017/07/02/webpack插件运行机制/index.html">
+<meta property="og:site_name" content="Lyu Dada">
+<meta property="og:description" content="注：本文查看的源码是webpack1.x版本，2.x版本已经不存在这个问题，查看描述。
+webpack1.x时代讨论地比较热烈的一个话题，就是UglifyJsPlugin插件为什么会对其他loader造成影响。我这里有个曾经遇到的问题，可以查看我为此编写的一个demo，有兴趣可以clone试验一下这个问题。
+由postcss-loader、autoprefixer处理后的css如下，在开发环境一切">
+<meta property="og:image" content="http://cdn1.showjoy.com/images/e8/e862e177e90f43e8af0c53a313ae698a.jpg">
+<meta property="og:updated_time" content="2017-07-02T15:02:24.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="webpack插件运行机制">
+<meta name="twitter:description" content="注：本文查看的源码是webpack1.x版本，2.x版本已经不存在这个问题，查看描述。
+webpack1.x时代讨论地比较热烈的一个话题，就是UglifyJsPlugin插件为什么会对其他loader造成影响。我这里有个曾经遇到的问题，可以查看我为此编写的一个demo，有兴趣可以clone试验一下这个问题。
+由postcss-loader、autoprefixer处理后的css如下，在开发环境一切">
+<meta name="twitter:image" content="http://cdn1.showjoy.com/images/e8/e862e177e90f43e8af0c53a313ae698a.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: '',
+    sidebar: 'post',
+    motion: true
+  };
+</script>
+
+  <title> webpack插件运行机制 | Lyu Dada </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-hk">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+
+
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Lyu Dada</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">to love and get love</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            歸檔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            標籤
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                webpack插件运行机制
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            發表於
+            <time itemprop="dateCreated" datetime="2017-07-02T23:01:26+08:00" content="2017-07-02">
+              2017-07-02
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><p>注：本文查看的源码是webpack1.x版本，2.x版本已经不存在这个问题，<a href="https://doc.webpack-china.org/guides/migrating/#uglifyjsplugin-loaders" target="_blank" rel="external">查看描述</a>。</p>
+<p>webpack1.x时代讨论地比较<a href="https://github.com/webpack/webpack/issues/283" target="_blank" rel="external">热烈的一个话题</a>，就是<code>UglifyJsPlugin</code>插件为什么会对其他loader造成影响。我这里有个曾经遇到的问题，可以查看我为此编写的一个<a href="https://github.com/fromIRIS/webpack1-uglifyJsPlugin" target="_blank" rel="external">demo</a>，有兴趣可以clone试验一下这个问题。</p>
+<p>由<code>postcss-loader、autoprefixer</code>处理后的css如下，在开发环境一切ok：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">p &#123;</div><div class="line">  display: flex;</div><div class="line">  justify-content: center;</div><div class="line">&#125;</div><div class="line"></div><div class="line">===》》</div><div class="line"></div><div class="line">p &#123;</div><div class="line">  display: -webkit-box;</div><div class="line">  display: -webkit-flex;</div><div class="line">  display: -ms-flexbox;</div><div class="line">  display: flex;</div><div class="line">  -webkit-box-pack: center;</div><div class="line">  -webkit-justify-content: center;</div><div class="line">      -ms-flex-pack: center;</div><div class="line">          justify-content: center;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>可是用线上环境<code>UglifyJsPlugin</code>进行打包后，最后的css被剔除了很多-webkit-前缀：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">p&#123;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center&#125;</div></pre></td></tr></table></figure>
+<p>这样的最终css在ios8以下版本是不兼容的，解决办法我也写在了<a href="https://github.com/fromIRIS/webpack1-uglifyJsPlugin" target="_blank" rel="external">demo</a>中，大家可以试验一下。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#123;test: /\.less$/,   loader: &apos;style-loader!css-loader?minimize&amp;-autoprefixer!postcss-loader!less-loader&apos;&#125;,</div></pre></td></tr></table></figure>
+<p>通过给css-loader添加<code>-autoprefixer</code>参数来告诉css-loader，虽然你被某股不知名的力量强制进行压缩了，但是在压缩的时候关闭掉<code>autoprefixer</code>这个功能，不要强制删除某些你觉得不重要的前缀。</p>
+<p>文章最前面的webpack issue也提到了，这股不知名的力量其实就是<code>UglifyJsPlugin</code>插件。我们先来看一下这个插件的一段核心源码。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">compilation.plugin(<span class="string">"normal-module-loader"</span>,  <span class="function"><span class="keyword">function</span>(<span class="params">context</span>) </span>&#123;</div><div class="line">	context.minimize = <span class="literal">true</span>;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>这块代码先不用理解什么意思，但是minimize字段很明确地告诉大家，某个上下文<code>context</code>的minimize字段被设置成true了。至于这个上下文<code>context</code>是哪个上下文，下文会解释道。</p>
+<p>对webpack运行原理不清楚的同学肯定会跟我有一样的疑惑，webpack中的插件（plugin），加载器（loader）到底是怎样的运行机制？插件在什么情况下会影响到loader的工作？以及插件除了影响到loader，还能影响什么？能否影响最后的打包输出？</p>
+<p>加载器（loader）的作用很明显，负责处理各种类型的模块，比如<code>png
+/vue/jsx/css/less</code>等等各种后缀类型，用相应的loader就能识别并进行转换。转换好的文件内容才能被webpack运行时读懂。</p>
+<p>插件（plugin），官网的解释非常简单</p>
+<blockquote>
+<p>插件目的在于解决 loader 无法实现的其他事。</p>
+</blockquote>
+<p>比方说，css-loader识别并转换完对应的css模块，babel-loader识别并转换完对应的js，他们的工作就结束了，现在我想把css内容从js里抽离出来变成单独一个css文件，这个工作就只能交给插件来做了。</p>
+<p>而插件又是如何识别<code>.css</code>模块成功被<code>css-loader</code>转换这个关键事件节点的？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">// 命名函数</div><div class="line">function MyExampleWebpackPlugin() &#123;</div><div class="line"></div><div class="line">&#125;;</div><div class="line"></div><div class="line">// 在它的 prototype 上定义一个 `apply` 方法。</div><div class="line">MyExampleWebpackPlugin.prototype.apply = function(compiler) &#123;</div><div class="line">  // 指定挂载的webpack事件钩子。</div><div class="line">  compiler.plugin(&apos;webpacksEventHook&apos;, function(compilation /* 处理webpack内部实例的特定数据。*/, callback) &#123;</div><div class="line">    console.log(&quot;This is an example plugin!!!&quot;);</div><div class="line">    // 功能完成后调用webpack提供的回调。</div><div class="line">    callback();</div><div class="line">  &#125;);</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>这是官网提供的插件编写例子，先撇开公共的代码部分我们看以下核心代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">// 指定挂载的webpack事件钩子。</div><div class="line">compiler.plugin(&apos;webpacksEventHook&apos;, function(compilation /* 处理webpack内部实例的特定数据。*/) &#123;</div><div class="line">    console.log(&quot;This is an example plugin!!!&quot;);</div><div class="line">  &#125;);</div></pre></td></tr></table></figure>
+<p>我们看到<code>webpacksEventHook</code>webpack事件钩子，用<code>plugin</code>方法注册到了compiler对象上，compiler是webpack非常核心的对象，稍后会介绍。</p>
+<p>这里的<code>webpacksEventHook</code>事件钩子的种类可以看<a href="https://webpack.github.io/docs/plugins.html#the-compiler-instance" target="_blank" rel="external">webpack官网</a></p>
+<p>webpack开放了非常丰富的事件钩子，供开发者们在插件中进行注册。而这些注册完的事件由webpack的compiler对象在对应的节点进行调用。</p>
+<p>插件何时以及如何作用于webpack的构建过程，注册事件钩子由compiler（以及下文提到的compilation）进行统一分配调用就是答案。</p>
+<p>再看一个相对较复杂的插件编写方式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">function HelloCompilationPlugin(options) &#123;&#125;</div><div class="line"></div><div class="line">HelloCompilationPlugin.prototype.apply = function(compiler) &#123;</div><div class="line"></div><div class="line">  // 设置回调来访问编译对象：</div><div class="line">  compiler.plugin(&quot;compilation&quot;, function(compilation) &#123;</div><div class="line"></div><div class="line">    // 现在设置回调来访问编译中的步骤：</div><div class="line">    compilation.plugin(&quot;optimize&quot;, function() &#123;</div><div class="line">      console.log(&quot;Assets are being optimized.&quot;);</div><div class="line">    &#125;);</div><div class="line">  &#125;);</div><div class="line">&#125;;</div><div class="line"></div><div class="line">module.exports = HelloCompilationPlugin;</div></pre></td></tr></table></figure>
+<p>抽离核心代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">// 设置回调来访问编译对象：</div><div class="line">  compiler.plugin(&quot;compilation&quot;, function(compilation) &#123;</div><div class="line"></div><div class="line">    // 现在设置回调来访问编译中的步骤：</div><div class="line">    compilation.plugin(&quot;optimize&quot;, function() &#123;</div><div class="line">      console.log(&quot;Assets are being optimized.&quot;);</div><div class="line">    &#125;);</div><div class="line">  &#125;);</div></pre></td></tr></table></figure>
+<p><code>compiler</code>对象注册方法的回调返回了一个<code>compilation</code>对象，这个对象也能进行事件注册，但两者的事件钩子是有区别的。具体的事件钩子<a href="https://webpack.github.io/docs/plugins.html#the-compilation-instance" target="_blank" rel="external">查看</a>。<code>compilation</code>对象和<code>compiler</code>对象构成了webpack最核心的两个对象，几乎所有的构建编译逻辑都由这两个对象完成。</p>
+<p>我们看下两个对象在编写插件的时候可以进行事件钩子注册的几个重要事件。</p>
+<ul>
+<li>「after-plugins」 compiler对象加载完所有插件。</li>
+<li>「compile」 compiler对象开始编译。</li>
+<li>「compilation」compiler对象构建出compilation对象。</li>
+<li>「make」 compiler对象开始在入门点进行模块分析以及依赖分析。在这个节点注册事件，插件可以手动添加入口文件，webpack会将配置文件中的入口和这里添加的入口一同进行打包流程。</li>
+<li>「build-module」 compilation对象开始构建模块。这个时间点模块还没开始构建，入口点已经被分析完，依赖已经分析完。</li>
+<li>「normal-module-loader」 compilation对象对每个模块构建并载入loader信息。这个节点在每个模块载入loader信息触发。</li>
+<li>「seal」 compilation对象开始封装构建结果</li>
+<li>「after-compile」 compiler对象完成构建任务</li>
+<li>「emit」 compiler对象开始把chunk输出</li>
+<li>「after-emit」 compiler对象完成chunk输出</li>
+</ul>
+<p>以上列出的只是部分比较关键的节点，这些节点事件都能在插件中进行注册。注册完后只需等待webpack运行时在对应的节点进行调用，就能完成插件想做的事情。</p>
+<p>那么<code>compiler</code>和<code>compilation</code>是如何完成编译构建的？其实看了事件钩子罗列大概就对webpack的构建流程有点眉目了，我们顺着事件钩子来大致理一理webpack的工作方式。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">// 构建出compiler对象</span></div><div class="line">compiler = webpack(options)</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 在webpack调用过程中，完成了所有必要插件的调用</span></div><div class="line"><span class="comment">// 此时所有插件注册的事件钩子都已经准备完毕，等待被调用</span></div><div class="line">compiler.options = <span class="keyword">new</span> WebpackOptionsApply().process(options, compiler);</div><div class="line"></div><div class="line"><span class="comment">// 调用插件中的 after-plugins 事件</span></div><div class="line">compiler.applyPlugins(<span class="string">"after-plugins"</span>, compiler);</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 这里涉及很多节点</span></div><div class="line"><span class="comment">// compiler调用compile方法 </span></div><div class="line"><span class="comment">// 此时调用插件中的 compile 事件</span></div><div class="line"><span class="comment">// 构建 compilation 对象</span></div><div class="line"><span class="comment">// 此时调用插件中的 compilation 事件</span></div><div class="line"><span class="comment">// 此时调用插件中的 make 事件</span></div><div class="line">Compiler.prototype.compile = <span class="function"><span class="keyword">function</span>(<span class="params">callback</span>) </span>&#123;</div><div class="line">	<span class="keyword">var</span> params = <span class="keyword">this</span>.newCompilationParams();</div><div class="line">	<span class="keyword">this</span>.applyPlugins(<span class="string">"compile"</span>, params);</div><div class="line"></div><div class="line">	<span class="keyword">var</span> compilation = <span class="keyword">this</span>.newCompilation(params);</div><div class="line"></div><div class="line">	<span class="keyword">this</span>.applyPluginsParallel(<span class="string">"make"</span>, compilation, <span class="function"><span class="keyword">function</span>(<span class="params">err</span>) </span>&#123;&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// make事件之后 compilation调用buildModule方法开始构建模块</span></div><div class="line"><span class="comment">// 此时调用插件的 build-module 事件</span></div><div class="line"><span class="comment">// 然后 module 实例会调用build方法</span></div><div class="line"><span class="comment">// 中间略过模块构建的步骤</span></div><div class="line"><span class="comment">// 此时调用插件的 normal-module-loader 事件，代表模块载入loader信息</span></div><div class="line">Compilation.prototype.buildModule = <span class="function"><span class="keyword">function</span>(<span class="params">module, thisCallback</span>) </span>&#123;</div><div class="line">	<span class="keyword">this</span>.applyPlugins(<span class="string">"build-module"</span>, <span class="built_in">module</span>);</div><div class="line">	...</div><div class="line">	module.build(<span class="keyword">this</span>.options, <span class="keyword">this</span>, <span class="keyword">this</span>.resolvers.normal, <span class="keyword">this</span>.inputFileSystem, <span class="function"><span class="keyword">function</span>(<span class="params">err</span>) </span>&#123;&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">    <span class="comment">// 模块全部构建完成后 compilation开始封装模块</span></div><div class="line">    <span class="comment">// 此时调用插件的 seal 事件</span></div><div class="line">    <span class="comment">// 完成seal后调用插件的 after-compile 事件</span></div><div class="line">compilation.seal(<span class="function"><span class="keyword">function</span>(<span class="params">err</span>) </span></div><div class="line">	<span class="title">this</span>.<span class="title">applyPluginsAsync</span>(<span class="params"><span class="string">"after-compile"</span>, compilation, function(err</span>) &#123;</div><div class="line">	&#125;);</div><div class="line">&#125;.bind(<span class="keyword">this</span>));</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">    <span class="comment">// 模块封装好后compilation会调用emitAssets方法将模块打包成chunk输出</span></div><div class="line">    <span class="comment">// 此时调用插件的 emit 事件</span></div><div class="line">Compiler.prototype.emitAssets = <span class="function"><span class="keyword">function</span>(<span class="params">compilation, callback</span>) </span>&#123;</div><div class="line">	<span class="keyword">this</span>.applyPluginsAsync(<span class="string">"emit"</span>, compilation, <span class="function"><span class="keyword">function</span>(<span class="params">err</span>) </span>&#123;</div><div class="line">	&#125;.bind(<span class="keyword">this</span>));</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>至此就粗略地完成了整个webpack的编译构建过程。</p>
+<p><img src="http://cdn1.showjoy.com/images/e8/e862e177e90f43e8af0c53a313ae698a.jpg" alt=""></p>
+<p>现在再回头看<code>UglifyJsPlugin</code>插件。其在插件中对js的压缩注册了<code>optimize-chunk-assets</code>事件，查阅文档可知这个事件模块封装成chunk触发，所以在最后的阶段对js进行压缩是最好的选择。</p>
+<p>还有一个事件就是开头提到的</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">compilation.plugin(<span class="string">"normal-module-loader"</span>,  <span class="function"><span class="keyword">function</span>(<span class="params">context</span>) </span>&#123;</div><div class="line">	context.minimize = <span class="literal">true</span>;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p><code>normal-module-loader</code>这个事件在模块开始构建并载入了loader时触发，这段代码的意思就是当模块载入对应的loader时，直接将loader的上下文环境中的minimize字段设置成true，而这个字段在<code>css-loader</code>和<code>postcss-loader</code>中设置成true会开启优化模式，所以会对代码进行压缩。</p>
+<p>而webpack2.x在迁移方案中官方明确说明去掉了<code>UglifyJsPlugin</code>强制开启其他loader优化模式的说明，在webpack2.x源码中<code>UglifyJsPlugin</code>插件已经没有注册<code>normal-module-loader</code>了。</p>
+<p>引用：</p>
+<ul>
+<li><a href="http://taobaofed.org/blog/2016/09/09/webpack-flow/" target="_blank" rel="external">http://taobaofed.org/blog/2016/09/09/webpack-flow/</a></li>
+<li><a href="https://github.com/webpack-contrib/css-loader/tree/v0.19.0" target="_blank" rel="external">https://github.com/webpack-contrib/css-loader/tree/v0.19.0</a></li>
+<li><a href="https://github.com/postcss/autoprefixer/issues/660" target="_blank" rel="external">https://github.com/postcss/autoprefixer/issues/660</a></li>
+<li><a href="https://doc.webpack-china.org/guides/migrating/" target="_blank" rel="external">https://doc.webpack-china.org/guides/migrating/</a></li>
+<li><a href="https://webpack.github.io/docs/plugins.html#the-compiler-instance" target="_blank" rel="external">https://webpack.github.io/docs/plugins.html#the-compiler-instance</a></li>
+<li><a href="https://github.com/webpack/webpack/issues/283" target="_blank" rel="external">https://github.com/webpack/webpack/issues/283</a></li>
+</ul>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/webpack/" rel="tag">#webpack</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/04/14/need-we-check-the-parameter-of-javascript/" rel="next" title="need we check the parameter of javascript">
+                <i class="fa fa-chevron-left"></i> need we check the parameter of javascript
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/07/02/weex页面数据传递/" rel="prev" title="weex页面数据传递">
+                weex页面数据传递 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+        </div>
+
+        
+
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </div>
+
+      
+        
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            本站概覽
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="https://avatars3.githubusercontent.com/u/8492963?v=3&s=460" alt="Lyu Dada" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">Lyu Dada</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description"></p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">48</span>
+              <span class="site-state-item-name">文章</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">9</span>
+              <span class="site-state-item-name">分類</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">38</span>
+              <span class="site-state-item-name">標籤</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">此文章未包含目錄</p>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+      
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="icon-next-heart fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lyu Dada</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 強力驅動
+</div>
+
+<div class="theme-info">
+  主題 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+    
+    
+
+  
+
+
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.2"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.2"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+<script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+<script type="text/javascript" src="/js/motion.js?v=0.4.5.2" id="motion.global"></script>
+
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.2" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    motionMiddleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  <script type="text/javascript" src="/js/bootstrap.js"></script>
+
+  
+  
+
+  
+  
+
+</body>
+</html>

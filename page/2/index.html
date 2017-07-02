@@ -199,6 +199,188 @@
             
               
                 
+                <a class="post-title-link" href="/2016/08/21/learn-es6/" itemprop="url">
+                  learn-es6
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            發表於
+            <time itemprop="dateCreated" datetime="2016-08-21T22:08:38+08:00" content="2016-08-21">
+              2016-08-21
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+            ecmascript6let const1.for 循环中let可以为循环变量因子创建独立的作用域，在for循环中进行事件绑定很方便。
+1234567891011121314beforevar a = [];for (var i = 0; i &lt; 10; i++) &#123;  (function (i) &#123;    a[i] = function () &#123;      console.log(i)    &#125;  &#125;)(i);  &#125;console.log(a.length)a[6](); // 6
+123456789aftervar a = [];for (let i = 0; i &lt; 10; i++) &#123;  a[i] = 
+            ...
+          </span>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/08/21/learn-es6/#more" rel="contents">
+              閱讀全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/08/08/http-response-headers-Content-Length/" itemprop="url">
+                  http-response-headers-Content-Length
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            發表於
+            <time itemprop="dateCreated" datetime="2016-08-08T16:51:09+08:00" content="2016-08-08">
+              2016-08-08
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+            
+本文讲述4个问题
+
+gzip编码与Content-Length的关系
+分块编码与Content-Length的关系
+file文件已经在服务端进行gzip压缩，那为何在node中用request请求这张图片时（请求的方法为head/get）返回头首部Content-Length还是未压缩前的图片大小？
+响应头一定会包含Content-Length首部吗？
+
+
+在图片性能监控脚本中对站内某页面的所有图片进行请求（采用request模块)，以获取图片的具体大小。(通过response.headers的Content-Length)
+1234567// 部分代码request.head(&apos;http://file.showjoy.com/images/46/4695c19423cd4046
+            ...
+          </span>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/08/08/http-response-headers-Content-Length/#more" rel="contents">
+              閱讀全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/07/24/the-mobile-web-handbook/" itemprop="url">
                   the-mobile-web-handbook
                 </a>
@@ -911,185 +1093,6 @@ http live streaming（hls）适用移动端HTTP Live Streaming（HLS）是苹果
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/01/28/viewport-and-flexibleJs/" itemprop="url">
-                  viewport-and-flexibleJs
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            發表於
-            <time itemprop="dateCreated" datetime="2016-01-28T17:56:39+08:00" content="2016-01-28">
-              2016-01-28
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-            viewport探索 flexible.js解读http://www.quirksmode.org/mobile/viewports.htmlhttp://www.quirksmode.org/mobile/viewports2.htmlhttp://www.quirksmode.org/mobile/metaviewport/#t10http://www.w3cplus.com/mobile/lib-flexible-for-html5-layout.html
-
-这在这篇文章介绍了viewport的三种视口、以及等过此三视口分析了淘宝的flexible.js方案的实现原理。
-
-现代浏览器中实现缩放的方式，无怪乎都是「拉伸」像素。
-在屏幕上，首先介绍的两个概念。「css像素」、「设备像素」
-
-            ...
-          </span>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/01/28/viewport-and-flexibleJs/#more" rel="contents">
-              閱讀全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/01/27/the-3th-viewport-translate/" itemprop="url">
-                  the-3th-viewport-translate
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            發表於
-            <time itemprop="dateCreated" datetime="2016-01-27T20:16:20+08:00" content="2016-01-27">
-              2016-01-27
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-            原文：http://www.quirksmode.org/mobile/metaviewport/#t10
-第三种viewport多年前 我提到了移动端的浏览器有两种viewport：visual viewport很layout viewport。如果有必要可以重读这几篇文章。文章我假设这两个viewport的知识大家已经掌握了。
-ideal viewport结果表明存在第三种viewport，我把他叫做ideal viewport。这个viewport能将设备上的页面设置能最理想的尺寸。因此，每种设备的ideal viewport的尺寸是不一样的。
-在老的便宜的没有retina屏幕的机型上，ideal viewport跟物理像素一致，但这不是必须的。更新物理像素更高的设备保持旧的ideal
-            ...
-          </span>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/01/27/the-3th-viewport-translate/#more" rel="contents">
-              閱讀全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
@@ -1136,7 +1139,7 @@ ideal viewport结果表明存在第三种viewport，我把他叫做ideal viewpor
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">46</span>
+              <span class="site-state-item-count">48</span>
               <span class="site-state-item-name">文章</span>
             </a>
           </div>
