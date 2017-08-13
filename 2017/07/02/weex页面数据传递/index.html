@@ -53,16 +53,22 @@
 
 
 
-<meta name="description" content="weex">
+<meta name="description" content="weex 页面间传参前言我司在weex上的应用是保证三端统一，为了延续web开发体验，统一在三端的跳转都采用url的形式，即采用\组件，或者自定义的openUrl方法进行跳转。
+假如现在点击B按钮跳转到/b.html页面，在vue文件中统一书写openUrl(&amp;#39;/b.html&amp;#39;)。H5中就是简单的调用window.location.href = /b.html，在native中会打">
 <meta property="og:type" content="article">
 <meta property="og:title" content="weex页面数据传递">
 <meta property="og:url" content="http://yoursite.com/2017/07/02/weex页面数据传递/index.html">
 <meta property="og:site_name" content="Lyu Dada">
-<meta property="og:description" content="weex">
-<meta property="og:updated_time" content="2017-07-02T15:05:15.000Z">
+<meta property="og:description" content="weex 页面间传参前言我司在weex上的应用是保证三端统一，为了延续web开发体验，统一在三端的跳转都采用url的形式，即采用\组件，或者自定义的openUrl方法进行跳转。
+假如现在点击B按钮跳转到/b.html页面，在vue文件中统一书写openUrl(&amp;#39;/b.html&amp;#39;)。H5中就是简单的调用window.location.href = /b.html，在native中会打">
+<meta property="og:image" content="http://cdn1.showjoy.com/images/c1/c1f09a9dfa1d40c1aa485cf7771a1504.jpg.316x490.jpg">
+<meta property="og:image" content="http://cdn1.showjoy.com/images/26/263d2a3d1e1c4537884ed500a4310266.jpg.319x400.jpg">
+<meta property="og:updated_time" content="2017-08-13T07:50:04.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="weex页面数据传递">
-<meta name="twitter:description" content="weex">
+<meta name="twitter:description" content="weex 页面间传参前言我司在weex上的应用是保证三端统一，为了延续web开发体验，统一在三端的跳转都采用url的形式，即采用\组件，或者自定义的openUrl方法进行跳转。
+假如现在点击B按钮跳转到/b.html页面，在vue文件中统一书写openUrl(&amp;#39;/b.html&amp;#39;)。H5中就是简单的调用window.location.href = /b.html，在native中会打">
+<meta name="twitter:image" content="http://cdn1.showjoy.com/images/c1/c1f09a9dfa1d40c1aa485cf7771a1504.jpg.316x490.jpg">
 
 
 
@@ -227,7 +233,50 @@
       
 
       
-        <span itemprop="articleBody"><p>weex</p>
+        <span itemprop="articleBody"><h1 id="weex_页面间传参">weex 页面间传参</h1><h2 id="前言">前言</h2><p>我司在weex上的应用是保证三端统一，为了延续web开发体验，统一在三端的跳转都采用url的形式，即采用\<a>组件，或者自定义的openUrl方法进行跳转。</a></p>
+<p>假如现在点击<code>B按钮</code>跳转到<code>/b.html</code>页面，在vue文件中统一书写<code>openUrl(&#39;/b.html&#39;)</code>。H5中就是简单的调用<code>window.location.href = /b.html</code>，在native中会打开一个视图，然后去下载跟<code>/b.html</code>对应的<code>b.min.js</code>js文件，进行原生视图渲染。页面与js文件的映射关系以及如何维护可以翻阅之前的<a href="https://github.com/ShowJoy-com/showjoy-blog/issues/25" target="_blank" rel="external">文章</a>查看App的跳转规则的weex支持方案设计。</p>
+<p>统一采用url跳转的方式进行页面跳转，为了传参方便，我们也统一采用在url后拼接参数的形式进行页面间传参。</p>
+<h2 id="正向传参">正向传参</h2><p>不管是weex（native）还是weex（H5）都是通过页面的url进行跳转。</p>
+<p>假设案例：</p>
+<p><code>x.com/a.html</code>跳转到<code>x.com/b.html?age=12</code>。</p>
+<h4 id="1）weex（native）_&gt;_weex（native）_实例化时从url中取得参数并传入到实例中">1）weex（native） &gt; weex（native） 实例化时从url中取得参数并传入到实例中</h4><p><a href="https://weex.apache.org/cn/references/advanced/extend-jsfm.html#多实例生命周期管理" target="_blank" rel="external">weex文档中写到</a></p>
+<blockquote>
+<p>每个 Weex 页面都有被创建、被销毁两个必经阶段，同时在 Weex 页面运行过程中，native 有机会主动向 Weex 页面发送消息。<br>Native 有机会在创建一个 Weex 页面的时候，传入一份外部数据，JS 框架也有机会借此机会为相同的 JS bundle 配合不同的 data 生成不同的页面内容。</p>
+</blockquote>
+<p>由上可知native在渲染一个weex页面的时候有机会往这个weex页面传入一个Object类型的数据，数据能通过<code>weex.config</code>取得。</p>
+<p>在我司的设计中，native首先会截取跳转的url，然后截取下参数，再把参数传入到weex实例中去。这样我们就能通过<code>weex.config.age</code>进行数据的获取，从而渲染不同的页面内容。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[_instance renderWithURL:[NSURL URLWithString:mstrURL] options:[self SHWeexOptionsWithH5URL:mstrH5URL withURL:mstrURL] data:nil];</div></pre></td></tr></table></figure>
+<h4 id="2）weex（web）&gt;_weex（web）在weex-vue-render层面从url读取参数，写入weex-config">2）weex（web）&gt; weex（web）在weex-vue-render层面从url读取参数，写入weex.config</h4><p>native实现这上述讲到的方式进行数据传递，那么web端也要以相同的方式<code>weex.config.age</code>这种方式去取得页面中的参数age。</p>
+<p>本司web端的weex依赖文件是通过webpack打包的方式，所以在require<code>weex-vue-render</code>依赖后，获取当前url的参数，再存进<code>weex.config</code>对象就好了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">require(&apos;weex-vue-render&apos;)</div><div class="line"></div><div class="line">// hack 将页面url的参数写入到weex.config中</div><div class="line">// app已经有这样的方法，h5自己实现</div><div class="line">let urlParamObj = &#123;&#125;;</div><div class="line">try &#123;</div><div class="line">  urlParamObj = utils.parseUrl(window.location.search.slice(1), &apos;&amp;&apos;, &quot;=&quot;, &#123;maxKeys: 0&#125;);  </div><div class="line">&#125; catch (error) &#123;</div><div class="line">  console.log(&apos;--------------weex.js parseUrl---------------------&apos;);</div><div class="line">  console.log(error);</div><div class="line">  console.log(&apos;------------------------------------&apos;);</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line">for (let key in urlParamObj) &#123;</div><div class="line">  window.weex.config[key] = encodeURIComponent(urlParamObj[key]);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>3）native &gt; weex（native） 同理<br>4）native &gt; weex（web） 同理</p>
+<p>对于3、4两种情况，native跳转weex，不管是跳到weex（native）还是跳转到weex（web），都是使用url的形式进行跳转。例：<code>x.com/b.html?age=12</code>。上面也讲到了在weex页面native和web如如何将参数写入weex.config对象中去的。要取得参数，统一在vue中编写<code>weex.config.age</code>便能取得传递进来的age参数。</p>
+<p>至此我们统一了三端（ios、android、H5）从A页面到B页面正向的传参方式。</p>
+<h2 id="反向传参">反向传参</h2><h4 id="1）weexA（native）_&gt;_weexB（native），weexB页面选择完毕返回weexA页面，_weexB（native）_&gt;_weexA（native）">1）weexA（native） &gt; weexB（native），weexB页面选择完毕返回weexA页面，  weexB（native） &gt; weexA（native）</h4><p><img src="http://cdn1.showjoy.com/images/c1/c1f09a9dfa1d40c1aa485cf7771a1504.jpg.316x490.jpg" alt=""></p>
+<p><img src="http://cdn1.showjoy.com/images/26/263d2a3d1e1c4537884ed500a4310266.jpg.319x400.jpg" alt=""></p>
+<p>在提交订单页面我们可以选择优惠券，进入到优惠券使用页面，首先会进行正向传参，因为选择优惠券页面会使用提交订单页的订单数据。</p>
+<p>然后在选择优惠券页面选择任意优惠券会回到提交订单页，这时需要携带优惠券数据回去，我们称这个为反向传参。</p>
+<p>查看官网我们本可以使用<a href="https://weex.apache.org/cn/references/jsfm-apis.html" target="_blank" rel="external">BroadcastChannel</a>这个api去做实例间的数据传递，但是在vue的<code>JS Framework</code>中还不支持这个特性，所以我们暂时使用的是<a href="https://weex.apache.org/cn/references/modules/globalevent.html#sidebar" target="_blank" rel="external">globalEvent</a>这个实例级别的api去代替应用级别的数据传递。</p>
+<p>我们首先在公司内部集成的module中增加了<code>fireGlobalEvent</code>方法，在选择优惠券页面调用这个方法。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">fireGlobalEvent(&apos;getConpon&apos;, &#123;</div><div class="line">    id: &apos;3323&apos;,</div><div class="line">  &#125;, function () &#123;</div><div class="line">  if (web) &#123;</div><div class="line">      </div><div class="line">  &#125; else &#123;</div><div class="line">    navigator.pop()</div><div class="line">  &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p>这个方法首先注册了<code>getCoupon</code>事件，然后传递了数据对象</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    id: &apos;3323&apos;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>最后注册了一个回调，当前页面会执行这个回调，回退上一页。</p>
+<p>而在上一页（提交订单页），注册了一个事件监听，当这个事件名被触发了，就接收来自这个事件的数据。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">const globalEvent = weex.requireModule(&apos;globalEvent&apos;);</div><div class="line">globalEvent.addEventListener(&apos;getCoupon&apos;, function (e) &#123;</div><div class="line">  console.log(&quot;get getCoupon&quot;)</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>这是业务逻辑中的实现，我们再来看看native为了达到返回上一页并传参效果做了什么处理（android为例）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">public void fireGlobalEvent(String name, String data, final JSCallback callback) &#123;</div><div class="line">        SHStorageManager.putToCache(SHWeexConstants.WEEX, SHWeexConstants.NAME, name);</div><div class="line">        SHStorageManager.putToCache(SHWeexConstants.WEEX, SHWeexConstants.DATA, data);</div><div class="line"></div><div class="line">        if (null != callback) &#123;</div><div class="line">            callback.invoke(new JSONObject());</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>当在业务中调用<code>fireGlobalEvent</code>方法时，native会把传入的事件名和data存入缓存。然后执行业务中定义的回调函数，而回调中会有<code>navigator.pop()</code>方法，意味着退出当前weex实例进入到上一个页面。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">public void onResume() &#123;</div><div class="line">        if (wxInstance != null) &#123;</div><div class="line">            wxInstance.onActivityResume();</div><div class="line"></div><div class="line">            String data = SHStorageManager.get(SHWeexConstants.WEEX, SHWeexConstants.DATA, &quot;&quot;);</div><div class="line"></div><div class="line">            if (!TextUtils.isEmpty(data)) &#123;</div><div class="line">                String name = SHStorageManager.get(SHWeexConstants.WEEX, SHWeexConstants.NAME, &quot;&quot;);</div><div class="line"></div><div class="line">                try &#123;</div><div class="line">                    JSONObject jsonObj = JSONObject.parseObject(data);</div><div class="line">                    Map&lt;String, Object&gt; params = new HashMap&lt;&gt;();</div><div class="line">                    for (Map.Entry&lt;String, Object&gt; entry : jsonObj.entrySet()) &#123;</div><div class="line">                        params.put(entry.getKey(), entry.getValue());</div><div class="line">                    &#125;</div><div class="line">                    wxInstance.fireGlobalEventCallback(name, params);</div><div class="line">                &#125; catch (Exception e) &#123;</div><div class="line">                    SHWeexLog.e(e);</div><div class="line">                &#125; finally &#123;</div><div class="line">                    SHStorageManager.removeFromCache(SHWeexConstants.WEEX, SHWeexConstants.DATA);</div><div class="line">                    SHStorageManager.removeFromCache(SHWeexConstants.WEEX, SHWeexConstants.NAME);</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>然后native会在上一个页面出现时，去缓存中取得之前存入的数据和事件名，再调用官方提供的实例api<a href="https://weex.apache.org/cn/references/modules/globalevent.html#sidebar" target="_blank" rel="external">fireGlobalEventCallback</a>，调用对应的事件，并传数据。</p>
+<p>当native中执行了<code>fireGlobalEventCallback</code>这个方法，上一页的事件监听函数就会取得数据。</p>
+<p>至此就完成了native中数据的反向传递。</p>
+<h4 id="2）weexA（web）_&gt;_weexB（web），_weexB（web）_&gt;_weexA（web）">2）weexA（web） &gt; weexB（web），  weexB（web） &gt; weexA（web）</h4><p>反向传递参数在weex的web端就更加好处理了，AB页面都是通过连接后面拼接参数的形式进行传递参数，那么反向传参跟正向传参还是可以按照之前的逻辑进行。</p>
+<p>在设计api时特意在回调中会对是否web环境做了判断，因为H5和native在反向传参的行为完全不同，所以判断逻辑会在业务中进行，更方便大家在写业务时进行不同情况不同处理。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">fireGlobalEvent(&apos;getConpon&apos;, &#123;</div><div class="line">    id: &apos;3323&apos;,</div><div class="line">  &#125;, function () &#123;</div><div class="line">  if (web) &#123;</div><div class="line">      openUrl(&apos;/a.html?id=&apos; + &apos;3323&apos;);</div><div class="line">  &#125; else &#123;</div><div class="line">    navigator.pop();</div><div class="line">  &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<blockquote>
+<p>本文来自<a href="http://weibo.com/u/2115840795" target="_blank" rel="external">二口南洋</a>，有什么需要讨论的欢迎找我。</p>
+</blockquote>
 </span>
       
     </div>
@@ -376,7 +425,7 @@
               
             
             
-              <p class="post-toc-empty">此文章未包含目錄</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#weex_页面间传参"><span class="nav-number">1.</span> <span class="nav-text">weex 页面间传参</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#正向传参"><span class="nav-number">1.2.</span> <span class="nav-text">正向传参</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1）weex（native）_>_weex（native）_实例化时从url中取得参数并传入到实例中"><span class="nav-number">1.2.0.1.</span> <span class="nav-text">1）weex（native） > weex（native） 实例化时从url中取得参数并传入到实例中</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2）weex（web）>_weex（web）在weex-vue-render层面从url读取参数，写入weex-config"><span class="nav-number">1.2.0.2.</span> <span class="nav-text">2）weex（web）> weex（web）在weex-vue-render层面从url读取参数，写入weex.config</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#反向传参"><span class="nav-number">1.3.</span> <span class="nav-text">反向传参</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1）weexA（native）_>_weexB（native），weexB页面选择完毕返回weexA页面，_weexB（native）_>_weexA（native）"><span class="nav-number">1.3.0.1.</span> <span class="nav-text">1）weexA（native） > weexB（native），weexB页面选择完毕返回weexA页面，  weexB（native） > weexA（native）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2）weexA（web）_>_weexB（web），_weexB（web）_>_weexA（web）"><span class="nav-number">1.3.0.2.</span> <span class="nav-text">2）weexA（web） > weexB（web），  weexB（web） > weexA（web）</span></a></li></ol></li></ol></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">

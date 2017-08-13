@@ -329,9 +329,11 @@ call和apply的用途：
         
           <span itemprop="articleBody">
             
-            weex
-
-            
+            weex 页面间传参前言我司在weex上的应用是保证三端统一，为了延续web开发体验，统一在三端的跳转都采用url的形式，即采用\组件，或者自定义的openUrl方法进行跳转。
+假如现在点击B按钮跳转到/b.html页面，在vue文件中统一书写openUrl(&#39;/b.html&#39;)。H5中就是简单的调用window.location.href = /b.html，在native中会打开一个视图，然后去下载跟/b.html对应的b.min.jsjs文件，进行原生视图渲染。页面与js文件的映射关系以及如何维护可以翻阅之前的文章查看App的跳转规则的weex支持方案设计。
+统一采用url跳转的方式进行页面跳转，为了传参方便，我们也统一采用在url后拼接参数的形式进行页面间传参。
+正向
+            ...
           </span>
           <div class="post-more-link text-center">
             <a class="btn" href="/2017/07/02/weex页面数据传递/#more" rel="contents">
