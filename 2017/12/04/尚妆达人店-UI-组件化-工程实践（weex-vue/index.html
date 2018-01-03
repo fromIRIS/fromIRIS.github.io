@@ -1,0 +1,750 @@
+<!doctype html>
+<html class="theme-next   use-motion ">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="weex," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Lyu Dada" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.2" />
+
+
+
+
+
+
+<meta name="description" content="尚妆达人店 UI 组件化 工程实践（weex vue）
+本文来自尚妆前端团队南洋
+发表于尚妆github博客，欢迎订阅！
+
+前言尚妆大前端团队使用 weex 进行三端统一开发有一段时间了，截止本文发表「达人店」APP大部分页面都已经用 weex 进行了重构，在此期间也积累了一些基础组件和业务组件。
+之前维护组件的方式是在达人店项目的工程内维护一个 components 文件夹，随日常开发迭代，并行">
+<meta property="og:type" content="article">
+<meta property="og:title" content="尚妆达人店 UI 组件化 工程实践（weex vue">
+<meta property="og:url" content="http://yoursite.com/2017/12/04/尚妆达人店-UI-组件化-工程实践（weex-vue/index.html">
+<meta property="og:site_name" content="Lyu Dada">
+<meta property="og:description" content="尚妆达人店 UI 组件化 工程实践（weex vue）
+本文来自尚妆前端团队南洋
+发表于尚妆github博客，欢迎订阅！
+
+前言尚妆大前端团队使用 weex 进行三端统一开发有一段时间了，截止本文发表「达人店」APP大部分页面都已经用 weex 进行了重构，在此期间也积累了一些基础组件和业务组件。
+之前维护组件的方式是在达人店项目的工程内维护一个 components 文件夹，随日常开发迭代，并行">
+<meta property="og:image" content="http://cdn1.showjoy.com/images/4f/4fcc59a87b724a4d888292d01d963e68.jpg">
+<meta property="og:image" content="http://cdn1.showjoy.com/images/ba/ba731c4b831c49818c26cea5fce1b44c.jpg">
+<meta property="og:image" content="http://cdn1.showjoy.com/images/7d/7daec3e4c4a942c29d830bd584502062.jpg">
+<meta property="og:image" content="http://cdn1.showjoy.com/images/87/8722736f896c44f18b1fb9264ed32a03.jpg">
+<meta property="og:image" content="http://cdn1.showjoy.com/images/07/07a3913a21c149dc9fae54a8271e4cff.jpg">
+<meta property="og:updated_time" content="2017-12-04T15:00:38.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="尚妆达人店 UI 组件化 工程实践（weex vue">
+<meta name="twitter:description" content="尚妆达人店 UI 组件化 工程实践（weex vue）
+本文来自尚妆前端团队南洋
+发表于尚妆github博客，欢迎订阅！
+
+前言尚妆大前端团队使用 weex 进行三端统一开发有一段时间了，截止本文发表「达人店」APP大部分页面都已经用 weex 进行了重构，在此期间也积累了一些基础组件和业务组件。
+之前维护组件的方式是在达人店项目的工程内维护一个 components 文件夹，随日常开发迭代，并行">
+<meta name="twitter:image" content="http://cdn1.showjoy.com/images/4f/4fcc59a87b724a4d888292d01d963e68.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: '',
+    sidebar: 'post',
+    motion: true
+  };
+</script>
+
+  <title> 尚妆达人店 UI 组件化 工程实践（weex vue | Lyu Dada </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-hk">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+
+
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Lyu Dada</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">to love and get love</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            歸檔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            標籤
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                尚妆达人店 UI 组件化 工程实践（weex vue
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            發表於
+            <time itemprop="dateCreated" datetime="2017-12-04T22:59:40+08:00" content="2017-12-04">
+              2017-12-04
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><h1 id="尚妆达人店_UI_组件化_工程实践（weex_vue）">尚妆达人店 UI 组件化 工程实践（weex vue）</h1><blockquote>
+<p>本文来自尚妆前端团队<a href="http://weibo.com/u/2115840795" target="_blank" rel="external">南洋</a></p>
+<p>发表于尚妆<a href="https://github.com/ShowJoy-com/showjoy-blog/issues/34" target="_blank" rel="external">github博客</a>，欢迎订阅！</p>
+</blockquote>
+<h2 id="前言">前言</h2><p>尚妆大前端团队使用 weex 进行三端统一开发有一段时间了，截止本文发表「达人店」APP大部分页面都已经用 weex 进行了重构，在此期间也积累了一些基础组件和业务组件。</p>
+<p>之前维护组件的方式是在达人店项目的工程内维护一个 components 文件夹，随日常开发迭代，并行需求与开发人员的增多，这种维护方式也暴露出一些问题。</p>
+<p>1、开发人员可以<strong>随意跟随需求开发修改 components 内的组件</strong>，破坏约定好的规范，或埋入 bug。</p>
+<p>2、<strong>定义组件缺少规范</strong>，比如在某个需求开发中， A 开发人员觉得这个功能可以抽离成组件，就直接在 components 内定义并使用，但实际却是伪需求，用了一次就再也没有人使用，造成 components 组件库的部分冗余。</p>
+<p>3、<strong>组件抽离过程无法协同使用</strong>，比如 A 开发同学切了个特性分支 <code>feature/A</code>，并根据项目抽了个通用组件 <code>ComponentA</code>，B 开发切了个特性分支 B，也想使用这个 <code>ComponentA</code> 组件，但此时两人在不同分支，代码并不能共享。</p>
+<p>4、。。。</p>
+<p>基于上述不便之处，我们尝试将 components 抽离出来，放到内部私有 npm 仓库中以 npm 包的形式去维护。</p>
+<p>也就是我们将 <code>spon-ui（内部组件库名称）</code>作为单独的一个项目去维护，加以约束形成组件库开发规范，能有效的解决上述问题。</p>
+<p>此文就是此次抽离过程的一些实践，包含了<strong>组件的调试</strong>、<strong>文档调试</strong>、<strong>npm使用</strong>、<strong>组件 发布</strong>等内容。当然 weex 的语法同 vue，这些实践也同样适用于 vue。</p>
+<h2 id="1、组件库的调试">1、组件库的调试</h2><p>先看下 <code>spon-ui</code> 组件库项目的目录结构。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">|- spon-ui</div><div class="line">||-- build</div><div class="line">||-- docs</div><div class="line">||-- examples</div><div class="line">||-- packages</div><div class="line">|||--- weex-field</div><div class="line">||||---- index.js</div><div class="line">||||---- field.vue</div><div class="line">||||---- example.vue</div><div class="line">||||---- readme.md</div><div class="line">||||---- package.json</div><div class="line">||-- src</div></pre></td></tr></table></figure>
+<ul>
+<li>build 中存放一些脚本执行文件，用于工程的调试、发布。</li>
+<li>docs 中存放文档调试的脚本，生成一个文档调试服务器。</li>
+<li>examples 中存放组件调试的脚本，生成一个组件调试服务器。（不存放组件例子）</li>
+<li>packages 存放真实组件，以及组件的文档和例子。</li>
+<li>src 存放组件可以使用的公共方法。</li>
+</ul>
+<h3 id="组件的调试">组件的调试</h3><p>examples 文件夹内就是组件调试的相关脚本，这个文件夹在组建开发过程中是不需要变动的，只是定义了调试服务器的一些逻辑。并不包含真实的组件例子。</p>
+<p>而真实的例子存放在相应组件目录下，<code>example.vue</code> 中引入当前目录下的 vue 组件，调试时是针对 <code>example.vue</code> 进行调试，因为调试组件需要模拟使用组件的场景（改变传入值，用户交互等）。</p>
+<p>当执行 <code>npm run dev:components</code> 时，开发同学会看到浏览器打开页面：</p>
+<p><img src="http://cdn1.showjoy.com/images/4f/4fcc59a87b724a4d888292d01d963e68.jpg" alt=""></p>
+<p>选择想要调试的组件，比如说 weex-dialog ，进入到 weex-dialog 的调试界面。</p>
+<p><img src="http://cdn1.showjoy.com/images/ba/ba731c4b831c49818c26cea5fce1b44c.jpg" alt=""></p>
+<p>开发同学此时修改 packages 目录中的 weex-dialog 的组件内容，会实时看到修改内容，进行调试。</p>
+<h4 id="console_中输出二维码">console 中输出二维码</h4><p>另外我们开发的组件是基于 weex 的，意味着开发的组件需要支持三端（iOS android H5），所以在 console 中会打印当前组件js的二维码，用于 native 调试。</p>
+<p><img src="http://cdn1.showjoy.com/images/7d/7daec3e4c4a942c29d830bd584502062.jpg" alt=""></p>
+<p>如何在console中输出二维码也是个小trick，首先利用js的二维码库将资源生成二维码图，然后利用console输出背景图的机制打印二维码。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">console.log(&quot;%c&quot;, &quot;padding:75px 80px 75px;line-height:160px;background:url(&quot; + base64 + &quot;) no-repeat;background-size:160px&quot;);</div></pre></td></tr></table></figure>
+<p>整个调试页面是通过单页面的形式展现的，使用 <code>vue-router</code> 进行路由控制，weex 也支持 <code>vue-router</code> ，所以这个单页面在 native 中也能良好运行。</p>
+<h4 id="自动生成组件相关信息">自动生成组件相关信息</h4><p>在每次执行 <code>npm run dev:components</code> 命令时，会根据 packages 目录下的组件自动生成 <code>nav-list.js</code> 文件，这个索引文件用来定义 <code>vue-router</code> 的路由信息，以及调试主页的组件列表。这样做可以完全将调试过程抽离成黑盒，开发人员只需关注 <code>packages</code> 目录下的开发即可。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> routes = navList.map(<span class="function">(<span class="params">item</span>) =&gt;</span> &#123;</div><div class="line">  <span class="keyword">const</span> path = item.path;</div><div class="line">  <span class="keyword">return</span> &#123;</div><div class="line">    path,</div><div class="line">    <span class="comment">// 需要加vue后缀，不然webpack会将examples下的所有文件都require一下</span></div><div class="line">    component: <span class="built_in">require</span>(<span class="string">'examples/'</span> + item.exampleRequire + <span class="string">'.vue'</span>),</div><div class="line">  &#125;;</div><div class="line">&#125;);</div><div class="line">routes.push(&#123;</div><div class="line">  <span class="attr">path</span>: <span class="string">'/'</span>,</div><div class="line">  <span class="attr">component</span>: <span class="built_in">require</span>(<span class="string">'./app.vue'</span>),</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">// 组件列表也通过 nav-list.js 渲染</span></div><div class="line">&lt;spon-cell-group&gt;</div><div class="line">   &lt;spon-cell</div><div class="line">     v-for="(page, jndex) in item.list"</div><div class="line">     :key="jndex"</div><div class="line">     :title="page.title"</div><div class="line">     :is-link="true"</div><div class="line">     @click="changePage(page)"</div><div class="line">   &gt;&lt;/spon-cell&gt;</div><div class="line">&lt;/spon-cell-group&gt;</div></pre></td></tr></table></figure>
+<h4 id="webpack_require_动态的资源">webpack require 动态的资源</h4><blockquote>
+<p>本文使用 webpack 3.x.x</p>
+</blockquote>
+<p>上节提到的 require 动态的模块时，如果不表明文件类型，webpack会将该目录下所有资源都 require 一遍，造成的问题是如果目录下有某类型的文件，而又没有使用对应的loader，在编译过程就会报错。上节中如果不加 <code>.vue</code> 后缀， webpack会将 examples 目录下所有资源都require一遍。</p>
+<p>所以在定义各路由的component时，需要加上 vue 后缀，查找vue文件。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">component: require(&apos;examples/&apos; + item.exampleRequire + &apos;.vue&apos;),</div><div class="line">  &#125;;</div></pre></td></tr></table></figure>
+<p>webpack的文档说明在 <a href="https://webpack.js.org/guides/dependency-management/#require-context" target="_blank" rel="external">https://webpack.js.org/guides/dependency-management/#require-context</a> </p>
+<p>在 webpack 的官方文档里列出了动态 require 的原理，对于 <code>require(&quot;./template/&quot; + name + &quot;.ejs&quot;);</code> 含表达式的引用，webpack 解析此处的 require，得到两个信息：</p>
+<p>1、 目录为 <code>./template</code><br>2、匹配规则为 <code>/^.*\.ejs$/</code></p>
+<p>然后 webpack 会根据这两个信息得到一个 context module，这个模块包含了 <code>./template</code> 目录下所有以 <code>.ejs</code> 为后缀的模块。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    &quot;./table.ejs&quot;: 42,</div><div class="line">    &quot;./table-row.ejs&quot;: 43,</div><div class="line">    &quot;./directory/folder.ejs&quot;: 44</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>还有一个 <code>require.context()</code> 方法可以自定义动态引用的规则，文档中也有示例，官网给出了一个基于此的demo，引入一个目录中所有符合规则的模块。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">function importAll (r) &#123;</div><div class="line">  r.keys().forEach(r);</div><div class="line">&#125;</div><div class="line"></div><div class="line">importAll(require.context(&apos;../components/&apos;, true, /\.js$/));</div></pre></td></tr></table></figure>
+<h3 id="文档的调试">文档的调试</h3><p>组件开发的差不多了，就要编写相应的文档，方便同事小伙伴使用，执行 <code>npm run dev:docs</code> 会开启文档调试服务器，方便开发同学编写文档。</p>
+<p><img src="http://cdn1.showjoy.com/images/87/8722736f896c44f18b1fb9264ed32a03.jpg" alt=""></p>
+<p>文档服务器的逻辑放在 <code>docs</code> 目录下，同样与组件代码解耦，左侧的组件信息动态取自 packages 目录下的组件信息，右侧的组件预览直接使用 <code>examples</code> 目录下的组件调试逻辑，中间的部分取自 组件中的 <code>readme.md</code> 文件。</p>
+<p>整个文档应用也是基于 <code>vue + vue-router</code> 开发。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"nav-bar-container"</span>&gt;</div><div class="line">    &lt;page-nav&gt;&lt;/page-nav&gt;</div><div class="line">&lt;/div&gt;</div><div class="line"></div><div class="line">&lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"document-area-container markdown-body"</span>&gt;</div><div class="line">    &lt;router-view&gt;&lt;/router-view&gt;</div><div class="line">&lt;/div&gt;</div><div class="line"></div><div class="line">&lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"mock-phone-container"</span>&gt;</div><div class="line">    &lt;page-preview :component-name="componentName"&gt;&lt;/page-preview&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+<p><code>&lt;router-view&gt;</code> 就是对应的路由所展示的文档内容，相应的在定义路由信息时需要确定路由以及路由所对应的 <code>readme.md</code> 路径。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">const routes = navList.map((item) =&gt; &#123;</div><div class="line">  const path = item.path;</div><div class="line">  return &#123;</div><div class="line">    path,</div><div class="line">    component: require(&apos;mds/&apos; + item.mdRequire + &apos;.md&apos;),</div><div class="line">  &#125;;</div><div class="line">&#125;);</div><div class="line"></div><div class="line">const router = new VueRouter(&#123;</div><div class="line">  routes,</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h4 id="markdown_转换_vue">markdown 转换 vue</h4><p>在引用组件时使用了 <code>.md</code> 后缀，这里是采用了 <code>vue-markdown-loader</code> 饿了么出品的loader。这个loader还是借助vue-loader，首先会将 md 的内容转换成 html ，然后再转换成 vue 所需要的单文件形式给vue-loader。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> renderVueTemplate = <span class="function"><span class="keyword">function</span>(<span class="params">html, wrapper</span>) </span>&#123;</div><div class="line">  <span class="comment">// 本文作者注</span></div><div class="line">  <span class="comment">// 传入的html是根据 markdown插件将md转换而来</span></div><div class="line">  <span class="keyword">var</span> $ = cheerio.load(html, &#123;</div><div class="line">    <span class="attr">decodeEntities</span>: <span class="literal">false</span>,</div><div class="line">    <span class="attr">lowerCaseAttributeNames</span>: <span class="literal">false</span>,</div><div class="line">    <span class="attr">lowerCaseTags</span>: <span class="literal">false</span></div><div class="line">  &#125;);</div><div class="line"></div><div class="line">  ...</div><div class="line">  <span class="comment">// 本文作者注</span></div><div class="line">  <span class="comment">// 将html转换成 vue-loader 所需的字符串形式</span></div><div class="line">  result =</div><div class="line">    <span class="string">`&lt;template&gt;&lt;<span class="subst">$&#123;wrapper&#125;</span>&gt;`</span> +</div><div class="line">    $.html() +</div><div class="line">    <span class="string">`&lt;/<span class="subst">$&#123;wrapper&#125;</span>&gt;&lt;/template&gt;\n`</span> +</div><div class="line">    output.style +</div><div class="line">    <span class="string">'\n'</span> +</div><div class="line">    output.script;</div><div class="line"></div><div class="line">  <span class="keyword">return</span> result;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> result =</div><div class="line">    <span class="string">'module.exports = require('</span> +</div><div class="line">    loaderUtils.stringifyRequest(</div><div class="line">      <span class="keyword">this</span>,</div><div class="line">      <span class="string">'!!vue-loader!'</span> +</div><div class="line">        markdownCompilerPath +</div><div class="line">        <span class="string">'?raw!'</span> +</div><div class="line">        filePath +</div><div class="line">        (<span class="keyword">this</span>.resourceQuery || <span class="string">''</span>)</div><div class="line">    ) +</div><div class="line">    <span class="string">');'</span>;</div><div class="line">    </div><div class="line">  <span class="comment">// 本文作者注</span></div><div class="line">  <span class="comment">// 将转换好的字符串传给 vue-loader</span></div><div class="line">  <span class="keyword">return</span> result;</div></pre></td></tr></table></figure>
+<h2 id="2、基于_npm_脚本实现工程化">2、基于 npm 脚本实现工程化</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&quot;scripts&quot;: &#123;</div><div class="line">    &quot;bootstrap&quot;: &quot;npm i&quot;,</div><div class="line">    &quot;dev:components&quot;: &quot;node build/bin/dev-entry.js&quot;,</div><div class="line">    &quot;dev:docs&quot;: &quot;node build/bin/docs-dev-entry.js&quot;,</div><div class="line">    &quot;build:docs&quot;: &quot;node build/bin/docs-build.js&quot;,</div><div class="line">    &quot;pub:docs&quot;: &quot;npm run bootstrap &amp;&amp; npm run clean &amp;&amp; node build/bin/release.js&quot;,</div><div class="line">    &quot;pub:components&quot;: &quot;node build/bin/prepublish.js &amp;&amp; lerna publish --skip-npm --skip-git &amp;&amp; node build/bin/publish.js&quot;,</div><div class="line">    &quot;clean&quot;: &quot;rm -rf docs/dist &amp;&amp; rm -rf docs/deploy&quot;,</div><div class="line">    &quot;add&quot;: &quot;node build/bin/add.js&quot;</div><div class="line">  &#125;,</div></pre></td></tr></table></figure>
+<p>本项目中将所有常用的命令都进行了抽离，开发同学使用的命令最后暴露出4个：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">npm run dev:components 组件的调试</div><div class="line">npm run dev:docs 文档的调试</div><div class="line">npm run pub:docs 文档的发布</div><div class="line">npm run pub:components 组件的发布</div></pre></td></tr></table></figure>
+<p>推荐看阮一峰的博客 <a href="http://www.ruanyifeng.com/blog/2016/10/npm_scripts.html" target="_blank" rel="external">npm scripts 使用指南</a> ，将npm 脚本很细致的介绍了一遍。</p>
+<h3 id="自动生成脚手架">自动生成脚手架</h3><p><code>npm run add</code> 会自动添加一个组件所需的脚手架信息，方便开发同学添加新组件。</p>
+<p>这里推荐使用 <code>json-templater/string</code> 模块处理 string 模板的问题。</p>
+<p>脚手架文件中的某些值会根据组件名的不同而不同，根据组件名自动生成对应的脚手架内容，更加方便开发。</p>
+<h3 id="npm_link">npm link</h3><p>组件在本地开发完成了，例子和文档都编写完毕，但不知在真实项目中使用会不会出现奇怪bug。</p>
+<p>最原始的方法可以将组件复制到项目中的npm包中进行真实调试。</p>
+<p>当然 npm 也提供了 方法专门解决这种问题。</p>
+<p>1、首先在 <code>spon-ui</code> 组件库的根目录执行 <code>npm link</code> </p>
+<p>2、回到项目目录，执行 <code>npm link spon-ui</code> ，两条命令就能将项目中原本引用的spon-ui 映射到本地的<code>spon-ui</code>目录中去。</p>
+<p>3、<code>npm unlink</code> 取消软链。</p>
+<h2 id="3、源码依赖">3、源码依赖</h2><p>上节提到的npm 脚本并没有提到组件打包的流程，因为如果在组件这层就进行打包，会增加一些webpack的冗余代码，增加字节，而且这个组件库目前完全属于内部项目使用，打包环境在项目中就存在，没有必要提前进行打包。</p>
+<p>所以发布出去的组件包就是packages下的所有组件，项目中所依赖的都是组件的源码，称为<strong>源码依赖</strong>。</p>
+<p>要做到源码依赖，需要修改业务项目中（非本组件项目）的babel的配置。排除掉 <code>spon-ui</code> 组件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">module: &#123;</div><div class="line">     rules: [</div><div class="line">       &#123;</div><div class="line">         test: /\.js$/,</div><div class="line">         exclude: /node_modules(?!\/.*(spon-ui).*)/,</div><div class="line">         loader: &apos;babel-loader&apos;,</div><div class="line">         options: &#123;</div><div class="line">           cacheDirectory: true,</div><div class="line">         &#125;,</div><div class="line">       &#125;,</div><div class="line">     ],</div><div class="line">   &#125;,</div></pre></td></tr></table></figure>
+<p>滴滴有篇<a href="https://juejin.im/post/59dc57f2f265da431d3ba2ef" target="_blank" rel="external">webpack 应用编译优化之路</a>有讲到源码依赖所带来的好处。</p>
+<h2 id="4、发布组件">4、发布组件</h2><p>我们使用了 <a href="https://lernajs.io/" target="_blank" rel="external">lerna</a> 来管理组件的发布，lerna 有两种发布方式，一种是一个项目的所有组件作为一个发布包，还有一种可以将一个项目中的多个组件分别发布。</p>
+<p>我们使用了第一种，即所有组件统一成一个发布包。这种方式发挥不出 lerna 的威力，但是作为发布前的版本号管理还是不错的。未来如果要将各个组件单独发布，改一下配置就ok。</p>
+<p><img src="http://cdn1.showjoy.com/images/07/07a3913a21c149dc9fae54a8271e4cff.jpg" alt=""></p>
+<h3 id="版本管理">版本管理</h3><h4 id="测试版本的管理">测试版本的管理</h4><p>在前文就提到过目前组件库的开发还是依赖于需求的迭代，小团队没有人专门开发组件，组件的开发会跟随需求的迭代而迭代。</p>
+<p>那么在前期组件变更需求通过评审会后，就会跟随项目正式进入开发流程。项目开发会区分测试环境和预发全量环境，那么组件的版本号也需要区分测试环境和全量环境。</p>
+<p><code>npm publish --tag</code></p>
+<p>介绍一下 publish 的 tag，发布的 npm 包默认会有一个 <code>latest</code> 标签，每次执行 <code>npm publish</code> 都会自动将 tag 设置为 latest，也可以理解为稳定版，所以我们要做的是再添加一个 tag </p>
+<p><code>npm publish --tag dev</code></p>
+<p>这个命令代表添加一个名为 <code>dev</code> 的tag，并将此次发布的版本号贴上 <code>dev</code> 标签。</p>
+<p>执行 <code>npm dist-tag ls spon-ui</code> 可以查看当前的标签所对应的版本号信息。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">➜  spon-ui git:(master) npm dist-tag ls spon-ui</div><div class="line">dev: 0.1.0-12</div><div class="line">latest: 0.1.0</div></pre></td></tr></table></figure>
+<p>在项目中安装spon-ui的时候，根据情况分别执行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">npm i spon-ui@dev</div><div class="line">npm i spon-ui@latest</div></pre></td></tr></table></figure>
+<h2 id="5、npm5_package-lock-json">5、npm5 package-lock.json</h2><p>组件发布完成了，就可以在项目中使用了，我们从npm3.x更新到了npm5，但是发现执行 <code>npm i</code> 时的现象跟网络上的科普文不太一致。</p>
+<p>有提到不管怎么修改package.json文件，重复执行npm i，npm都会根据lock文件描述的版本信息进行下载。</p>
+<p>也有提到重复npm i时，npm会不顾lock的信息，根据package.json中的包Semantic versioning 版本信息下载更新模块（lock貌似没啥用了）。</p>
+<p><strong>查阅资料得知，自npm 5.0版本发布以来，npm i的规则发生了三次变化。</strong></p>
+<p>1、npm 5.0.x 版本，不管package.json怎么变，npm i 时都会根据lock文件下载</p>
+<p><a href="https://github.com/npm/npm/issues/16866" target="_blank" rel="external">https://github.com/npm/npm/issues/16866</a><br>这个 issue 控诉了这个问题，明明手动改了package.json，为啥不给我升级包！然后就导致了5.1.0的问题…</p>
+<p>2、5.1.0版本后 npm install 会无视lock文件 去下载最新的npm </p>
+<p>然后有人提了这个issue <a href="https://github.com/npm/npm/issues/17979" target="_blank" rel="external">https://github.com/npm/npm/issues/17979</a><br>控诉这个问题，最后演变成5.4.2版本后的规则。</p>
+<p>3、5.4.2版本后  <a href="https://github.com/npm/npm/issues/17979" target="_blank" rel="external">https://github.com/npm/npm/issues/17979</a></p>
+<p>大致意思是，如果改了package.json，且package.json和lock文件不同，那么执行<code>npm i</code>时npm会根据package中的版本号以及语义含义去下载最新的包，并更新至lock。</p>
+<p>如果两者是同一状态，那么执行<code>npm i</code>都会根据lock下载，不会理会package实际包的版本是否有新。</p>
+<h2 id="总结">总结</h2><p>以上就是我们将UI组件从项目中迁移出来单独以npm包的形式去维护的实践过程，不完美还有待时间的考验，希望其中的一些内容能帮助到大家。</p>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/weex/" rel="tag">#weex</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/07/03/js设计模式阅读笔记/" rel="next" title="js设计模式阅读笔记">
+                <i class="fa fa-chevron-left"></i> js设计模式阅读笔记
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/03/es6-import/" rel="prev" title="es6 import">
+                es6 import <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+        </div>
+
+        
+
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </div>
+
+      
+        
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            本站概覽
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="https://avatars3.githubusercontent.com/u/8492963?v=3&s=460" alt="Lyu Dada" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">Lyu Dada</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description"></p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">51</span>
+              <span class="site-state-item-name">文章</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">9</span>
+              <span class="site-state-item-name">分類</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">39</span>
+              <span class="site-state-item-name">標籤</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#尚妆达人店_UI_组件化_工程实践（weex_vue）"><span class="nav-number">1.</span> <span class="nav-text">尚妆达人店 UI 组件化 工程实践（weex vue）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1、组件库的调试"><span class="nav-number">1.2.</span> <span class="nav-text">1、组件库的调试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#组件的调试"><span class="nav-number">1.2.1.</span> <span class="nav-text">组件的调试</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#console_中输出二维码"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">console 中输出二维码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#自动生成组件相关信息"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">自动生成组件相关信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#webpack_require_动态的资源"><span class="nav-number">1.2.1.3.</span> <span class="nav-text">webpack require 动态的资源</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文档的调试"><span class="nav-number">1.2.2.</span> <span class="nav-text">文档的调试</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#markdown_转换_vue"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">markdown 转换 vue</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、基于_npm_脚本实现工程化"><span class="nav-number">1.3.</span> <span class="nav-text">2、基于 npm 脚本实现工程化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#自动生成脚手架"><span class="nav-number">1.3.1.</span> <span class="nav-text">自动生成脚手架</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#npm_link"><span class="nav-number">1.3.2.</span> <span class="nav-text">npm link</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3、源码依赖"><span class="nav-number">1.4.</span> <span class="nav-text">3、源码依赖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4、发布组件"><span class="nav-number">1.5.</span> <span class="nav-text">4、发布组件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#版本管理"><span class="nav-number">1.5.1.</span> <span class="nav-text">版本管理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#测试版本的管理"><span class="nav-number">1.5.1.1.</span> <span class="nav-text">测试版本的管理</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5、npm5_package-lock-json"><span class="nav-number">1.6.</span> <span class="nav-text">5、npm5 package-lock.json</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">1.7.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+      
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="icon-next-heart fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lyu Dada</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 強力驅動
+</div>
+
+<div class="theme-info">
+  主題 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT
+  </a>
+</div>
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+    
+    
+
+  
+
+
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.2"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.2"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+<script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+<script type="text/javascript" src="/js/motion.js?v=0.4.5.2" id="motion.global"></script>
+
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.2" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    motionMiddleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  <script type="text/javascript" src="/js/bootstrap.js"></script>
+
+  
+  
+
+  
+  
+
+</body>
+</html>
